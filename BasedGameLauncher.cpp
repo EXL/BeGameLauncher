@@ -1,5 +1,6 @@
 #include "BeApp.h"
 #include "BeMainWindow.h"
+#include "BeDirectoryFilter.h"
 
 #include <Rect.h>
 #include <View.h>
@@ -8,6 +9,9 @@
 #include <Message.h>
 #include <StringView.h>
 #include <TextControl.h>
+#include <FilePanel.h>
+#include <Directory.h>
+#include <Path.h>
 
 // For Debug
 #include <stdio.h>
@@ -19,9 +23,10 @@
 #define L_BTN_EXIT           "Exit"
 #define L_BTN_ABOUT          "About..."
 #define L_BTN_BROWSE         "..."
-#define L_BTN_BROWSE_TOOLTIP "Click to open file dialog"
+#define L_BTN_BROWSE_TOOLTIP "Click to open the file dialog."
 #define L_SV_DATA            "Please select a directory with game files:"
 #define L_SV_DATA_TOOLTIP    "Path to a directory with game files."
+#define L_FP_TITLE           "Open Game Folder"
 
 #define GAP        10.0f
 #define BANNER_W   64.0f
@@ -30,14 +35,16 @@ class BeBasedWindow : public BeMainWindow
 {
 	enum
 	{
-		MSG_BUTTON_RUN_CLICKED =     'btrn',
-		MSG_BUTTON_EXIT_CLICKED =    'btex',
-		MSG_BUTTON_BROWSE_CLICKED =  'btbr',
-		MSG_BUTTON_ABOUT_CLICKED =   'btab',
-		MSG_TEXT_CONTROL_EDITED =    'tced'
+		MSG_BUTTON_RUN_CLICKED        = 'btrn',
+		MSG_BUTTON_EXIT_CLICKED       = 'btex',
+		MSG_BUTTON_BROWSE_CLICKED     = 'btbr',
+		MSG_BUTTON_ABOUT_CLICKED      = 'btab',
+		MSG_FILE_PANEL_FILE_SELECTED  = 'fpsc'
 	};
 
 	BTextControl *fDataTextControl;
+	BFilePanel *fFilePanel;
+	BeDirectoryFilter *fDirectotyFilter;
 public:
 	BeBasedWindow(void) : BeMainWindow(BRect(100, 100, 700, 500), L_APP_NAME)
 	{
@@ -53,7 +60,7 @@ public:
 		BView *mainView = new BView(r, "mainView", B_FOLLOW_ALL, B_WILL_DRAW);
 		mainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
-		BView *bannerView = new BView(bannerRect, "bannerView", B_FOLLOW_NONE, B_WILL_DRAW);
+		BView *bannerView = new BView(bannerRect, "bannerView", B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW);
 		bannerView->SetViewColor(200, 0, 0);
 
 		BStringView *dataStringView = new BStringView(stringViewRect, "dataStringView", L_SV_DATA, B_FOLLOW_LEFT);
@@ -69,7 +76,7 @@ public:
 		mainView->AddChild(buttonBrowse);
 
 		BRect dataTextControlRect(BANNER_W + GAP, BANNER_W + GAP * 3, r.right - GAP*4, r.bottom);
-		fDataTextControl = new BTextControl(dataTextControlRect, "dataTextControl", NULL, NULL, new BMessage(MSG_TEXT_CONTROL_EDITED), B_FOLLOW_LEFT_RIGHT);
+		fDataTextControl = new BTextControl(dataTextControlRect, "dataTextControl", NULL, NULL, NULL, B_FOLLOW_LEFT_RIGHT);
 		fDataTextControl->ResizeToPreferred();
 		fDataTextControl->SetToolTip(L_SV_DATA_TOOLTIP);
 		mainView->AddChild(fDataTextControl);
@@ -87,9 +94,64 @@ public:
 		mainView->AddChild(buttonExit);
 		mainView->AddChild(buttonRun);
 		mainView->AddChild(buttonAbout);
+		SetDefaultButton(buttonRun);
 
 		AddChild(mainView);
 		AddChild(bannerView);
+
+		fDirectotyFilter = new BeDirectoryFilter();
+		fFilePanel = new BFilePanel(B_OPEN_PANEL, new BMessenger(this), NULL, B_DIRECTORY_NODE, false,
+		                            new BMessage(MSG_FILE_PANEL_FILE_SELECTED), fDirectotyFilter, true);
+		fFilePanel->Window()->SetTitle(L_FP_TITLE);
+
+		SetSizeLimits(400.0f, 800.0f, 300.0f, 600.0f);
+	}
+
+	void MessageReceived(BMessage *msg)
+	{
+		switch (msg->what)
+		{
+			case MSG_BUTTON_RUN_CLICKED:
+			{
+				BeMainWindow::QuitRequested();
+				break;
+			}
+			case MSG_BUTTON_EXIT_CLICKED:
+			{
+				BeMainWindow::QuitRequested();
+				break;
+			}
+			case MSG_BUTTON_ABOUT_CLICKED:
+			{
+				BeMainWindow::QuitRequested();
+				break;
+			}
+			case MSG_BUTTON_BROWSE_CLICKED:
+			{
+				ChooseDirectory();
+				break;
+			}
+			case MSG_FILE_PANEL_FILE_SELECTED:
+			{
+				entry_ref dirRef;
+				fFilePanel->GetPanelDirectory(&dirRef);
+				BEntry entry(&dirRef);
+				BPath path;
+				entry.GetPath(&path);
+				fDataTextControl->SetText(path.Path());
+				break;
+			}
+			default:
+			{
+				BeMainWindow::MessageReceived(msg);
+				break;
+			}
+		}
+	}
+
+	void ChooseDirectory(void)
+	{
+		fFilePanel->Show();
 	}
 };
 
