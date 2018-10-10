@@ -1,6 +1,7 @@
 #include "BeApp.h"
 #include "BeMainWindow.h"
 #include "BeDirectoryFilter.h"
+#include "BeUtils.h"
 
 #include <Rect.h>
 #include <View.h>
@@ -100,8 +101,12 @@ public:
 		AddChild(bannerView);
 
 		fDirectotyFilter = new BeDirectoryFilter();
-		fFilePanel = new BFilePanel(B_OPEN_PANEL, new BMessenger(this), NULL, B_DIRECTORY_NODE, false,
-		                            new BMessage(MSG_FILE_PANEL_FILE_SELECTED), fDirectotyFilter, true);
+		entry_ref start_point;
+		BEntry entry(BeUtils::GetPathToHomeDir().String());
+		entry.GetRef(&start_point);
+		fFilePanel = new BFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
+		                            B_DIRECTORY_NODE, false, new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
+		                            fDirectotyFilter, true);
 		fFilePanel->Window()->SetTitle(L_FP_TITLE);
 
 		SetSizeLimits(400.0f, 800.0f, 300.0f, 600.0f);
