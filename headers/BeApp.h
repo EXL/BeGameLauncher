@@ -9,8 +9,8 @@ class BeApp : public BApplication
 	BWindow *gMainWindow;
 public:
 	BeApp(const char *signature);
+	virtual thread_id Run();
 	void SetMainWindow(BWindow *window);
-	thread_id Run();
 };
 
 #endif // BEAPP_H

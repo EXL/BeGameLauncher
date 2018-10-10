@@ -2,6 +2,7 @@
 #include "BeMainWindow.h"
 #include "BeDirectoryFilter.h"
 #include "BeUtils.h"
+#include "BeSettings.h"
 
 #include <Rect.h>
 #include <View.h>
@@ -13,11 +14,15 @@
 #include <FilePanel.h>
 #include <Directory.h>
 #include <Path.h>
+#include <String.h>
+
+#include <map>
 
 // For Debug
 #include <stdio.h>
 
-#define SIGNATURE  "application/x-vnd.exl-BasedGameLauncher"
+#define SIGNATURE            "application/x-vnd.exl-BasedGameLauncher"
+#define SETTINGS_FILE        "GameLauncher.set"
 
 #define L_APP_NAME           "Game Launcher"
 #define L_BTN_RUN            "Run!"
@@ -46,9 +51,11 @@ class BeBasedWindow : public BeMainWindow
 	BTextControl *fDataTextControl;
 	BFilePanel *fFilePanel;
 	BeDirectoryFilter *fDirectotyFilter;
+	BeSettings *fSettings;
 public:
 	BeBasedWindow(void) : BeMainWindow(BRect(100, 100, 700, 500), L_APP_NAME)
 	{
+		fSettings = new BeSettings(SETTINGS_FILE);
 		CreateForm();
 	}
 
@@ -62,7 +69,7 @@ public:
 		mainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
 		BView *bannerView = new BView(bannerRect, "bannerView", B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW);
-		bannerView->SetViewColor(200, 0, 0);
+		bannerView->SetViewColor(255, 205, 8);
 
 		BStringView *dataStringView = new BStringView(stringViewRect, "dataStringView", L_SV_DATA, B_FOLLOW_LEFT);
 		dataStringView->ResizeToPreferred();
@@ -118,7 +125,8 @@ public:
 		{
 			case MSG_BUTTON_RUN_CLICKED:
 			{
-				BeMainWindow::QuitRequested();
+				SaveSettings();
+				//BeMainWindow::QuitRequested();
 				break;
 			}
 			case MSG_BUTTON_EXIT_CLICKED:
@@ -138,12 +146,7 @@ public:
 			}
 			case MSG_FILE_PANEL_FILE_SELECTED:
 			{
-				entry_ref dirRef;
-				fFilePanel->GetPanelDirectory(&dirRef);
-				BEntry entry(&dirRef);
-				BPath path;
-				entry.GetPath(&path);
-				fDataTextControl->SetText(path.Path());
+				DirectorySelected();
 				break;
 			}
 			default:
@@ -154,9 +157,32 @@ public:
 		}
 	}
 
+	void DirectorySelected(void)
+	{
+		entry_ref dirRef;
+		fFilePanel->GetPanelDirectory(&dirRef);
+		BEntry entry(&dirRef);
+		BPath path;
+		entry.GetPath(&path);
+		fDataTextControl->SetText(path.Path());
+	}
+
 	void ChooseDirectory(void)
 	{
 		fFilePanel->Show();
+	}
+
+	void SaveSettings(void)
+	{
+		std::map<int, int> settings;
+		//settings[BString("Test1")] = BString("1");
+		//settings[BString("Test2")] = BString("2");
+		//settings[BString("Test3")] = BString("3");
+		settings[4] = 1;
+		settings[5] = 5;
+
+		fSettings->UpdateSettings(settings);
+		fSettings->DumpSettingsToFile();
 	}
 };
 

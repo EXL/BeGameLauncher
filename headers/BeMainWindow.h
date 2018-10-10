@@ -9,9 +9,9 @@ class BeMainWindow : public BWindow
 {
 public:
 	BeMainWindow(const BRect &frame, const char *title);
-	void MessageReceived(BMessage *msg);
-	bool QuitRequested(void);
+	virtual void MessageReceived(BMessage *msg);
 	virtual void CreateForm(void) = 0;
+	bool QuitRequested(void);
 };
 
 #endif // BEMAINWINDOW_H

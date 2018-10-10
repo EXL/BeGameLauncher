@@ -6,12 +6,6 @@ BeApp::BeApp(const char *signature)
 
 }
 
-void
-BeApp::SetMainWindow(BWindow *window)
-{
-	gMainWindow = window;
-}
-
 thread_id
 BeApp::Run()
 {
@@ -20,4 +14,10 @@ BeApp::Run()
 		gMainWindow->Show();
 	}
 	BApplication::Run();
+}
+
+void
+BeApp::SetMainWindow(BWindow *window)
+{
+	gMainWindow = window;
 }
