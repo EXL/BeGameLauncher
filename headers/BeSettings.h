@@ -8,13 +8,14 @@
 
 class BeSettings : public BMessage
 {
-	std::map<int, int> settings;
 	BString pathToSettingsFile;
+	void SetString(const char *name, const char *string);
 public:
 	BeSettings(const char *fileName);
 	bool DumpSettingsToFile();
 	bool ReadSettingsFromFile();
-	void UpdateSettings(std::map<int, int> options);
+	void UpdateSettings(const std::map<BString, BString> &options);
+	const char *GetString(const char *name) const;
 };
 
 #endif // BESETTINGS_H

@@ -10,6 +10,20 @@ BeSettings::BeSettings(const char *fileName)
 	pathToSettingsFile = BeUtils::GetPathToSettingsFile(fileName);
 }
 
+void
+BeSettings::SetString(const char *name, const char *string)
+{
+	BString buffer;
+	if(FindString(name, &buffer) != B_OK)
+	{
+		AddString(name, string);
+	}
+	else
+	{
+		ReplaceString(name, string);
+	}
+}
+
 bool
 BeSettings::DumpSettingsToFile()
 {
@@ -42,7 +56,31 @@ BeSettings::ReadSettingsFromFile()
 }
 
 void
-BeSettings::UpdateSettings(std::map<int, int> options)
+BeSettings::UpdateSettings(const std::map<BString, BString> &options)
 {
-	settings = options;
+	std::map<BString, BString>::const_iterator it = options.begin();
+	
+	while(it != options.end())
+	{
+		BString key = it->first;
+		BString value = it->second;
+
+		SetString(key.String(), value.String());
+
+		++it;
+	}
+}
+
+const char *
+BeSettings::GetString(const char *name) const
+{
+	BString buffer;
+	if (FindString(name, &buffer) != B_OK)
+	{
+		return "";
+	}
+	else
+	{
+		return buffer.String();
+	}
 }

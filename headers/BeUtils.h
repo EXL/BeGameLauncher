@@ -4,6 +4,10 @@
 #include <FindDirectory.h>
 #include <String.h>
 
+#include <cstdio>
+
+#define BeDebug(...) fprintf(stderr, __VA_ARGS__)
+
 class BeUtils
 {
 	static BString FindPathInner(directory_which dir);

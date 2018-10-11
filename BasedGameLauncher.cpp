@@ -23,6 +23,7 @@
 
 #define SIGNATURE            "application/x-vnd.exl-BasedGameLauncher"
 #define SETTINGS_FILE        "GameLauncher.set"
+#define DATA_PATH            "DATA_PATH"
 
 #define L_APP_NAME           "Game Launcher"
 #define L_BTN_RUN            "Run!"
@@ -57,6 +58,7 @@ public:
 	{
 		fSettings = new BeSettings(SETTINGS_FILE);
 		CreateForm();
+		ReadSettings();
 	}
 
 	void CreateForm()
@@ -125,7 +127,7 @@ public:
 		{
 			case MSG_BUTTON_RUN_CLICKED:
 			{
-				SaveSettings();
+				SaveSettings(false);
 				//BeMainWindow::QuitRequested();
 				break;
 			}
@@ -172,17 +174,39 @@ public:
 		fFilePanel->Show();
 	}
 
-	void SaveSettings(void)
+	void ReadSettings(void)
 	{
-		std::map<int, int> settings;
-		//settings[BString("Test1")] = BString("1");
-		//settings[BString("Test2")] = BString("2");
-		//settings[BString("Test3")] = BString("3");
-		settings[4] = 1;
-		settings[5] = 5;
+		if(!fSettings->ReadSettingsFromFile())
+		{
+			SaveSettings(true);
+		}
+
+		fDataTextControl->SetText(fSettings->GetString(DATA_PATH));
+	}
+
+	void SaveSettings(bool def)
+	{
+		std::map<BString, BString> settings;
+		settings[BString(DATA_PATH)] = (def) ? BString(BeUtils::GetPathToHomeDir()) :
+		                                         BString(fDataTextControl->Text());
 
 		fSettings->UpdateSettings(settings);
 		fSettings->DumpSettingsToFile();
+	}
+
+	void ShowAboutDialog()
+	{
+
+	}
+
+	void RunGame()
+	{
+
+	}
+
+	void RunGameExecVe()
+	{
+
 	}
 };
 
