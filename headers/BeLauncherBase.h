@@ -47,12 +47,16 @@ protected:
 
 public:
 	BeLauncherBase(const char *windowTitle, const char *packageName,
-	               const char *executableFileName, const char *settingFileName);
-	virtual void InitParameters();
+	               const char *executableFileName, const char *settingFileName, const char*dataPath);
+	virtual void InitParameters(const char *stringViewData, const char *textControlToolTip,
+	                            const char *buttonBrowseToolTip, const char* filePanelTitle);
 	virtual void CreateForm();
 	virtual bool ReadSettings();
 	virtual void SaveSettings(bool def);
 	virtual void MessageReceived(BMessage *msg);
+
+	virtual bool CheckCache();
+	virtual bool CheckExecutable();
 
 	BView *GetMainView() const;
 	BeSettings *GetSettings() const;

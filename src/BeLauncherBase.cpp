@@ -13,6 +13,10 @@
 #include <Directory.h>
 #include <Path.h>
 
+#include <unistd.h>
+
+extern char **environ;
+
 #define GAP                        10.0f
 #define BANNER_W                   64.0f
 
@@ -31,21 +35,21 @@
 #define O_BTN_EXIT                 "buttonExit"
 
 BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
-                               const char *executableFileName, const char *settingFileName)
+                               const char *executableFileName, const char *settingFileName, const char *dataPath)
 	: BeMainWindow(BRect(100, 100, 700, 500), windowTitle), sPackageName(packageName),
-	  sExecutableFileName(executableFileName), sSettingsFileName(settingFileName)
+	  sExecutableFileName(executableFileName), sSettingsFileName(settingFileName), sDataPath(dataPath)
 {
 
 }
 
 void
-BeLauncherBase::InitParameters()
+BeLauncherBase::InitParameters(const char *stringViewData, const char *textControlToolTip,
+                               const char *buttonBrowseToolTip, const char* filePanelTitle)
 {
-	sDataPath = "DATA_PATH";
-	sButtonBrowseToolTip = "Click to open the file dialog.";
-	sStringViewData = "Please select a directory with game files:";
-	sTextControlToolTip = "Path to a directory with game files.";
-	sFilePanelTitle = "Open Game Folder";
+	sStringViewData = stringViewData;
+	sTextControlToolTip = textControlToolTip;
+	sButtonBrowseToolTip = buttonBrowseToolTip;
+	sFilePanelTitle = filePanelTitle;
 
 	fExecutableFilePath = BeUtils::GetPathToExecutable(sPackageName, sExecutableFileName);
 
@@ -125,7 +129,7 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 		case MSG_BUTTON_RUN_CLICKED:
 		{
 			SaveSettings(false);
-			RunGameViaRoaster();
+			RunGameViaExecVe();
 			BeMainWindow::QuitRequested();
 			break;
 		}
@@ -155,6 +159,18 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 			break;
 		}
 	}
+}
+
+bool
+BeLauncherBase::CheckCache()
+{
+	return true;
+}
+
+bool
+BeLauncherBase::CheckExecutable()
+{
+	return true;
 }
 
 BView *
@@ -243,5 +259,23 @@ BeLauncherBase::RunGameViaRoaster()
 void
 BeLauncherBase::RunGameViaExecVe()
 {
-	BeDebug(__func__);
+	if(!CheckCache())
+	{
+		BeDebug("Cache Error!");
+		return;
+	}
+	if(!CheckExecutable())
+	{
+		BeDebug("Executable Error!");
+		return;
+	}
+	setenv(sDataPath, fSettings->GetString(sDataPath), 1);
+	if (!fork())
+	{
+		const char *executable = fExecutableFilePath.String();
+		const char *argv[] = { executable, NULL };
+		execve(executable, (char **)argv, environ);
+		BeDebug("Run Executable Error!");
+		return;
+	}
 }

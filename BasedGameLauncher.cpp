@@ -6,12 +6,21 @@
 #include <StringView.h>
 #include <CheckBox.h>
 
+// Launcher Settings
 #define SIGNATURE            "application/x-vnd.exl-BasedGameLauncher"
 #define TITLE                "Game Launcher"
 #define PACKAGE_DIR          "Game"
 #define SETTINGS_FILE        "GameLauncher.set"
 #define EXECUTABLE_FILE      "GameExe"
+#define DATA_PATH            "DATA_PATH"
 
+// Various Strings
+#define L_BUTTON_BROWSE_T    "Click to open the file dialog."
+#define L_SV_DATA            "Please select a directory with game files:"
+#define L_TC_DATA_T          "Path to a directory with game files."
+#define L_FP_TITLE           "Please choose a Game Folder"
+
+// Additional option
 #define S_CHECKBOX_OPTION    "GAME_OPTION"
 #define L_CHECKBOX_OPTION    "Game Option"
 #define O_CHECKBOX_OPTION    "checkBoxOption"
@@ -26,9 +35,9 @@ class BasedGameLauncher : public BeLauncherBase
 	BCheckBox *fCheckBoxOption;
 public:
 	BasedGameLauncher(void)
-		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH)
 	{
-		BeLauncherBase::InitParameters();
+		BeLauncherBase::InitParameters(L_SV_DATA, L_TC_DATA_T, L_BUTTON_BROWSE_T, L_FP_TITLE);
 		CreateForm();
 		ReadSettings();
 	}
