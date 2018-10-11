@@ -9,6 +9,7 @@ set(SOURCES
 	src/BeDirectoryFilter.cpp
 	src/BeSettings.cpp
 	src/BeUtils.cpp
+	src/BeLauncherBase.cpp
 	BasedGameLauncher.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})

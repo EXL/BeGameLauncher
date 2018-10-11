@@ -50,5 +50,6 @@ BeUtils::GetPathToPackage(const char *packageName)
 BString
 BeUtils::GetPathToExecutable(const char *packageName, const char *executableName)
 {
-	return FindPathInner(B_SYSTEM_APPS_DIRECTORY) << BString("/") << BString(packageName) << BString("/") << BString(executableName);
+	return FindPathInner(B_SYSTEM_APPS_DIRECTORY) << BString("/") << BString(packageName)
+	                                              << BString("/") << BString(executableName);
 }

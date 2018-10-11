@@ -55,22 +55,6 @@ BeSettings::ReadSettingsFromFile()
 	return true;
 }
 
-void
-BeSettings::UpdateSettings(const std::map<BString, BString> &options)
-{
-	std::map<BString, BString>::const_iterator it = options.begin();
-	
-	while(it != options.end())
-	{
-		BString key = it->first;
-		BString value = it->second;
-
-		SetString(key.String(), value.String());
-
-		++it;
-	}
-}
-
 const char *
 BeSettings::GetString(const char *name) const
 {
