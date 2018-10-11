@@ -25,7 +25,7 @@
 #define L_CHECKBOX_OPTION    "Game Option"
 #define O_CHECKBOX_OPTION    "checkBoxOption"
 
-class BasedGameLauncher : public BeLauncherBase 
+class BasedGameLauncher : public BeLauncherBase
 {
 	enum
 	{
@@ -40,6 +40,12 @@ public:
 		BeLauncherBase::InitParameters(L_SV_DATA, L_TC_DATA_T, L_BUTTON_BROWSE_T, L_FP_TITLE);
 		CreateForm();
 		ReadSettings();
+	}
+
+	const char *
+	SetDefaultDir()
+	{
+		return BeUtils::GetPathToHomeDir();
 	}
 
 	bool

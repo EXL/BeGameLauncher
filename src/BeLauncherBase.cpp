@@ -115,7 +115,7 @@ BeLauncherBase::CreateForm()
 
 	fDirectotyFilter = new BeDirectoryFilter();
 	entry_ref start_point;
-	BEntry entry(BeUtils::GetPathToHomeDir().String());
+	BEntry entry(SetDefaultDir());
 	entry.GetRef(&start_point);
 	fFilePanel = new BFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
 	                            B_DIRECTORY_NODE, false, new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
@@ -250,7 +250,7 @@ BeLauncherBase::ReadSettings()
 void
 BeLauncherBase::SaveSettings(bool def)
 {
-	fSettings->SetString(sDataPath, (def) ? BeUtils::GetPathToHomeDir().String() :
+	fSettings->SetString(sDataPath, (def) ? SetDefaultDir() :
 	                                        fDataTextControl->Text());
 
 	fSettings->DumpSettingsToFile();
@@ -318,4 +318,10 @@ BeLauncherBase::RunGameViaExecVe()
 		BeDebug("Run Executable Error!\n");
 		return;
 	}
+}
+
+const char
+*BeLauncherBase::SetDefaultDir()
+{
+	return BeUtils::GetPathToUserNonPackedDataDir().String();
 }

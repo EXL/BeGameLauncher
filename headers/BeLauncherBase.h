@@ -34,8 +34,6 @@ class BeLauncherBase : public BeMainWindow
 	void DirectorySelected(void);
 	void SelectDirectory(void);
 	void ShowAboutDialog();
-	void RunGameViaRoster();
-	void RunGameViaExecVe();
 
 protected:
 	enum
@@ -64,6 +62,11 @@ public:
 	BView *GetMainView() const;
 	BeSettings *GetSettings() const;
 	BTextControl *GetTextControl() const;
+
+	virtual void RunGameViaRoster();
+	virtual void RunGameViaExecVe();
+
+	virtual const char* SetDefaultDir();
 
 	static float Gap();
 	static float BannerWidth();
