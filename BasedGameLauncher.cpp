@@ -42,6 +42,12 @@ public:
 		ReadSettings();
 	}
 
+	bool
+	CheckCache()
+	{
+		return false;
+	}
+
 	void
 	CreateForm()
 	{
@@ -78,6 +84,7 @@ public:
 			BeDebug("Saved Option: %d\n", value);
 			fCheckBoxOption->SetValue(value);
 		}
+		return true;
 	}
 
 	void
@@ -104,7 +111,7 @@ public:
 			case MSG_BUTTON_RUN_CLICKED:
 			{
 				SaveSettings(false);
-				BeDebug("Run Button clicked, save settings!");
+				BeDebug("Run Button clicked, save settings!\n");
 				BeLauncherBase::MessageReceived(msg);
 				break;
 			}

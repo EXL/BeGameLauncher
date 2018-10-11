@@ -12,8 +12,10 @@
 #include <Entry.h>
 #include <Directory.h>
 #include <Path.h>
+#include <Roster.h>
 
 #include <unistd.h>
+#include <posix/stdlib.h>
 
 extern char **environ;
 
@@ -35,9 +37,11 @@ extern char **environ;
 #define O_BTN_EXIT                 "buttonExit"
 
 BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
-                               const char *executableFileName, const char *settingFileName, const char *dataPath)
+                               const char *executableFileName, const char *settingsFileName,
+                               const char *dataPath, bool useExecVe)
 	: BeMainWindow(BRect(100, 100, 700, 500), windowTitle), sPackageName(packageName),
-	  sExecutableFileName(executableFileName), sSettingsFileName(settingFileName), sDataPath(dataPath)
+	  sExecutableFileName(executableFileName), sSettingsFileName(settingsFileName),
+	  sDataPath(dataPath), sUseExecVe(useExecVe)
 {
 
 }
@@ -129,7 +133,15 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 		case MSG_BUTTON_RUN_CLICKED:
 		{
 			SaveSettings(false);
-			RunGameViaExecVe();
+			if(sUseExecVe)
+			{
+				BeDebug("Running game via execve...\n");
+				RunGameViaExecVe();
+			}
+			else
+			{
+				RunGameViaRoster();
+			}
 			BeMainWindow::QuitRequested();
 			break;
 		}
@@ -251,31 +263,59 @@ BeLauncherBase::ShowAboutDialog()
 }
 
 void
-BeLauncherBase::RunGameViaRoaster()
+BeLauncherBase::RunGameViaRoster()
 {
-	BeDebug(__func__);
+	if(!CheckExecutable())
+	{
+		BeDebug("Executable Error!\n");
+		return;
+	}
+	if(!CheckCache())
+	{
+		BeDebug("Cache Error!\n");
+		return;
+	}
+
+	BRoster roster;
+	entry_ref ref;
+
+	setenv(sDataPath, fDataTextControl->Text(), 1);
+
+	const char *executable = fExecutableFilePath.String();
+
+	if(get_ref_for_path(executable, &ref) != B_OK)
+	{
+		BeDebug("Run Executable Error!\n");
+	}
+	else
+	{
+		const char *argv[] = { executable, NULL };
+		roster.Launch(&ref, 1, argv);
+	}
 }
 
 void
 BeLauncherBase::RunGameViaExecVe()
 {
-	if(!CheckCache())
-	{
-		BeDebug("Cache Error!");
-		return;
-	}
 	if(!CheckExecutable())
 	{
-		BeDebug("Executable Error!");
+		BeDebug("Executable Error!\n");
 		return;
 	}
-	setenv(sDataPath, fSettings->GetString(sDataPath), 1);
+	if(!CheckCache())
+	{
+		BeDebug("Cache Error!\n");
+		return;
+	}
+
+	setenv(sDataPath, fDataTextControl->Text(), 1);
+
 	if (!fork())
 	{
 		const char *executable = fExecutableFilePath.String();
 		const char *argv[] = { executable, NULL };
-		execve(executable, (char **)argv, environ);
-		BeDebug("Run Executable Error!");
+		execve(executable, const_cast<char * const *>(argv), environ);
+		BeDebug("Run Executable Error!\n");
 		return;
 	}
 }

@@ -11,6 +11,8 @@
 
 class BeLauncherBase : public BeMainWindow
 {
+	const bool sUseExecVe;
+
 	const char *sSettingsFileName;
 	const char *sDataPath;
 	const char *sButtonBrowseToolTip;
@@ -32,7 +34,7 @@ class BeLauncherBase : public BeMainWindow
 	void DirectorySelected(void);
 	void SelectDirectory(void);
 	void ShowAboutDialog();
-	void RunGameViaRoaster();
+	void RunGameViaRoster();
 	void RunGameViaExecVe();
 
 protected:
@@ -47,7 +49,8 @@ protected:
 
 public:
 	BeLauncherBase(const char *windowTitle, const char *packageName,
-	               const char *executableFileName, const char *settingFileName, const char*dataPath);
+	               const char *executableFileName, const char *settingsFileName,
+	               const char *dataPath, bool useExecVe = false);
 	virtual void InitParameters(const char *stringViewData, const char *textControlToolTip,
 	                            const char *buttonBrowseToolTip, const char* filePanelTitle);
 	virtual void CreateForm();
