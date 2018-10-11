@@ -1,5 +1,6 @@
 #include "BeApp.h"
 #include "BeLauncherBase.h"
+#include "BeUtils.h"
 
 #include <View.h>
 #include <StringView.h>
@@ -11,27 +12,99 @@
 #define SETTINGS_FILE        "GameLauncher.set"
 #define EXECUTABLE_FILE      "GameExe"
 
+#define S_CHECKBOX_OPTION    "GAME_OPTION"
+#define L_CHECKBOX_OPTION    "Game Option"
+#define O_CHECKBOX_OPTION    "checkBoxOption"
+
 class BasedGameLauncher : public BeLauncherBase 
 {
+	enum
+	{
+		MSG_CHECKBOX_STATE_CHANGED = 'chks'
+	};
+
+	BCheckBox *fCheckBoxOption;
 public:
-	BasedGameLauncher(void) : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE)
+	BasedGameLauncher(void)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE)
 	{
 		BeLauncherBase::InitParameters();
 		CreateForm();
-		BeLauncherBase::ReadSettings();
+		ReadSettings();
 	}
 
-	void CreateForm()
+	void
+	CreateForm()
 	{
 		BeLauncherBase::CreateForm();
 
 		BView *ui = BeLauncherBase::GetMainView();
 
-		BStringView *strView = new BStringView(BRect(), "testString", "Test");
-		strView->ResizeToPreferred();
-		strView->MoveTo(200, 200);
+		fCheckBoxOption = new BCheckBox(BRect(), O_CHECKBOX_OPTION, L_CHECKBOX_OPTION,
+		                                          new BMessage(MSG_CHECKBOX_STATE_CHANGED), B_FOLLOW_LEFT);
 
-		ui->AddChild(strView);
+		fCheckBoxOption->ResizeToPreferred();
+
+		BRect r = BeLauncherBase::GetTextControl()->Frame();
+		fCheckBoxOption->MoveTo(r.left, r.top + Gap() * 3);
+
+		BeDebug("%f %f %f %f\n", r.left, r.top, r.right, r.bottom);
+
+		ui->AddChild(fCheckBoxOption);
+	}
+
+	bool
+	ReadSettings()
+	{
+		if(!BeLauncherBase::ReadSettings())
+		{
+			// First run, set default value
+			fCheckBoxOption->SetValue(1);
+		}
+		else
+		{
+			const char *str = BeLauncherBase::GetSettings()->GetString(S_CHECKBOX_OPTION);
+			int ASCII_MAGIC = 48;
+			int value = static_cast<int>(str[0] - ASCII_MAGIC);
+			BeDebug("Saved Option: %d\n", value);
+			fCheckBoxOption->SetValue(value);
+		}
+	}
+
+	void
+	SaveSettings(bool def)
+	{
+		BString value;
+		value << fCheckBoxOption->Value();
+		BeLauncherBase::GetSettings()->SetString(S_CHECKBOX_OPTION, value);
+
+		BeLauncherBase::SaveSettings(def);
+	}
+
+	void
+	MessageReceived(BMessage *msg)
+	{
+		switch (msg->what)
+		{
+			case MSG_CHECKBOX_STATE_CHANGED:
+			{
+				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
+				BeDebug("Game Option: %d\n", checkBox->Value());
+				break;
+			}
+			case MSG_BUTTON_RUN_CLICKED:
+			{
+				SaveSettings(false);
+				BeDebug("Run Button clicked, save settings!");
+				BeLauncherBase::MessageReceived(msg);
+				break;
+			}
+			default:
+			{
+				BeLauncherBase::MessageReceived(msg);
+				break;
+			}
+		}
 	}
 };
 

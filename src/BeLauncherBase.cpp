@@ -169,6 +169,12 @@ BeLauncherBase::GetSettings() const
 	return fSettings;
 }
 
+BTextControl *
+BeLauncherBase::GetTextControl() const
+{
+	return fDataTextControl;
+}
+
 float
 BeLauncherBase::Gap()
 {
@@ -199,15 +205,18 @@ BeLauncherBase::DirectorySelected()
 	fDataTextControl->SetText(path.Path());
 }
 
-void
+bool
 BeLauncherBase::ReadSettings()
 {
+	bool isNotFirstBlood = true;
 	if(!fSettings->ReadSettingsFromFile())
 	{
+		isNotFirstBlood = false;
 		SaveSettings(true);
 	}
 
 	fDataTextControl->SetText(fSettings->GetString(sDataPath));
+	return isNotFirstBlood;
 }
 
 void

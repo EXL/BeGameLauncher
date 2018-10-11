@@ -11,15 +11,6 @@
 
 class BeLauncherBase : public BeMainWindow
 {
-	enum
-	{
-		MSG_BUTTON_RUN_CLICKED        = 'btrn',
-		MSG_BUTTON_EXIT_CLICKED       = 'btex',
-		MSG_BUTTON_BROWSE_CLICKED     = 'btbr',
-		MSG_BUTTON_ABOUT_CLICKED      = 'btab',
-		MSG_FILE_PANEL_FILE_SELECTED  = 'fpsc'
-	};
-
 	const char *sSettingsFileName;
 	const char *sDataPath;
 	const char *sButtonBrowseToolTip;
@@ -43,17 +34,29 @@ class BeLauncherBase : public BeMainWindow
 	void ShowAboutDialog();
 	void RunGameViaRoaster();
 	void RunGameViaExecVe();
+
+protected:
+	enum
+	{
+		MSG_BUTTON_RUN_CLICKED        = 'btrn',
+		MSG_BUTTON_EXIT_CLICKED       = 'btex',
+		MSG_BUTTON_BROWSE_CLICKED     = 'btbr',
+		MSG_BUTTON_ABOUT_CLICKED      = 'btab',
+		MSG_FILE_PANEL_FILE_SELECTED  = 'fpsc'
+	};
+
 public:
 	BeLauncherBase(const char *windowTitle, const char *packageName,
 	               const char *executableFileName, const char *settingFileName);
 	virtual void InitParameters();
 	virtual void CreateForm();
-	virtual void ReadSettings();
+	virtual bool ReadSettings();
 	virtual void SaveSettings(bool def);
 	virtual void MessageReceived(BMessage *msg);
 
 	BView *GetMainView() const;
 	BeSettings *GetSettings() const;
+	BTextControl *GetTextControl() const;
 
 	static float Gap();
 	static float BannerWidth();
