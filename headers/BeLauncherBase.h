@@ -41,17 +41,16 @@ protected:
 	enum
 	{
 		MSG_BUTTON_RUN_CLICKED        = 'btrn',
-		MSG_BUTTON_EXIT_CLICKED       = 'btex',
 		MSG_BUTTON_BROWSE_CLICKED     = 'btbr',
 		MSG_BUTTON_ABOUT_CLICKED      = 'btab',
 		MSG_FILE_PANEL_FILE_SELECTED  = 'fpsc'
 	};
 	enum color_msg_t
 	{
-		COLOR_RED,
-		COLOR_GREEN,
-		COLOR_BLUE,
-		COLOR_BLACK
+		B_COLOR_RED,
+		B_COLOR_GREEN,
+		B_COLOR_BLUE,
+		B_COLOR_BLACK
 	};
 
 public:
@@ -85,6 +84,9 @@ public:
 	virtual void ShowErrorCacheAlert();
 	virtual void ShowExecutableCacheAlert();
 	virtual void ShowWarnWriteSettingsAlert();
+
+	virtual bool QuitRequested();
+	virtual bool QuitRequestedSub();
 };
 
 #endif // BELAUNCHERBASE_H

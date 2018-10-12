@@ -85,7 +85,7 @@ public:
 			const char *str = BeLauncherBase::GetSettings()->GetString(S_CHECKBOX_OPTION);
 			int ASCII_MAGIC = 48;
 			int value = static_cast<int>(str[0] - ASCII_MAGIC);
-			SetStatusString(COLOR_BLACK, BString("Saved Option ") << value);
+			SetStatusString(B_COLOR_BLACK, BString("Saved Option ") << value);
 			fCheckBoxOption->SetValue(value);
 		}
 		return true;
@@ -109,7 +109,7 @@ public:
 			case MSG_CHECKBOX_STATE_CHANGED:
 			{
 				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				SetStatusString(COLOR_BLACK, BString("Game Option ") << checkBox->Value());
+				SetStatusString(B_COLOR_BLACK, BString("Game Option ") << checkBox->Value());
 				break;
 			}
 			default:

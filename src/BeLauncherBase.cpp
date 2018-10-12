@@ -20,9 +20,9 @@
 
 extern char **environ;
 
-#define GAP                        10.0f
-#define STATUS_GAP_HACK             1.0f
-#define BANNER_W                   64.0f
+#define G_GAP                      10.0f
+#define G_STATUS_GAP_HACK          1.0f
+#define G_BANNER_W                 64.0f
 
 #define L_BTN_RUN                  "Run!"
 #define L_BTN_EXIT                 "Exit"
@@ -76,8 +76,8 @@ void
 BeLauncherBase::CreateForm()
 {
 	BRect r(Bounds());
-	BRect bannerRect(r.left, r.top, BANNER_W, r.bottom);
-	BRect stringViewRect(BANNER_W + GAP, BANNER_W + GAP, r.right, r.bottom);
+	BRect bannerRect(r.left, r.top, G_BANNER_W, r.bottom);
+	BRect stringViewRect(G_BANNER_W + G_GAP, G_BANNER_W + G_GAP, r.right, r.bottom);
 
 	fMainView = new BView(r, O_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
 	fMainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
@@ -92,12 +92,12 @@ BeLauncherBase::CreateForm()
 	BButton *buttonBrowse = new BButton(BRect(), O_BTN_BROWSE, L_BTN_BROWSE,
 	                                    new BMessage(MSG_BUTTON_BROWSE_CLICKED), B_FOLLOW_RIGHT);
 	buttonBrowse->ResizeToPreferred();
-	buttonBrowse->ResizeTo(buttonBrowse->Bounds().Width() - GAP * 5, buttonBrowse->Bounds().Height());
-	buttonBrowse->MoveTo(r.right - buttonBrowse->Bounds().Width() - GAP, BANNER_W + GAP * 3);
+	buttonBrowse->ResizeTo(buttonBrowse->Bounds().Width() - G_GAP * 5, buttonBrowse->Bounds().Height());
+	buttonBrowse->MoveTo(r.right - buttonBrowse->Bounds().Width() - G_GAP, G_BANNER_W + G_GAP * 3);
 	buttonBrowse->SetToolTip(sButtonBrowseToolTip);
 	fMainView->AddChild(buttonBrowse);
 
-	BRect dataTextControlRect(BANNER_W + GAP, BANNER_W + GAP * 3, r.right - GAP*4, r.bottom);
+	BRect dataTextControlRect(G_BANNER_W + G_GAP, G_BANNER_W + G_GAP * 3, r.right - G_GAP*4, r.bottom);
 	fDataTextControl = new BTextControl(dataTextControlRect, O_DATA_TCONTROL, NULL, NULL, NULL, B_FOLLOW_LEFT_RIGHT);
 	fDataTextControl->ResizeToPreferred();
 	fDataTextControl->SetToolTip(sTextControlToolTip);
@@ -109,26 +109,28 @@ BeLauncherBase::CreateForm()
 	BButton *buttonRun = new BButton(BRect(), O_BTN_RUN, L_BTN_RUN,
 	                                 new BMessage(MSG_BUTTON_RUN_CLICKED), B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
 	BButton *buttonExit = new BButton(BRect(), O_BTN_EXIT, L_BTN_EXIT,
-	                                  new BMessage(MSG_BUTTON_EXIT_CLICKED), B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
+	                                  new BMessage(B_QUIT_REQUESTED), B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
 	buttonRun->ResizeToPreferred();
 	buttonExit->ResizeToPreferred();
 	buttonAbout->ResizeToPreferred();
-	buttonExit->MoveTo(r.right - buttonExit->Bounds().Width() - GAP, r.bottom - buttonExit->Bounds().Height() - GAP);
-	buttonRun->MoveTo(r.right - buttonExit->Bounds().Width() - buttonRun->Bounds().Width() - GAP * 2,
-	                  r.bottom - buttonRun->Bounds().Height() - GAP);
-	buttonAbout->MoveTo(r.left + BANNER_W + GAP, r.bottom - buttonAbout->Bounds().Height() - GAP);
+	buttonExit->MoveTo(r.right - buttonExit->Bounds().Width() - G_GAP,
+	                   r.bottom - buttonExit->Bounds().Height() - G_GAP);
+	buttonRun->MoveTo(r.right - buttonExit->Bounds().Width() - buttonRun->Bounds().Width() - G_GAP * 2,
+	                  r.bottom - buttonRun->Bounds().Height() - G_GAP);
+	buttonAbout->MoveTo(r.left + G_BANNER_W + G_GAP, r.bottom - buttonAbout->Bounds().Height() - G_GAP);
 	fMainView->AddChild(buttonExit);
 	fMainView->AddChild(buttonRun);
 	fMainView->AddChild(buttonAbout);
 	SetDefaultButton(buttonRun);
 
-	BRect statusRect(BANNER_W + STATUS_GAP_HACK, r.bottom - buttonAbout->Bounds().Height() - GAP * 3, r.right, r.bottom);
+	BRect statusRect(G_BANNER_W + G_STATUS_GAP_HACK, r.bottom - buttonAbout->Bounds().Height() - G_GAP * 3,
+	                 r.right, r.bottom);
 	BView *statusView = new BView(statusRect, O_STATUS_VIEW, B_FOLLOW_LEFT_RIGHT | B_FOLLOW_BOTTOM, B_WILL_DRAW);
 	fStatusString = new BStringView(BRect(), O_STATUS_STRING, L_READY, B_FOLLOW_LEFT);
 	statusView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	fStatusString->SetFontSize(10.0f);
 	fStatusString->ResizeToPreferred();
-	fStatusString->MoveTo(GAP, 0.0f);
+	fStatusString->MoveTo(G_GAP, 0.0f);
 	statusView->AddChild(fStatusString);
 
 	AddChild(fMainView);
@@ -155,26 +157,20 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 		case MSG_BUTTON_RUN_CLICKED:
 		{
 			bool result = false;
-			SaveSettings(false);
 			if(sUseExecVe)
 			{
-				SetStatusString(COLOR_BLUE, "Running game via execve...\n");
+				SetStatusString(B_COLOR_BLUE, "Running game via execve...\n");
 				result = RunGameViaExecVe();
 			}
 			else
 			{
-				SetStatusString(COLOR_BLUE, "Running game via BRoster...\n");
+				SetStatusString(B_COLOR_BLUE, "Running game via BRoster...\n");
 				result = RunGameViaRoster();
 			}
 			if(result)
 			{
-				BeMainWindow::QuitRequested();
+				QuitRequestedSub();
 			}
-			break;
-		}
-		case MSG_BUTTON_EXIT_CLICKED:
-		{
-			BeMainWindow::QuitRequested();
 			break;
 		}
 		case MSG_BUTTON_ABOUT_CLICKED:
@@ -205,17 +201,17 @@ BeLauncherBase::SetStatusString(color_msg_t type, const BString &str)
 {
 	switch(type)
 	{
-		case COLOR_RED:
+		case B_COLOR_RED:
 		{
 			fStatusString->SetHighColor(200, 0, 0);
 			break;
 		}
-		case COLOR_GREEN:
+		case B_COLOR_GREEN:
 		{
 			fStatusString->SetHighColor(0, 100, 0);
 			break;
 		}
-		case COLOR_BLUE:
+		case B_COLOR_BLUE:
 		{
 			fStatusString->SetHighColor(0, 0, 200);
 			break;
@@ -245,7 +241,7 @@ BeLauncherBase::CheckExecutable()
 	entry_ref ref;
 	if(get_ref_for_path(executable, &ref) != B_OK)
 	{
-		SetStatusString(COLOR_RED, BString("Error: Function get_ref_for_path for ")
+		SetStatusString(B_COLOR_RED, BString("Error: Function get_ref_for_path for ")
 		                << BString(executable) << BString(" failed."));
 		return false;
 	}
@@ -253,7 +249,7 @@ BeLauncherBase::CheckExecutable()
 	BEntry entry(&ref);
 	if(!entry.Exists() || !entry.IsFile())
 	{
-		SetStatusString(COLOR_RED, BString("Error: Path entry ")
+		SetStatusString(B_COLOR_RED, BString("Error: Path entry ")
 		                << BString(executable) << BString(" is not exist nor file."));
 		return false;
 	}
@@ -261,14 +257,14 @@ BeLauncherBase::CheckExecutable()
 	mode_t permissions;
 	if(entry.GetPermissions(&permissions) != B_OK)
 	{
-		SetStatusString(COLOR_RED, BString("Error: Cannot get entry ")
+		SetStatusString(B_COLOR_RED, BString("Error: Cannot get entry ")
 		                << BString(executable) << BString(" permissons."));
 		return false;
 	}
 
 	if(!(permissions & S_IXUSR))
 	{
-		SetStatusString(COLOR_RED, BString("Error: File ")
+		SetStatusString(B_COLOR_RED, BString("Error: File ")
 		                << BString(executable) << BString(" does not have permission to execute"));
 		return false;
 	}
@@ -297,19 +293,19 @@ BeLauncherBase::GetTextControl() const
 float
 BeLauncherBase::Gap()
 {
-	return GAP;
+	return G_GAP;
 }
 
 float
 BeLauncherBase::BannerWidth()
 {
-	return BANNER_W;
+	return G_BANNER_W;
 }
 
 float
 BeLauncherBase::StatusGapHack()
 {
-	return STATUS_GAP_HACK;
+	return G_STATUS_GAP_HACK;
 }
 
 void
@@ -321,7 +317,7 @@ BeLauncherBase::ShowErrorCacheAlert()
 	int32 button_index = cacheErrorAlert->Go();
 	if(button_index == 0)
 	{
-		SetStatusString(COLOR_BLACK, L_READY);
+		SetStatusString(B_COLOR_BLACK, L_READY);
 	}
 }
 
@@ -336,7 +332,7 @@ BeLauncherBase::ShowWarnWriteSettingsAlert()
 	int32 button_index = writeSettingsWarnAlert->Go();
 	if(button_index == 0)
 	{
-		SetStatusString(COLOR_BLACK, L_READY);
+		SetStatusString(B_COLOR_BLACK, L_READY);
 	}
 }
 
@@ -351,7 +347,7 @@ BeLauncherBase::ShowExecutableCacheAlert()
 	int32 button_index = executableErrorAlert->Go();
 	if(button_index == 0)
 	{
-		SetStatusString(COLOR_BLACK, L_READY);
+		SetStatusString(B_COLOR_BLACK, L_READY);
 	}
 }
 
@@ -393,13 +389,15 @@ BeLauncherBase::SaveSettings(bool def)
 	fSettings->SetString(sDataPath, (def) ? SetDefaultDir() :
 	                                        fDataTextControl->Text());
 
-	SetStatusString(COLOR_BLUE, BString("Saving settings to ")
+	SetStatusString(B_COLOR_BLUE, BString("Saving settings to ")
 	                << BString(BeUtils::GetPathToSettingsFile(sSettingsFileName)) << BString(" file..."));
 
 	if(!fSettings->DumpSettingsToFile())
 	{
 		ShowWarnWriteSettingsAlert();
 	}
+
+	SetStatusString(B_COLOR_BLACK, L_READY);
 }
 
 void
@@ -431,7 +429,7 @@ BeLauncherBase::RunGameViaRoster()
 
 	if(get_ref_for_path(executable, &ref) != B_OK)
 	{
-		SetStatusString(COLOR_RED, BString("Cannot run ") << BString(executable)
+		SetStatusString(B_COLOR_RED, BString("Cannot run ") << BString(executable)
 		                << BString(" executable. See ") << BString(__func__));
 		return false;
 	}
@@ -465,7 +463,7 @@ BeLauncherBase::RunGameViaExecVe()
 		const char *executable = fExecutableFilePath.String();
 		const char *argv[] = { executable, NULL };
 		execve(executable, const_cast<char * const *>(argv), environ);
-		SetStatusString(COLOR_RED, BString("Cannot run ") << BString(executable)
+		SetStatusString(B_COLOR_RED, BString("Cannot run ") << BString(executable)
 		                << BString(" executable. See ") << BString(__func__));
 		return false;
 	}
@@ -473,8 +471,23 @@ BeLauncherBase::RunGameViaExecVe()
 	return true;
 }
 
-const char
-*BeLauncherBase::SetDefaultDir()
+const char *
+BeLauncherBase::SetDefaultDir()
 {
 	return BeUtils::GetPathToUserNonPackedDataDir().String();
+}
+
+bool
+BeLauncherBase::QuitRequested()
+{
+	SaveSettings(false);
+	BeMainWindow::QuitRequested();
+	return true;
+}
+
+bool
+BeLauncherBase::QuitRequestedSub()
+{
+	BeMainWindow::QuitRequested();
+	return true;
 }

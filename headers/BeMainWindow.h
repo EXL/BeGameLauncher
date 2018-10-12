@@ -11,7 +11,7 @@ public:
 	BeMainWindow(const BRect &frame, const char *title);
 	virtual void MessageReceived(BMessage *msg);
 	virtual void CreateForm(void) = 0;
-	bool QuitRequested(void);
+	virtual bool QuitRequested(void);
 };
 
 #endif // BEMAINWINDOW_H
