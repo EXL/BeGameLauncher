@@ -15,6 +15,7 @@ class BeLauncherBase : public BeMainWindow
 {
 	const bool sUseExecVe;
 
+	const char *sWindowTitle;
 	const char *sSettingsFileName;
 	const char *sDataPath;
 	const char *sButtonBrowseToolTip;
@@ -26,13 +27,13 @@ class BeLauncherBase : public BeMainWindow
 
 	BString fExecutableFilePath;
 
-	BTextControl *fDataTextControl;
-	BeDirectoryFilePanel *fDirectoryFilePanel;
-	BeDirectoryFilter *fDirectotyFilter;
 	BeSettings *fSettings;
+	BeDirectoryFilter *fDirectotyFilter;
+	BeDirectoryFilePanel *fDirectoryFilePanel;
 
 	BView *fMainView;
 	BStringView *fStatusString;
+	BTextControl *fDataTextControl;
 
 	void DirectorySelected(void);
 	void SelectDirectory(void);

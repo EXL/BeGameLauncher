@@ -6,6 +6,7 @@ include_directories(headers headers/haiku_inner)
 set(SOURCES
 	src/BeApp.cpp
 	src/BeMainWindow.cpp
+	src/BeAboutWindow.cpp
 	src/BeDirectoryFilter.cpp
 	src/BeDirectoryFilePanel.cpp
 	src/BeSettings.cpp

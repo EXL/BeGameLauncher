@@ -1,4 +1,5 @@
 #include "BeLauncherBase.h"
+#include "BeAboutWindow.h"
 #include "BeUtils.h"
 
 #include <Rect.h>
@@ -16,8 +17,6 @@
 #include <unistd.h>
 #include <posix/stdlib.h>
 #include <compat/sys/stat.h>
-
-extern char **environ;
 
 #define G_GAP                      10.0f
 #define G_STATUS_GAP_HACK          1.0f
@@ -47,6 +46,8 @@ extern char **environ;
 #define O_BTN_RUN                  "buttonRun"
 #define O_BTN_EXIT                 "buttonExit"
 
+extern char **environ;
+
 BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
                                const char *executableFileName, const char *settingsFileName,
                                const char *dataPath, bool useExecVe)
@@ -54,7 +55,7 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
 	  sExecutableFileName(executableFileName), sSettingsFileName(settingsFileName),
 	  sDataPath(dataPath), sUseExecVe(useExecVe)
 {
-
+	sWindowTitle = windowTitle;
 }
 
 void
@@ -402,7 +403,8 @@ BeLauncherBase::SaveSettings(bool def)
 void
 BeLauncherBase::ShowAboutDialog()
 {
-	BeDebug(__func__);
+	BeAboutWindow *aboutWindow = new BeAboutWindow(Frame().InsetBySelf(G_BANNER_W, -(G_GAP * 3)), sWindowTitle);
+	aboutWindow->Show();
 }
 
 bool
@@ -479,6 +481,7 @@ BeLauncherBase::SetDefaultDir()
 bool
 BeLauncherBase::QuitRequested()
 {
+	BeDebug("AAAAAAAAAA\n");
 	SaveSettings(false);
 	BeMainWindow::QuitRequested();
 	return true;
