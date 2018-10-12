@@ -8,6 +8,7 @@
 #include <String.h>
 #include <View.h>
 #include <TextControl.h>
+#include <StringView.h>
 
 class BeLauncherBase : public BeMainWindow
 {
@@ -30,6 +31,7 @@ class BeLauncherBase : public BeMainWindow
 	BeSettings *fSettings;
 
 	BView *fMainView;
+	BStringView *fStatusString;
 
 	void DirectorySelected(void);
 	void SelectDirectory(void);
@@ -44,6 +46,13 @@ protected:
 		MSG_BUTTON_ABOUT_CLICKED      = 'btab',
 		MSG_FILE_PANEL_FILE_SELECTED  = 'fpsc'
 	};
+	enum color_msg_t
+	{
+		COLOR_RED,
+		COLOR_GREEN,
+		COLOR_BLUE,
+		COLOR_BLACK
+	};
 
 public:
 	BeLauncherBase(const char *windowTitle, const char *packageName,
@@ -55,6 +64,7 @@ public:
 	virtual bool ReadSettings();
 	virtual void SaveSettings(bool def);
 	virtual void MessageReceived(BMessage *msg);
+	virtual void SetStatusString(color_msg_t type, const BString &str);
 
 	virtual bool CheckCache();
 	virtual bool CheckExecutable();
@@ -63,8 +73,8 @@ public:
 	BeSettings *GetSettings() const;
 	BTextControl *GetTextControl() const;
 
-	virtual void RunGameViaRoster();
-	virtual void RunGameViaExecVe();
+	virtual bool RunGameViaRoster();
+	virtual bool RunGameViaExecVe();
 
 	virtual const char* SetDefaultDir();
 

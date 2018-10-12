@@ -3,7 +3,6 @@
 
 #include <Rect.h>
 #include <InterfaceDefs.h>
-#include <StringView.h>
 #include <Button.h>
 #include <Message.h>
 #include <Messenger.h>
@@ -16,19 +15,24 @@
 
 #include <unistd.h>
 #include <posix/stdlib.h>
+#include <compat/sys/stat.h>
 
 extern char **environ;
 
 #define GAP                        10.0f
+#define STATUS_GAP_HACK             1.0f
 #define BANNER_W                   64.0f
 
 #define L_BTN_RUN                  "Run!"
 #define L_BTN_EXIT                 "Exit"
 #define L_BTN_ABOUT                "About..."
 #define L_BTN_BROWSE               "..."
+#define L_READY                    "Ready."
 
 #define O_MAIN_VIEW                "mainView"
 #define O_BANNER_VIEW              "bannerView"
+#define O_STATUS_VIEW              "statusView"
+#define O_STATUS_STRING            "statusString"
 #define O_DATA_SVIEW               "dataStringView"
 #define O_DATA_TCONTROL            "dataTextControl"
 #define O_BTN_BROWSE               "buttonBrowse"
@@ -110,8 +114,18 @@ BeLauncherBase::CreateForm()
 	fMainView->AddChild(buttonAbout);
 	SetDefaultButton(buttonRun);
 
+	BRect statusRect(BANNER_W + STATUS_GAP_HACK, r.bottom - buttonAbout->Bounds().Height() - GAP * 3, r.right, r.bottom);
+	BView *statusView = new BView(statusRect, O_STATUS_VIEW, B_FOLLOW_LEFT_RIGHT | B_FOLLOW_BOTTOM, B_WILL_DRAW);
+	fStatusString = new BStringView(BRect(), O_STATUS_STRING, L_READY, B_FOLLOW_LEFT);
+	statusView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	fStatusString->SetFontSize(10.0f);
+	fStatusString->ResizeToPreferred();
+	fStatusString->MoveTo(GAP, 0.0f);
+	statusView->AddChild(fStatusString);
+
 	AddChild(fMainView);
 	AddChild(bannerView);
+	AddChild(statusView);
 
 	fDirectotyFilter = new BeDirectoryFilter();
 	entry_ref start_point;
@@ -132,17 +146,22 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 	{
 		case MSG_BUTTON_RUN_CLICKED:
 		{
+			bool result = false;
 			SaveSettings(false);
 			if(sUseExecVe)
 			{
-				BeDebug("Running game via execve...\n");
-				RunGameViaExecVe();
+				SetStatusString(COLOR_BLUE, "Running game via execve...\n");
+				result = RunGameViaExecVe();
 			}
 			else
 			{
-				RunGameViaRoster();
+				SetStatusString(COLOR_BLUE, "Running game via BRoster...\n");
+				result = RunGameViaRoster();
 			}
-			BeMainWindow::QuitRequested();
+			if(result)
+			{
+				BeMainWindow::QuitRequested();
+			}
 			break;
 		}
 		case MSG_BUTTON_EXIT_CLICKED:
@@ -173,6 +192,38 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 	}
 }
 
+void
+BeLauncherBase::SetStatusString(color_msg_t type, const BString &str)
+{
+	switch(type)
+	{
+		case COLOR_RED:
+		{
+			fStatusString->SetHighColor(200, 0, 0);
+			break;
+		}
+		case COLOR_GREEN:
+		{
+			fStatusString->SetHighColor(0, 200, 0);
+			break;
+		}
+		case COLOR_BLUE:
+		{
+			fStatusString->SetHighColor(0, 200, 0);
+			break;
+		}
+		default:
+		{
+			fStatusString->SetHighColor(0, 0, 0);
+			break;
+		}
+
+	}
+
+	fStatusString->SetText(str.String());
+	fStatusString->ResizeToPreferred();
+}
+
 bool
 BeLauncherBase::CheckCache()
 {
@@ -182,6 +233,38 @@ BeLauncherBase::CheckCache()
 bool
 BeLauncherBase::CheckExecutable()
 {
+	const char *executable = fExecutableFilePath.String();
+	entry_ref ref;
+	if(get_ref_for_path(executable, &ref) != B_OK)
+	{
+		SetStatusString(COLOR_RED, BString("Error: Function get_ref_for_path for ")
+		                << BString(executable) << BString(" failed."));
+		return false;
+	}
+
+	BEntry entry(&ref);
+	if(!entry.Exists() || !entry.IsFile())
+	{
+		SetStatusString(COLOR_RED, BString("Error: Path entry ")
+		                << BString(executable) << BString(" is not exist nor file."));
+		return false;
+	}
+
+	mode_t permissions;
+	if(entry.GetPermissions(&permissions) != B_OK)
+	{
+		SetStatusString(COLOR_RED, BString("Error: Cannot get entry ")
+		                << BString(executable) << BString(" permissons."));
+		return false;
+	}
+
+	if(!(permissions & S_IXUSR))
+	{
+		SetStatusString(COLOR_RED, BString("Error: File ")
+		                << BString(executable) << BString(" does not have permission to execute"));
+		return false;
+	}
+
 	return true;
 }
 
@@ -262,18 +345,18 @@ BeLauncherBase::ShowAboutDialog()
 	BeDebug(__func__);
 }
 
-void
+bool
 BeLauncherBase::RunGameViaRoster()
 {
 	if(!CheckExecutable())
 	{
 		BeDebug("Executable Error!\n");
-		return;
+		return false;
 	}
 	if(!CheckCache())
 	{
 		BeDebug("Cache Error!\n");
-		return;
+		return false;
 	}
 
 	BRoster roster;
@@ -285,27 +368,31 @@ BeLauncherBase::RunGameViaRoster()
 
 	if(get_ref_for_path(executable, &ref) != B_OK)
 	{
-		BeDebug("Run Executable Error!\n");
+		SetStatusString(COLOR_RED, BString("Cannot run ") << BString(executable)
+		                << BString(" executable. See ") << BString(__func__));
+		return false;
 	}
 	else
 	{
 		const char *argv[] = { executable, NULL };
 		roster.Launch(&ref, 1, argv);
 	}
+
+	return true;
 }
 
-void
+bool
 BeLauncherBase::RunGameViaExecVe()
 {
 	if(!CheckExecutable())
 	{
 		BeDebug("Executable Error!\n");
-		return;
+		return false;
 	}
 	if(!CheckCache())
 	{
 		BeDebug("Cache Error!\n");
-		return;
+		return false;
 	}
 
 	setenv(sDataPath, fDataTextControl->Text(), 1);
@@ -315,9 +402,12 @@ BeLauncherBase::RunGameViaExecVe()
 		const char *executable = fExecutableFilePath.String();
 		const char *argv[] = { executable, NULL };
 		execve(executable, const_cast<char * const *>(argv), environ);
-		BeDebug("Run Executable Error!\n");
-		return;
+		SetStatusString(COLOR_RED, BString("Cannot run ") << BString(executable)
+		                << BString(" executable. See ") << BString(__func__));
+		return false;
 	}
+
+	return true;
 }
 
 const char

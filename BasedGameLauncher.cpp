@@ -51,7 +51,7 @@ public:
 	bool
 	CheckCache()
 	{
-		return false;
+		return true;
 	}
 
 	void
@@ -69,8 +69,6 @@ public:
 		BRect r = BeLauncherBase::GetTextControl()->Frame();
 		fCheckBoxOption->MoveTo(r.left, r.top + Gap() * 3);
 
-		BeDebug("%f %f %f %f\n", r.left, r.top, r.right, r.bottom);
-
 		ui->AddChild(fCheckBoxOption);
 	}
 
@@ -87,7 +85,7 @@ public:
 			const char *str = BeLauncherBase::GetSettings()->GetString(S_CHECKBOX_OPTION);
 			int ASCII_MAGIC = 48;
 			int value = static_cast<int>(str[0] - ASCII_MAGIC);
-			BeDebug("Saved Option: %d\n", value);
+			SetStatusString(COLOR_BLACK, BString("Saved Option ") << value);
 			fCheckBoxOption->SetValue(value);
 		}
 		return true;
@@ -111,14 +109,7 @@ public:
 			case MSG_CHECKBOX_STATE_CHANGED:
 			{
 				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				BeDebug("Game Option: %d\n", checkBox->Value());
-				break;
-			}
-			case MSG_BUTTON_RUN_CLICKED:
-			{
-				SaveSettings(false);
-				BeDebug("Run Button clicked, save settings!\n");
-				BeLauncherBase::MessageReceived(msg);
+				SetStatusString(COLOR_BLACK, BString("Game Option ") << checkBox->Value());
 				break;
 			}
 			default:
