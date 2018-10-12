@@ -4,6 +4,7 @@
 #include "BeMainWindow.h"
 #include "BeDirectoryFilter.h"
 #include "BeSettings.h"
+#include "BeDirectoryFilePanel.h"
 
 #include <String.h>
 #include <View.h>
@@ -26,7 +27,7 @@ class BeLauncherBase : public BeMainWindow
 	BString fExecutableFilePath;
 
 	BTextControl *fDataTextControl;
-	BFilePanel *fFilePanel;
+	BeDirectoryFilePanel *fDirectoryFilePanel;
 	BeDirectoryFilter *fDirectotyFilter;
 	BeSettings *fSettings;
 

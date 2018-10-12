@@ -7,7 +7,6 @@
 #include <Message.h>
 #include <Messenger.h>
 #include <TextControl.h>
-#include <FilePanel.h>
 #include <Entry.h>
 #include <Directory.h>
 #include <Path.h>
@@ -141,10 +140,10 @@ BeLauncherBase::CreateForm()
 	entry_ref start_point;
 	BEntry entry(SetDefaultDir());
 	entry.GetRef(&start_point);
-	fFilePanel = new BFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
+	fDirectoryFilePanel = new BeDirectoryFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
 	                            B_DIRECTORY_NODE, false, new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
 	                            fDirectotyFilter, true);
-	fFilePanel->Window()->SetTitle(sFilePanelTitle);
+	fDirectoryFilePanel->Window()->SetTitle(sFilePanelTitle);
 
 	SetSizeLimits(400.0f, 800.0f, 300.0f, 600.0f);
 }
@@ -354,14 +353,14 @@ BeLauncherBase::ShowExecutableCacheAlert()
 void
 BeLauncherBase::SelectDirectory()
 {
-	fFilePanel->Show();
+	fDirectoryFilePanel->Show();
 }
 
 void
 BeLauncherBase::DirectorySelected()
 {
 	entry_ref dirRef;
-	fFilePanel->GetPanelDirectory(&dirRef);
+	fDirectoryFilePanel->GetPanelDirectory(&dirRef);
 	BEntry entry(&dirRef);
 	BPath path;
 	entry.GetPath(&path);
