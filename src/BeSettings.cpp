@@ -37,6 +37,7 @@ BeSettings::DumpSettingsToFile()
 		return false;
 	}
 	out.Unset();
+
 	return true;
 }
 
@@ -52,6 +53,7 @@ BeSettings::ReadSettingsFromFile()
 	{
 		return false;
 	}
+
 	return true;
 }
 

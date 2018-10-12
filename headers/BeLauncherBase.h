@@ -80,6 +80,11 @@ public:
 
 	static float Gap();
 	static float BannerWidth();
+	static float StatusGapHack();
+
+	virtual void ShowErrorCacheAlert();
+	virtual void ShowExecutableCacheAlert();
+	virtual void ShowWarnWriteSettingsAlert();
 };
 
 #endif // BELAUNCHERBASE_H

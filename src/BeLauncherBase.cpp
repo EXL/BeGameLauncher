@@ -12,6 +12,7 @@
 #include <Directory.h>
 #include <Path.h>
 #include <Roster.h>
+#include <Alert.h>
 
 #include <unistd.h>
 #include <posix/stdlib.h>
@@ -27,7 +28,14 @@ extern char **environ;
 #define L_BTN_EXIT                 "Exit"
 #define L_BTN_ABOUT                "About..."
 #define L_BTN_BROWSE               "..."
+#define L_BTN_ALERT_OK             "OK"
 #define L_READY                    "Ready."
+#define L_ALERT_EXECUTABLE_ERROR_H "Executable Error"
+#define L_ALERT_EXECUTABLE_ERROR   "Cannot run executable: "
+#define L_ALERT_CACHE_ERROR_H      "Cache Error"
+#define L_ALERT_CACHE_ERROR        "Game data check failed."
+#define L_ALERT_WRITE_S_WARNING_H  "Settings Error"
+#define L_ALERT_WRITE_S_WARNING    "Cannot write settings file: "
 
 #define O_MAIN_VIEW                "mainView"
 #define O_BANNER_VIEW              "bannerView"
@@ -204,12 +212,12 @@ BeLauncherBase::SetStatusString(color_msg_t type, const BString &str)
 		}
 		case COLOR_GREEN:
 		{
-			fStatusString->SetHighColor(0, 200, 0);
+			fStatusString->SetHighColor(0, 100, 0);
 			break;
 		}
 		case COLOR_BLUE:
 		{
-			fStatusString->SetHighColor(0, 200, 0);
+			fStatusString->SetHighColor(0, 0, 200);
 			break;
 		}
 		default:
@@ -298,6 +306,55 @@ BeLauncherBase::BannerWidth()
 	return BANNER_W;
 }
 
+float
+BeLauncherBase::StatusGapHack()
+{
+	return STATUS_GAP_HACK;
+}
+
+void
+BeLauncherBase::ShowErrorCacheAlert()
+{
+	BAlert *cacheErrorAlert = new BAlert(L_ALERT_CACHE_ERROR_H, L_ALERT_CACHE_ERROR, L_BTN_ALERT_OK);
+	cacheErrorAlert->SetType(B_STOP_ALERT);
+	cacheErrorAlert->SetFlags(cacheErrorAlert->Flags() | B_CLOSE_ON_ESCAPE);
+	int32 button_index = cacheErrorAlert->Go();
+	if(button_index == 0)
+	{
+		SetStatusString(COLOR_BLACK, L_READY);
+	}
+}
+
+void
+BeLauncherBase::ShowWarnWriteSettingsAlert()
+{
+	BString settingsWarning(L_ALERT_WRITE_S_WARNING);
+	settingsWarning << BeUtils::GetPathToSettingsFile(sSettingsFileName);
+	BAlert *writeSettingsWarnAlert = new BAlert(L_ALERT_WRITE_S_WARNING_H, settingsWarning, L_BTN_ALERT_OK);
+	writeSettingsWarnAlert->SetType(B_WARNING_ALERT);
+	writeSettingsWarnAlert->SetFlags(writeSettingsWarnAlert->Flags() | B_CLOSE_ON_ESCAPE);
+	int32 button_index = writeSettingsWarnAlert->Go();
+	if(button_index == 0)
+	{
+		SetStatusString(COLOR_BLACK, L_READY);
+	}
+}
+
+void
+BeLauncherBase::ShowExecutableCacheAlert()
+{
+	BString executableError(L_ALERT_EXECUTABLE_ERROR);
+	executableError << fExecutableFilePath;
+	BAlert *executableErrorAlert = new BAlert(L_ALERT_EXECUTABLE_ERROR_H, executableError, L_BTN_ALERT_OK);
+	executableErrorAlert->SetType(B_STOP_ALERT);
+	executableErrorAlert->SetFlags(executableErrorAlert->Flags() | B_CLOSE_ON_ESCAPE);
+	int32 button_index = executableErrorAlert->Go();
+	if(button_index == 0)
+	{
+		SetStatusString(COLOR_BLACK, L_READY);
+	}
+}
+
 void
 BeLauncherBase::SelectDirectory()
 {
@@ -336,7 +393,13 @@ BeLauncherBase::SaveSettings(bool def)
 	fSettings->SetString(sDataPath, (def) ? SetDefaultDir() :
 	                                        fDataTextControl->Text());
 
-	fSettings->DumpSettingsToFile();
+	SetStatusString(COLOR_BLUE, BString("Saving settings to ")
+	                << BString(BeUtils::GetPathToSettingsFile(sSettingsFileName)) << BString(" file..."));
+
+	if(!fSettings->DumpSettingsToFile())
+	{
+		ShowWarnWriteSettingsAlert();
+	}
 }
 
 void
@@ -350,12 +413,12 @@ BeLauncherBase::RunGameViaRoster()
 {
 	if(!CheckExecutable())
 	{
-		BeDebug("Executable Error!\n");
+		ShowExecutableCacheAlert();
 		return false;
 	}
 	if(!CheckCache())
 	{
-		BeDebug("Cache Error!\n");
+		ShowErrorCacheAlert();
 		return false;
 	}
 
@@ -386,12 +449,12 @@ BeLauncherBase::RunGameViaExecVe()
 {
 	if(!CheckExecutable())
 	{
-		BeDebug("Executable Error!\n");
+		ShowExecutableCacheAlert();
 		return false;
 	}
 	if(!CheckCache())
 	{
-		BeDebug("Cache Error!\n");
+		ShowErrorCacheAlert();
 		return false;
 	}
 
