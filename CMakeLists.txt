@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(BeGameLauncher)
 
-include_directories(headers headers/haiku_inner)
+include_directories(headers)
+
 set(SOURCES
 	src/BeApp.cpp
 	src/BeMainWindow.cpp
@@ -12,9 +13,7 @@ set(SOURCES
 	src/BeSettings.cpp
 	src/BeUtils.cpp
 	src/BeLauncherBase.cpp
-	src/haiku_inner/HyperTextView.cpp
-	src/haiku_inner/HyperTextActions.cpp
-	BasedGameLauncher.cpp)
+	src/BeUrlStringView.cpp)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} be tracker localestub)
+add_executable(BasedGameLauncher BasedGameLauncher.cpp ${SOURCES})
+target_link_libraries(BasedGameLauncher be tracker localestub)

@@ -203,22 +203,22 @@ BeLauncherBase::SetStatusString(color_msg_t type, const BString &str)
 	{
 		case B_COLOR_RED:
 		{
-			fStatusString->SetHighColor(200, 0, 0);
+			fStatusString->SetHighColor(K_RED);
 			break;
 		}
 		case B_COLOR_GREEN:
 		{
-			fStatusString->SetHighColor(0, 100, 0);
+			fStatusString->SetHighColor(K_GREEN);
 			break;
 		}
 		case B_COLOR_BLUE:
 		{
-			fStatusString->SetHighColor(0, 0, 200);
+			fStatusString->SetHighColor(K_BLUE);
 			break;
 		}
 		default:
 		{
-			fStatusString->SetHighColor(0, 0, 0);
+			fStatusString->SetHighColor(K_BLACK);
 			break;
 		}
 
@@ -421,7 +421,6 @@ BeLauncherBase::RunGameViaRoster()
 		return false;
 	}
 
-	BRoster roster;
 	entry_ref ref;
 
 	setenv(sDataPath, fDataTextControl->Text(), 1);
@@ -437,7 +436,7 @@ BeLauncherBase::RunGameViaRoster()
 	else
 	{
 		const char *argv[] = { executable, NULL };
-		roster.Launch(&ref, 1, argv);
+		be_roster->Launch(&ref, 1, argv);
 	}
 
 	return true;

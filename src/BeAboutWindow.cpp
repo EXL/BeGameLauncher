@@ -1,7 +1,6 @@
-#include "HyperTextView.h"
-#include "HyperTextActions.h"
 #include "BeAboutWindow.h"
 #include "BeLauncherBase.h"           // For GAP-functions
+#include "BeUrlStringView.h"
 
 #include <Rect.h>
 #include <GroupView.h>
@@ -13,13 +12,14 @@
 #define G_STRIPE_W                    30.0f
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT         "BeDirectoryFilePanel"
+#define B_TRANSLATION_CONTEXT         "BeAboutWindow"
 
 #define L_ABOUT_BUTTON_OK             B_TRANSLATE("OK")
 
 #define O_ABOUT_MAIN_VIEW             "aboutMainView"
 #define O_ABOUT_STRIPE_VIEW           "aboutStripeView"
 #define O_ABOUT_BUTTON_OK             "aboutButtonOk"
+#define O_ABOUT_URL_STRING_VIEW       "aboutUrlStringView"
 
 BeAboutWindow::BeAboutWindow(const BRect &frame, const char *title)
 	: BeMainWindow(frame, title)
@@ -34,6 +34,7 @@ BeAboutWindow::CreateForm()
 {
 	BRect r(Bounds());
 	BRect stripeRect(r.left, r.top, G_STRIPE_W, r.bottom);
+
 	BView *mainView = new BView(r, O_ABOUT_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
 	mainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
@@ -48,10 +49,9 @@ BeAboutWindow::CreateForm()
 	SetDefaultButton(okButton);
 	mainView->AddChild(okButton);
 
-//	HyperTextView *htv = new HyperTextView(r.InsetBySelf(50, 50), "adadsa", r.InsetBySelf(100, 100), 0);
-//	htv->SetText("http://exlmoto.ru\nAAAA");
-//	htv->InsertHyperText("adasdasdas", new URLAction("http://exlmoto.ru"));
-//	mainView->AddChild(htv);
+	BeUrlStringView *beUrlStringView = new BeUrlStringView(BRect(), O_ABOUT_URL_STRING_VIEW, "www.exlmoto.ru");
+	beUrlStringView->MoveTo(G_STRIPE_W * 3, r.bottom - okButton->Bounds().Height() - BeLauncherBase::Gap() * 4);
+	mainView->AddChild(beUrlStringView);
 
 	AddChild(mainView);
 	AddChild(stripeView);
