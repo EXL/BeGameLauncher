@@ -18,10 +18,6 @@
 BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text, const char *url, float fontSize)
 	: BStringView(frame, name, text), fFontSize(fontSize)
 {
-	SetHighColor(K_BLUE);
-	SetFontSize(fFontSize);
-	ResizeToPreferred();
-
 	fText << text;
 	if(url)
 	{
@@ -31,28 +27,41 @@ BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text
 	{
 		fUrl = "";
 	}
+
+	drawUnderline = false;
+
+	SetResizingMode(B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
+	SetHighColor(K_BLUE);
+	SetFontSize(fFontSize);
+	ResizeToPreferred();
 }
 
 void
 BeUrlStringView::Draw(BRect bounds)
 {
-	float offset = (fFontSize >= 12.0f) ? G_OFFSET_STRIPE_GAP_BIG : G_OFFSET_STRIPE_GAP_SMALL;
-
-	StrokeLine(bounds.OffsetToSelf(0.0f, offset).LeftBottom(),
-	           bounds.OffsetToSelf(0.0f, offset).RightBottom());
-
 	BStringView::Draw(bounds);
+
+	if(drawUnderline)
+	{
+		float offset = (fFontSize >= 12.0f) ? G_OFFSET_STRIPE_GAP_BIG : G_OFFSET_STRIPE_GAP_SMALL;
+
+		StrokeLine(bounds.OffsetToSelf(0.0f, offset).LeftBottom(),
+		           bounds.OffsetToSelf(0.0f, offset).RightBottom());
+	}
 }
 
 void
 BeUrlStringView::MouseMoved(BPoint point, uint32 transit, const BMessage *dragMessage)
 {
 	_UNUSED(point);
-	_UNUSED(transit);
 	_UNUSED(dragMessage);
 
 	BCursor linkCursor(B_CURSOR_ID_FOLLOW_LINK);
 	SetViewCursor(&linkCursor);
+
+	drawUnderline = transit < B_EXITED_VIEW;
+
+	Invalidate();
 }
 
 void

@@ -11,6 +11,8 @@ class BeUrlStringView : public BStringView
 {
 	const float fFontSize;
 
+	bool drawUnderline;
+
 	BString fUrl;
 	BString fText;
 
