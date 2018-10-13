@@ -2,12 +2,12 @@
 #define BEMULTISTRINGVIEW_H
 
 #include <TextView.h>
-#include <View.h>
+#include <Rect.h>
 
 class BeMultiStringView : public BTextView
 {
 public:
-	BeMultiStringView(const char* name, const BView *view);
+	BeMultiStringView(const char* name, BRect rect);
 
 	void FrameResized(float newWidth, float newHeight);
 };

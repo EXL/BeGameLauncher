@@ -3,6 +3,7 @@
 #include "BeAboutWindow.h"
 #include "BeUtils.h"
 #include "BeMultiStringView.h"
+#include "BeUrlStringView.h"
 
 #include <Rect.h>
 #include <View.h>
@@ -32,6 +33,10 @@
                              "mollit anim id est laborum.\n\n"
 #define L_ABOUT_THANKS_STR_H "Thanks to:\n\t"
 #define L_ABOUT_THANKS_STR   "- my gf"
+#define L_ABOUT_LINK         "http://exlmoto.ru"
+#define L_ABOUT_LINK_DESC    "Some useful link: "
+#define L_DATA_LINK          "https://store.steampowered.com/"
+#define L_DATA_FILES_LINK_D  "Buy data files: "
 
 // Additional option
 #define S_CHECKBOX_OPTION    "GAME_OPTION"
@@ -39,6 +44,10 @@
 #define O_CHECKBOX_OPTION    "checkBoxOption"
 
 #define O_ABOUT_STRING       "aboutString"
+#define O_ABOUT_LINK         "aboutLink"
+#define O_ABOUT_LINK_DESC    "aboutLinkDesc"
+#define O_DATA_LINK          "dataLink"
+#define O_DATA_LINK_DESC     "dataLinkDesc"
 
 class GameAboutWindow : public BeAboutWindow
 {
@@ -55,7 +64,7 @@ public:
 
 		BView *ui = BeAboutWindow::GetTextView();
 
-		BeMultiStringView *aboutView = new BeMultiStringView(O_ABOUT_STRING, ui);
+		BeMultiStringView *aboutView = new BeMultiStringView(O_ABOUT_STRING, BRect(0, 0, ui->Bounds().Width(), 200.0f));
 		aboutView->MoveTo(0, 0);
 		aboutView->Insert(L_ABOUT_STRING);
 		aboutView->SetFontAndColor(be_bold_font);
@@ -63,7 +72,19 @@ public:
 		aboutView->SetFontAndColor(be_plain_font);
 		aboutView->Insert(L_ABOUT_THANKS_STR);
 
+		BStringView *urlDescString = new BStringView(BRect(), O_ABOUT_LINK_DESC,
+		                                             L_ABOUT_LINK_DESC, B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
+		urlDescString->ResizeToPreferred();
+		urlDescString->MoveTo(0.0f, aboutView->Bounds().Height() + BeLauncherBase::Gap());
+
+		BeUrlStringView *urlString = new BeUrlStringView(BRect(), O_ABOUT_LINK, L_ABOUT_LINK);
+		urlString->ResizeToPreferred();
+		urlString->MoveTo(urlDescString->Bounds().Width() + BeLauncherBase::Gap(),
+		                  aboutView->Bounds().Height() + BeLauncherBase::Gap());
+
 		ui->AddChild(aboutView);
+		ui->AddChild(urlDescString);
+		ui->AddChild(urlString);
 	}
 };
 
@@ -111,7 +132,19 @@ public:
 		BRect r = BeLauncherBase::GetTextControl()->Frame();
 		fCheckBoxOption->MoveTo(r.left, r.top + Gap() * 3);
 
+		BStringView *urlDescString = new BStringView(BRect(), O_DATA_LINK_DESC,
+		                                             L_DATA_FILES_LINK_D, B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
+		urlDescString->ResizeToPreferred();
+		urlDescString->MoveTo(r.left, r.top + Gap() * 6);
+
+		BeUrlStringView *urlString = new BeUrlStringView(BRect(), O_DATA_LINK, L_DATA_LINK);
+		urlString->ResizeToPreferred();
+		urlString->MoveTo(r.left + urlDescString->Bounds().Width() + BeLauncherBase::Gap(),
+		                  r.top + Gap() * 6);
+
 		ui->AddChild(fCheckBoxOption);
+		ui->AddChild(urlDescString);
+		ui->AddChild(urlString);
 	}
 
 	bool

@@ -1,9 +1,10 @@
 #include "BeMultiStringView.h"
 
+#include <View.h>
 #include <InterfaceDefs.h>
 
-BeMultiStringView::BeMultiStringView(const char *name, const BView *view)
-	: BTextView(view->Bounds(), name, view->Bounds(), B_FOLLOW_ALL, B_WILL_DRAW)
+BeMultiStringView::BeMultiStringView(const char *name, BRect rect)
+	: BTextView(rect, name, rect, B_FOLLOW_ALL, B_WILL_DRAW)
 {
 	MakeEditable(false);
 	MakeSelectable(true);
