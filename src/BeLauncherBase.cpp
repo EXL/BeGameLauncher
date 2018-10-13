@@ -146,7 +146,8 @@ BeLauncherBase::CreateForm()
 	                            fDirectotyFilter, true);
 	fDirectoryFilePanel->Window()->SetTitle(sFilePanelTitle);
 
-	SetSizeLimits(400.0f, 800.0f, 300.0f, 600.0f);
+	SetSizeLimits(Bounds().Width() - 200.0f, Bounds().Width() + 200.0f,
+	              Bounds().Height() - 100.0f, Bounds().Height() + 200.0f);
 }
 
 void

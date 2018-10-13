@@ -37,7 +37,6 @@ class BeLauncherBase : public BeMainWindow
 
 	void DirectorySelected(void);
 	void SelectDirectory(void);
-	void ShowAboutDialog();
 
 protected:
 	enum
@@ -89,6 +88,8 @@ public:
 
 	virtual bool QuitRequested();
 	virtual bool QuitRequestedSub();
+
+	virtual void ShowAboutDialog();
 };
 
 #endif // BELAUNCHERBASE_H

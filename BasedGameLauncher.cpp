@@ -1,14 +1,19 @@
 #include "BeApp.h"
 #include "BeLauncherBase.h"
+#include "BeAboutWindow.h"
 #include "BeUtils.h"
+#include "BeMultiStringView.h"
 
+#include <Rect.h>
 #include <View.h>
 #include <StringView.h>
 #include <CheckBox.h>
+#include <Font.h>
 
 // Launcher Settings
 #define SIGNATURE            "application/x-vnd.exl-BasedGameLauncher"
 #define TITLE                "Game Launcher"
+#define VERSION              "1.0.0"
 #define PACKAGE_DIR          "Game"
 #define SETTINGS_FILE        "GameLauncher.set"
 #define EXECUTABLE_FILE      "GameExe"
@@ -19,11 +24,48 @@
 #define L_SV_DATA            "Please select a directory with game files:"
 #define L_TC_DATA_T          "Path to a directory with game files."
 #define L_FP_TITLE           "Please choose a Game Folder"
+#define L_ABOUT_STRING       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" \
+                             "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud" \
+                             "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure" \
+                             "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " \
+                             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt " \
+                             "mollit anim id est laborum.\n\n"
+#define L_ABOUT_THANKS_STR_H "Thanks to:\n\t"
+#define L_ABOUT_THANKS_STR   "- my gf"
 
 // Additional option
 #define S_CHECKBOX_OPTION    "GAME_OPTION"
 #define L_CHECKBOX_OPTION    "Game Option"
 #define O_CHECKBOX_OPTION    "checkBoxOption"
+
+#define O_ABOUT_STRING       "aboutString"
+
+class GameAboutWindow : public BeAboutWindow
+{
+public:
+	GameAboutWindow(const BRect &frame, const char *title, const char *version)
+	    : BeAboutWindow(frame, title, version)
+	{
+		BeAboutWindow::CreateForm();
+	}
+
+	void SetAboutText()
+	{
+		BeAboutWindow::SetAboutText();
+
+		BView *ui = BeAboutWindow::GetTextView();
+
+		BeMultiStringView *aboutView = new BeMultiStringView(O_ABOUT_STRING, ui);
+		aboutView->MoveTo(0, 0);
+		aboutView->Insert(L_ABOUT_STRING);
+		aboutView->SetFontAndColor(be_bold_font);
+		aboutView->Insert(L_ABOUT_THANKS_STR_H);
+		aboutView->SetFontAndColor(be_plain_font);
+		aboutView->Insert(L_ABOUT_THANKS_STR);
+
+		ui->AddChild(aboutView);
+	}
+};
 
 class BasedGameLauncher : public BeLauncherBase
 {
@@ -118,6 +160,14 @@ public:
 				break;
 			}
 		}
+	}
+
+	void
+	ShowAboutDialog()
+	{
+		GameAboutWindow *gameAboutWindow = new GameAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
+		                                                       TITLE, VERSION);
+		gameAboutWindow->Show();
 	}
 };
 

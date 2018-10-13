@@ -13,7 +13,8 @@ set(SOURCES
 	src/BeSettings.cpp
 	src/BeUtils.cpp
 	src/BeLauncherBase.cpp
-	src/BeUrlStringView.cpp)
+	src/BeUrlStringView.cpp
+	src/BeMultiStringView.cpp)
 
 add_executable(BasedGameLauncher BasedGameLauncher.cpp ${SOURCES})
 target_link_libraries(BasedGameLauncher be tracker localestub)
