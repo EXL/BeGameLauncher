@@ -23,6 +23,7 @@ class BeLauncherBase : public BeMainWindow
 	const char *sDataPath;
 	const char *sFilePanelTitle;
 
+	const bool sShowIcon;
 	const bool sUseExecVe;
 
 	BString fExecutableFilePath;
@@ -57,7 +58,7 @@ protected:
 public:
 	BeLauncherBase(const char *windowTitle, const char *packageName,
 	               const char *executableFileName, const char *settingsFileName,
-	               const char *dataPath, bool useExecVe = false);
+	               const char *dataPath, bool showIcon = false, bool useExecVe = false);
 	virtual void InitParameters(const char *stringViewData, const char *textControlToolTip,
 	                            const char *buttonBrowseToolTip, const char* filePanelTitle);
 	virtual void CreateForm();

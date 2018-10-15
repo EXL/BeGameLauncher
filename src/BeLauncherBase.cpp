@@ -38,6 +38,7 @@
 
 #define O_MAIN_VIEW                "mainView"
 #define O_BANNER_VIEW              "bannerView"
+#define O_ICON_VIEW                "iconView"
 #define O_STATUS_VIEW              "statusView"
 #define O_STATUS_STRING            "statusString"
 #define O_DATA_SVIEW               "dataStringView"
@@ -51,10 +52,10 @@ extern char **environ;
 
 BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
                                const char *executableFileName, const char *settingsFileName,
-                               const char *dataPath, bool useExecVe)
+                               const char *dataPath, bool showIcon, bool useExecVe)
 	: BeMainWindow(BRect(100, 100, 700, 500), windowTitle), sPackageName(packageName),
 	  sExecutableFileName(executableFileName), sSettingsFileName(settingsFileName),
-	  sDataPath(dataPath), sUseExecVe(useExecVe)
+	  sDataPath(dataPath), sShowIcon(showIcon), sUseExecVe(useExecVe)
 {
 	sWindowTitle = windowTitle;
 }
@@ -83,9 +84,14 @@ BeLauncherBase::CreateForm()
 	fMainView = new BView(r, O_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
 	fMainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
-	BeImageView *bannerView	= new BeImageView(bannerRect, O_BANNER_VIEW, K_BANNER, B_FOLLOW_TOP_BOTTOM);
-	//BView *bannerView = new BView(bannerRect, O_BANNER_VIEW, B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW);
-	//bannerView->SetViewColor(255, 205, 8);
+	BeImageView *bannerView = new BeImageView(bannerRect, O_BANNER_VIEW, K_BANNER, B_FOLLOW_TOP_BOTTOM);
+
+	if(sShowIcon)
+	{
+		BRect iconRect(r.right - G_BANNER_W, r.top, r.right, G_BANNER_W);
+		BeImageView *iconView = new BeImageView(iconRect, O_ICON_VIEW, K_ICON, B_FOLLOW_RIGHT | B_FOLLOW_TOP);
+		fMainView->AddChild(iconView);
+	}
 
 	BStringView *dataStringView = new BStringView(stringViewRect, O_DATA_SVIEW, sStringViewData, B_FOLLOW_LEFT);
 	dataStringView->ResizeToPreferred();

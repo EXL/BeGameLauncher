@@ -99,7 +99,7 @@ class BasedGameLauncher : public BeLauncherBase
 	BCheckBox *fCheckBoxOption;
 public:
 	BasedGameLauncher(void)
-		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH, true)
 	{
 		BeLauncherBase::InitParameters(L_SV_DATA, L_TC_DATA_T, L_BUTTON_BROWSE_T, L_FP_TITLE);
 		CreateForm();

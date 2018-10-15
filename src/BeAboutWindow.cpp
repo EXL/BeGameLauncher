@@ -1,6 +1,7 @@
 #include "BeAboutWindow.h"
 #include "BeLauncherBase.h"           // For GAP-functions
 #include "BeUrlStringView.h"
+#include "BeImageView.h"
 #include "BeUtils.h"
 
 #include <Rect.h>
@@ -14,6 +15,7 @@
 
 #define G_STRIPE_W                    30.0f
 #define G_SMALL_FONT_SIZE             10.0f
+#define G_ICON_OFFSET_W               24.0f
 #define G_URL_EXLMOTO_BLOG_TITLE      "http://exlmoto.ru/haiku-packages"
 #define G_URL_EXLMOTO_BLOG_LINK       "http://exlmoto.ru/haiku-packages#7"
 #define G_URL_GITHUB_TITLE_LINK       "http://github.com/EXL/BeGameLauncher"
@@ -57,9 +59,8 @@ BeAboutWindow::CreateForm()
 	fMainView = new BView(r, O_ABOUT_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
 	fMainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
-	BRect iconRect(r.left + 24.0f, r.top + 15.0f, 64.0f + 24.0f, 64.0f + 15.0f);
-	BView *iconView = new BView(iconRect, O_ABOUT_ICON_VIEW, B_FOLLOW_LEFT_TOP, B_WILL_DRAW);
-	iconView->SetViewColor(K_GREEN);
+	BRect iconRect(r.left + G_ICON_OFFSET_W, r.top + 15.0f, 64.0f + G_ICON_OFFSET_W, 64.0f + 15.0f);
+	BeImageView *iconView = new BeImageView(iconRect, O_ABOUT_ICON_VIEW, K_ICON, B_FOLLOW_LEFT_TOP, true);
 
 	BStringView *titleView = new BStringView(BRect(), O_ABOUT_TITLE_VIEW, fTitle, B_FOLLOW_LEFT_TOP);
 	BFont titleFont;
@@ -172,4 +173,16 @@ float
 BeAboutWindow::GetSmallFontSize()
 {
 	return G_SMALL_FONT_SIZE;
+}
+
+float
+BeAboutWindow::GetIconOffsetX()
+{
+	return G_ICON_OFFSET_W;
+}
+
+float
+BeAboutWindow::GetStripeOffsetX()
+{
+	return G_STRIPE_W - G_ICON_OFFSET_W;
 }

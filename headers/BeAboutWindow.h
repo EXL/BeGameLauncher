@@ -29,6 +29,8 @@ public:
 
 	static float GetStripeWidth();
 	static float GetSmallFontSize();
+	static float GetIconOffsetX();
+	static float GetStripeOffsetX();
 };
 
 #endif // BEABOUTWINDOW_H

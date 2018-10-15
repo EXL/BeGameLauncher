@@ -15,12 +15,11 @@ enum BitmapIndex
 class BeImageView : public BView
 {
 	bool fSuccessful;
+	bool fStripe;
 
 	BBitmap *fBitmap;
-
-	BBitmap *GetIconFromSignature(const char *signature);
 public:
-	BeImageView(BRect rect, const char *name, BitmapIndex index, uint32 resizeFlags);
+	BeImageView(BRect rect, const char *name, BitmapIndex index, uint32 resizeFlags, bool stripe = false);
 
 	virtual void Draw(BRect rect);
 };
