@@ -15,7 +15,8 @@
 #define L_URL_ALERT_WARNING             B_TRANSLATE("Cannot open link: ")
 #define L_URL_ALERT_BUTTON_OK           B_TRANSLATE("OK")
 
-BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text, const char *url, float fontSize)
+BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text, const char *url,
+                                 float fontSize, uint32 resizingFlags)
 	: BStringView(frame, name, text), fFontSize(fontSize)
 {
 	fText << text;
@@ -30,7 +31,7 @@ BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text
 
 	drawUnderline = false;
 
-	SetResizingMode(B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
+	SetResizingMode(resizingFlags);
 	SetHighColor(K_BLUE);
 	SetFontSize(fFontSize);
 	ResizeToPreferred();

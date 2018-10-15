@@ -78,6 +78,7 @@ public:
 		urlDescString->MoveTo(0.0f, aboutView->Bounds().Height() + BeLauncherBase::Gap());
 
 		BeUrlStringView *urlString = new BeUrlStringView(BRect(), O_ABOUT_LINK, L_ABOUT_LINK);
+		urlString->SetResizingMode(B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
 		urlString->ResizeToPreferred();
 		urlString->MoveTo(urlDescString->Bounds().Width() + BeLauncherBase::Gap(),
 		                  aboutView->Bounds().Height() + BeLauncherBase::Gap());
@@ -133,7 +134,7 @@ public:
 		fCheckBoxOption->MoveTo(r.left, r.top + Gap() * 3);
 
 		BStringView *urlDescString = new BStringView(BRect(), O_DATA_LINK_DESC,
-		                                             L_DATA_FILES_LINK_D, B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
+		                                             L_DATA_FILES_LINK_D, B_FOLLOW_LEFT);
 		urlDescString->ResizeToPreferred();
 		urlDescString->MoveTo(r.left, r.top + Gap() * 6);
 

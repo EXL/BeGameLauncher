@@ -92,14 +92,16 @@ BeAboutWindow::CreateForm()
 	BeUrlStringView *beUrlGhStringView = new BeUrlStringView(BRect(), O_ABOUT_URL_STRING_VIEW_GH,
 	                                                         G_URL_GITHUB_TITLE_LINK,
 	                                                         G_URL_GITHUB_TITLE_LINK,
-	                                                         G_SMALL_FONT_SIZE);
+	                                                         G_SMALL_FONT_SIZE,
+	                                                         B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
 	beUrlGhStringView->MoveTo(offsetWidth, r.bottom - BeLauncherBase::Gap() * 2);
 	fMainView->AddChild(beUrlGhStringView);
 
 	BeUrlStringView *beUrlEmStringView = new BeUrlStringView(BRect(), O_ABOUT_URL_STRING_VIEW_EM,
 	                                                         G_URL_EXLMOTO_BLOG_TITLE,
 	                                                         G_URL_EXLMOTO_BLOG_LINK,
-	                                                         G_SMALL_FONT_SIZE);
+	                                                         G_SMALL_FONT_SIZE,
+	                                                         B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
 	beUrlEmStringView->MoveTo(offsetWidth,
 	                          r.bottom - beUrlGhStringView->Bounds().Height() - BeLauncherBase::Gap() * 2);
 	fMainView->AddChild(beUrlEmStringView);

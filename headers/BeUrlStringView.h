@@ -6,6 +6,8 @@
 #include <Point.h>
 #include <Message.h>
 #include <String.h>
+#include <SupportDefs.h>
+#include <View.h>
 
 class BeUrlStringView : public BStringView
 {
@@ -18,7 +20,8 @@ class BeUrlStringView : public BStringView
 
 	void ShowOpenLinkWarning(const BString &url);
 public:
-	BeUrlStringView(BRect frame, const char* name, const char* text, const char *url = NULL, float fontSize = 12.0f);
+	BeUrlStringView(BRect frame, const char* name, const char* text, const char *url = NULL,
+	                float fontSize = 12.0f, uint32 resizingFlags = B_FOLLOW_LEFT);
 
 	virtual	void Draw(BRect bounds);
 	virtual void MouseMoved(BPoint point, uint32 transit, const BMessage* dragMessage);
