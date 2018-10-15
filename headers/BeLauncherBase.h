@@ -13,17 +13,17 @@
 
 class BeLauncherBase : public BeMainWindow
 {
-	const bool sUseExecVe;
-
 	const char *sWindowTitle;
-	const char *sSettingsFileName;
-	const char *sDataPath;
 	const char *sButtonBrowseToolTip;
 	const char *sStringViewData;
 	const char *sTextControlToolTip;
-	const char *sFilePanelTitle;
-	const char *sExecutableFileName;
 	const char *sPackageName;
+	const char *sExecutableFileName;
+	const char *sSettingsFileName;
+	const char *sDataPath;
+	const char *sFilePanelTitle;
+
+	const bool sUseExecVe;
 
 	BString fExecutableFilePath;
 

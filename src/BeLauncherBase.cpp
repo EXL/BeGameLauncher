@@ -1,5 +1,6 @@
 #include "BeLauncherBase.h"
 #include "BeAboutWindow.h"
+#include "BeImageView.h"
 #include "BeUtils.h"
 
 #include <Rect.h>
@@ -82,8 +83,9 @@ BeLauncherBase::CreateForm()
 	fMainView = new BView(r, O_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
 	fMainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
-	BView *bannerView = new BView(bannerRect, O_BANNER_VIEW, B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW);
-	bannerView->SetViewColor(255, 205, 8);
+	BeImageView *bannerView	= new BeImageView(bannerRect, O_BANNER_VIEW, K_BANNER, B_FOLLOW_TOP_BOTTOM);
+	//BView *bannerView = new BView(bannerRect, O_BANNER_VIEW, B_FOLLOW_TOP_BOTTOM, B_WILL_DRAW);
+	//bannerView->SetViewColor(255, 205, 8);
 
 	BStringView *dataStringView = new BStringView(stringViewRect, O_DATA_SVIEW, sStringViewData, B_FOLLOW_LEFT);
 	dataStringView->ResizeToPreferred();
