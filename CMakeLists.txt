@@ -27,12 +27,34 @@ set(LIBRARIES
 	translation
 	localestub)
 
+set(LOCALES
+	en
+	ru)
+
 set(BASED_LAUNCHER_NAME "BasedGameLauncher")
+set(RES_DIR "based")
+set(SIGNATURE "application/x-vnd.exl-BasedGameLauncher")
+
+add_definitions(-DSIGNATURE="${SIGNATURE}")
 add_executable(${BASED_LAUNCHER_NAME} ${BASED_LAUNCHER_NAME}.cpp ${SOURCES})
 target_link_libraries(${BASED_LAUNCHER_NAME} ${LIBRARIES})
 add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
-	rc -o ${BASED_LAUNCHER_NAME}.rsrc ${CMAKE_CURRENT_SOURCE_DIR}/res/based/${BASED_LAUNCHER_NAME}.rdef)
+	rc -o ${BASED_LAUNCHER_NAME}.rsrc ${CMAKE_CURRENT_SOURCE_DIR}/res/${RES_DIR}/${BASED_LAUNCHER_NAME}.rdef)
 add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
 	xres -o ${BASED_LAUNCHER_NAME} ${BASED_LAUNCHER_NAME}.rsrc)
 add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
 	mimeset --all ${BASED_LAUNCHER_NAME})
+add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
+	cat ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp | ${CMAKE_C_COMPILER} -E -x c++
+	-I${CMAKE_CURRENT_SOURCE_DIR}/headers -DSIGNATURE="${SIGNATURE}" -DB_COLLECTING_CATKEYS - | grep -av "^#" >
+	${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/pre/${BASED_LAUNCHER_NAME}.pre )
+foreach(LOCALE ${LOCALES})
+	add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
+		test -f ${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/${LOCALE}.catkeys ||
+		collectcatkeys -l ${LOCALE} -s ${SIGNATURE}
+		${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/pre/${BASED_LAUNCHER_NAME}.pre -o
+		${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/${LOCALE}.catkeys)
+	add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
+		linkcatkeys -o ${BASED_LAUNCHER_NAME} -s ${SIGNATURE} -tr -l ${LOCALE}
+		${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/${LOCALE}.catkeys)
+endforeach()

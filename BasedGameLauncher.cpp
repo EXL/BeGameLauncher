@@ -11,8 +11,11 @@
 #include <CheckBox.h>
 #include <Font.h>
 
+#ifndef SIGNATURE
+#error "SIGNATURE not defined. Check your build system."
+#endif // !SIGNATURE
+
 // Launcher Settings
-#define SIGNATURE            "application/x-vnd.exl-BasedGameLauncher"
 #define TITLE                "Game Launcher"
 #define VERSION              "1.0.0"
 #define PACKAGE_DIR          "Game"
