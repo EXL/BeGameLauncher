@@ -1,0 +1,38 @@
+1	ru	application/x-vnd.exl-BasedGameLauncher	2015380030
+Cannot run executable: 	BeGameLauncher		Не могу запустить исполнительный файл: 
+http://exlmoto.ru	BasedGameLauncher		http://exlmoto.ru
+Thanks to:\n\t	BasedGameLauncher		Спасибо:\n\t
+Select	BeGameLauncher		Select
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Ошибка: Сущность %exe% не существует или не является файлом.
+...	BeGameLauncher		...
+Exit	BeGameLauncher		Выход
+Please choose a Game Folder	BasedGameLauncher		Пожалуйста выберите директорию с игровыми файлами
+- my gf	BasedGameLauncher		- моей подружке
+Run!	BeGameLauncher		Запустить!
+Click to open the file dialog.	BasedGameLauncher		Нажмите для открытия файлового диалога.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Ошибка: Файл %exe% не имеет прав на выполнение.
+Saving settings to the %file% file...	BeGameLauncher		Сохранение настроек в файл %file%...
+Buy data files: 	BasedGameLauncher		Купить игровые файлы: 
+BeGameLauncer (c) EXL, 2018	BeGameLauncher		BeGameLauncer © EXL, 2018
+Settings Error	BeGameLauncher		Ошибка настроек
+Ready.	BeGameLauncher		Готово.
+Running game via BRoster...	BeGameLauncher		Запуск игры через BRoster...
+Executable Error	BeGameLauncher		Ошибка исполнительного файла
+Please select a directory with game files: 	BasedGameLauncher		Пожалуйста выберите директорию с игровыми файлами: 
+Version: 	BeGameLauncher		Версия: 
+Cache Error	BeGameLauncher		Ошибка данных
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	BasedGameLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка:	Неуспешное выполнение функции get_ref_for_path() для файла %exe%.
+Error: Cannot get entry %exe% permissons.	BeGameLauncher		Ошибка: Невозможно получить права файла %exe%.
+About...	BeGameLauncher		О программе...
+Game data check failed.	BeGameLauncher		Не удалось проверить данные игры.
+Cannot open link: 	BeGameLauncher		Не могу открыть ссылку: 
+Game Option	BasedGameLauncher		Дополнительная опция
+OK	BeGameLauncher		OK
+Some useful link: 	BasedGameLauncher		Полезная ссылка: 
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Ошибка: Не могу запустить исполнительны файл %exe%. См. %func%.
+Path to a directory with game files.	BasedGameLauncher		Путь до директории с игровыми файлами.
+https://store.steampowered.com/	BasedGameLauncher		https://store.steampowered.com/
+Running game via execve...	BeGameLauncher		Запуск игры через execve...
+Cannot write settings file: 	BeGameLauncher		Не могу записать файл настроек: 
+Open Link Error	BeGameLauncher		Ошибка открытия ссылки
