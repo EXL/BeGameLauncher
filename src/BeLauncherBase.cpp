@@ -15,38 +15,51 @@
 #include <Roster.h>
 #include <Alert.h>
 
+#include <Catalog.h>
+
 #include <unistd.h>
 #include <posix/stdlib.h>
 #include <compat/sys/stat.h>
 
-#define G_GAP                      10.0f
-#define G_STATUS_GAP_HACK          1.0f
-#define G_BANNER_W                 64.0f
+#define G_GAP                          10.0f
+#define G_STATUS_GAP_HACK              1.0f
+#define G_BANNER_W                     64.0f
 
-#define L_BTN_RUN                  "Run!"
-#define L_BTN_EXIT                 "Exit"
-#define L_BTN_ABOUT                "About..."
-#define L_BTN_BROWSE               "..."
-#define L_BTN_ALERT_OK             "OK"
-#define L_READY                    "Ready."
-#define L_ALERT_EXECUTABLE_ERROR_H "Executable Error"
-#define L_ALERT_EXECUTABLE_ERROR   "Cannot run executable: "
-#define L_ALERT_CACHE_ERROR_H      "Cache Error"
-#define L_ALERT_CACHE_ERROR        "Game data check failed."
-#define L_ALERT_WRITE_S_WARNING_H  "Settings Error"
-#define L_ALERT_WRITE_S_WARNING    "Cannot write settings file: "
+#undef  B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
-#define O_MAIN_VIEW                "mainView"
-#define O_BANNER_VIEW              "bannerView"
-#define O_ICON_VIEW                "iconView"
-#define O_STATUS_VIEW              "statusView"
-#define O_STATUS_STRING            "statusString"
-#define O_DATA_SVIEW               "dataStringView"
-#define O_DATA_TCONTROL            "dataTextControl"
-#define O_BTN_BROWSE               "buttonBrowse"
-#define O_BTN_ABOUT                "buttonAbout"
-#define O_BTN_RUN                  "buttonRun"
-#define O_BTN_EXIT                 "buttonExit"
+#define L_BTN_RUN                      B_TRANSLATE("Run!")
+#define L_BTN_EXIT                     B_TRANSLATE("Exit")
+#define L_BTN_ABOUT                    B_TRANSLATE("About...")
+#define L_BTN_BROWSE                   B_TRANSLATE("...")
+#define L_BTN_ALERT_OK                 B_TRANSLATE("OK")
+#define L_READY                        B_TRANSLATE("Ready.")
+#define L_ALERT_EXECUTABLE_ERROR_H     B_TRANSLATE("Executable Error")
+#define L_ALERT_EXECUTABLE_ERROR       B_TRANSLATE("Cannot run executable: ")
+#define L_ALERT_CACHE_ERROR_H          B_TRANSLATE("Cache Error")
+#define L_ALERT_CACHE_ERROR            B_TRANSLATE("Game data check failed.")
+#define L_ALERT_WRITE_S_WARNING_H      B_TRANSLATE("Settings Error")
+#define L_ALERT_WRITE_S_WARNING        B_TRANSLATE("Cannot write settings file: ")
+#define L_RUNNING_VIA_EXECVE           B_TRANSLATE("Running game via execve...")
+#define L_RUNNING_VIA_ROSTER           B_TRANSLATE("Running game via BRoster...")
+#define L_ERROR_ENTRY_FUNC             B_TRANSLATE("Error: Function get_ref_for_path() for %exe% failed.")
+#define L_ERROR_ENTRY_PATH             B_TRANSLATE("Error: Path entry %exe% is not exist nor file.")
+#define L_ERROR_ENTRY_PERMISSIONS      B_TRANSLATE("Error: Cannot get entry %exe% permissons.")
+#define L_ERROR_ENTRY_PERMISSIONS_EXEC B_TRANSLATE("Error: File %exe% does not have permission to execute.")
+#define L_ERROR_RUN_EXE                B_TRANSLATE("Error: Cannot run %exe% executable. See %func%.")
+#define L_SAVING_SETTINGS              B_TRANSLATE("Saving settings to the %file% file...")
+
+#define O_MAIN_VIEW                    "mainView"
+#define O_BANNER_VIEW                  "bannerView"
+#define O_ICON_VIEW                    "iconView"
+#define O_STATUS_VIEW                  "statusView"
+#define O_STATUS_STRING                "statusString"
+#define O_DATA_SVIEW                   "dataStringView"
+#define O_DATA_TCONTROL                "dataTextControl"
+#define O_BTN_BROWSE                   "buttonBrowse"
+#define O_BTN_ABOUT                    "buttonAbout"
+#define O_BTN_RUN                      "buttonRun"
+#define O_BTN_EXIT                     "buttonExit"
 
 extern char **environ;
 
@@ -168,12 +181,12 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 			bool result = false;
 			if(sUseExecVe)
 			{
-				SetStatusString(B_COLOR_BLUE, "Running game via execve...\n");
+				SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_EXECVE);
 				result = RunGameViaExecVe();
 			}
 			else
 			{
-				SetStatusString(B_COLOR_BLUE, "Running game via BRoster...\n");
+				SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_ROSTER);
 				result = RunGameViaRoster();
 			}
 			if(result)
@@ -250,31 +263,35 @@ BeLauncherBase::CheckExecutable()
 	entry_ref ref;
 	if(get_ref_for_path(executable, &ref) != B_OK)
 	{
-		SetStatusString(B_COLOR_RED, BString("Error: Function get_ref_for_path for ")
-		                << BString(executable) << BString(" failed."));
+		BString error(L_ERROR_ENTRY_FUNC);
+		error.ReplaceAll("%exe%", executable);
+		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
 
 	BEntry entry(&ref);
 	if(!entry.Exists() || !entry.IsFile())
 	{
-		SetStatusString(B_COLOR_RED, BString("Error: Path entry ")
-		                << BString(executable) << BString(" is not exist nor file."));
+		BString error(L_ERROR_ENTRY_PATH);
+		error.ReplaceAll("%exe%", executable);
+		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
 
 	mode_t permissions;
 	if(entry.GetPermissions(&permissions) != B_OK)
 	{
-		SetStatusString(B_COLOR_RED, BString("Error: Cannot get entry ")
-		                << BString(executable) << BString(" permissons."));
+		BString error(L_ERROR_ENTRY_PERMISSIONS);
+		error.ReplaceAll("%exe%", executable);
+		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
 
 	if(!(permissions & S_IXUSR))
 	{
-		SetStatusString(B_COLOR_RED, BString("Error: File ")
-		                << BString(executable) << BString(" does not have permission to execute"));
+		BString error(L_ERROR_ENTRY_PERMISSIONS_EXEC);
+		error.ReplaceAll("%exe%", executable);
+		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
 
@@ -398,8 +415,9 @@ BeLauncherBase::SaveSettings(bool def)
 	fSettings->SetString(sDataPath, (def) ? SetDefaultDir() :
 	                                        fDataTextControl->Text());
 
-	SetStatusString(B_COLOR_BLUE, BString("Saving settings to ")
-	                << BString(BeUtils::GetPathToSettingsFile(sSettingsFileName)) << BString(" file..."));
+	BString message(L_SAVING_SETTINGS);
+	message.ReplaceAll("%file%", BString(BeUtils::GetPathToSettingsFile(sSettingsFileName)));
+	SetStatusString(B_COLOR_BLUE, message);
 
 	if(!fSettings->DumpSettingsToFile())
 	{
@@ -438,8 +456,9 @@ BeLauncherBase::RunGameViaRoster()
 
 	if(get_ref_for_path(executable, &ref) != B_OK)
 	{
-		SetStatusString(B_COLOR_RED, BString("Cannot run ") << BString(executable)
-		                << BString(" executable. See ") << BString(__func__));
+		BString error(L_ERROR_RUN_EXE);
+		error.ReplaceAll("%exe%", executable).ReplaceAll("%func%", __func__);
+		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
 	else
@@ -472,8 +491,10 @@ BeLauncherBase::RunGameViaExecVe()
 		const char *executable = fExecutableFilePath.String();
 		const char *argv[] = { executable, NULL };
 		execve(executable, const_cast<char * const *>(argv), environ);
-		SetStatusString(B_COLOR_RED, BString("Cannot run ") << BString(executable)
-		                << BString(" executable. See ") << BString(__func__));
+
+		BString error(L_ERROR_RUN_EXE);
+		error.ReplaceAll("%exe%", executable).ReplaceAll("%func%", __func__);
+		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
 

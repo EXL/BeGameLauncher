@@ -9,9 +9,10 @@
 #include <GroupView.h>
 #include <InterfaceDefs.h>
 #include <Button.h>
-#include <Catalog.h>
 #include <Message.h>
 #include <Font.h>
+
+#include <Catalog.h>
 
 #define G_STRIPE_W                    30.0f
 #define G_SMALL_FONT_SIZE             10.0f
@@ -21,7 +22,7 @@
 #define G_URL_GITHUB_TITLE_LINK       "http://github.com/EXL/BeGameLauncher"
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT         "BeAboutWindow"
+#define B_TRANSLATION_CONTEXT         "BeGameLauncher"
 
 #define L_ABOUT_BUTTON_OK             B_TRANSLATE("OK")
 #define L_ABOUT_LAUNCHER_STRING       B_TRANSLATE("BeGameLauncer (c) EXL, 2018")

@@ -9,6 +9,7 @@ class BeSettings : public BMessage
 	BString pathToSettingsFile;
 public:
 	BeSettings(const char *fileName);
+
 	bool DumpSettingsToFile();
 	bool ReadSettingsFromFile();
 	const char *GetString(const char *name) const;

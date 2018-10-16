@@ -9,7 +9,7 @@
 #define G_OFFSET_STRIPE_GAP_BIG         -3.0f
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT           "BeUrlStringView"
+#define B_TRANSLATION_CONTEXT           "BeGameLauncher"
 
 #define L_URL_ALERT_WARNING_H           B_TRANSLATE("Open Link Error")
 #define L_URL_ALERT_WARNING             B_TRANSLATE("Cannot open link: ")

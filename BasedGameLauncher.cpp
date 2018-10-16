@@ -11,46 +11,52 @@
 #include <CheckBox.h>
 #include <Font.h>
 
+#include <Catalog.h>
+
 #ifndef SIGNATURE
 #error "SIGNATURE not defined. Check your build system."
 #endif // !SIGNATURE
 
+#undef  B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT          "BasedGameLauncher"
+
 // Launcher Settings
-#define TITLE                "Game Launcher"
-#define VERSION              "1.0.0"
-#define PACKAGE_DIR          "Game"
-#define SETTINGS_FILE        "GameLauncher.set"
-#define EXECUTABLE_FILE      "GameExe"
-#define DATA_PATH            "DATA_PATH"
+#define TITLE                          "Game Launcher"
+#define VERSION                        "1.0.0"
+#define PACKAGE_DIR                    "Game"
+#define SETTINGS_FILE                  "GameLauncher.set"
+#define EXECUTABLE_FILE                "GameExe"
+#define DATA_PATH                      "DATA_PATH"
 
 // Various Strings
-#define L_BUTTON_BROWSE_T    "Click to open the file dialog."
-#define L_SV_DATA            "Please select a directory with game files:"
-#define L_TC_DATA_T          "Path to a directory with game files."
-#define L_FP_TITLE           "Please choose a Game Folder"
-#define L_ABOUT_STRING       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" \
-                             "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud" \
-                             "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure" \
-                             "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " \
-                             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt " \
-                             "mollit anim id est laborum.\n\n"
-#define L_ABOUT_THANKS_STR_H "Thanks to:\n\t"
-#define L_ABOUT_THANKS_STR   "- my gf"
-#define L_ABOUT_LINK         "http://exlmoto.ru"
-#define L_ABOUT_LINK_DESC    "Some useful link: "
-#define L_DATA_LINK          "https://store.steampowered.com/"
-#define L_DATA_FILES_LINK_D  "Buy data files: "
+#define L_BUTTON_BROWSE_T              B_TRANSLATE("Click to open the file dialog.")
+#define L_SV_DATA                      B_TRANSLATE("Please select a directory with game files: ")
+#define L_TC_DATA_T                    B_TRANSLATE("Path to a directory with game files.")
+#define L_FP_TITLE                     B_TRANSLATE("Please choose a Game Folder")
+#define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
+                                       "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim" \
+                                       "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea" \
+                                       "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit" \
+                                       "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat " \
+                                       "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
+                                       "id est laborum.\n\n")
+#define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
+#define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
+#define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
+#define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/")
+#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy data files: ")
 
 // Additional option
-#define S_CHECKBOX_OPTION    "GAME_OPTION"
-#define L_CHECKBOX_OPTION    "Game Option"
-#define O_CHECKBOX_OPTION    "checkBoxOption"
+#define S_CHECKBOX_OPTION              "GAME_OPTION"
+#define L_CHECKBOX_OPTION              B_TRANSLATE("Game Option")
+#define O_CHECKBOX_OPTION              "checkBoxOption"
 
-#define O_ABOUT_STRING       "aboutString"
-#define O_ABOUT_LINK         "aboutLink"
-#define O_ABOUT_LINK_DESC    "aboutLinkDesc"
-#define O_DATA_LINK          "dataLink"
-#define O_DATA_LINK_DESC     "dataLinkDesc"
+#define O_ABOUT_STRING                 "aboutString"
+#define O_ABOUT_LINK                   "aboutLink"
+#define O_ABOUT_LINK_DESC              "aboutLinkDesc"
+#define O_DATA_LINK                    "dataLink"
+#define O_DATA_LINK_DESC               "dataLinkDesc"
 
 class GameAboutWindow : public BeAboutWindow
 {

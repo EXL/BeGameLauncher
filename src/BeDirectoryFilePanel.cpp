@@ -3,9 +3,9 @@
 #include <Catalog.h>
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT     "BeDirectoryFilePanel"
+#define B_TRANSLATION_CONTEXT         "BeGameLauncher"
 
-#define L_BTN_SELECT              B_TRANSLATE("Select")
+#define L_BTN_SELECT                  B_TRANSLATE("Select")
 
 BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
                                            BMessenger* target, const entry_ref* directory,

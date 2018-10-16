@@ -7,6 +7,7 @@ class BeDirectoryFilter : public BRefFilter
 {
 public:
 	BeDirectoryFilter();
+
 	virtual bool Filter(const entry_ref *ref, BNode *node, stat_beos *stat, const char *mimeType);
 };
 
