@@ -21,7 +21,8 @@ BString
 BeUtils::FindPathInner(directory_which dir)
 {
 	char path[PATH_MAX];
-	if (find_directory(dir, -1, false, path, PATH_MAX) != B_OK) {
+	if (find_directory(dir, -1, false, path, PATH_MAX) != B_OK)
+	{
 		return BString("/");
 	}
 	return BString(path, PATH_MAX);

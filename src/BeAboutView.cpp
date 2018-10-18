@@ -58,8 +58,8 @@ BeAboutView::BeAboutView(const char *name, const char *version)
 	rgb_color textColor = HighColor();
 	fInformationView = new BeMultiStringView(O_ABOUT_INFORMATION, &textColor);
 
-	BScrollView *informationScroller = new BScrollView(O_ABOUT_SCROLLER, fInformationView,
-	                                                   B_WILL_DRAW | B_FRAME_EVENTS, false, true, B_NO_BORDER);
+//	BScrollView *informationScroller = new BScrollView(O_ABOUT_SCROLLER, fInformationView,
+//	                                                   B_WILL_DRAW | B_FRAME_EVENTS, false, true, B_NO_BORDER);
 
 	fAdditionalBox = new BBox(O_ABOUT_ADDITIONAL_BOX);
 	fAdditionalBox->SetBorder(B_NO_BORDER);
@@ -84,7 +84,7 @@ BeAboutView::BeAboutView(const char *name, const char *version)
 	                .Add(fNameView)
 	                .Add(fVersionView)
 	                .AddStrut(B_USE_SMALL_SPACING)
-	                .Add(informationScroller)
+	                .Add(fInformationView)
 	                .Add(fAdditionalBox)
 	                .AddGlue()
 	            .End()

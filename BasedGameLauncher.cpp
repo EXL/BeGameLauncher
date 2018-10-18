@@ -44,7 +44,7 @@
                                        "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
                                        "id est laborum.\n\n")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf\n")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
 #define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/")

@@ -4,8 +4,8 @@
 #include <View.h>
 #include <InterfaceDefs.h>
 
-#define G_MIN_WIDTH                   210.0f
-#define G_MIN_HEIGHT                  160.0f
+#define G_MIN_WIDTH                   240.0f
+#define G_MIN_HEIGHT                  200.0f
 #define G_GENERAL_INSET               0.0f
 
 BeMultiStringView::BeMultiStringView(const char *name, const rgb_color *color)
@@ -20,6 +20,7 @@ BeMultiStringView::BeMultiStringView(const char *name, const rgb_color *color)
 	SetExplicitMinSize(BSize(G_MIN_WIDTH, G_MIN_HEIGHT));
 	SetInsets(G_GENERAL_INSET, G_GENERAL_INSET, G_GENERAL_INSET, G_GENERAL_INSET);
 	// SetFlags(Flags() | B_FRAME_EVENTS);
+	// SetResizingMode(B_FOLLOW_LEFT_TOP);
 }
 
 float
