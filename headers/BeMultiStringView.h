@@ -1,15 +1,18 @@
 #ifndef BEMULTISTRINGVIEW_H
 #define BEMULTISTRINGVIEW_H
 
+#include <GraphicsDefs.h>
 #include <TextView.h>
-#include <Rect.h>
 
 class BeMultiStringView : public BTextView
 {
 public:
-	BeMultiStringView(const char* name, BRect rect);
+	BeMultiStringView(const char* name, const rgb_color *color);
+	virtual ~BeMultiStringView();
 
-	void FrameResized(float newWidth, float newHeight);
+	static float GetMinWidth(void);
+	static float GetMinHeight(void);
+	static float GetGeneralInset(void);
 };
 
 #endif // BEMULTISTRINGVIEW_H

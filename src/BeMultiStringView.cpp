@@ -1,25 +1,46 @@
 #include "BeMultiStringView.h"
 
+#include <Size.h>
 #include <View.h>
 #include <InterfaceDefs.h>
 
-BeMultiStringView::BeMultiStringView(const char *name, BRect rect)
-	: BTextView(rect, name, rect, B_FOLLOW_ALL, B_WILL_DRAW)
+#define G_MIN_WIDTH                   210.0f
+#define G_MIN_HEIGHT                  160.0f
+#define G_GENERAL_INSET               0.0f
+
+BeMultiStringView::BeMultiStringView(const char *name, const rgb_color *color)
+	: BTextView(name, NULL, color, B_WILL_DRAW)
 {
 	MakeEditable(false);
 	MakeSelectable(true);
-	// MakeResizable(true); ??
+	//MakeResizable(true); ??
 
-	SetFlags(Flags() | B_FRAME_EVENTS);
 	SetWordWrap(true);
 	SetStylable(true);
-
-	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	SetExplicitMinSize(BSize(G_MIN_WIDTH, G_MIN_HEIGHT));
+	SetInsets(G_GENERAL_INSET, G_GENERAL_INSET, G_GENERAL_INSET, G_GENERAL_INSET);
+	// SetFlags(Flags() | B_FRAME_EVENTS);
 }
 
-void
-BeMultiStringView::FrameResized(float newWidth, float newHeight)
+float
+BeMultiStringView::GetMinWidth(void)
 {
-	SetTextRect(BRect(0.0f, 0.0f, newWidth, newHeight));
-	BTextView::FrameResized(newWidth, newHeight);
+	return G_MIN_WIDTH;
+}
+
+float
+BeMultiStringView::GetMinHeight(void)
+{
+	return G_MIN_HEIGHT;
+}
+
+float
+BeMultiStringView::GetGeneralInset(void)
+{
+	return G_GENERAL_INSET;
+}
+
+BeMultiStringView::~BeMultiStringView()
+{
+
 }

@@ -12,6 +12,8 @@ set(SOURCES
 	src/BeApp.cpp
 	src/BeMainWindow.cpp
 	src/BeAboutWindow.cpp
+	src/BeAboutView.cpp
+	src/BeAboutStripeView.cpp
 	src/BeDirectoryFilter.cpp
 	src/BeDirectoryFilePanel.cpp
 	src/BeSettings.cpp
@@ -19,6 +21,7 @@ set(SOURCES
 	src/BeLauncherBase.cpp
 	src/BeUrlStringView.cpp
 	src/BeMultiStringView.cpp
+	src/BeUnderlineStringView.cpp
 	src/BeImageView.cpp)
 
 set(LIBRARIES
@@ -46,7 +49,7 @@ add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
 	mimeset --all ${BASED_LAUNCHER_NAME})
 add_custom_command(TARGET ${BASED_LAUNCHER_NAME} COMMAND
 	cat ${CMAKE_CURRENT_SOURCE_DIR}/${BASED_LAUNCHER_NAME}.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp |
-	${CMAKE_C_COMPILER} -E -x c++ -I${CMAKE_CURRENT_SOURCE_DIR}/headers -DSIGNATURE="${SIGNATURE}"
+	${CMAKE_CXX_COMPILER} -E -x c++ -I${CMAKE_CURRENT_SOURCE_DIR}/headers -DSIGNATURE="${SIGNATURE}"
 	-DB_COLLECTING_CATKEYS - | grep -av "^#" >
 	${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/pre/${BASED_LAUNCHER_NAME}.pre )
 foreach(LOCALE ${LOCALES})

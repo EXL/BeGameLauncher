@@ -10,11 +10,14 @@
 #include <StringView.h>
 #include <CheckBox.h>
 #include <Font.h>
+#include <Box.h>
+#include <GroupLayout.h>
+#include <LayoutBuilder.h>
 
 #include <Catalog.h>
 
 #ifndef SIGNATURE
-#error "SIGNATURE not defined. Check your build system."
+#error "App SIGNATURE is not defined. Check your build system."
 #endif // !SIGNATURE
 
 #undef  B_TRANSLATION_CONTEXT
@@ -41,7 +44,7 @@
                                        "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
                                        "id est laborum.\n\n")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf\n")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
 #define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/")
@@ -62,39 +65,24 @@ class GameAboutWindow : public BeAboutWindow
 {
 public:
 	GameAboutWindow(const BRect &frame, const char *title, const char *version)
-	    : BeAboutWindow(frame, title, version)
+		: BeAboutWindow(frame, title, version)
 	{
-		BeAboutWindow::CreateForm();
-	}
+		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
+		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
 
-	void SetAboutText()
-	{
-		BeAboutWindow::SetAboutText();
+		BeMultiStringView *informationText = BeAboutWindow::GetInformationView();
+		informationText->Insert(L_ABOUT_STRING);
+		informationText->SetFontAndColor(be_bold_font);
+		informationText->Insert(L_ABOUT_THANKS_STR_H);
+		informationText->SetFontAndColor(be_plain_font);
+		informationText->Insert(L_ABOUT_THANKS_STR);
 
-		BView *ui = BeAboutWindow::GetTextView();
-
-		BeMultiStringView *aboutView = new BeMultiStringView(O_ABOUT_STRING, BRect(0, 0, ui->Bounds().Width(), 200.0f));
-		aboutView->MoveTo(0, 0);
-		aboutView->Insert(L_ABOUT_STRING);
-		aboutView->SetFontAndColor(be_bold_font);
-		aboutView->Insert(L_ABOUT_THANKS_STR_H);
-		aboutView->SetFontAndColor(be_plain_font);
-		aboutView->Insert(L_ABOUT_THANKS_STR);
-
-		BStringView *urlDescString = new BStringView(BRect(), O_ABOUT_LINK_DESC,
-		                                             L_ABOUT_LINK_DESC, B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
-		urlDescString->ResizeToPreferred();
-		urlDescString->MoveTo(0.0f, aboutView->Bounds().Height() + BeLauncherBase::Gap());
-
-		BeUrlStringView *urlString = new BeUrlStringView(BRect(), O_ABOUT_LINK, L_ABOUT_LINK);
-		urlString->SetResizingMode(B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
-		urlString->ResizeToPreferred();
-		urlString->MoveTo(urlDescString->Bounds().Width() + BeLauncherBase::Gap(),
-		                  aboutView->Bounds().Height() + BeLauncherBase::Gap());
-
-		ui->AddChild(aboutView);
-		ui->AddChild(urlDescString);
-		ui->AddChild(urlString);
+		BBox *additionalBox = BeAboutWindow::GetAdditionalBox();
+		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_HORIZONTAL)
+		                          .Add(urlDescString)
+		                          .Add(urlString)
+		                          .AddGlue();
+		additionalBox->AddChild(boxLayout->View());
 	}
 };
 
@@ -147,7 +135,7 @@ public:
 		urlDescString->ResizeToPreferred();
 		urlDescString->MoveTo(r.left, r.top + Gap() * 6);
 
-		BeUrlStringView *urlString = new BeUrlStringView(BRect(), O_DATA_LINK, L_DATA_LINK);
+		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
 		urlString->ResizeToPreferred();
 		urlString->MoveTo(r.left + urlDescString->Bounds().Width() + BeLauncherBase::Gap(),
 		                  r.top + Gap() * 6);

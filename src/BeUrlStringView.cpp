@@ -2,11 +2,9 @@
 #include "BeUtils.h"
 
 #include <Cursor.h>
-#include <Catalog.h>
 #include <Alert.h>
 
-#define G_OFFSET_STRIPE_GAP_SMALL       -2.0f
-#define G_OFFSET_STRIPE_GAP_BIG         -3.0f
+#include <Catalog.h>
 
 #undef  B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT           "BeGameLauncher"
@@ -15,9 +13,9 @@
 #define L_URL_ALERT_WARNING             B_TRANSLATE("Cannot open link: ")
 #define L_URL_ALERT_BUTTON_OK           B_TRANSLATE("OK")
 
-BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text, const char *url,
+BeUrlStringView::BeUrlStringView(const char* name, const char* text, const char *url,
                                  float fontSize, uint32 resizingFlags)
-	: BStringView(frame, name, text), fFontSize(fontSize)
+	: BeUnderlineStringView(name, text, fontSize)
 {
 	fText << text;
 	if(url)
@@ -33,22 +31,7 @@ BeUrlStringView::BeUrlStringView(BRect frame, const char* name, const char* text
 
 	SetResizingMode(resizingFlags);
 	SetHighColor(K_BLUE);
-	SetFontSize(fFontSize);
 	ResizeToPreferred();
-}
-
-void
-BeUrlStringView::Draw(BRect bounds)
-{
-	BStringView::Draw(bounds);
-
-	if(drawUnderline)
-	{
-		float offset = (fFontSize >= 12.0f) ? G_OFFSET_STRIPE_GAP_BIG : G_OFFSET_STRIPE_GAP_SMALL;
-
-		StrokeLine(bounds.OffsetToSelf(0.0f, offset).LeftBottom(),
-		           bounds.OffsetToSelf(0.0f, offset).RightBottom());
-	}
 }
 
 void
@@ -98,14 +81,7 @@ BeUrlStringView::ShowOpenLinkWarning(const BString &url)
 	openLinkWarningAlert->Go();
 }
 
-float
-BeUrlStringView::GetOffsetStripeGapSmall()
+BeUrlStringView::~BeUrlStringView()
 {
-	return G_OFFSET_STRIPE_GAP_SMALL;
-}
 
-float
-BeUrlStringView::GetOffsetStripeGapBig()
-{
-	return G_OFFSET_STRIPE_GAP_BIG;
 }

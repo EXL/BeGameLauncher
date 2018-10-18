@@ -2,35 +2,37 @@
 #define BEABOUTWINDOW_H
 
 #include "BeMainWindow.h"
+#include "BeAboutView.h"
+#include "BeMultiStringView.h"
+#include "BeUtils.h"
 
 #include <String.h>
 #include <Rect.h>
 #include <View.h>
+#include <Box.h>
 
 class BeAboutWindow : public BeMainWindow
 {
 	const char *fTitle;
 	BString fVersion;
 
-	BView *fMainView;
-	BView *fTextView;
+	BeAboutView *fAboutView;
+	BeMultiStringView *fInformationView;
+	BBox *fAdditionalBox;
+
+	void CreateForm();
 
 protected:
-	BView *GetMainView() const;
-	BView *GetTextView() const;
+	BeAboutView *GetMainView(void) const;
+	BeMultiStringView *GetInformationView(void) const;
+	BBox *GetAdditionalBox(void) const;
 
-public:
-	BeAboutWindow(const BRect &frame, const char *title, const char *version = "1.0.0");
-
-	virtual void CreateForm();
-	virtual void SetAboutText();
+	virtual void FrameResized(float newWidth, float newHeight);
 
 	virtual bool QuitRequested(void);
-
-	static float GetStripeWidth();
-	static float GetSmallFontSize();
-	static float GetIconOffsetX();
-	static float GetStripeOffsetX();
+public:
+	BeAboutWindow(const BRect &frame, const char *title, const char *version = G_DEFAULT_VERSION);
+	virtual ~BeAboutWindow();
 };
 
 #endif // BEABOUTWINDOW_H

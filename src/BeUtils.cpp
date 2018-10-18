@@ -28,19 +28,19 @@ BeUtils::FindPathInner(directory_which dir)
 }
 
 BString
-BeUtils::GetPathToHomeDir()
+BeUtils::GetPathToHomeDir(void)
 {
 	return FindPathInner(B_USER_DIRECTORY);
 }
 
 BString
-BeUtils::GetPathToUserDataDir()
+BeUtils::GetPathToUserDataDir(void)
 {
 	return FindPathInner(B_USER_DATA_DIRECTORY);
 }
 
 BString
-BeUtils::GetPathToUserNonPackedDataDir()
+BeUtils::GetPathToUserNonPackedDataDir(void)
 {
 	return FindPathInner(B_USER_NONPACKAGED_DATA_DIRECTORY);
 }
@@ -84,4 +84,9 @@ BeUtils::OpenLinkViaWebBrowser(const BString &url)
 		be_roster->Launch(&ref, 2, argv); // 2 = argc
 		return true;
 	}
+}
+
+BeUtils::~BeUtils()
+{
+
 }

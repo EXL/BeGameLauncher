@@ -22,6 +22,8 @@ public:
 	BeImageView(BRect rect, const char *name, BitmapIndex index, uint32 resizeFlags, bool stripe = false);
 
 	virtual void Draw(BRect rect);
+
+	static BBitmap* GetIconBitmap();
 };
 
 #endif // BEIMAGEVIEW_H

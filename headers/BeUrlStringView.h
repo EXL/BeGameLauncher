@@ -1,7 +1,9 @@
 #ifndef BEURLSTRINGVIEW_H
 #define BEURLSTRINGVIEW_H
 
-#include <StringView.h>
+#include "BeUnderlineStringView.h"
+#include "BeUtils.h"
+
 #include <Rect.h>
 #include <Point.h>
 #include <Message.h>
@@ -9,26 +11,21 @@
 #include <SupportDefs.h>
 #include <View.h>
 
-class BeUrlStringView : public BStringView
+class BeUrlStringView : public BeUnderlineStringView
 {
-	const float fFontSize;
-
-	bool drawUnderline;
-
 	BString fUrl;
 	BString fText;
 
 	void ShowOpenLinkWarning(const BString &url);
-public:
-	BeUrlStringView(BRect frame, const char* name, const char* text, const char *url = NULL,
-	                float fontSize = 12.0f, uint32 resizingFlags = B_FOLLOW_LEFT);
 
-	virtual	void Draw(BRect bounds);
+protected:
 	virtual void MouseMoved(BPoint point, uint32 transit, const BMessage* dragMessage);
 	virtual void MouseDown(BPoint point);
 
-	static float GetOffsetStripeGapSmall();
-	static float GetOffsetStripeGapBig();
+public:
+	BeUrlStringView(const char* name, const char* text, const char *url = NULL,
+	                float fontSize = G_DEFAULT_FONT_SIZE, uint32 resizingFlags = B_FOLLOW_LEFT);
+	virtual ~BeUrlStringView();
 };
 
 #endif // BEURLSTRINGVIEW_H

@@ -42,7 +42,7 @@ BeImageView::Draw(BRect rect)
 	{
 		rgb_color oldColor = HighColor();
 		SetHighColor(tint_color(ViewColor(), B_DARKEN_1_TINT));
-		FillRect(BRect(0.0f, 0.0f, BeAboutWindow::GetStripeOffsetX(), bitmapRect.Height()));
+		//FillRect(BRect(0.0f, 0.0f, BeAboutWindow::GetStripeOffsetX(), bitmapRect.Height()));
 		SetHighColor(oldColor);
 	}
 
@@ -50,4 +50,10 @@ BeImageView::Draw(BRect rect)
 	{
 		DrawBitmapAsync(fBitmap, bitmapRect, drawRect);
 	}
+}
+
+BBitmap *
+BeImageView::GetIconBitmap()
+{
+	return BTranslationUtils::GetBitmap(B_PNG_FORMAT, K_ICON);
 }
