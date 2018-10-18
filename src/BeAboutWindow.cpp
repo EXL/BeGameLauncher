@@ -41,11 +41,11 @@ BeAboutWindow::CreateForm()
 	SetDefaultButton(fAboutView->GetAboutButton());
 	AddChild(fAboutView);
 
-	const float gap = BeAboutStripeView::GetStripeWidth();
+	const float gap = BeAboutStripeView::GetIconX();
 
-	SetSizeLimits(Frame().InsetBySelf(gap / 2.0f, 0.0f).Width(),
+	SetSizeLimits(Frame().InsetBySelf(gap, 0.0f).Width(),
 	              Frame().InsetBySelf(-gap * 4.0f, 0.0f).Width(),
-	              Frame().InsetBySelf(0.0f, gap / 2.0f).Height(),
+	              Frame().InsetBySelf(0.0f, gap).Height(),
 	              Frame().InsetBySelf(0.0f, -gap * 3.0f).Height());
 }
 
