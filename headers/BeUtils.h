@@ -11,6 +11,7 @@
 
 #define G_DEFAULT_FONT_SIZE             12.0f
 #define G_SMALL_FONT_SIZE               10.0f
+#define G_DEFAULT_GAP                   10.0f
 #define G_DEFAULT_VERSION               "1.0.0"
 
 class BeUtils

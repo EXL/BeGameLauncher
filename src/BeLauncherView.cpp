@@ -148,6 +148,12 @@ BeLauncherView::GetExitButton(void) const
 	return fExitButton;
 }
 
+const char *
+BeLauncherView::GetReadyString()
+{
+	return L_STATUS_READY;
+}
+
 BeLauncherView::~BeLauncherView()
 {
 

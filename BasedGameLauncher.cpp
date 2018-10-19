@@ -1,8 +1,8 @@
 #include "BeApp.h"
 #include "BeLauncherBase.h"
 #include "BeAboutWindow.h"
-#include "BeUtils.h"
 #include "BeUrlStringView.h"
+#include "BeUtils.h"
 
 #include <Rect.h>
 #include <String.h>
@@ -111,13 +111,13 @@ protected:
 	}
 
 	bool
-	CheckCache()
+	CheckCache(void)
 	{
 		return true;
 	}
 
 	bool
-	ReadSettings()
+	ReadSettings(void)
 	{
 		if(!BeLauncherBase::ReadSettings())
 		{
@@ -146,7 +146,7 @@ protected:
 	}
 
 	void
-	ShowAboutDialog()
+	ShowAboutDialog(void)
 	{
 		GameAboutWindow *gameAboutWindow = new GameAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
 		                                                       TITLE, VERSION);

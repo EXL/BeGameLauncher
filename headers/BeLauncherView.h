@@ -28,6 +28,8 @@ public:
 	BButton *GetAboutButton(void) const;
 	BButton *GetRunButton(void) const;
 	BButton *GetExitButton(void) const;
+
+	static const char *GetReadyString();
 };
 
 #endif // BELAUNCHERVIEW_H

@@ -5,33 +5,38 @@
 #include "BeUtils.h"
 
 #include <Rect.h>
+#include <GroupLayout.h>
 #include <InterfaceDefs.h>
-#include <Button.h>
-#include <Message.h>
-#include <Messenger.h>
-#include <TextControl.h>
 #include <Entry.h>
-#include <Directory.h>
+#include <Messenger.h>
+#include <Errors.h>
+#include <Alert.h>
+#include <SupportDefs.h>
 #include <Path.h>
 #include <Roster.h>
-#include <Alert.h>
-#include <GroupLayout.h>
+
+#include <FilePanel.h>
+#include <StorageDefs.h>
 
 #include <Catalog.h>
 
 #include <unistd.h>
+
 #include <posix/stdlib.h>
+#include <posix/sys/types.h>
+
 #include <compat/sys/stat.h>
 
-#define G_GAP                          10.0f
-#define G_STATUS_GAP_HACK              1.0f
-#define G_BANNER_W                     64.0f
+#define G_START_POINT_X                100.0f
+#define G_START_POINT_Y                100.0f
+#define G_WINDOW_WIDTH                 600.0f + G_START_POINT_X
+#define G_WINDOW_HEIGHT                400.0f + G_START_POINT_Y
+#define G_OFFSET_FOR_SIZE              200.0f
 
 #undef  B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
 #define L_BTN_ALERT_OK                 B_TRANSLATE("OK")
-#define L_READY                        B_TRANSLATE("Ready.") // ?
 #define L_ALERT_EXECUTABLE_ERROR_H     B_TRANSLATE("Executable Error")
 #define L_ALERT_EXECUTABLE_ERROR       B_TRANSLATE("Cannot run executable: ")
 #define L_ALERT_CACHE_ERROR_H          B_TRANSLATE("Cache Error")
@@ -50,17 +55,26 @@
 
 extern char **environ;
 
-BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
-                               const char *executableFileName, const char *settingsFileName,
-                               const char *dataPath, const char *startPath,
-                               bool showIcon, bool readSettings, bool useExecVe)
-	: BeMainWindow(BRect(100.0f, 100.0f, 700.0f, 500.0f), windowTitle), sSettingsFileName(settingsFileName),
-	  sDataPath(dataPath), sStartPath(startPath), sShowIcon(showIcon), sUseExecVe(useExecVe)
+BeLauncherBase::BeLauncherBase(const char *windowTitle,
+                               const char *packageName,
+                               const char *executableFileName,
+                               const char *settingsFileName,
+                               const char *dataPath,
+                               const char *startPath,
+                               bool showIcon,
+                               bool readSettings,
+                               bool useExecVe)
+	: BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
+      sSettingsFileName(settingsFileName), sDataPath(dataPath), sStartPath(startPath),
+      sShowIcon(showIcon), sUseExecVe(useExecVe)
 {
 	sWindowTitle = windowTitle;
 	fExecutableFilePath = BeUtils::GetPathToExecutable(packageName, executableFileName);
+
 	fSettings = new BeSettings(sSettingsFileName);
+
 	CreateForm();
+
 	if(readSettings)
 	{
 		ReadSettings();
@@ -68,7 +82,7 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
 }
 
 void
-BeLauncherBase::CreateForm()
+BeLauncherBase::CreateForm(void)
 {
 	SetLayout(new BGroupLayout(B_VERTICAL));
 
@@ -86,17 +100,19 @@ BeLauncherBase::CreateForm()
 	SetDefaultButton(fLauncherView->GetRunButton());
 	AddChild(fLauncherView);
 
-	fDirectotyFilter = new BeDirectoryFilter();
+	fDirectoryFilter = new BeDirectoryFilter();
 	entry_ref start_point;
 	BEntry entry(sStartPath);
 	entry.GetRef(&start_point);
 	fDirectoryFilePanel = new BeDirectoryFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
 	                            B_DIRECTORY_NODE, false, new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
-	                            fDirectotyFilter, true);
+	                            fDirectoryFilter, true);
 	fDirectoryFilePanel->Window()->SetTitle(L_FILE_PANEL_TITLE);
 
-	SetSizeLimits(Bounds().Width() - 200.0f, Bounds().Width() + 200.0f,
-	              Bounds().Height() - 100.0f, Bounds().Height() + 200.0f);
+	SetSizeLimits(Bounds().Width()  - G_OFFSET_FOR_SIZE,
+	              Bounds().Width()  + G_OFFSET_FOR_SIZE,
+	              Bounds().Height() - G_START_POINT_Y,
+	              Bounds().Height() + G_OFFSET_FOR_SIZE);
 }
 
 void
@@ -179,13 +195,13 @@ BeLauncherBase::SetStatusString(color_msg_t type, const BString &str)
 }
 
 bool
-BeLauncherBase::CheckCache()
+BeLauncherBase::CheckCache(void)
 {
 	return true;
 }
 
 bool
-BeLauncherBase::CheckExecutable()
+BeLauncherBase::CheckExecutable(void)
 {
 	const char *executable = fExecutableFilePath.String();
 	entry_ref ref;
@@ -227,37 +243,37 @@ BeLauncherBase::CheckExecutable()
 }
 
 BeSettings *
-BeLauncherBase::GetSettings() const
+BeLauncherBase::GetSettings(void) const
 {
 	return fSettings;
 }
 
 BTextControl *
-BeLauncherBase::GetTextControl() const
+BeLauncherBase::GetTextControl(void) const
 {
 	return fDataTextControl;
 }
 
-float
-BeLauncherBase::Gap()
+BBox *
+BeLauncherBase::GetAdditionalBox(void) const
 {
-	return G_GAP;
+	return fAdditionalBox;
 }
 
 float
-BeLauncherBase::BannerWidth()
+BeLauncherBase::Gap(void)
 {
-	return G_BANNER_W;
+	return G_DEFAULT_GAP;
 }
 
 float
-BeLauncherBase::StatusGapHack()
+BeLauncherBase::BannerWidth(void)
 {
-	return G_STATUS_GAP_HACK;
+	return BeImageView::GetGeneralWidth();
 }
 
 void
-BeLauncherBase::ShowErrorCacheAlert()
+BeLauncherBase::ShowErrorCacheAlert(void)
 {
 	BAlert *cacheErrorAlert = new BAlert(L_ALERT_CACHE_ERROR_H, L_ALERT_CACHE_ERROR, L_BTN_ALERT_OK);
 	cacheErrorAlert->SetType(B_STOP_ALERT);
@@ -265,12 +281,12 @@ BeLauncherBase::ShowErrorCacheAlert()
 	int32 button_index = cacheErrorAlert->Go();
 	if(button_index == 0)
 	{
-		SetStatusString(B_COLOR_BLACK, L_READY);
+		SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
 	}
 }
 
 void
-BeLauncherBase::ShowWarnWriteSettingsAlert()
+BeLauncherBase::ShowWarnWriteSettingsAlert(void)
 {
 	BString settingsWarning(L_ALERT_WRITE_S_WARNING);
 	settingsWarning << BeUtils::GetPathToSettingsFile(sSettingsFileName);
@@ -280,12 +296,12 @@ BeLauncherBase::ShowWarnWriteSettingsAlert()
 	int32 button_index = writeSettingsWarnAlert->Go();
 	if(button_index == 0)
 	{
-		SetStatusString(B_COLOR_BLACK, L_READY);
+		SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
 	}
 }
 
 void
-BeLauncherBase::ShowExecutableCacheAlert()
+BeLauncherBase::ShowExecutableCacheAlert(void)
 {
 	BString executableError(L_ALERT_EXECUTABLE_ERROR);
 	executableError << fExecutableFilePath;
@@ -295,24 +311,18 @@ BeLauncherBase::ShowExecutableCacheAlert()
 	int32 button_index = executableErrorAlert->Go();
 	if(button_index == 0)
 	{
-		SetStatusString(B_COLOR_BLACK, L_READY);
+		SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
 	}
 }
 
 void
-BeLauncherBase::SelectDirectory()
+BeLauncherBase::SelectDirectory(void)
 {
 	fDirectoryFilePanel->Show();
 }
 
-BBox *
-BeLauncherBase::GetAdditionalBox(void) const
-{
-	return fAdditionalBox;
-}
-
 void
-BeLauncherBase::DirectorySelected()
+BeLauncherBase::DirectorySelected(void)
 {
 	entry_ref dirRef;
 	fDirectoryFilePanel->GetPanelDirectory(&dirRef);
@@ -324,7 +334,7 @@ BeLauncherBase::DirectorySelected()
 }
 
 bool
-BeLauncherBase::ReadSettings()
+BeLauncherBase::ReadSettings(void)
 {
 	bool isNotFirstBlood = true;
 	if(!fSettings->ReadSettingsFromFile())
@@ -353,19 +363,19 @@ BeLauncherBase::SaveSettings(bool def)
 		ShowWarnWriteSettingsAlert();
 	}
 
-	SetStatusString(B_COLOR_BLACK, L_READY);
+	SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
 	BeDebug("done!\n");
 }
 
 void
-BeLauncherBase::ShowAboutDialog()
+BeLauncherBase::ShowAboutDialog(void)
 {
-	BeAboutWindow *aboutWindow = new BeAboutWindow(Frame().InsetBySelf(G_BANNER_W, -(G_GAP * 3)), sWindowTitle);
+	BeAboutWindow *aboutWindow = new BeAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)), sWindowTitle);
 	aboutWindow->Show();
 }
 
 bool
-BeLauncherBase::RunGameViaRoster()
+BeLauncherBase::RunGameViaRoster(void)
 {
 	if(!CheckExecutable())
 	{
@@ -401,7 +411,7 @@ BeLauncherBase::RunGameViaRoster()
 }
 
 bool
-BeLauncherBase::RunGameViaExecVe()
+BeLauncherBase::RunGameViaExecVe(void)
 {
 	if(!CheckExecutable())
 	{
@@ -432,7 +442,7 @@ BeLauncherBase::RunGameViaExecVe()
 }
 
 bool
-BeLauncherBase::QuitRequested()
+BeLauncherBase::QuitRequested(void)
 {
 	SaveSettings(false);
 	BeMainWindow::QuitRequested();
@@ -440,7 +450,7 @@ BeLauncherBase::QuitRequested()
 }
 
 bool
-BeLauncherBase::QuitRequestedSub()
+BeLauncherBase::QuitRequestedSub(void)
 {
 	BeMainWindow::QuitRequested();
 	return true;
@@ -449,8 +459,8 @@ BeLauncherBase::QuitRequestedSub()
 BeLauncherBase::~BeLauncherBase()
 {
 	BeDebug("[Info]: Freeing... ");
-	delete fDirectotyFilter;
-	fDirectotyFilter = NULL;
+	delete fDirectoryFilter;
+	fDirectoryFilter = NULL;
 
 	delete fDirectoryFilePanel;
 	fDirectoryFilePanel = NULL;

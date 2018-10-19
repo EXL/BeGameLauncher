@@ -26,7 +26,7 @@ class BeLauncherBase : public BeMainWindow
 	BString fExecutableFilePath;
 
 	BeSettings *fSettings;
-	BeDirectoryFilter *fDirectotyFilter;
+	BeDirectoryFilter *fDirectoryFilter;
 	BeDirectoryFilePanel *fDirectoryFilePanel;
 	BeLauncherView *fLauncherView;
 
@@ -45,6 +45,7 @@ protected:
 		MSG_BUTTON_ABOUT_CLICKED      = 'btab',
 		MSG_FILE_PANEL_FILE_SELECTED  = 'fpsc'
 	};
+
 	enum color_msg_t
 	{
 		B_COLOR_RED,
@@ -53,41 +54,47 @@ protected:
 		B_COLOR_BLACK
 	};
 
-public:
-	BeLauncherBase(const char *windowTitle, const char *packageName,
-	               const char *executableFileName, const char *settingsFileName,
-	               const char *dataPath, const char *startPath,
-	               bool showIcon = false, bool readSettings = true, bool useExecVe = false);
-	virtual ~BeLauncherBase();
-
-	virtual void CreateForm();
-	virtual bool ReadSettings();
-	virtual void SaveSettings(bool def);
 	virtual void MessageReceived(BMessage *msg);
+
+	virtual void CreateForm(void);
+	virtual bool ReadSettings(void);
+	virtual void SaveSettings(bool def);
+
 	virtual void SetStatusString(color_msg_t type, const BString &str);
 
-	virtual bool CheckCache();
-	virtual bool CheckExecutable();
+	virtual bool CheckCache(void);
+	virtual bool CheckExecutable(void);
 
-	BeSettings *GetSettings() const;
-	BTextControl *GetTextControl() const;
+	virtual bool RunGameViaRoster(void);
+	virtual bool RunGameViaExecVe(void);
+
+	virtual void ShowErrorCacheAlert(void);
+	virtual void ShowExecutableCacheAlert(void);
+	virtual void ShowWarnWriteSettingsAlert(void);
+
+	virtual bool QuitRequested(void);
+	virtual bool QuitRequestedSub(void);
+
+	virtual void ShowAboutDialog(void);
+
+public:
+	BeLauncherBase(const char *windowTitle,
+	               const char *packageName,
+	               const char *executableFileName,
+	               const char *settingsFileName,
+	               const char *dataPath,
+	               const char *startPath,
+	               bool showIcon = false,
+	               bool readSettings = true,
+	               bool useExecVe = false);
+	virtual ~BeLauncherBase();
+
+	BeSettings *GetSettings(void) const;
+	BTextControl *GetTextControl(void) const;
 	BBox *GetAdditionalBox(void) const;
 
-	virtual bool RunGameViaRoster();
-	virtual bool RunGameViaExecVe();
-
-	static float Gap();
-	static float BannerWidth();
-	static float StatusGapHack();
-
-	virtual void ShowErrorCacheAlert();
-	virtual void ShowExecutableCacheAlert();
-	virtual void ShowWarnWriteSettingsAlert();
-
-	virtual bool QuitRequested();
-	virtual bool QuitRequestedSub();
-
-	virtual void ShowAboutDialog();
+	static float Gap(void);
+	static float BannerWidth(void);
 };
 
 #endif // BELAUNCHERBASE_H
