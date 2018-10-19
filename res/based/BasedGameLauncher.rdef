@@ -11,7 +11,7 @@ resource app_version {
 	internal = 1,
 
 	short_info = "Game Launcher",
-	long_info = "Based Example laucher for BeGameLauncher project."
+	long_info = "Based Example launcher for BeGameLauncher project."
 };
 
 resource(0, "Banner.png") #'PNG ' import "Banner.png";
