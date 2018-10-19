@@ -4,7 +4,6 @@
 #include <View.h>
 #include <Rect.h>
 #include <Bitmap.h>
-#include <SupportDefs.h>
 
 enum BitmapIndex
 {
@@ -15,15 +14,21 @@ enum BitmapIndex
 class BeImageView : public BView
 {
 	bool fSuccessful;
-	bool fStripe;
+	BitmapIndex fIndex;
 
 	BBitmap *fBitmap;
-public:
-	BeImageView(BRect rect, const char *name, BitmapIndex index, uint32 resizeFlags, bool stripe = false);
 
+protected:
 	virtual void Draw(BRect rect);
 
-	static BBitmap* GetIconBitmap();
+public:
+	BeImageView(const char *name, BitmapIndex index);
+	virtual ~BeImageView();
+
+	static BBitmap* GetIconBitmapByIndex(BitmapIndex index);
+
+	static float GetImageOnePixelSize(void);
+	static float GetGeneralWidth(void);
 };
 
 #endif // BEIMAGEVIEW_H

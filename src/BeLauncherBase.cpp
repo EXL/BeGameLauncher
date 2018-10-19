@@ -1,4 +1,5 @@
 #include "BeLauncherBase.h"
+#include "BeLauncherView.h"
 #include "BeAboutWindow.h"
 #include "BeImageView.h"
 #include "BeUtils.h"
@@ -14,6 +15,7 @@
 #include <Path.h>
 #include <Roster.h>
 #include <Alert.h>
+#include <GroupLayout.h>
 
 #include <Catalog.h>
 
@@ -90,6 +92,12 @@ BeLauncherBase::InitParameters(const char *stringViewData, const char *textContr
 void
 BeLauncherBase::CreateForm()
 {
+	SetLayout(new BGroupLayout(B_VERTICAL));
+	BeLauncherView *launcherView = new BeLauncherView(O_MAIN_VIEW);
+	AddChild(launcherView);
+
+
+
 	BRect r(Bounds());
 	BRect bannerRect(r.left, r.top, G_BANNER_W, r.bottom);
 	BRect stringViewRect(G_BANNER_W + G_GAP, G_BANNER_W + G_GAP, r.right, r.bottom);
@@ -97,6 +105,7 @@ BeLauncherBase::CreateForm()
 	fMainView = new BView(r, O_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
 	fMainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
+/*
 	BeImageView *bannerView = new BeImageView(bannerRect, O_BANNER_VIEW, K_BANNER, B_FOLLOW_TOP_BOTTOM);
 
 	if(sShowIcon)
@@ -105,6 +114,7 @@ BeLauncherBase::CreateForm()
 		BeImageView *iconView = new BeImageView(iconRect, O_ICON_VIEW, K_ICON, B_FOLLOW_RIGHT | B_FOLLOW_TOP);
 		fMainView->AddChild(iconView);
 	}
+	*/
 
 	BStringView *dataStringView = new BStringView(stringViewRect, O_DATA_SVIEW, sStringViewData, B_FOLLOW_LEFT);
 	dataStringView->ResizeToPreferred();
@@ -154,9 +164,9 @@ BeLauncherBase::CreateForm()
 	fStatusString->MoveTo(G_GAP, 0.0f);
 	statusView->AddChild(fStatusString);
 
-	AddChild(fMainView);
-	AddChild(bannerView);
-	AddChild(statusView);
+//	AddChild(fMainView);
+//	AddChild(bannerView);
+//	AddChild(statusView);
 
 	fDirectotyFilter = new BeDirectoryFilter();
 	entry_ref start_point;

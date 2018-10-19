@@ -42,7 +42,7 @@ BeAboutView::BeAboutView(const char *name, const char *version)
 {
 	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 
-	fAboutStripeView = new BeAboutStripeView(BeImageView::GetIconBitmap());
+	fAboutStripeView = new BeAboutStripeView(BeImageView::GetIconBitmapByIndex(K_ICON));
 
 	fNameView = new BStringView(O_ABOUT_NAME, name);
 	BFont font;

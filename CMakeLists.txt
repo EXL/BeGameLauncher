@@ -19,6 +19,7 @@ set(SOURCES
 	src/BeSettings.cpp
 	src/BeUtils.cpp
 	src/BeLauncherBase.cpp
+	src/BeLauncherView.cpp
 	src/BeUrlStringView.cpp
 	src/BeMultiStringView.cpp
 	src/BeUnderlineStringView.cpp
