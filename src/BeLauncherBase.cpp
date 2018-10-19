@@ -14,9 +14,11 @@
 #include <SupportDefs.h>
 #include <Path.h>
 #include <Roster.h>
+#include <Window.h>
+#include <StorageDefs.h>
+#include <Errors.h>
 
 #include <FilePanel.h>
-#include <StorageDefs.h>
 
 #include <Catalog.h>
 

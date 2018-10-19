@@ -29,7 +29,7 @@ public:
 	BButton *GetRunButton(void) const;
 	BButton *GetExitButton(void) const;
 
-	static const char *GetReadyString();
+	static const char *GetReadyString(void);
 };
 
 #endif // BELAUNCHERVIEW_H

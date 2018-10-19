@@ -21,3 +21,8 @@ BeApp::SetMainWindow(BWindow *window)
 {
 	gMainWindow = window;
 }
+
+BeApp::~BeApp()
+{
+
+}

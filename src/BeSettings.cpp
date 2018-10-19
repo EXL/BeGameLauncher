@@ -2,7 +2,8 @@
 #include "BeUtils.h"
 
 #include <File.h>
-#include <Flattenable.h>
+#include <Errors.h>
+#include <StorageDefs.h>
 
 BeSettings::BeSettings(const char *fileName)
 	: BMessage()
@@ -25,7 +26,7 @@ BeSettings::SetString(const char *name, const char *string)
 }
 
 bool
-BeSettings::DumpSettingsToFile()
+BeSettings::DumpSettingsToFile(void)
 {
 	BFile out;
 	if(out.SetTo(pathToSettingsFile.String(), B_READ_WRITE | B_CREATE_FILE | B_ERASE_FILE) != B_OK)
@@ -42,7 +43,7 @@ BeSettings::DumpSettingsToFile()
 }
 
 bool
-BeSettings::ReadSettingsFromFile()
+BeSettings::ReadSettingsFromFile(void)
 {
 	BFile in;
 	if(in.SetTo(pathToSettingsFile.String(), B_READ_ONLY) != B_OK)
@@ -69,4 +70,9 @@ BeSettings::GetString(const char *name) const
 	{
 		return buffer.String();
 	}
+}
+
+BeSettings::~BeSettings()
+{
+
 }

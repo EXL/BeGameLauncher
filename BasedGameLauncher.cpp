@@ -16,7 +16,7 @@
 #include <Catalog.h>
 
 #ifndef SIGNATURE
-#error "App SIGNATURE is not defined. Check your build system."
+#error "Application SIGNATURE is not defined. Check your build system."
 #endif // !SIGNATURE
 
 #undef  B_TRANSLATION_CONTEXT
@@ -176,7 +176,7 @@ public:
 		                          .End();
 		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
 
-		// NOTE: Be sure to call read settings function
+		// NOTE: Be sure to call read settings function.
 		ReadSettings();
 	}
 };

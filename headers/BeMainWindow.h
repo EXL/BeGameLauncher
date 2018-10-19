@@ -7,11 +7,16 @@
 
 class BeMainWindow : public BWindow
 {
+protected:
+	virtual void CreateForm(void) = 0;
+
+	virtual void MessageReceived(BMessage *msg);
+
+	virtual bool QuitRequested();
+
 public:
 	BeMainWindow(const BRect &frame, const char *title);
-	virtual void MessageReceived(BMessage *msg);
-	virtual void CreateForm(void) = 0;
-	virtual bool QuitRequested(void);
+	virtual ~BeMainWindow();
 };
 
 #endif // BEMAINWINDOW_H

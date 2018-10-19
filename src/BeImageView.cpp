@@ -1,13 +1,15 @@
 #include "BeImageView.h"
 #include "BeUtils.h"
 
+#include <Size.h>
 #include <InterfaceDefs.h>
+#include <GraphicsDefs.h>
 
 #include <TranslationUtils.h>
 #include <TranslatorFormats.h>
 
-#define G_IMAGE_ONE_PIXEL_SIZE                       1.0f
-#define G_IMAGE_GENERAL_WIDTH                        64.0f
+#define G_IMAGE_ONE_PIXEL_SIZE         1.0f
+#define G_IMAGE_GENERAL_WIDTH          64.0f
 
 BeImageView::BeImageView(const char *name, BitmapIndex index)
 	: BView(name, B_WILL_DRAW), fIndex(index)
@@ -51,7 +53,10 @@ BeImageView::Draw(BRect rect)
 
 	BRect bitmapRect = fBitmap->Bounds();
 	BRect drawRect = Bounds();
-	drawRect = BRect(drawRect.left, drawRect.top, drawRect.right, drawRect.bottom - G_IMAGE_ONE_PIXEL_SIZE);
+	drawRect = BRect(drawRect.left,
+	                 drawRect.top,
+	                 drawRect.right,
+	                 drawRect.bottom - G_IMAGE_ONE_PIXEL_SIZE);
 
 	SetDrawingMode(B_OP_ALPHA);
 	SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);

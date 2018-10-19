@@ -1,17 +1,17 @@
 #include "BeUrlStringView.h"
-#include "BeUtils.h"
 
 #include <Cursor.h>
 #include <Alert.h>
+#include <Window.h>
 
 #include <Catalog.h>
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT           "BeGameLauncher"
+#define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
-#define L_URL_ALERT_WARNING_H           B_TRANSLATE("Open Link Error")
-#define L_URL_ALERT_WARNING             B_TRANSLATE("Cannot open link: ")
-#define L_URL_ALERT_BUTTON_OK           B_TRANSLATE("OK")
+#define L_URL_ALERT_WARNING_H          B_TRANSLATE("Open Link Error")
+#define L_URL_ALERT_WARNING            B_TRANSLATE("Cannot open link: ")
+#define L_URL_ALERT_BUTTON_OK          B_TRANSLATE("OK")
 
 BeUrlStringView::BeUrlStringView(const char* name, const char* text, const char *url,
                                  float fontSize, uint32 resizingFlags)

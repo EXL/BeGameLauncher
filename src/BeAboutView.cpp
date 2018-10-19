@@ -5,37 +5,35 @@
 #include "BeUtils.h"
 
 #include <InterfaceDefs.h>
-#include <GraphicsDefs.h>
 #include <Font.h>
 #include <Size.h>
-#include <Message.h>
-#include <GroupLayout.h>
+#include <GraphicsDefs.h>
 #include <LayoutBuilder.h>
-#include <ScrollView.h>
+#include <Message.h>
 
 #include <Catalog.h>
 
-#define G_URL_EXLMOTO_BLOG_TITLE      "http://exlmoto.ru/haiku-packages"
-#define G_URL_EXLMOTO_BLOG_LINK       "http://exlmoto.ru/haiku-packages#7"
-#define G_URL_GITHUB_TITLE_LINK       "http://github.com/EXL/BeGameLauncher"
+#define G_URL_EXLMOTO_BLOG_TITLE       "http://exlmoto.ru/haiku-packages"
+#define G_URL_EXLMOTO_BLOG_LINK        "http://exlmoto.ru/haiku-packages#7"
+#define G_URL_GITHUB_TITLE_LINK        "http://github.com/EXL/BeGameLauncher"
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT         "BeGameLauncher"
+#define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
-#define L_ABOUT_BUTTON                B_TRANSLATE("OK")
-#define L_ABOUT_LAUNCHER_STRING       B_TRANSLATE("BeGameLauncer (c) EXL, 2018           ")
+#define L_ABOUT_BUTTON                 B_TRANSLATE("OK")
+#define L_ABOUT_LAUNCHER_STRING        B_TRANSLATE("BeGameLauncer (c) EXL, 2018           ")
 
-#define O_ABOUT_VIEW                  "aboutView"
-#define O_ABOUT_NAME                  "aboutName"
-#define O_ABOUT_VERSION               "aboutVersion"
-#define O_ABOUT_INFORMATION           "aboutInformation"
-#define O_ABOUT_BUTTON                "aboutButton"
-#define O_ABOUT_SCROLLER              "aboutScroller"
-#define O_ABOUT_ADDITIONAL_BOX        "aboutAdditionalBox"
-#define O_ABOUT_LINE_VIEW             "aboutLineView"
-#define O_ABOUT_LAUNCHER_STRING       "aboutLauncherString"
-#define O_ABOUT_URL_STRING_VIEW_EM    "aboutUrlStringViewEm"
-#define O_ABOUT_URL_STRING_VIEW_GH    "aboutUrlStringViewGh"
+#define O_ABOUT_VIEW                   "aboutView"
+#define O_ABOUT_NAME                   "aboutName"
+#define O_ABOUT_VERSION                "aboutVersion"
+#define O_ABOUT_INFORMATION            "aboutInformation"
+#define O_ABOUT_BUTTON                 "aboutButton"
+#define O_ABOUT_SCROLLER               "aboutScroller"
+#define O_ABOUT_ADDITIONAL_BOX         "aboutAdditionalBox"
+#define O_ABOUT_LINE_VIEW              "aboutLineView"
+#define O_ABOUT_LAUNCHER_STRING        "aboutLauncherString"
+#define O_ABOUT_URL_STRING_VIEW_EM     "aboutUrlStringViewEm"
+#define O_ABOUT_URL_STRING_VIEW_GH     "aboutUrlStringViewGh"
 
 BeAboutView::BeAboutView(const char *name, const char *version)
 	: BGroupView(O_ABOUT_VIEW, B_VERTICAL)

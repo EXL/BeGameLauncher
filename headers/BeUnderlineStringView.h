@@ -4,10 +4,11 @@
 #include "BeUtils.h"
 
 #include <StringView.h>
+#include <Rect.h>
 
 class BeUnderlineStringView : public BStringView
 {
-	float fFontSize;
+	const float fFontSize;
 
 protected:
 	bool drawUnderline;

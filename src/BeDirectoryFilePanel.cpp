@@ -3,17 +3,22 @@
 #include <Catalog.h>
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT         "BeGameLauncher"
+#define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
-#define L_BTN_SELECT                  B_TRANSLATE("Select")
+#define L_BTN_SELECT                   B_TRANSLATE("Select")
 
 BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
-                                           BMessenger* target, const entry_ref* directory,
-                                           uint32 nodeFlavors, bool allowMultipleSelection,
-                                           BMessage* message, BRefFilter* refFilter,
-                                           bool modal, bool hideWhenDone)
-	: BFilePanel(mode, target, directory, nodeFlavors, allowMultipleSelection,
-	            message, refFilter, modal, hideWhenDone)
+                                           BMessenger* target,
+                                           const entry_ref* directory,
+                                           uint32 nodeFlavors,
+                                           bool allowMultipleSelection,
+                                           BMessage* message,
+                                           BRefFilter* refFilter,
+                                           bool modal,
+                                           bool hideWhenDone)
+	: BFilePanel(mode, target, directory, nodeFlavors,
+                 allowMultipleSelection, message, refFilter,
+                 modal, hideWhenDone)
 {
 
 }
@@ -21,6 +26,12 @@ BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
 void
 BeDirectoryFilePanel::Show()
 {
+	// Just rename button from "Open" to "Select".
 	SetButtonLabel(B_DEFAULT_BUTTON, L_BTN_SELECT);
 	BFilePanel::Show();
+}
+
+BeDirectoryFilePanel::~BeDirectoryFilePanel()
+{
+
 }

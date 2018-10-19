@@ -26,3 +26,8 @@ BeMainWindow::QuitRequested()
 	be_app->PostMessage(B_QUIT_REQUESTED);
 	return true;
 }
+
+BeMainWindow::~BeMainWindow()
+{
+
+}

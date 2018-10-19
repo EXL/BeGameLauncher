@@ -1,8 +1,8 @@
 #ifndef BEMULTISTRINGVIEW_H
 #define BEMULTISTRINGVIEW_H
 
-#include <GraphicsDefs.h>
 #include <TextView.h>
+#include <GraphicsDefs.h>
 
 class BeMultiStringView : public BTextView
 {

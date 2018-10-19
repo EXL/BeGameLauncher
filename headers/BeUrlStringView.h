@@ -4,10 +4,9 @@
 #include "BeUnderlineStringView.h"
 #include "BeUtils.h"
 
-#include <Rect.h>
 #include <Point.h>
-#include <Message.h>
 #include <String.h>
+#include <Message.h>
 #include <SupportDefs.h>
 #include <View.h>
 

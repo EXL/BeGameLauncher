@@ -1,14 +1,16 @@
 #include "BeAboutStripeView.h"
 
 #include <Size.h>
+#include <Point.h>
 #include <InterfaceDefs.h>
+#include <GraphicsDefs.h>
 
-#define G_ICON_OFFSET                   24.0f
-#define G_STRIPE_WIDTH                  30.0f
-#define G_ICON_X                        15.0f
-#define G_ICON_Y                        10.0f
+#define G_ICON_OFFSET                  24.0f
+#define G_STRIPE_WIDTH                 30.0f
+#define G_ICON_X                       15.0f
+#define G_ICON_Y                       10.0f
 
-#define O_ABOUT_STRIPE_VIEW             "aboutStripeView"
+#define O_ABOUT_STRIPE_VIEW            "aboutStripeView"
 
 BeAboutStripeView::BeAboutStripeView(BBitmap *icon)
 	: BView(O_ABOUT_STRIPE_VIEW, B_WILL_DRAW), fIcon(icon)

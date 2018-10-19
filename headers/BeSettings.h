@@ -7,11 +7,14 @@
 class BeSettings : public BMessage
 {
 	BString pathToSettingsFile;
+
 public:
 	BeSettings(const char *fileName);
+	virtual ~BeSettings();
 
-	bool DumpSettingsToFile();
-	bool ReadSettingsFromFile();
+	bool DumpSettingsToFile(void);
+	bool ReadSettingsFromFile(void);
+
 	const char *GetString(const char *name) const;
 	void SetString(const char *name, const char *string);
 };

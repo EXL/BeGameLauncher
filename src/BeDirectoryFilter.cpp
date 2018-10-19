@@ -1,18 +1,17 @@
 #include "BeDirectoryFilter.h"
 
-#include <Entry.h>
-#include <Node.h>
-
-#include <compat/sys/stat.h>
-
 BeDirectoryFilter::BeDirectoryFilter()
 {
 
 }
 
 bool
-BeDirectoryFilter::Filter(const entry_ref *ref, BNode *node, stat_beos *stat, const char *mimeType)
+BeDirectoryFilter::Filter(const entry_ref *ref, BNode *node,
+                          stat_beos *stat, const char *mimeType)
 {
+	_UNUSED(node);
+	_UNUSED(mimeType);
+
 	if(S_ISDIR(stat->st_mode))
 	{
 		return true;
@@ -25,4 +24,9 @@ BeDirectoryFilter::Filter(const entry_ref *ref, BNode *node, stat_beos *stat, co
 	}
 
 	return false;
+}
+
+BeDirectoryFilter::~BeDirectoryFilter()
+{
+
 }

@@ -2,15 +2,16 @@
 
 #include <Roster.h>
 #include <Entry.h>
+#include <Errors.h>
 
 #include <posix/limits.h>
 
-const rgb_color K_RED         = { 200,   0,   0, 255 };
-const rgb_color K_GREEN       = {   0, 100,   0, 255 };
-const rgb_color K_BLUE        = {   0,   0, 200, 255 };
-const rgb_color K_BLACK       = {   0,   0,   0, 255 };
+const rgb_color K_RED                  = { 200,   0,   0, 255 };
+const rgb_color K_GREEN                = {   0, 100,   0, 255 };
+const rgb_color K_BLUE                 = {   0,   0, 200, 255 };
+const rgb_color K_BLACK                = {   0,   0,   0, 255 };
 
-#define OPEN_BINARY_PATH        "/bin/open"
+#define OPEN_BINARY_PATH               "/bin/open"
 
 BeUtils::BeUtils()
 {

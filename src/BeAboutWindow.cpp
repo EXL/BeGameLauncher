@@ -1,21 +1,15 @@
 #include "BeAboutWindow.h"
 #include "BeAboutStripeView.h"
 
-#include <Rect.h>
-#include <Point.h>
-#include <GroupView.h>
-#include <InterfaceDefs.h>
-#include <Button.h>
-#include <Message.h>
-#include <Font.h>
+#include <Window.h>
 #include <GroupLayout.h>
 
 #include <Catalog.h>
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT         "BeGameLauncher"
+#define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
-#define L_ABOUT_VERSION_STRING        B_TRANSLATE("Version: ")
+#define L_ABOUT_VERSION_STRING         B_TRANSLATE("Version: ")
 
 BeAboutWindow::BeAboutWindow(const BRect &frame, const char *title, const char *version)
 	: BeMainWindow(frame, title)
@@ -70,7 +64,7 @@ BeAboutWindow::GetAdditionalBox(void) const
 void
 BeAboutWindow::FrameResized(float newWidth, float newHeight)
 {
-	// Fix some draw glitches via resizing window
+	// Fix some draw glitches via resizing about window.
 	if(fAboutView)
 	{
 		fAboutView->GetAboutStripeView()->Invalidate();

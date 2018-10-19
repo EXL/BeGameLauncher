@@ -1,12 +1,11 @@
 #include "BeMultiStringView.h"
 
-#include <Size.h>
 #include <View.h>
-#include <InterfaceDefs.h>
+#include <Size.h>
 
-#define G_MIN_WIDTH                   240.0f
-#define G_MIN_HEIGHT                  200.0f
-#define G_GENERAL_INSET               0.0f
+#define G_MIN_WIDTH                    240.0f
+#define G_MIN_HEIGHT                   200.0f
+#define G_GENERAL_INSET                0.0f
 
 BeMultiStringView::BeMultiStringView(const char *name, const rgb_color *color)
 	: BTextView(name, NULL, color, B_WILL_DRAW)
