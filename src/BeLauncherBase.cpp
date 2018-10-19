@@ -340,6 +340,7 @@ BeLauncherBase::ReadSettings()
 void
 BeLauncherBase::SaveSettings(bool def)
 {
+	BeDebug("[Info]: Saving Settings... ");
 	fSettings->SetString(sDataPath, (def) ? sStartPath :
 	                                        fDataTextControl->Text());
 
@@ -353,6 +354,7 @@ BeLauncherBase::SaveSettings(bool def)
 	}
 
 	SetStatusString(B_COLOR_BLACK, L_READY);
+	BeDebug("done!\n");
 }
 
 void
@@ -432,7 +434,6 @@ BeLauncherBase::RunGameViaExecVe()
 bool
 BeLauncherBase::QuitRequested()
 {
-	BeDebug("AAAAAAAAAA\n");
 	SaveSettings(false);
 	BeMainWindow::QuitRequested();
 	return true;
@@ -447,7 +448,7 @@ BeLauncherBase::QuitRequestedSub()
 
 BeLauncherBase::~BeLauncherBase()
 {
-	BeDebug("Freeing...\n");
+	BeDebug("[Info]: Freeing... ");
 	delete fDirectotyFilter;
 	fDirectotyFilter = NULL;
 
@@ -460,4 +461,5 @@ BeLauncherBase::~BeLauncherBase()
 
 	delete fSettings;
 	fSettings = NULL;
+	BeDebug("done!\n");
 }

@@ -47,8 +47,9 @@
 
 // Additional option
 #define S_CHECKBOX_OPTION              "GAME_OPTION"
-#define L_CHECKBOX_OPTION              B_TRANSLATE("Game Option")
-#define L_CHECKBOX_SAVED_OPTION        B_TRANSLATE("Saved Option: ")
+#define L_CHECKBOX_OPTION              B_TRANSLATE("Game option")
+#define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to activate game option.")
+#define L_CHECKBOX_SAVED_OPTION        B_TRANSLATE("Saved option: ")
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 
 #define O_ABOUT_STRING                 "aboutString"
@@ -158,6 +159,7 @@ public:
 	                     BeUtils::GetPathToHomeDir(), true, false)
 	{
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
+		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);
 
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
 		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
@@ -183,9 +185,10 @@ int
 main(void)
 {
 	BeApp *beApp = new BeApp(SIGNATURE);
-	BasedGameLauncher *beBasedGameLauncher = new BasedGameLauncher();
-	beApp->SetMainWindow(beBasedGameLauncher);
+	BasedGameLauncher *basedGameLauncher = new BasedGameLauncher();
+	beApp->SetMainWindow(basedGameLauncher);
 	beApp->Run();
 	delete beApp;
+	beApp = NULL;
 	return 0;
 }
