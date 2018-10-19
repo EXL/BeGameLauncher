@@ -121,7 +121,7 @@ protected:
 	{
 		if(!BeLauncherBase::ReadSettings())
 		{
-			// First run, set default value.
+			BeDebug("[Info]: First run, set default values.");
 			fCheckBoxOption->SetValue(1);
 		}
 		else
@@ -154,9 +154,9 @@ protected:
 	}
 
 public:
-	BasedGameLauncher(void)
+	BasedGameLauncher(const char *startPath)
 		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_ENV,
-	                     BeUtils::GetPathToHomeDir(), true, false)
+	                     startPath, true, false)
 	{
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
 		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);
@@ -185,7 +185,7 @@ int
 main(void)
 {
 	BeApp *beApp = new BeApp(SIGNATURE);
-	BasedGameLauncher *basedGameLauncher = new BasedGameLauncher();
+	BasedGameLauncher *basedGameLauncher = new BasedGameLauncher(BeUtils::GetPathToHomeDir());
 	beApp->SetMainWindow(basedGameLauncher);
 	beApp->Run();
 	delete beApp;
