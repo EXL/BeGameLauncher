@@ -20,7 +20,7 @@ class BeAboutWindow : public BeMainWindow
 	BeMultiStringView *fInformationView;
 	BBox *fAdditionalBox;
 
-	void CreateForm();
+	void CreateForm(void);
 
 protected:
 	BeAboutView *GetMainView(void) const;
@@ -30,6 +30,7 @@ protected:
 	virtual void FrameResized(float newWidth, float newHeight);
 
 	virtual bool QuitRequested(void);
+
 public:
 	BeAboutWindow(const BRect &frame, const char *title, const char *version = G_DEFAULT_VERSION);
 	virtual ~BeAboutWindow();

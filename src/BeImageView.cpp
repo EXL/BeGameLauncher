@@ -10,27 +10,38 @@
 #define G_IMAGE_GENERAL_WIDTH                        64.0f
 
 BeImageView::BeImageView(const char *name, BitmapIndex index)
-	: BView(BRect(), name, B_FOLLOW_LEFT, B_WILL_DRAW), fIndex(index)
+	: BView(name, B_WILL_DRAW), fIndex(index)
 {
 	SetFlags(Flags() | B_FULL_UPDATE_ON_RESIZE);
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 
 	float width;
+	float height;
 	fBitmap = BTranslationUtils::GetBitmap(B_PNG_FORMAT, fIndex);
 	if(fBitmap && fBitmap->IsValid())
 	{
 		fSuccessful = true;
 		width = fBitmap->Bounds().Width();
+		height = fBitmap->Bounds().Height();
 	}
 	else
 	{
 		fSuccessful = false;
 		SetViewColor(K_RED);
 		width = G_IMAGE_GENERAL_WIDTH;
+		height = G_IMAGE_GENERAL_WIDTH;
 	}
 
-	SetExplicitSize(BSize(width, B_SIZE_UNSET));
-	SetExplicitPreferredSize(BSize(width, B_SIZE_UNLIMITED));
+	if(fIndex != K_ICON)
+	{
+		SetExplicitSize(BSize(width, B_SIZE_UNSET));
+		SetExplicitPreferredSize(BSize(width, B_SIZE_UNLIMITED));
+	}
+	else
+	{
+		SetExplicitSize(BSize(width, height));
+		SetExplicitPreferredSize(BSize(width, height));
+	}
 }
 
 void
@@ -44,18 +55,6 @@ BeImageView::Draw(BRect rect)
 
 	SetDrawingMode(B_OP_ALPHA);
 	SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);
-
-//	if(fStripe)
-//	{
-//		rgb_color oldColor = HighColor();
-//		SetHighColor(tint_color(ViewColor(), B_DARKEN_1_TINT));
-//		//FillRect(BRect(0.0f, 0.0f, BeAboutWindow::GetStripeOffsetX(), bitmapRect.Height()));
-//		SetHighColor(oldColor);
-//	}
-
-	BeDebug("%f %f %f %f | %f %f %f %f | %f %f %f %f\n", bitmapRect.left, bitmapRect.top, bitmapRect.right, bitmapRect.bottom,
-	        drawRect.left, drawRect.bottom, drawRect.right, drawRect.bottom,
-	        rect.left, rect.bottom, rect.right, rect.bottom);
 
 	if(fSuccessful)
 	{

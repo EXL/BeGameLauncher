@@ -31,7 +31,7 @@ BeAboutWindow::BeAboutWindow(const BRect &frame, const char *title, const char *
 }
 
 void
-BeAboutWindow::CreateForm()
+BeAboutWindow::CreateForm(void)
 {
 	SetLayout(new BGroupLayout(B_VERTICAL));
 

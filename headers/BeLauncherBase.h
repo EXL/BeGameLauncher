@@ -5,23 +5,20 @@
 #include "BeDirectoryFilter.h"
 #include "BeSettings.h"
 #include "BeDirectoryFilePanel.h"
+#include "BeLauncherView.h"
 
 #include <String.h>
-#include <View.h>
 #include <TextControl.h>
 #include <StringView.h>
+#include <Message.h>
+#include <Box.h>
 
 class BeLauncherBase : public BeMainWindow
 {
 	const char *sWindowTitle;
-	const char *sButtonBrowseToolTip;
-	const char *sStringViewData;
-	const char *sTextControlToolTip;
-	const char *sPackageName;
-	const char *sExecutableFileName;
 	const char *sSettingsFileName;
 	const char *sDataPath;
-	const char *sFilePanelTitle;
+	const char *sStartPath;
 
 	const bool sShowIcon;
 	const bool sUseExecVe;
@@ -31,10 +28,11 @@ class BeLauncherBase : public BeMainWindow
 	BeSettings *fSettings;
 	BeDirectoryFilter *fDirectotyFilter;
 	BeDirectoryFilePanel *fDirectoryFilePanel;
+	BeLauncherView *fLauncherView;
 
-	BView *fMainView;
 	BStringView *fStatusString;
 	BTextControl *fDataTextControl;
+	BBox *fAdditionalBox;
 
 	void DirectorySelected(void);
 	void SelectDirectory(void);
@@ -58,9 +56,10 @@ protected:
 public:
 	BeLauncherBase(const char *windowTitle, const char *packageName,
 	               const char *executableFileName, const char *settingsFileName,
-	               const char *dataPath, bool showIcon = false, bool useExecVe = false);
-	virtual void InitParameters(const char *stringViewData, const char *textControlToolTip,
-	                            const char *buttonBrowseToolTip, const char* filePanelTitle);
+	               const char *dataPath, const char *startPath,
+	               bool showIcon = false, bool readSettings = true, bool useExecVe = false);
+	virtual ~BeLauncherBase();
+
 	virtual void CreateForm();
 	virtual bool ReadSettings();
 	virtual void SaveSettings(bool def);
@@ -70,14 +69,12 @@ public:
 	virtual bool CheckCache();
 	virtual bool CheckExecutable();
 
-	BView *GetMainView() const;
 	BeSettings *GetSettings() const;
 	BTextControl *GetTextControl() const;
+	BBox *GetAdditionalBox(void) const;
 
 	virtual bool RunGameViaRoster();
 	virtual bool RunGameViaExecVe();
-
-	virtual const char* SetDefaultDir();
 
 	static float Gap();
 	static float BannerWidth();

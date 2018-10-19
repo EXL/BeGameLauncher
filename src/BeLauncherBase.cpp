@@ -30,12 +30,8 @@
 #undef  B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
-#define L_BTN_RUN                      B_TRANSLATE("Run!")
-#define L_BTN_EXIT                     B_TRANSLATE("Exit")
-#define L_BTN_ABOUT                    B_TRANSLATE("About...")
-#define L_BTN_BROWSE                   B_TRANSLATE("...")
 #define L_BTN_ALERT_OK                 B_TRANSLATE("OK")
-#define L_READY                        B_TRANSLATE("Ready.")
+#define L_READY                        B_TRANSLATE("Ready.") // ?
 #define L_ALERT_EXECUTABLE_ERROR_H     B_TRANSLATE("Executable Error")
 #define L_ALERT_EXECUTABLE_ERROR       B_TRANSLATE("Cannot run executable: ")
 #define L_ALERT_CACHE_ERROR_H          B_TRANSLATE("Cache Error")
@@ -50,132 +46,54 @@
 #define L_ERROR_ENTRY_PERMISSIONS_EXEC B_TRANSLATE("Error: File %exe% does not have permission to execute.")
 #define L_ERROR_RUN_EXE                B_TRANSLATE("Error: Cannot run %exe% executable. See %func%.")
 #define L_SAVING_SETTINGS              B_TRANSLATE("Saving settings to the %file% file...")
-
-#define O_MAIN_VIEW                    "mainView"
-#define O_BANNER_VIEW                  "bannerView"
-#define O_ICON_VIEW                    "iconView"
-#define O_STATUS_VIEW                  "statusView"
-#define O_STATUS_STRING                "statusString"
-#define O_DATA_SVIEW                   "dataStringView"
-#define O_DATA_TCONTROL                "dataTextControl"
-#define O_BTN_BROWSE                   "buttonBrowse"
-#define O_BTN_ABOUT                    "buttonAbout"
-#define O_BTN_RUN                      "buttonRun"
-#define O_BTN_EXIT                     "buttonExit"
+#define L_FILE_PANEL_TITLE             B_TRANSLATE("Please choose a game folder")
 
 extern char **environ;
 
 BeLauncherBase::BeLauncherBase(const char *windowTitle, const char *packageName,
                                const char *executableFileName, const char *settingsFileName,
-                               const char *dataPath, bool showIcon, bool useExecVe)
-	: BeMainWindow(BRect(100, 100, 700, 500), windowTitle), sPackageName(packageName),
-	  sExecutableFileName(executableFileName), sSettingsFileName(settingsFileName),
-	  sDataPath(dataPath), sShowIcon(showIcon), sUseExecVe(useExecVe)
+                               const char *dataPath, const char *startPath,
+                               bool showIcon, bool readSettings, bool useExecVe)
+	: BeMainWindow(BRect(100.0f, 100.0f, 700.0f, 500.0f), windowTitle), sSettingsFileName(settingsFileName),
+	  sDataPath(dataPath), sStartPath(startPath), sShowIcon(showIcon), sUseExecVe(useExecVe)
 {
 	sWindowTitle = windowTitle;
-}
-
-void
-BeLauncherBase::InitParameters(const char *stringViewData, const char *textControlToolTip,
-                               const char *buttonBrowseToolTip, const char* filePanelTitle)
-{
-	sStringViewData = stringViewData;
-	sTextControlToolTip = textControlToolTip;
-	sButtonBrowseToolTip = buttonBrowseToolTip;
-	sFilePanelTitle = filePanelTitle;
-
-	fExecutableFilePath = BeUtils::GetPathToExecutable(sPackageName, sExecutableFileName);
-
+	fExecutableFilePath = BeUtils::GetPathToExecutable(packageName, executableFileName);
 	fSettings = new BeSettings(sSettingsFileName);
+	CreateForm();
+	if(readSettings)
+	{
+		ReadSettings();
+	}
 }
 
 void
 BeLauncherBase::CreateForm()
 {
 	SetLayout(new BGroupLayout(B_VERTICAL));
-	BeLauncherView *launcherView = new BeLauncherView(O_MAIN_VIEW);
-	AddChild(launcherView);
 
+	fLauncherView = new BeLauncherView(sShowIcon);
 
+	fStatusString = fLauncherView->GetStatusStringView();
+	fDataTextControl = fLauncherView->GetTextControl();
+	fAdditionalBox = fLauncherView->GetAdditionalBox();
 
-	BRect r(Bounds());
-	BRect bannerRect(r.left, r.top, G_BANNER_W, r.bottom);
-	BRect stringViewRect(G_BANNER_W + G_GAP, G_BANNER_W + G_GAP, r.right, r.bottom);
+	fLauncherView->GetBrowseButton()->SetMessage(new BMessage(MSG_BUTTON_BROWSE_CLICKED));
+	fLauncherView->GetAboutButton()->SetMessage(new BMessage(MSG_BUTTON_ABOUT_CLICKED));
+	fLauncherView->GetRunButton()->SetMessage(new BMessage(MSG_BUTTON_RUN_CLICKED));
+	fLauncherView->GetExitButton()->SetMessage(new BMessage(B_QUIT_REQUESTED));
 
-	fMainView = new BView(r, O_MAIN_VIEW, B_FOLLOW_ALL, B_WILL_DRAW);
-	fMainView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-
-/*
-	BeImageView *bannerView = new BeImageView(bannerRect, O_BANNER_VIEW, K_BANNER, B_FOLLOW_TOP_BOTTOM);
-
-	if(sShowIcon)
-	{
-		BRect iconRect(r.right - G_BANNER_W, r.top, r.right, G_BANNER_W);
-		BeImageView *iconView = new BeImageView(iconRect, O_ICON_VIEW, K_ICON, B_FOLLOW_RIGHT | B_FOLLOW_TOP);
-		fMainView->AddChild(iconView);
-	}
-	*/
-
-	BStringView *dataStringView = new BStringView(stringViewRect, O_DATA_SVIEW, sStringViewData, B_FOLLOW_LEFT);
-	dataStringView->ResizeToPreferred();
-	fMainView->AddChild(dataStringView);
-
-	BButton *buttonBrowse = new BButton(BRect(), O_BTN_BROWSE, L_BTN_BROWSE,
-	                                    new BMessage(MSG_BUTTON_BROWSE_CLICKED), B_FOLLOW_RIGHT);
-	buttonBrowse->ResizeToPreferred();
-	buttonBrowse->ResizeTo(buttonBrowse->Bounds().Width() - G_GAP * 5, buttonBrowse->Bounds().Height());
-	buttonBrowse->MoveTo(r.right - buttonBrowse->Bounds().Width() - G_GAP, G_BANNER_W + G_GAP * 3);
-	buttonBrowse->SetToolTip(sButtonBrowseToolTip);
-	fMainView->AddChild(buttonBrowse);
-
-	BRect dataTextControlRect(G_BANNER_W + G_GAP, G_BANNER_W + G_GAP * 3, r.right - G_GAP*4, r.bottom);
-	fDataTextControl = new BTextControl(dataTextControlRect, O_DATA_TCONTROL, NULL, NULL, NULL, B_FOLLOW_LEFT_RIGHT);
-	fDataTextControl->ResizeToPreferred();
-	fDataTextControl->SetToolTip(sTextControlToolTip);
-	fMainView->AddChild(fDataTextControl);
-	buttonBrowse->ResizeTo(buttonBrowse->Bounds().Width(), fDataTextControl->Bounds().Height());
-
-	BButton *buttonAbout = new BButton(BRect(), O_BTN_ABOUT, L_BTN_ABOUT,
-	                                   new BMessage(MSG_BUTTON_ABOUT_CLICKED), B_FOLLOW_LEFT | B_FOLLOW_BOTTOM);
-	BButton *buttonRun = new BButton(BRect(), O_BTN_RUN, L_BTN_RUN,
-	                                 new BMessage(MSG_BUTTON_RUN_CLICKED), B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
-	BButton *buttonExit = new BButton(BRect(), O_BTN_EXIT, L_BTN_EXIT,
-	                                  new BMessage(B_QUIT_REQUESTED), B_FOLLOW_RIGHT | B_FOLLOW_BOTTOM);
-	buttonRun->ResizeToPreferred();
-	buttonExit->ResizeToPreferred();
-	buttonAbout->ResizeToPreferred();
-	buttonExit->MoveTo(r.right - buttonExit->Bounds().Width() - G_GAP,
-	                   r.bottom - buttonExit->Bounds().Height() - G_GAP);
-	buttonRun->MoveTo(r.right - buttonExit->Bounds().Width() - buttonRun->Bounds().Width() - G_GAP * 2,
-	                  r.bottom - buttonRun->Bounds().Height() - G_GAP);
-	buttonAbout->MoveTo(r.left + G_BANNER_W + G_GAP, r.bottom - buttonAbout->Bounds().Height() - G_GAP);
-	fMainView->AddChild(buttonExit);
-	fMainView->AddChild(buttonRun);
-	fMainView->AddChild(buttonAbout);
-	SetDefaultButton(buttonRun);
-
-	BRect statusRect(G_BANNER_W + G_STATUS_GAP_HACK, r.bottom - buttonAbout->Bounds().Height() - G_GAP * 3,
-	                 r.right, r.bottom);
-	BView *statusView = new BView(statusRect, O_STATUS_VIEW, B_FOLLOW_LEFT_RIGHT | B_FOLLOW_BOTTOM, B_WILL_DRAW);
-	fStatusString = new BStringView(BRect(), O_STATUS_STRING, L_READY, B_FOLLOW_LEFT);
-	statusView->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
-	fStatusString->SetFontSize(10.0f);
-	fStatusString->ResizeToPreferred();
-	fStatusString->MoveTo(G_GAP, 0.0f);
-	statusView->AddChild(fStatusString);
-
-//	AddChild(fMainView);
-//	AddChild(bannerView);
-//	AddChild(statusView);
+	SetDefaultButton(fLauncherView->GetRunButton());
+	AddChild(fLauncherView);
 
 	fDirectotyFilter = new BeDirectoryFilter();
 	entry_ref start_point;
-	BEntry entry(SetDefaultDir());
+	BEntry entry(sStartPath);
 	entry.GetRef(&start_point);
 	fDirectoryFilePanel = new BeDirectoryFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
 	                            B_DIRECTORY_NODE, false, new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
 	                            fDirectotyFilter, true);
-	fDirectoryFilePanel->Window()->SetTitle(sFilePanelTitle);
+	fDirectoryFilePanel->Window()->SetTitle(L_FILE_PANEL_TITLE);
 
 	SetSizeLimits(Bounds().Width() - 200.0f, Bounds().Width() + 200.0f,
 	              Bounds().Height() - 100.0f, Bounds().Height() + 200.0f);
@@ -308,12 +226,6 @@ BeLauncherBase::CheckExecutable()
 	return true;
 }
 
-BView *
-BeLauncherBase::GetMainView() const
-{
-	return fMainView;
-}
-
 BeSettings *
 BeLauncherBase::GetSettings() const
 {
@@ -393,6 +305,12 @@ BeLauncherBase::SelectDirectory()
 	fDirectoryFilePanel->Show();
 }
 
+BBox *
+BeLauncherBase::GetAdditionalBox(void) const
+{
+	return fAdditionalBox;
+}
+
 void
 BeLauncherBase::DirectorySelected()
 {
@@ -422,7 +340,7 @@ BeLauncherBase::ReadSettings()
 void
 BeLauncherBase::SaveSettings(bool def)
 {
-	fSettings->SetString(sDataPath, (def) ? SetDefaultDir() :
+	fSettings->SetString(sDataPath, (def) ? sStartPath :
 	                                        fDataTextControl->Text());
 
 	BString message(L_SAVING_SETTINGS);
@@ -511,12 +429,6 @@ BeLauncherBase::RunGameViaExecVe()
 	return true;
 }
 
-const char *
-BeLauncherBase::SetDefaultDir()
-{
-	return BeUtils::GetPathToUserNonPackedDataDir().String();
-}
-
 bool
 BeLauncherBase::QuitRequested()
 {
@@ -531,4 +443,21 @@ BeLauncherBase::QuitRequestedSub()
 {
 	BeMainWindow::QuitRequested();
 	return true;
+}
+
+BeLauncherBase::~BeLauncherBase()
+{
+	BeDebug("Freeing...\n");
+	delete fDirectotyFilter;
+	fDirectotyFilter = NULL;
+
+	delete fDirectoryFilePanel;
+	fDirectoryFilePanel = NULL;
+
+	fLauncherView->RemoveSelf();
+	delete fLauncherView;
+	fLauncherView = NULL;
+
+	delete fSettings;
+	fSettings = NULL;
 }

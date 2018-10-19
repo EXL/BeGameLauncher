@@ -2,17 +2,16 @@
 #include "BeLauncherBase.h"
 #include "BeAboutWindow.h"
 #include "BeUtils.h"
-#include "BeMultiStringView.h"
 #include "BeUrlStringView.h"
 
 #include <Rect.h>
-#include <View.h>
+#include <String.h>
 #include <StringView.h>
 #include <CheckBox.h>
 #include <Font.h>
-#include <Box.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
+#include <InterfaceDefs.h>
 
 #include <Catalog.h>
 
@@ -29,13 +28,9 @@
 #define PACKAGE_DIR                    "Game"
 #define SETTINGS_FILE                  "GameLauncher.set"
 #define EXECUTABLE_FILE                "GameExe"
-#define DATA_PATH                      "DATA_PATH"
+#define DATA_PATH_ENV                  "DATA_PATH_ENV"
 
 // Various Strings
-#define L_BUTTON_BROWSE_T              B_TRANSLATE("Click to open the file dialog.")
-#define L_SV_DATA                      B_TRANSLATE("Please select a directory with game files: ")
-#define L_TC_DATA_T                    B_TRANSLATE("Path to a directory with game files.")
-#define L_FP_TITLE                     B_TRANSLATE("Please choose a Game Folder")
 #define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
                                        "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim" \
                                        "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea" \
@@ -53,6 +48,7 @@
 // Additional option
 #define S_CHECKBOX_OPTION              "GAME_OPTION"
 #define L_CHECKBOX_OPTION              B_TRANSLATE("Game Option")
+#define L_CHECKBOX_SAVED_OPTION        B_TRANSLATE("Saved Option: ")
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 
 #define O_ABOUT_STRING                 "aboutString"
@@ -70,19 +66,17 @@ public:
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
 
-		BeMultiStringView *informationText = BeAboutWindow::GetInformationView();
-		informationText->Insert(L_ABOUT_STRING);
-		informationText->SetFontAndColor(be_bold_font);
-		informationText->Insert(L_ABOUT_THANKS_STR_H);
-		informationText->SetFontAndColor(be_plain_font);
-		informationText->Insert(L_ABOUT_THANKS_STR);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_STRING);
+		BeAboutWindow::GetInformationView()->SetFontAndColor(be_bold_font);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_THANKS_STR_H);
+		BeAboutWindow::GetInformationView()->SetFontAndColor(be_plain_font);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_THANKS_STR);
 
-		BBox *additionalBox = BeAboutWindow::GetAdditionalBox();
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_HORIZONTAL)
 		                          .Add(urlDescString)
 		                          .Add(urlString)
 		                          .AddGlue();
-		additionalBox->AddChild(boxLayout->View());
+		BeAboutWindow::GetAdditionalBox()->AddChild(boxLayout->View());
 	}
 };
 
@@ -94,19 +88,25 @@ class BasedGameLauncher : public BeLauncherBase
 	};
 
 	BCheckBox *fCheckBoxOption;
-public:
-	BasedGameLauncher(void)
-		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH, true)
-	{
-		BeLauncherBase::InitParameters(L_SV_DATA, L_TC_DATA_T, L_BUTTON_BROWSE_T, L_FP_TITLE);
-		CreateForm();
-		ReadSettings();
-	}
 
-	const char *
-	SetDefaultDir()
+protected:
+	void
+	MessageReceived(BMessage *msg)
 	{
-		return BeUtils::GetPathToHomeDir();
+		switch (msg->what)
+		{
+			case MSG_CHECKBOX_STATE_CHANGED:
+			{
+				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
+				SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_OPTION) << ": " << checkBox->Value());
+				break;
+			}
+			default:
+			{
+				BeLauncherBase::MessageReceived(msg);
+				break;
+			}
+		}
 	}
 
 	bool
@@ -115,42 +115,12 @@ public:
 		return true;
 	}
 
-	void
-	CreateForm()
-	{
-		BeLauncherBase::CreateForm();
-
-		BView *ui = BeLauncherBase::GetMainView();
-
-		fCheckBoxOption = new BCheckBox(BRect(), O_CHECKBOX_OPTION, L_CHECKBOX_OPTION,
-		                                          new BMessage(MSG_CHECKBOX_STATE_CHANGED), B_FOLLOW_LEFT);
-
-		fCheckBoxOption->ResizeToPreferred();
-
-		BRect r = BeLauncherBase::GetTextControl()->Frame();
-		fCheckBoxOption->MoveTo(r.left, r.top + Gap() * 3);
-
-		BStringView *urlDescString = new BStringView(BRect(), O_DATA_LINK_DESC,
-		                                             L_DATA_FILES_LINK_D, B_FOLLOW_LEFT);
-		urlDescString->ResizeToPreferred();
-		urlDescString->MoveTo(r.left, r.top + Gap() * 6);
-
-		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
-		urlString->ResizeToPreferred();
-		urlString->MoveTo(r.left + urlDescString->Bounds().Width() + BeLauncherBase::Gap(),
-		                  r.top + Gap() * 6);
-
-		ui->AddChild(fCheckBoxOption);
-		ui->AddChild(urlDescString);
-		ui->AddChild(urlString);
-	}
-
 	bool
 	ReadSettings()
 	{
 		if(!BeLauncherBase::ReadSettings())
 		{
-			// First run, set default value
+			// First run, set default value.
 			fCheckBoxOption->SetValue(1);
 		}
 		else
@@ -158,7 +128,7 @@ public:
 			const char *str = BeLauncherBase::GetSettings()->GetString(S_CHECKBOX_OPTION);
 			int ASCII_MAGIC = 48;
 			int value = static_cast<int>(str[0] - ASCII_MAGIC);
-			SetStatusString(B_COLOR_BLACK, BString("Saved Option ") << value);
+			SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_SAVED_OPTION) << value);
 			fCheckBoxOption->SetValue(value);
 		}
 		return true;
@@ -175,30 +145,37 @@ public:
 	}
 
 	void
-	MessageReceived(BMessage *msg)
-	{
-		switch (msg->what)
-		{
-			case MSG_CHECKBOX_STATE_CHANGED:
-			{
-				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				SetStatusString(B_COLOR_BLACK, BString("Game Option ") << checkBox->Value());
-				break;
-			}
-			default:
-			{
-				BeLauncherBase::MessageReceived(msg);
-				break;
-			}
-		}
-	}
-
-	void
 	ShowAboutDialog()
 	{
 		GameAboutWindow *gameAboutWindow = new GameAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
 		                                                       TITLE, VERSION);
 		gameAboutWindow->Show();
+	}
+
+public:
+	BasedGameLauncher(void)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_ENV,
+	                     BeUtils::GetPathToHomeDir(), true, false)
+	{
+		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
+
+		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
+		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
+
+		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, B_USE_HALF_ITEM_SPACING)
+		                          .AddGroup(B_HORIZONTAL, 0.0f)
+		                              .Add(fCheckBoxOption)
+		                              .AddGlue()
+		                          .End()
+		                          .AddGroup(B_HORIZONTAL, 0.0f)
+		                              .Add(urlDescString)
+		                              .Add(urlString)
+		                              .AddGlue()
+		                          .End();
+		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
+
+		// NOTE: Be sure to call read settings function
+		ReadSettings();
 	}
 };
 
