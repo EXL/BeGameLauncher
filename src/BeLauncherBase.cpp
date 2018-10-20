@@ -15,10 +15,7 @@
 #include <Path.h>
 #include <Roster.h>
 #include <Window.h>
-#include <StorageDefs.h>
 #include <Errors.h>
-
-#include <FilePanel.h>
 
 #include <Catalog.h>
 
@@ -103,12 +100,9 @@ BeLauncherBase::CreateForm(void)
 	AddChild(fLauncherView);
 
 	fDirectoryFilter = new BeDirectoryFilter();
-	entry_ref start_point;
-	BEntry entry(sStartPath);
-	entry.GetRef(&start_point);
-	fDirectoryFilePanel = new BeDirectoryFilePanel(B_OPEN_PANEL, new BMessenger(this), &start_point,
-	                            B_DIRECTORY_NODE, false, new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
-	                            fDirectoryFilter, true);
+	fDirectoryFilePanel = new BeDirectoryFilePanel(new BMessenger(this),
+	                                               new BMessage(MSG_FILE_PANEL_FILE_SELECTED),
+	                                               fDirectoryFilter, sStartPath);
 	fDirectoryFilePanel->Window()->SetTitle(L_FILE_PANEL_TITLE);
 
 	SetSizeLimits(Bounds().Width()  - G_OFFSET_FOR_SIZE,

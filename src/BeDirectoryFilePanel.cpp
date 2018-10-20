@@ -1,5 +1,8 @@
 #include "BeDirectoryFilePanel.h"
 
+#include <StorageDefs.h>
+#include <Entry.h>
+
 #include <Catalog.h>
 
 #undef  B_TRANSLATION_CONTEXT
@@ -7,20 +10,17 @@
 
 #define L_BTN_SELECT                   B_TRANSLATE("Select")
 
-BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
-                                           BMessenger* target,
-                                           const entry_ref* directory,
-                                           uint32 nodeFlavors,
-                                           bool allowMultipleSelection,
-                                           BMessage* message,
-                                           BRefFilter* refFilter,
-                                           bool modal,
-                                           bool hideWhenDone)
-                    : BFilePanel(mode, target, directory, nodeFlavors,
-                                 allowMultipleSelection, message, refFilter,
-                                 modal, hideWhenDone)
+BeDirectoryFilePanel::BeDirectoryFilePanel(BMessenger *target,
+                                           BMessage *message,
+                                           BRefFilter *refFilter,
+                                           const char *startPath)
+                    : BFilePanel(B_OPEN_PANEL, target, NULL, B_DIRECTORY_NODE,
+                                 false, message, refFilter, true, true)
 {
-
+	entry_ref start_point;
+	BEntry entry(startPath);
+	entry.GetRef(&start_point);
+	SetPanelDirectory(&start_point);
 }
 
 void
