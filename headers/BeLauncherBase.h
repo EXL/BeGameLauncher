@@ -17,7 +17,7 @@ class BeLauncherBase : public BeMainWindow
 {
 	const char *sWindowTitle;
 	const char *sSettingsFileName;
-	const char *sDataPath;
+	const char *sDataPathArg;
 	const char *sStartPath;
 
 	const bool sShowIcon;
@@ -63,17 +63,17 @@ protected:
 
 	virtual bool CheckCache(void);
 	virtual bool CheckExecutable(void);
+	virtual bool CheckAll(void);
 
 	virtual bool RunGame(void);
-	virtual bool RunGameViaRosterEnv(void);
-	virtual bool RunGameViaExecVeEnv(void);
+	virtual bool RunGameViaRoster(bool useEnviron = false);
+	virtual bool RunGameViaExecVe(bool useEnviron = false);
 
 	virtual void ShowErrorCacheAlert(void);
 	virtual void ShowExecutableCacheAlert(void);
 	virtual void ShowWarnWriteSettingsAlert(void);
 
 	virtual bool QuitRequested(void);
-	virtual bool QuitRequestedSub(void);
 
 	virtual void ShowAboutDialog(void);
 
@@ -82,7 +82,7 @@ public:
 	                        const char *packageName,
 	                        const char *executableFileName,
 	                        const char *settingsFileName,
-	                        const char *dataPath,
+	                        const char *dataPathArg,
 	                        const char *startPath,
 	                        bool showIcon = false,
 	                        bool readSettings = true);

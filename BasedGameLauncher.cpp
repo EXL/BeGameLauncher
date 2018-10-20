@@ -27,8 +27,8 @@
 #define VERSION                        "1.0.0"
 #define PACKAGE_DIR                    "Game"
 #define SETTINGS_FILE                  "GameLauncher.set"
-#define EXECUTABLE_FILE                "GameExe"
-#define DATA_PATH_ENV                  "DATA_PATH_ENV"
+#define EXECUTABLE_FILE                "Game"
+#define DATA_PATH_OPT                  "DATA_DIR"
 
 // Various Strings
 #define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
@@ -117,6 +117,12 @@ protected:
 	}
 
 	virtual bool
+	RunGame(void)
+	{
+		return BeLauncherBase::RunGameViaRoster(true);
+	}
+
+	virtual bool
 	ReadSettings(void)
 	{
 		if(!BeLauncherBase::ReadSettings())
@@ -155,7 +161,7 @@ protected:
 
 public:
 	explicit BasedGameLauncher(const char *startPath)
-	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_ENV,
+	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
 	                          startPath, true, false)
 	{
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));

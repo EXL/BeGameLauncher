@@ -19,6 +19,8 @@
 
 #include <Catalog.h>
 
+#include <vector>
+
 #include <unistd.h>
 
 #include <posix/stdlib.h>
@@ -42,8 +44,8 @@
 #define L_ALERT_CACHE_ERROR            B_TRANSLATE("Game data check failed.")
 #define L_ALERT_WRITE_S_WARNING_H      B_TRANSLATE("Settings Error")
 #define L_ALERT_WRITE_S_WARNING        B_TRANSLATE("Cannot write settings file: ")
-#define L_RUNNING_VIA_EXECVE           B_TRANSLATE("Running game via execve...")
-#define L_RUNNING_VIA_ROSTER           B_TRANSLATE("Running game via BRoster...")
+#define L_RUNNING_VIA_EXECVE           B_TRANSLATE("Running game via execve. Environ: %env%...")
+#define L_RUNNING_VIA_ROSTER           B_TRANSLATE("Running game via BRoster. Environ: %env%...")
 #define L_ERROR_ENTRY_FUNC             B_TRANSLATE("Error: Function get_ref_for_path() for %exe% failed.")
 #define L_ERROR_ENTRY_PATH             B_TRANSLATE("Error: Path entry %exe% is not exist nor file.")
 #define L_ERROR_ENTRY_PERMISSIONS      B_TRANSLATE("Error: Cannot get entry %exe% permissons.")
@@ -58,12 +60,12 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
                                const char *packageName,
                                const char *executableFileName,
                                const char *settingsFileName,
-                               const char *dataPath,
+                               const char *dataPathArg,
                                const char *startPath,
                                bool showIcon,
                                bool readSettings)
               : BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
-                             sSettingsFileName(settingsFileName), sDataPath(dataPath), sStartPath(startPath),
+                             sSettingsFileName(settingsFileName), sDataPathArg(dataPathArg), sStartPath(startPath),
                              sShowIcon(showIcon)
 {
 	sWindowTitle = windowTitle;
@@ -119,7 +121,7 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 		{
 			if(RunGame())
 			{
-				QuitRequestedSub();
+				PostMessage(B_QUIT_REQUESTED);
 			}
 			break;
 		}
@@ -227,9 +229,27 @@ BeLauncherBase::CheckExecutable(void)
 }
 
 bool
-BeLauncherBase::RunGame()
+BeLauncherBase::CheckAll()
 {
-	return RunGameViaRosterEnv();
+	if(!CheckExecutable())
+	{
+		ShowExecutableCacheAlert();
+		return false;
+	}
+
+	if(!CheckCache())
+	{
+		ShowErrorCacheAlert();
+		return false;
+	}
+
+	return true;
+}
+
+bool
+BeLauncherBase::RunGame(void)
+{
+	return RunGameViaRoster();
 }
 
 BeSettings *
@@ -333,7 +353,7 @@ BeLauncherBase::ReadSettings(void)
 		SaveSettings(true);
 	}
 
-	fDataTextControl->SetText(fSettings->GetString(sDataPath));
+	fDataTextControl->SetText(fSettings->GetString(sDataPathArg));
 	return isNotFirstBlood;
 }
 
@@ -341,7 +361,7 @@ void
 BeLauncherBase::SaveSettings(bool def)
 {
 	BeDebug("[Info]: Saving Settings... ");
-	fSettings->SetString(sDataPath, (def) ? sStartPath :
+	fSettings->SetString(sDataPathArg, (def) ? sStartPath :
 	                                        fDataTextControl->Text());
 
 	BString message(L_SAVING_SETTINGS);
@@ -365,24 +385,23 @@ BeLauncherBase::ShowAboutDialog(void)
 }
 
 bool
-BeLauncherBase::RunGameViaRosterEnv(void)
+BeLauncherBase::RunGameViaRoster(bool useEnviron)
 {
-	SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_ROSTER);
+	BString message(L_RUNNING_VIA_ROSTER);
+	message.ReplaceAll("%env%", BString() << useEnviron);
+	SetStatusString(B_COLOR_BLUE, message);
 
-	if(!CheckExecutable())
+	if(!CheckAll())
 	{
-		ShowExecutableCacheAlert();
-		return false;
-	}
-	if(!CheckCache())
-	{
-		ShowErrorCacheAlert();
 		return false;
 	}
 
 	entry_ref ref;
 
-	setenv(sDataPath, fDataTextControl->Text(), 1);
+	if(useEnviron)
+	{
+		setenv(sDataPathArg, fDataTextControl->Text(), 1);
+	}
 
 	const char *executable = fExecutableFilePath.String();
 
@@ -395,36 +414,53 @@ BeLauncherBase::RunGameViaRosterEnv(void)
 	}
 	else
 	{
-		const char *argv[] = { executable, NULL };
-		be_roster->Launch(&ref, 1, argv);
+		std::vector<const char *> argv;
+		if (useEnviron)
+		{
+			argv.push_back(executable);
+		}
+		else
+		{
+			argv.push_back(sDataPathArg);
+			argv.push_back(fDataTextControl->Text());
+		}
+		argv.push_back(NULL);
+		be_roster->Launch(&ref, 1, const_cast<const char * const *>(argv.data()));
 	}
 
 	return true;
 }
 
 bool
-BeLauncherBase::RunGameViaExecVeEnv(void)
+BeLauncherBase::RunGameViaExecVe(bool useEnviron)
 {
-	SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_EXECVE);
+	BString message(L_RUNNING_VIA_EXECVE);
+	message.ReplaceAll("%env%", BString() << useEnviron);
+	SetStatusString(B_COLOR_BLUE, message);
 
-	if(!CheckExecutable())
+	if(!CheckAll())
 	{
-		ShowExecutableCacheAlert();
-		return false;
-	}
-	if(!CheckCache())
-	{
-		ShowErrorCacheAlert();
 		return false;
 	}
 
-	setenv(sDataPath, fDataTextControl->Text(), 1);
+	if(useEnviron)
+	{
+		setenv(sDataPathArg, fDataTextControl->Text(), 1);
+	}
 
 	if (!fork())
 	{
 		const char *executable = fExecutableFilePath.String();
-		const char *argv[] = { executable, NULL };
-		execve(executable, const_cast<char * const *>(argv), environ);
+
+		std::vector<const char *> argv;
+		argv.push_back(executable);
+		if(!useEnviron)
+		{
+			argv.push_back(sDataPathArg);
+			argv.push_back(fDataTextControl->Text());
+		}
+		argv.push_back(NULL);
+		execve(executable, const_cast<char * const *>(argv.data()), environ);
 
 		BString error(L_ERROR_RUN_EXE);
 		error.ReplaceAll("%exe%", executable).ReplaceAll("%func%", __func__);
@@ -439,13 +475,6 @@ bool
 BeLauncherBase::QuitRequested(void)
 {
 	SaveSettings(false);
-	BeMainWindow::QuitRequested();
-	return true;
-}
-
-bool
-BeLauncherBase::QuitRequestedSub(void)
-{
 	BeMainWindow::QuitRequested();
 	return true;
 }
