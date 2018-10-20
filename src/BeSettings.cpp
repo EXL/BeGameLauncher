@@ -6,7 +6,7 @@
 #include <StorageDefs.h>
 
 BeSettings::BeSettings(const char *fileName)
-	: BMessage()
+	      : BMessage()
 {
 	pathToSettingsFile = BeUtils::GetPathToSettingsFile(fileName);
 }

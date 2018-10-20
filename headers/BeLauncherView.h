@@ -18,7 +18,7 @@ class BeLauncherView : public BGroupView
 	BButton *fExitButton;
 
 public:
-	BeLauncherView(bool showIcon = false);
+	explicit BeLauncherView(bool showIcon = false);
 	virtual ~BeLauncherView();
 
 	BTextControl *GetTextControl(void) const;

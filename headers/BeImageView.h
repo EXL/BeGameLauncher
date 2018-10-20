@@ -22,7 +22,7 @@ protected:
 	virtual void Draw(BRect rect);
 
 public:
-	BeImageView(const char *name, BitmapIndex index);
+	explicit BeImageView(const char *name, BitmapIndex index);
 	virtual ~BeImageView();
 
 	static BBitmap* GetIconBitmapByIndex(BitmapIndex index);

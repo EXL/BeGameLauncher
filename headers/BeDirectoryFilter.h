@@ -11,7 +11,7 @@
 class BeDirectoryFilter : public BRefFilter
 {
 public:
-	BeDirectoryFilter();
+	explicit BeDirectoryFilter();
 	virtual ~BeDirectoryFilter();
 
 	virtual bool Filter(const entry_ref *ref, BNode *node,

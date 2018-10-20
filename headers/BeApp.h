@@ -10,7 +10,7 @@ class BeApp : public BApplication
 	BWindow *gMainWindow;
 
 public:
-	BeApp(const char *signature);
+	explicit BeApp(const char *signature);
 	virtual ~BeApp();
 
 	virtual thread_id Run();

@@ -66,9 +66,9 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
                                bool showIcon,
                                bool readSettings,
                                bool useExecVe)
-	: BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
-      sSettingsFileName(settingsFileName), sDataPath(dataPath), sStartPath(startPath),
-      sShowIcon(showIcon), sUseExecVe(useExecVe)
+	          : BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
+                             sSettingsFileName(settingsFileName), sDataPath(dataPath), sStartPath(startPath),
+                             sShowIcon(showIcon), sUseExecVe(useExecVe)
 {
 	sWindowTitle = windowTitle;
 	fExecutableFilePath = BeUtils::GetPathToExecutable(packageName, executableFileName);

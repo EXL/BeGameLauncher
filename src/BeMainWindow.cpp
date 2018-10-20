@@ -3,7 +3,7 @@
 #include <Application.h>
 
 BeMainWindow::BeMainWindow(const BRect &frame, const char *title)
-	: BWindow(frame, title, B_TITLED_WINDOW, B_ASYNCHRONOUS_CONTROLS)
+	        : BWindow(frame, title, B_TITLED_WINDOW, B_ASYNCHRONOUS_CONTROLS)
 {
 
 }

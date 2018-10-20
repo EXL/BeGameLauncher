@@ -4,7 +4,7 @@
 #define G_OFFSET_STRIPE_GAP_BIG        -3.0f
 
 BeUnderlineStringView::BeUnderlineStringView(const char* name, const char* text, float fontSize)
-	: BStringView(BRect(), name, text), fFontSize(fontSize)
+	                 : BStringView(BRect(), name, text), fFontSize(fontSize)
 {
 	drawUnderline = true;
 

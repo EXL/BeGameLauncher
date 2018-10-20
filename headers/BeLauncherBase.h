@@ -78,15 +78,15 @@ protected:
 	virtual void ShowAboutDialog(void);
 
 public:
-	BeLauncherBase(const char *windowTitle,
-	               const char *packageName,
-	               const char *executableFileName,
-	               const char *settingsFileName,
-	               const char *dataPath,
-	               const char *startPath,
-	               bool showIcon = false,
-	               bool readSettings = true,
-	               bool useExecVe = false);
+	explicit BeLauncherBase(const char *windowTitle,
+	                        const char *packageName,
+	                        const char *executableFileName,
+	                        const char *settingsFileName,
+	                        const char *dataPath,
+	                        const char *startPath,
+	                        bool showIcon = false,
+	                        bool readSettings = true,
+	                        bool useExecVe = false);
 	virtual ~BeLauncherBase();
 
 	BeSettings *GetSettings(void) const;

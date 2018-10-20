@@ -27,7 +27,7 @@ protected:
 	virtual bool QuitRequested(void);
 
 public:
-	BeAboutWindow(const BRect &frame, const char *title, const char *version = G_DEFAULT_VERSION);
+	explicit BeAboutWindow(const BRect &frame, const char *title, const char *version = G_DEFAULT_VERSION);
 	virtual ~BeAboutWindow();
 
 	BeAboutView *GetMainView(void) const;

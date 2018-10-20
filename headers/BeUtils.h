@@ -19,7 +19,7 @@ class BeUtils
 	static BString FindPathInner(directory_which dir);
 
 	// Forbidden.
-	BeUtils();
+	explicit BeUtils();
 	~BeUtils();
 
 public:

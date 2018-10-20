@@ -10,7 +10,7 @@ class BeAboutStripeView : public BView
 	BBitmap *fIcon;
 
 public:
-	BeAboutStripeView(BBitmap *icon);
+	explicit BeAboutStripeView(BBitmap *icon);
 	virtual ~BeAboutStripeView();
 
 	static float GetIconX(void);

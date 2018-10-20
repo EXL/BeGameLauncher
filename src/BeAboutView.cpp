@@ -36,7 +36,7 @@
 #define O_ABOUT_URL_STRING_VIEW_GH     "aboutUrlStringViewGh"
 
 BeAboutView::BeAboutView(const char *name, const char *version)
-	: BGroupView(O_ABOUT_VIEW, B_VERTICAL)
+	       : BGroupView(O_ABOUT_VIEW, B_VERTICAL)
 {
 	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 

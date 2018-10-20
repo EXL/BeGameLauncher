@@ -15,7 +15,7 @@ protected:
 	virtual bool QuitRequested();
 
 public:
-	BeMainWindow(const BRect &frame, const char *title);
+	explicit BeMainWindow(const BRect &frame, const char *title);
 	virtual ~BeMainWindow();
 };
 

@@ -8,7 +8,7 @@
 #define G_GENERAL_INSET                0.0f
 
 BeMultiStringView::BeMultiStringView(const char *name, const rgb_color *color)
-	: BTextView(name, NULL, color, B_WILL_DRAW)
+	             : BTextView(name, NULL, color, B_WILL_DRAW)
 {
 	MakeEditable(false);
 	MakeSelectable(true);

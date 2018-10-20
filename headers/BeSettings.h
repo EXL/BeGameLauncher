@@ -9,7 +9,7 @@ class BeSettings : public BMessage
 	BString pathToSettingsFile;
 
 public:
-	BeSettings(const char *fileName);
+	explicit BeSettings(const char *fileName);
 	virtual ~BeSettings();
 
 	bool DumpSettingsToFile(void);

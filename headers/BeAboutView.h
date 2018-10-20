@@ -24,7 +24,7 @@ protected:
 	virtual void AllAttached();
 
 public:
-	BeAboutView(const char *name, const char *version);
+	explicit BeAboutView(const char *name, const char *version);
 	virtual ~BeAboutView();
 
 	BBox *GetAdditionalBox(void) const;

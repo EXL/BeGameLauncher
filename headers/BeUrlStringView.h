@@ -22,8 +22,8 @@ protected:
 	virtual void MouseDown(BPoint point);
 
 public:
-	BeUrlStringView(const char* name, const char* text, const char *url = NULL,
-	                float fontSize = G_DEFAULT_FONT_SIZE, uint32 resizingFlags = B_FOLLOW_LEFT);
+	explicit BeUrlStringView(const char* name, const char* text, const char *url = NULL,
+	                         float fontSize = G_DEFAULT_FONT_SIZE, uint32 resizingFlags = B_FOLLOW_LEFT);
 	virtual ~BeUrlStringView();
 };
 

@@ -16,9 +16,9 @@ BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
                                            BRefFilter* refFilter,
                                            bool modal,
                                            bool hideWhenDone)
-	: BFilePanel(mode, target, directory, nodeFlavors,
-                 allowMultipleSelection, message, refFilter,
-                 modal, hideWhenDone)
+	                : BFilePanel(mode, target, directory, nodeFlavors,
+                                 allowMultipleSelection, message, refFilter,
+                                 modal, hideWhenDone)
 {
 
 }
