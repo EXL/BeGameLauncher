@@ -282,6 +282,36 @@ BeLauncherBase::BannerWidth(void)
 	return BeImageView::GetGeneralWidth();
 }
 
+float
+BeLauncherBase::GetStartPointX(void)
+{
+	return G_START_POINT_X;
+}
+
+float
+BeLauncherBase::GetStartPointY(void)
+{
+	return G_START_POINT_Y;
+}
+
+float
+BeLauncherBase::GetWindowWidth(void)
+{
+	return G_WINDOW_WIDTH;
+}
+
+float
+BeLauncherBase::GetWindowHeight(void)
+{
+	return G_WINDOW_HEIGHT;
+}
+
+float
+BeLauncherBase::GetOffsetForSize(void)
+{
+	return G_OFFSET_FOR_SIZE;
+}
+
 void
 BeLauncherBase::ShowErrorCacheAlert(void)
 {

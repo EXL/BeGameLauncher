@@ -94,6 +94,11 @@ public:
 
 	static float Gap(void);
 	static float BannerWidth(void);
+	static float GetStartPointX(void);
+	static float GetStartPointY(void);
+	static float GetWindowWidth(void);
+	static float GetWindowHeight(void);
+	static float GetOffsetForSize(void);
 };
 
 #endif // BELAUNCHERBASE_H
