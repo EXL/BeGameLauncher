@@ -99,5 +99,6 @@ BeImageView::GetGeneralWidth(void)
 
 BeImageView::~BeImageView()
 {
-
+	delete fBitmap;
+	fBitmap = NULL;
 }

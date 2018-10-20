@@ -74,5 +74,6 @@ BeAboutStripeView::GetStripeWidth(void)
 
 BeAboutStripeView::~BeAboutStripeView()
 {
-
+	delete fIcon;
+	fIcon = NULL;
 }
