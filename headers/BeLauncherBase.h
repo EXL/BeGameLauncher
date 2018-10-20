@@ -21,7 +21,6 @@ class BeLauncherBase : public BeMainWindow
 	const char *sStartPath;
 
 	const bool sShowIcon;
-	const bool sUseExecVe;
 
 	BString fExecutableFilePath;
 
@@ -65,8 +64,9 @@ protected:
 	virtual bool CheckCache(void);
 	virtual bool CheckExecutable(void);
 
-	virtual bool RunGameViaRoster(void);
-	virtual bool RunGameViaExecVe(void);
+	virtual bool RunGame(void);
+	virtual bool RunGameViaRosterEnv(void);
+	virtual bool RunGameViaExecVeEnv(void);
 
 	virtual void ShowErrorCacheAlert(void);
 	virtual void ShowExecutableCacheAlert(void);
@@ -85,8 +85,7 @@ public:
 	                        const char *dataPath,
 	                        const char *startPath,
 	                        bool showIcon = false,
-	                        bool readSettings = true,
-	                        bool useExecVe = false);
+	                        bool readSettings = true);
 	virtual ~BeLauncherBase(void);
 
 	BeSettings *GetSettings(void) const;

@@ -61,11 +61,10 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
                                const char *dataPath,
                                const char *startPath,
                                bool showIcon,
-                               bool readSettings,
-                               bool useExecVe)
+                               bool readSettings)
               : BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
                              sSettingsFileName(settingsFileName), sDataPath(dataPath), sStartPath(startPath),
-                             sShowIcon(showIcon), sUseExecVe(useExecVe)
+                             sShowIcon(showIcon)
 {
 	sWindowTitle = windowTitle;
 	fExecutableFilePath = BeUtils::GetPathToExecutable(packageName, executableFileName);
@@ -118,18 +117,7 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 	{
 		case MSG_BUTTON_RUN_CLICKED:
 		{
-			bool result = false;
-			if(sUseExecVe)
-			{
-				SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_EXECVE);
-				result = RunGameViaExecVe();
-			}
-			else
-			{
-				SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_ROSTER);
-				result = RunGameViaRoster();
-			}
-			if(result)
+			if(RunGame())
 			{
 				QuitRequestedSub();
 			}
@@ -236,6 +224,12 @@ BeLauncherBase::CheckExecutable(void)
 	}
 
 	return true;
+}
+
+bool
+BeLauncherBase::RunGame()
+{
+	return RunGameViaRosterEnv();
 }
 
 BeSettings *
@@ -371,8 +365,10 @@ BeLauncherBase::ShowAboutDialog(void)
 }
 
 bool
-BeLauncherBase::RunGameViaRoster(void)
+BeLauncherBase::RunGameViaRosterEnv(void)
 {
+	SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_ROSTER);
+
 	if(!CheckExecutable())
 	{
 		ShowExecutableCacheAlert();
@@ -407,8 +403,10 @@ BeLauncherBase::RunGameViaRoster(void)
 }
 
 bool
-BeLauncherBase::RunGameViaExecVe(void)
+BeLauncherBase::RunGameViaExecVeEnv(void)
 {
+	SetStatusString(B_COLOR_BLUE, L_RUNNING_VIA_EXECVE);
+
 	if(!CheckExecutable())
 	{
 		ShowExecutableCacheAlert();
