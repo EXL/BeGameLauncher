@@ -13,6 +13,19 @@ const rgb_color K_BLACK                = {   0,   0,   0, 255 };
 
 #define OPEN_BINARY_PATH               "/bin/open"
 
+#if __cplusplus < 201103L
+#include <cstdarg>
+
+void
+BeDebug(const char *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	vfprintf(stderr, format, args);
+	va_end(args);
+}
+#endif
+
 BeUtils::BeUtils()
 {
 

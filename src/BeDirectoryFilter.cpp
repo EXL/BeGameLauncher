@@ -1,4 +1,5 @@
 #include "BeDirectoryFilter.h"
+#include "BeUtils.h"
 
 BeDirectoryFilter::BeDirectoryFilter()
 {
@@ -9,8 +10,8 @@ bool
 BeDirectoryFilter::Filter(const entry_ref *ref, BNode *node,
                           stat_beos *stat, const char *mimeType)
 {
-	_UNUSED(node);
-	_UNUSED(mimeType);
+	BeUnused(node);
+	BeUnused(mimeType);
 
 	if(S_ISDIR(stat->st_mode))
 	{

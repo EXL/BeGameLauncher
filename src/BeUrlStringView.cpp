@@ -37,8 +37,8 @@ BeUrlStringView::BeUrlStringView(const char* name, const char* text, const char 
 void
 BeUrlStringView::MouseMoved(BPoint point, uint32 transit, const BMessage *dragMessage)
 {
-	_UNUSED(point);
-	_UNUSED(dragMessage);
+	BeUnused(point);
+	BeUnused(dragMessage);
 
 	BCursor linkCursor(B_CURSOR_ID_FOLLOW_LINK);
 	SetViewCursor(&linkCursor);
@@ -51,7 +51,7 @@ BeUrlStringView::MouseMoved(BPoint point, uint32 transit, const BMessage *dragMe
 void
 BeUrlStringView::MouseDown(BPoint point)
 {
-	_UNUSED(point);
+	BeUnused(point);
 
 	BString url;
 	if(!fUrl.IsEmpty())

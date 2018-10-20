@@ -5,14 +5,19 @@
 #include <FindDirectory.h>
 #include <String.h>
 
-#include <cstdio>
-
-#define BeDebug(...)                   fprintf(stderr, __VA_ARGS__)
-
 #define G_DEFAULT_FONT_SIZE            12.0f
 #define G_SMALL_FONT_SIZE              10.0f
 #define G_DEFAULT_GAP                  10.0f
 #define G_DEFAULT_VERSION              "1.0.0"
+
+#include <cstdio>
+
+#define BeUnused(x)                    (void)(x)
+#if __cplusplus >= 201103L
+#define BeDebug(...)                   fprintf(stderr, __VA_ARGS__)
+#else
+extern void BeDebug(const char *format, ...);
+#endif // __cplusplus == 201103L
 
 class BeUtils
 {

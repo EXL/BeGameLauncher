@@ -49,7 +49,7 @@ BeImageView::BeImageView(const char *name, BitmapIndex index)
 void
 BeImageView::Draw(BRect rect)
 {
-	_UNUSED(rect);
+	BeUnused(rect);
 
 	BRect bitmapRect = fBitmap->Bounds();
 	BRect drawRect = Bounds();
