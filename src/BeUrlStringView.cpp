@@ -15,9 +15,8 @@
 
 BeUrlStringView::BeUrlStringView(const char* name, const char* text, const char *url,
                                  float fontSize, uint32 resizingFlags)
-	           : BeUnderlineStringView(name, text, fontSize)
+               : BeUnderlineStringView(name, text, fontSize), fText(text)
 {
-	fText << text;
 	if(url)
 	{
 		fUrl << url;
@@ -81,7 +80,7 @@ BeUrlStringView::ShowOpenLinkWarning(const BString &url)
 	openLinkWarningAlert->Go();
 }
 
-BeUrlStringView::~BeUrlStringView()
+BeUrlStringView::~BeUrlStringView(void)
 {
 
 }

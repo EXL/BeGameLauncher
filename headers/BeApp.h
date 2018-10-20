@@ -11,9 +11,9 @@ class BeApp : public BApplication
 
 public:
 	explicit BeApp(const char *signature);
-	virtual ~BeApp();
+	virtual ~BeApp(void);
 
-	virtual thread_id Run();
+	virtual thread_id Run(void);
 
 	void SetMainWindow(BWindow *window);
 };

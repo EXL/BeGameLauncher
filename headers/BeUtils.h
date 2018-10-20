@@ -24,16 +24,16 @@ class BeUtils
 	static BString FindPathInner(directory_which dir);
 
 	// Forbidden.
-	explicit BeUtils();
-	~BeUtils();
+	explicit BeUtils(void);
+	~BeUtils(void);
 
 public:
-	static BString GetPathToHomeDir(void);
-	static BString GetPathToUserDataDir(void);
-	static BString GetPathToUserNonPackedDataDir(void);
-	static BString GetPathToSettingsFile(const char* settingsFileName);
-	static BString GetPathToPackage(const char *packageName);
-	static BString GetPathToExecutable(const char *packageName, const char *executableName);
+	static const BString GetPathToHomeDir(void);
+	static const BString GetPathToUserDataDir(void);
+	static const BString GetPathToUserNonPackedDataDir(void);
+	static const BString GetPathToSettingsFile(const char* settingsFileName);
+	static const BString GetPathToPackage(const char *packageName);
+	static const BString GetPathToExecutable(const char *packageName, const char *executableName);
 
 	static bool OpenLinkViaWebBrowser(const BString &url);
 };

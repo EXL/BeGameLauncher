@@ -20,9 +20,9 @@ public:
 	                              BRefFilter* refFilter = NULL,
 	                              bool modal = false,
 	                              bool hideWhenDone = true);
-	virtual ~BeDirectoryFilePanel();
+	virtual ~BeDirectoryFilePanel(void);
 
-	void Show();
+	void Show(void);
 };
 
 #endif // BEDIRECTORYFILEPANEL_H

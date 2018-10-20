@@ -1,13 +1,13 @@
 #include "BeApp.h"
 
 BeApp::BeApp(const char *signature)
-	 : BApplication(signature)
+     : BApplication(signature)
 {
 
 }
 
 thread_id
-BeApp::Run()
+BeApp::Run(void)
 {
 	if(gMainWindow)
 	{
@@ -22,7 +22,7 @@ BeApp::SetMainWindow(BWindow *window)
 	gMainWindow = window;
 }
 
-BeApp::~BeApp()
+BeApp::~BeApp(void)
 {
 
 }

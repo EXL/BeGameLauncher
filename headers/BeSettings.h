@@ -10,7 +10,7 @@ class BeSettings : public BMessage
 
 public:
 	explicit BeSettings(const char *fileName);
-	virtual ~BeSettings();
+	virtual ~BeSettings(void);
 
 	bool DumpSettingsToFile(void);
 	bool ReadSettingsFromFile(void);

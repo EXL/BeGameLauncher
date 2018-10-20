@@ -19,7 +19,7 @@ class BeLauncherView : public BGroupView
 
 public:
 	explicit BeLauncherView(bool showIcon = false);
-	virtual ~BeLauncherView();
+	virtual ~BeLauncherView(void);
 
 	BTextControl *GetTextControl(void) const;
 	BButton *GetBrowseButton(void) const;

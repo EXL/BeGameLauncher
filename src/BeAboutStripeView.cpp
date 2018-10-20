@@ -13,7 +13,7 @@
 #define O_ABOUT_STRIPE_VIEW            "aboutStripeView"
 
 BeAboutStripeView::BeAboutStripeView(const BBitmap *icon)
-	             : BView(O_ABOUT_STRIPE_VIEW, B_WILL_DRAW), fIcon(icon)
+                 : BView(O_ABOUT_STRIPE_VIEW, B_WILL_DRAW), fIcon(icon)
 {
 	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 
@@ -72,7 +72,7 @@ BeAboutStripeView::GetStripeWidth(void)
 	return G_STRIPE_WIDTH;
 }
 
-BeAboutStripeView::~BeAboutStripeView()
+BeAboutStripeView::~BeAboutStripeView(void)
 {
 	delete fIcon;
 	fIcon = NULL;

@@ -21,11 +21,11 @@ class BeAboutView : public BGroupView
 	BeAboutStripeView *fAboutStripeView;
 
 protected:
-	virtual void AllAttached();
+	virtual void AllAttached(void);
 
 public:
 	explicit BeAboutView(const char *name, const char *version);
-	virtual ~BeAboutView();
+	virtual ~BeAboutView(void);
 
 	BBox *GetAdditionalBox(void) const;
 	BButton *GetAboutButton(void) const;

@@ -8,7 +8,7 @@ class BeMultiStringView : public BTextView
 {
 public:
 	explicit BeMultiStringView(const char* name, const rgb_color *color);
-	virtual ~BeMultiStringView();
+	virtual ~BeMultiStringView(void);
 
 	static float GetMinWidth(void);
 	static float GetMinHeight(void);

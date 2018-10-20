@@ -12,11 +12,11 @@ protected:
 
 	virtual void MessageReceived(BMessage *msg);
 
-	virtual bool QuitRequested();
+	virtual bool QuitRequested(void);
 
 public:
 	explicit BeMainWindow(const BRect &frame, const char *title);
-	virtual ~BeMainWindow();
+	virtual ~BeMainWindow(void);
 };
 
 #endif // BEMAINWINDOW_H

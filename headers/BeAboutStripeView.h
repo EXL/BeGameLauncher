@@ -14,7 +14,7 @@ protected:
 
 public:
 	explicit BeAboutStripeView(const BBitmap *icon);
-	virtual ~BeAboutStripeView();
+	virtual ~BeAboutStripeView(void);
 
 	static float GetIconX(void);
 	static float GetIconY(void);

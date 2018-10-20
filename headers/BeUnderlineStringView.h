@@ -16,7 +16,7 @@ protected:
 	virtual void Draw(BRect rect);
 public:
 	explicit BeUnderlineStringView(const char* name, const char* text, float fontSize = G_DEFAULT_FONT_SIZE);
-	virtual ~BeUnderlineStringView();
+	virtual ~BeUnderlineStringView(void);
 
 	static float GetOffsetStipeGapBig(void);
 	static float GetOffsetStipeGapSmall(void);

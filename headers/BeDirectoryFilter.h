@@ -11,8 +11,8 @@
 class BeDirectoryFilter : public BRefFilter
 {
 public:
-	explicit BeDirectoryFilter();
-	virtual ~BeDirectoryFilter();
+	explicit BeDirectoryFilter(void);
+	virtual ~BeDirectoryFilter(void);
 
 	virtual bool Filter(const entry_ref *ref, BNode *node,
 	                    stat_beos *stat, const char *mimeType);

@@ -28,7 +28,7 @@ protected:
 
 public:
 	explicit BeAboutWindow(const BRect &frame, const char *title, const char *version = G_DEFAULT_VERSION);
-	virtual ~BeAboutWindow();
+	virtual ~BeAboutWindow(void);
 
 	BeAboutView *GetMainView(void) const;
 	BeMultiStringView *GetInformationView(void) const;

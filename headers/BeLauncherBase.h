@@ -87,7 +87,7 @@ public:
 	                        bool showIcon = false,
 	                        bool readSettings = true,
 	                        bool useExecVe = false);
-	virtual ~BeLauncherBase();
+	virtual ~BeLauncherBase(void);
 
 	BeSettings *GetSettings(void) const;
 	BTextControl *GetTextControl(void) const;

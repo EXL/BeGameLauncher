@@ -12,7 +12,7 @@
 #define L_ABOUT_VERSION_STRING         B_TRANSLATE("Version: ")
 
 BeAboutWindow::BeAboutWindow(const BRect &frame, const char *title, const char *version)
-	         : BeMainWindow(frame, title)
+             : BeMainWindow(frame, title)
 {
 	fTitle = title;
 	fVersion << L_ABOUT_VERSION_STRING;
@@ -78,7 +78,7 @@ BeAboutWindow::QuitRequested()
 	return true;
 }
 
-BeAboutWindow::~BeAboutWindow()
+BeAboutWindow::~BeAboutWindow(void)
 {
 	fAboutView->RemoveSelf();
 	delete fAboutView;

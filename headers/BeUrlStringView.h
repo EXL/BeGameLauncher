@@ -12,8 +12,8 @@
 
 class BeUrlStringView : public BeUnderlineStringView
 {
+	const BString fText;
 	BString fUrl;
-	BString fText;
 
 	void ShowOpenLinkWarning(const BString &url);
 
@@ -24,7 +24,7 @@ protected:
 public:
 	explicit BeUrlStringView(const char* name, const char* text, const char *url = NULL,
 	                         float fontSize = G_DEFAULT_FONT_SIZE, uint32 resizingFlags = B_FOLLOW_LEFT);
-	virtual ~BeUrlStringView();
+	virtual ~BeUrlStringView(void);
 };
 
 #endif // BEURLSTRINGVIEW_H

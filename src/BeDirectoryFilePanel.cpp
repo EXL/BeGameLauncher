@@ -16,7 +16,7 @@ BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
                                            BRefFilter* refFilter,
                                            bool modal,
                                            bool hideWhenDone)
-	                : BFilePanel(mode, target, directory, nodeFlavors,
+                    : BFilePanel(mode, target, directory, nodeFlavors,
                                  allowMultipleSelection, message, refFilter,
                                  modal, hideWhenDone)
 {
@@ -24,14 +24,14 @@ BeDirectoryFilePanel::BeDirectoryFilePanel(file_panel_mode mode,
 }
 
 void
-BeDirectoryFilePanel::Show()
+BeDirectoryFilePanel::Show(void)
 {
 	// Just rename button from "Open" to "Select".
 	SetButtonLabel(B_DEFAULT_BUTTON, L_BTN_SELECT);
 	BFilePanel::Show();
 }
 
-BeDirectoryFilePanel::~BeDirectoryFilePanel()
+BeDirectoryFilePanel::~BeDirectoryFilePanel(void)
 {
 
 }

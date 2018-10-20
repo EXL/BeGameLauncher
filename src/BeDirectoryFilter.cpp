@@ -1,7 +1,7 @@
 #include "BeDirectoryFilter.h"
 #include "BeUtils.h"
 
-BeDirectoryFilter::BeDirectoryFilter()
+BeDirectoryFilter::BeDirectoryFilter(void)
 {
 
 }
@@ -27,7 +27,7 @@ BeDirectoryFilter::Filter(const entry_ref *ref, BNode *node,
 	return false;
 }
 
-BeDirectoryFilter::~BeDirectoryFilter()
+BeDirectoryFilter::~BeDirectoryFilter(void)
 {
 
 }

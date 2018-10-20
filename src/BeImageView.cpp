@@ -12,7 +12,7 @@
 #define G_IMAGE_GENERAL_WIDTH          64.0f
 
 BeImageView::BeImageView(const char *name, BitmapIndex index)
-	       : BView(name, B_WILL_DRAW), fIndex(index)
+           : BView(name, B_WILL_DRAW), fIndex(index)
 {
 	SetFlags(Flags() | B_FULL_UPDATE_ON_RESIZE);
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
@@ -20,15 +20,14 @@ BeImageView::BeImageView(const char *name, BitmapIndex index)
 	float width;
 	float height;
 	fBitmap = BTranslationUtils::GetBitmap(B_PNG_FORMAT, fIndex);
-	if(fBitmap && fBitmap->IsValid())
+	fSuccessful = (fBitmap && fBitmap->IsValid());
+	if(fSuccessful)
 	{
-		fSuccessful = true;
 		width = fBitmap->Bounds().Width();
 		height = fBitmap->Bounds().Height();
 	}
 	else
 	{
-		fSuccessful = false;
 		SetViewColor(K_RED);
 		width = G_IMAGE_GENERAL_WIDTH;
 		height = G_IMAGE_GENERAL_WIDTH;
@@ -51,7 +50,7 @@ BeImageView::Draw(BRect rect)
 {
 	BeUnused(rect);
 
-	BRect bitmapRect = fBitmap->Bounds();
+	const BRect bitmapRect = fBitmap->Bounds();
 	BRect drawRect = Bounds();
 	drawRect = BRect(drawRect.left,
 	                 drawRect.top,
@@ -74,10 +73,10 @@ BeImageView::Draw(BRect rect)
 	}
 }
 
-BBitmap *
+const BBitmap *
 BeImageView::GetIconBitmapByIndex(BitmapIndex index)
 {
-	BBitmap *bitmap = BTranslationUtils::GetBitmap(B_PNG_FORMAT, index);
+	const BBitmap *bitmap = BTranslationUtils::GetBitmap(B_PNG_FORMAT, index);
 	if(bitmap && bitmap->IsValid())
 	{
 		return bitmap;
@@ -97,7 +96,7 @@ BeImageView::GetGeneralWidth(void)
 	return G_IMAGE_GENERAL_WIDTH;
 }
 
-BeImageView::~BeImageView()
+BeImageView::~BeImageView(void)
 {
 	delete fBitmap;
 	fBitmap = NULL;

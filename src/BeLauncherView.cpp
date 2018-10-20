@@ -154,7 +154,7 @@ BeLauncherView::GetReadyString(void)
 	return L_STATUS_READY;
 }
 
-BeLauncherView::~BeLauncherView()
+BeLauncherView::~BeLauncherView(void)
 {
 
 }

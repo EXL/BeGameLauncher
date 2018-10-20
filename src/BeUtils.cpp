@@ -26,7 +26,7 @@ BeDebug(const char *format, ...)
 }
 #endif
 
-BeUtils::BeUtils()
+BeUtils::BeUtils(void)
 {
 
 }
@@ -42,37 +42,37 @@ BeUtils::FindPathInner(directory_which dir)
 	return BString(path, PATH_MAX);
 }
 
-BString
+const BString
 BeUtils::GetPathToHomeDir(void)
 {
 	return FindPathInner(B_USER_DIRECTORY);
 }
 
-BString
+const BString
 BeUtils::GetPathToUserDataDir(void)
 {
 	return FindPathInner(B_USER_DATA_DIRECTORY);
 }
 
-BString
+const BString
 BeUtils::GetPathToUserNonPackedDataDir(void)
 {
 	return FindPathInner(B_USER_NONPACKAGED_DATA_DIRECTORY);
 }
 
-BString
+const BString
 BeUtils::GetPathToSettingsFile(const char *settingsFileName)
 {
 	return FindPathInner(B_USER_SETTINGS_DIRECTORY) << BString("/") << BString(settingsFileName);
 }
 
-BString
+const BString
 BeUtils::GetPathToPackage(const char *packageName)
 {
 	return FindPathInner(B_SYSTEM_APPS_DIRECTORY) << BString("/") <<  BString(packageName);
 }
 
-BString
+const BString
 BeUtils::GetPathToExecutable(const char *packageName, const char *executableName)
 {
 	return FindPathInner(B_SYSTEM_APPS_DIRECTORY) << BString("/") << BString(packageName)
@@ -101,7 +101,7 @@ BeUtils::OpenLinkViaWebBrowser(const BString &url)
 	}
 }
 
-BeUtils::~BeUtils()
+BeUtils::~BeUtils(void)
 {
 
 }

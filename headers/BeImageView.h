@@ -13,19 +13,20 @@ enum BitmapIndex
 
 class BeImageView : public BView
 {
-	bool fSuccessful;
-	BitmapIndex fIndex;
+	const BitmapIndex fIndex;
 
-	BBitmap *fBitmap;
+	const BBitmap *fBitmap;
+
+	bool fSuccessful;
 
 protected:
 	virtual void Draw(BRect rect);
 
 public:
 	explicit BeImageView(const char *name, BitmapIndex index);
-	virtual ~BeImageView();
+	virtual ~BeImageView(void);
 
-	static BBitmap* GetIconBitmapByIndex(BitmapIndex index);
+	static const BBitmap* GetIconBitmapByIndex(BitmapIndex index);
 
 	static float GetImageOnePixelSize(void);
 	static float GetGeneralWidth(void);

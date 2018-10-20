@@ -66,7 +66,7 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
                                bool showIcon,
                                bool readSettings,
                                bool useExecVe)
-	          : BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
+              : BeMainWindow(BRect(G_START_POINT_X, G_START_POINT_Y, G_WINDOW_WIDTH, G_WINDOW_HEIGHT), windowTitle),
                              sSettingsFileName(settingsFileName), sDataPath(dataPath), sStartPath(startPath),
                              sShowIcon(showIcon), sUseExecVe(useExecVe)
 {
@@ -280,7 +280,7 @@ BeLauncherBase::ShowErrorCacheAlert(void)
 	BAlert *cacheErrorAlert = new BAlert(L_ALERT_CACHE_ERROR_H, L_ALERT_CACHE_ERROR, L_BTN_ALERT_OK);
 	cacheErrorAlert->SetType(B_STOP_ALERT);
 	cacheErrorAlert->SetFlags(cacheErrorAlert->Flags() | B_CLOSE_ON_ESCAPE);
-	int32 button_index = cacheErrorAlert->Go();
+	const int32 button_index = cacheErrorAlert->Go();
 	if(button_index == 0)
 	{
 		SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
@@ -295,7 +295,7 @@ BeLauncherBase::ShowWarnWriteSettingsAlert(void)
 	BAlert *writeSettingsWarnAlert = new BAlert(L_ALERT_WRITE_S_WARNING_H, settingsWarning, L_BTN_ALERT_OK);
 	writeSettingsWarnAlert->SetType(B_WARNING_ALERT);
 	writeSettingsWarnAlert->SetFlags(writeSettingsWarnAlert->Flags() | B_CLOSE_ON_ESCAPE);
-	int32 button_index = writeSettingsWarnAlert->Go();
+	const int32 button_index = writeSettingsWarnAlert->Go();
 	if(button_index == 0)
 	{
 		SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
@@ -310,7 +310,7 @@ BeLauncherBase::ShowExecutableCacheAlert(void)
 	BAlert *executableErrorAlert = new BAlert(L_ALERT_EXECUTABLE_ERROR_H, executableError, L_BTN_ALERT_OK);
 	executableErrorAlert->SetType(B_STOP_ALERT);
 	executableErrorAlert->SetFlags(executableErrorAlert->Flags() | B_CLOSE_ON_ESCAPE);
-	int32 button_index = executableErrorAlert->Go();
+	const int32 button_index = executableErrorAlert->Go();
 	if(button_index == 0)
 	{
 		SetStatusString(B_COLOR_BLACK, BeLauncherView::GetReadyString());
@@ -458,7 +458,7 @@ BeLauncherBase::QuitRequestedSub(void)
 	return true;
 }
 
-BeLauncherBase::~BeLauncherBase()
+BeLauncherBase::~BeLauncherBase(void)
 {
 	BeDebug("[Info]: Freeing... ");
 	delete fDirectoryFilter;

@@ -91,7 +91,7 @@ class BasedGameLauncher : public BeLauncherBase
 	BCheckBox *fCheckBoxOption;
 
 protected:
-	void
+	virtual void
 	MessageReceived(BMessage *msg)
 	{
 		switch (msg->what)
@@ -110,13 +110,13 @@ protected:
 		}
 	}
 
-	bool
+	virtual bool
 	CheckCache(void)
 	{
 		return true;
 	}
 
-	bool
+	virtual bool
 	ReadSettings(void)
 	{
 		if(!BeLauncherBase::ReadSettings())
@@ -135,7 +135,7 @@ protected:
 		return true;
 	}
 
-	void
+	virtual void
 	SaveSettings(bool def)
 	{
 		BString value;
@@ -145,7 +145,7 @@ protected:
 		BeLauncherBase::SaveSettings(def);
 	}
 
-	void
+	virtual void
 	ShowAboutDialog(void)
 	{
 		GameAboutWindow *gameAboutWindow = new GameAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
