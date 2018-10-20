@@ -445,17 +445,15 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron)
 	else
 	{
 		std::vector<const char *> argv;
-		if (useEnviron)
-		{
-			argv.push_back(executable);
-		}
-		else
+		argv.push_back(executable);
+		if (!useEnviron)
 		{
 			argv.push_back(sDataPathArg);
 			argv.push_back(fDataTextControl->Text());
 		}
 		argv.push_back(NULL);
-		be_roster->Launch(&ref, 1, const_cast<const char * const *>(argv.data()));
+		be_roster->Launch(&ref, static_cast<int>(argv.size() - 1),
+		                  const_cast<const char * const *>(argv.data()));
 	}
 
 	return true;
