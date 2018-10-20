@@ -12,7 +12,7 @@
 
 #define O_ABOUT_STRIPE_VIEW            "aboutStripeView"
 
-BeAboutStripeView::BeAboutStripeView(BBitmap *icon)
+BeAboutStripeView::BeAboutStripeView(const BBitmap *icon)
 	             : BView(O_ABOUT_STRIPE_VIEW, B_WILL_DRAW), fIcon(icon)
 {
 	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);

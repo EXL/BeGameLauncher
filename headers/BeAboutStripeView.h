@@ -7,19 +7,19 @@
 
 class BeAboutStripeView : public BView
 {
-	BBitmap *fIcon;
+	const BBitmap *fIcon;
+
+protected:
+	virtual void Draw(BRect rect);
 
 public:
-	explicit BeAboutStripeView(BBitmap *icon);
+	explicit BeAboutStripeView(const BBitmap *icon);
 	virtual ~BeAboutStripeView();
 
 	static float GetIconX(void);
 	static float GetIconY(void);
 	static float GetIconOffset(void);
 	static float GetStripeWidth(void);
-
-protected:
-	virtual void Draw(BRect rect);
 };
 
 #endif // BEABOUTSTRIPEVIEW_H

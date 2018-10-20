@@ -13,7 +13,7 @@ BeApp::Run()
 	{
 		gMainWindow->Show();
 	}
-	BApplication::Run();
+	return BApplication::Run();
 }
 
 void
