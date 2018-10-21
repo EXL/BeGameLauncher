@@ -30,8 +30,8 @@
 
 #define G_START_POINT_X                100.0f
 #define G_START_POINT_Y                100.0f
-#define G_WINDOW_WIDTH                 600.0f + G_START_POINT_X
-#define G_WINDOW_HEIGHT                400.0f + G_START_POINT_Y
+#define G_WINDOW_WIDTH                 (600.0f + G_START_POINT_X)
+#define G_WINDOW_HEIGHT                (400.0f + G_START_POINT_Y)
 #define G_OFFSET_FOR_SIZE              200.0f
 
 #undef  B_TRANSLATION_CONTEXT

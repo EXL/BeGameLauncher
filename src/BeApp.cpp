@@ -1,7 +1,7 @@
 #include "BeApp.h"
 
 BeApp::BeApp(const char *signature)
-     : BApplication(signature)
+     : BApplication(signature), gMainWindow(NULL)
 {
 
 }

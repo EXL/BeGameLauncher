@@ -87,18 +87,17 @@ BeUtils::OpenLinkViaWebBrowser(const BString &url)
 	{
 		return false;
 	}
-	else
+
+	BString normalizedUrl;
+	if(url.FindFirst("://") == B_ERROR)
 	{
-		BString normalizedUrl;
-		if(url.FindFirst("://") == B_ERROR)
-		{
-			normalizedUrl << "http://";
-		}
-		normalizedUrl << url;
-		const char *argv[] = { OPEN_BINARY_PATH, normalizedUrl.String(), NULL };
-		be_roster->Launch(&ref, 2, argv); // 2 = argc
-		return true;
+		normalizedUrl << "http://";
 	}
+	normalizedUrl << url;
+	const char *argv[] = { OPEN_BINARY_PATH, normalizedUrl.String(), NULL };
+	be_roster->Launch(&ref, 2, argv); // 2 = argc
+
+	return true;
 }
 
 BeUtils::~BeUtils(void)

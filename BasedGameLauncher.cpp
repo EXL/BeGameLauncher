@@ -52,7 +52,6 @@
 #define L_CHECKBOX_SAVED_OPTION        B_TRANSLATE("Saved option: ")
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 
-#define O_ABOUT_STRING                 "aboutString"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
 #define O_DATA_LINK                    "dataLink"
@@ -99,7 +98,10 @@ protected:
 			case MSG_CHECKBOX_STATE_CHANGED:
 			{
 				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_OPTION) << ": " << checkBox->Value());
+				if(checkBox)
+				{
+					SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_OPTION) << ": " << checkBox->Value());
+				}
 				break;
 			}
 			default:

@@ -66,10 +66,8 @@ BeSettings::GetString(const char *name) const
 	{
 		return "";
 	}
-	else
-	{
-		return buffer.String();
-	}
+
+	return buffer.String();
 }
 
 BeSettings::~BeSettings(void)

@@ -7,8 +7,6 @@ if(NOT HAIKU)
 endif()
 
 set(CMAKE_CXX_STANDARD 98)
-#set(CMAKE_VERBOSE_MAKEFILE ON)
-#add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 include_directories(headers)
 
