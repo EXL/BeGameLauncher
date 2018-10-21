@@ -21,7 +21,7 @@
 #define B_TRANSLATION_CONTEXT          "BeGameLauncher"
 
 #define L_ABOUT_BUTTON                 B_TRANSLATE("OK")
-#define L_ABOUT_LAUNCHER_STRING        B_TRANSLATE("BeGameLauncer (c) EXL, 2018           ")
+#define L_ABOUT_LAUNCHER_STRING        B_TRANSLATE("BeGameLauncher (c) EXL, 2018           ")
 
 #define O_ABOUT_VIEW                   "aboutView"
 #define O_ABOUT_NAME                   "aboutName"

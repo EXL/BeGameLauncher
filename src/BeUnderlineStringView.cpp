@@ -1,7 +1,7 @@
 #include "BeUnderlineStringView.h"
 
-#define G_OFFSET_STRIPE_GAP_SMALL      -2.0f
-#define G_OFFSET_STRIPE_GAP_BIG        -3.0f
+#define G_OFFSET_STRIPE_GAP_SMALL      (-2.0f)
+#define G_OFFSET_STRIPE_GAP_BIG        (-3.0f)
 
 BeUnderlineStringView::BeUnderlineStringView(const char* name, const char* text, float fontSize)
                      : BStringView(BRect(), name, text), fFontSize(fontSize)
@@ -26,13 +26,13 @@ BeUnderlineStringView::Draw(BRect rect)
 }
 
 float
-BeUnderlineStringView::GetOffsetStipeGapBig(void)
+BeUnderlineStringView::GetOffsetStripeGapBig(void)
 {
 	return G_OFFSET_STRIPE_GAP_BIG;
 }
 
 float
-BeUnderlineStringView::GetOffsetStipeGapSmall(void)
+BeUnderlineStringView::GetOffsetStripeGapSmall(void)
 {
 	return G_OFFSET_STRIPE_GAP_SMALL;
 }
