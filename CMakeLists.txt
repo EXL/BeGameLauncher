@@ -80,8 +80,21 @@ add_custom_command(TARGET Resources
 	COMMENT "${P} Collecting translation strings in the source files to the '${BASED_LAUNCHER_NAME}.pre' file."
 	VERBATIM)
 
-foreach(LOCALE ${LOCALES})
-	add_custom_target(Language-${LOCALE} ALL DEPENDS Resources)
+# English locale must be linked first and the all rest last. Therefore, we build a chain of dependencies
+# where locales are linked to the executable file in the order which specified in the ${LOCALES} list. This
+# will help get rid of racing conditions in a parallel build and avoid some strange bugs.
+list(LENGTH LOCALES LOCALES_SIZE)
+math(EXPR LOCALES_SIZE_MAX "${LOCALES_SIZE} - 1")
+foreach(VAL RANGE ${LOCALES_SIZE_MAX})
+	list(GET LOCALES ${VAL} LOCALE)
+	math(EXPR VAL_PREVIOUS "${VAL} - 1")
+	list(GET LOCALES ${VAL_PREVIOUS} LOCALE_PREVIOUS)
+	if(${VAL} EQUAL 0)
+		set(TARGET_DEPENDS Resources)
+	else()
+		set(TARGET_DEPENDS Language-${LOCALE_PREVIOUS})
+	endif()
+	add_custom_target(Language-${LOCALE} ALL DEPENDS ${TARGET_DEPENDS})
 	add_custom_command(TARGET Language-${LOCALE}
 		COMMAND test -f ${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/${LOCALE}.catkeys ||
 			collectcatkeys -l ${LOCALE} -s ${SIGNATURE}
