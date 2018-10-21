@@ -52,7 +52,9 @@ add_executable(${BASED_LAUNCHER_NAME} ${BASED_LAUNCHER_NAME}.cpp)
 target_link_libraries(${BASED_LAUNCHER_NAME} ${PROJECT_NAME} ${LIBRARIES})
 
 set(P "------")
-add_custom_target(Resources ALL DEPENDS ${BASED_LAUNCHER_NAME})
+add_custom_target(Resources ALL
+	DEPENDS ${BASED_LAUNCHER_NAME}
+	SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/res/${RES_DIR}/${BASED_LAUNCHER_NAME}.rdef)
 add_custom_command(TARGET Resources
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_SOURCE_DIR}/res/${RES_DIR}
 	VERBATIM)
@@ -94,7 +96,9 @@ foreach(VAL RANGE ${LOCALES_SIZE_MAX})
 	else()
 		set(TARGET_DEPENDS Language-${LOCALE_PREVIOUS})
 	endif()
-	add_custom_target(Language-${LOCALE} ALL DEPENDS ${TARGET_DEPENDS})
+	add_custom_target(Language-${LOCALE} ALL
+		DEPENDS ${TARGET_DEPENDS}
+		SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/${LOCALE}.catkeys)
 	add_custom_command(TARGET Language-${LOCALE}
 		COMMAND test -f ${CMAKE_CURRENT_SOURCE_DIR}/locales/${RES_DIR}/${LOCALE}.catkeys ||
 			collectcatkeys -l ${LOCALE} -s ${SIGNATURE}
