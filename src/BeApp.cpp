@@ -9,7 +9,7 @@ BeApp::BeApp(const char *signature)
 thread_id
 BeApp::Run(void)
 {
-	if(gMainWindow)
+	if(gMainWindow != NULL)
 	{
 		gMainWindow->Show();
 	}

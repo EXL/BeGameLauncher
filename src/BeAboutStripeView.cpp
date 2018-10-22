@@ -18,7 +18,7 @@ BeAboutStripeView::BeAboutStripeView(const BBitmap *icon)
 	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 
 	float width = 0.0f;
-	if(fIcon)
+	if(fIcon != NULL)
 	{
 		width += fIcon->Bounds().Width() + G_ICON_OFFSET;
 	}
@@ -30,7 +30,7 @@ BeAboutStripeView::BeAboutStripeView(const BBitmap *icon)
 void
 BeAboutStripeView::Draw(BRect rect)
 {
-	if(!fIcon)
+	if(fIcon == NULL)
 	{
 		return;
 	}

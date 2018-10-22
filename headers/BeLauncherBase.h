@@ -66,8 +66,8 @@ protected:
 	virtual bool CheckAll(void);
 
 	virtual bool RunGame(void);
-	virtual bool RunGameViaRoster(bool useEnviron = false);
-	virtual bool RunGameViaExecVe(bool useEnviron = false);
+	virtual bool RunGameViaRoster(bool useEnviron);
+	virtual bool RunGameViaExecVe(bool useEnviron);
 
 	virtual void ShowErrorCacheAlert(void);
 	virtual void ShowExecutableCacheAlert(void);

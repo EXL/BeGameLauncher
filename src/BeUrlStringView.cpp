@@ -17,7 +17,7 @@ BeUrlStringView::BeUrlStringView(const char* name, const char* text, const char 
                                  float fontSize, uint32 resizingFlags)
                : BeUnderlineStringView(name, text, fontSize), fText(text)
 {
-	if(url)
+	if(url != NULL)
 	{
 		fUrl << url;
 	}

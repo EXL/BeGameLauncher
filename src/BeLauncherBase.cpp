@@ -72,6 +72,12 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
 	fExecutableFilePath = BeUtils::GetPathToExecutable(packageName, executableFileName);
 
 	fSettings = new BeSettings(sSettingsFileName);
+	fDirectoryFilter = NULL;
+	fDirectoryFilePanel = NULL;
+	fLauncherView = NULL;
+	fStatusString = NULL;
+	fDataTextControl = NULL;
+	fAdditionalBox = NULL;
 
 	CreateForm();
 
@@ -217,7 +223,7 @@ BeLauncherBase::CheckExecutable(void)
 		return false;
 	}
 
-	if(!(permissions & S_IXUSR))
+	if((permissions & S_IXUSR) == 0)
 	{
 		BString error(L_ERROR_ENTRY_PERMISSIONS_EXEC);
 		error.ReplaceAll("%exe%", executable);
@@ -249,7 +255,7 @@ BeLauncherBase::CheckAll()
 bool
 BeLauncherBase::RunGame(void)
 {
-	return RunGameViaRoster();
+	return RunGameViaRoster(false);
 }
 
 BeSettings *
@@ -442,19 +448,17 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron)
 		SetStatusString(B_COLOR_RED, error);
 		return false;
 	}
-	else
+
+	std::vector<const char *> argv;
+	argv.push_back(executable);
+	if (!useEnviron)
 	{
-		std::vector<const char *> argv;
-		argv.push_back(executable);
-		if (!useEnviron)
-		{
-			argv.push_back(sDataPathArg);
-			argv.push_back(fDataTextControl->Text());
-		}
-		argv.push_back(NULL);
-		be_roster->Launch(&ref, static_cast<int>(argv.size() - 1),
-		                  const_cast<const char * const *>(argv.data()));
+		argv.push_back(sDataPathArg);
+		argv.push_back(fDataTextControl->Text());
 	}
+	argv.push_back(NULL);
+	be_roster->Launch(&ref, static_cast<int>(argv.size() - 1),
+	                  const_cast<const char * const *>(argv.data()));
 
 	return true;
 }
@@ -476,7 +480,7 @@ BeLauncherBase::RunGameViaExecVe(bool useEnviron)
 		setenv(sDataPathArg, fDataTextControl->Text(), 1);
 	}
 
-	if (!fork())
+	if (fork() == 0)
 	{
 		const char *executable = fExecutableFilePath.String();
 

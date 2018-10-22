@@ -98,7 +98,7 @@ protected:
 			case MSG_CHECKBOX_STATE_CHANGED:
 			{
 				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				if(checkBox)
+				if(checkBox != NULL)
 				{
 					SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_OPTION) << ": " << checkBox->Value());
 				}

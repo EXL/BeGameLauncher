@@ -18,6 +18,10 @@ BeAboutWindow::BeAboutWindow(const BRect &frame, const char *title, const char *
 	fVersion << L_ABOUT_VERSION_STRING;
 	fVersion << version;
 
+	fAboutView = NULL;
+	fInformationView = NULL;
+	fAdditionalBox = NULL;
+
 	SetFlags(Flags() | B_NOT_ZOOMABLE | B_CLOSE_ON_ESCAPE);
 	SetType(B_MODAL_WINDOW);
 
@@ -65,7 +69,7 @@ void
 BeAboutWindow::FrameResized(float newWidth, float newHeight)
 {
 	// Fix some draw glitches via resizing about window.
-	if(fAboutView)
+	if(fAboutView != NULL)
 	{
 		fAboutView->GetAboutStripeView()->Invalidate();
 	}

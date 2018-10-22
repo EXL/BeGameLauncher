@@ -20,7 +20,7 @@ BeImageView::BeImageView(const char *name, BitmapIndex index)
 	float width;
 	float height;
 	fBitmap = BTranslationUtils::GetBitmap(B_PNG_FORMAT, fIndex);
-	fSuccessful = (fBitmap && fBitmap->IsValid());
+	fSuccessful = ((fBitmap != NULL) && (fBitmap->IsValid()));
 	if(fSuccessful)
 	{
 		width = fBitmap->Bounds().Width();
@@ -77,7 +77,7 @@ const BBitmap *
 BeImageView::GetIconBitmapByIndex(BitmapIndex index)
 {
 	const BBitmap *bitmap = BTranslationUtils::GetBitmap(B_PNG_FORMAT, index);
-	if(bitmap && bitmap->IsValid())
+	if((bitmap != NULL) && (bitmap->IsValid()))
 	{
 		return bitmap;
 	}
