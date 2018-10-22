@@ -258,6 +258,12 @@ BeLauncherBase::RunGame(void)
 	return RunGameViaRoster(false);
 }
 
+BeDirectoryFilePanel *
+BeLauncherBase::GetDirectoryFilePanel(void) const
+{
+	return fDirectoryFilePanel;
+}
+
 BeSettings *
 BeLauncherBase::GetSettings(void) const
 {

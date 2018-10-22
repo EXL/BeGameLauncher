@@ -88,6 +88,8 @@ public:
 	                        bool readSettings = true);
 	virtual ~BeLauncherBase(void);
 
+	BeDirectoryFilePanel *GetDirectoryFilePanel(void) const;
+
 	BeSettings *GetSettings(void) const;
 	BTextControl *GetTextControl(void) const;
 	BBox *GetAdditionalBox(void) const;
