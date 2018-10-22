@@ -14,8 +14,8 @@ BeDirectoryFilePanel::BeDirectoryFilePanel(BMessenger *target,
                                            BMessage *message,
                                            BRefFilter *refFilter,
                                            const char *startPath)
-                    : BFilePanel(B_OPEN_PANEL, target, NULL, B_DIRECTORY_NODE,
-                                 false, message, refFilter, true, true)
+                      : BFilePanel(B_OPEN_PANEL, target, NULL, B_DIRECTORY_NODE,
+                                   false, message, refFilter, true, true)
 {
 	entry_ref start_point;
 	BEntry entry(startPath);

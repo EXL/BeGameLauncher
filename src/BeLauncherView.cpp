@@ -33,7 +33,7 @@
 #define O_STATUS_STRING_VIEW           "statusStringView"
 
 BeLauncherView::BeLauncherView(bool showIcon)
-              : BGroupView(O_LAUNCHER_VIEW, B_VERTICAL)
+                : BGroupView(O_LAUNCHER_VIEW, B_VERTICAL)
 {
 	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 

@@ -8,11 +8,11 @@
 #define G_GENERAL_INSET                0.0f
 
 BeMultiStringView::BeMultiStringView(const char *name, const rgb_color *color)
-                 : BTextView(name, NULL, color, B_WILL_DRAW)
+                   : BTextView(name, NULL, color, B_WILL_DRAW)
 {
 	MakeEditable(false);
 	MakeSelectable(true);
-	//MakeResizable(true); ??
+	// MakeResizable(true); ??
 
 	SetWordWrap(true);
 	SetStylable(true);
