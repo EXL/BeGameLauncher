@@ -12,7 +12,7 @@ BeSettings::BeSettings(const char *fileName)
 }
 
 void
-BeSettings::SetString(const char *name, const char *string)
+BeSettings::SetSettingsString(const char *name, const char *string)
 {
 	BString buffer;
 	if(FindString(name, &buffer) != B_OK)
@@ -59,7 +59,7 @@ BeSettings::ReadSettingsFromFile(void)
 }
 
 const char *
-BeSettings::GetString(const char *name) const
+BeSettings::GetSettingsString(const char *name) const
 {
 	BString buffer;
 	if (FindString(name, &buffer) != B_OK)

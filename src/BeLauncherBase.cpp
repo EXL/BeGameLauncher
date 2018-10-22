@@ -389,7 +389,7 @@ BeLauncherBase::ReadSettings(void)
 		SaveSettings(true);
 	}
 
-	fDataTextControl->SetText(fSettings->GetString(sDataPathArg));
+	fDataTextControl->SetText(fSettings->GetSettingsString(sDataPathArg));
 	return isNotFirstBlood;
 }
 
@@ -397,7 +397,7 @@ void
 BeLauncherBase::SaveSettings(bool def)
 {
 	BeDebug("[Info]: Saving Settings... ");
-	fSettings->SetString(sDataPathArg, (def) ? sStartPath :
+	fSettings->SetSettingsString(sDataPathArg, (def) ? sStartPath :
 	                                        fDataTextControl->Text());
 
 	BString message(L_SAVING_SETTINGS);

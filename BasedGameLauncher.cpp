@@ -134,7 +134,7 @@ protected:
 		}
 		else
 		{
-			const char *str = BeLauncherBase::GetSettings()->GetString(S_CHECKBOX_OPTION);
+			const char *str = BeLauncherBase::GetSettings()->GetSettingsString(S_CHECKBOX_OPTION);
 			int ASCII_MAGIC = 48;
 			int value = static_cast<int>(str[0] - ASCII_MAGIC);
 			SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_SAVED_OPTION) << value);
@@ -148,7 +148,7 @@ protected:
 	{
 		BString value;
 		value << fCheckBoxOption->Value();
-		BeLauncherBase::GetSettings()->SetString(S_CHECKBOX_OPTION, value);
+		BeLauncherBase::GetSettings()->SetSettingsString(S_CHECKBOX_OPTION, value);
 
 		BeLauncherBase::SaveSettings(def);
 	}

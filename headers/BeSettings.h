@@ -15,8 +15,8 @@ public:
 	bool DumpSettingsToFile(void);
 	bool ReadSettingsFromFile(void);
 
-	const char *GetString(const char *name) const;
-	void SetString(const char *name, const char *string);
+	const char *GetSettingsString(const char *name) const;
+	void SetSettingsString(const char *name, const char *string);
 };
 
 #endif // BESETTINGS_H
