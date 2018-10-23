@@ -55,6 +55,15 @@
                                        "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat " \
                                        "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
                                        "id est laborum.\n\n")
+#define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required files.\n" \
+                                       "Structure, arch_postfix = 64 on the x86_64 and empty on x86:\n    " \
+                                       "libmenu.so\n    libengine.so\n    extras.pak\n    " \
+                                       "bshift/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
+                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    " \
+                                       "gearbox/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
+                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    " \
+                                       "valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
+                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    ...")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
 #define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
@@ -71,9 +80,8 @@
 #define L_ERROR_NO_VALVE_CATALOG       B_TRANSLATE("Game files directory does not contain the \"valve\" catalog.")
 #define L_ERROR_NO_GAMEINFO_FILE       B_TRANSLATE("Required data file %file% not found.")
 #define L_ERROR_NO_ENG_LIBRARY         B_TRANSLATE("Required engine library %library% not found.")
-#define L_CHECKBOX_OPTION              B_TRANSLATE("Override path to the Xash3D required libraries:")
-#define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to override path to the Xash3D required libraries.")
-#define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required libraries.")
+#define L_CHECKBOX_OPTION              B_TRANSLATE("Override path to the Xash3D required files:")
+#define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to override path to the Xash3D required files.")
 #define L_EXTRA_BUTTON_BROWSE          B_TRANSLATE("...")
 #define L_EXTRA_BUTTON_BROWSE_TOOLTIP  B_TRANSLATE("Click to open the file dialog.")
 #define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
