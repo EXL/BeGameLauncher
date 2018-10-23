@@ -14,7 +14,7 @@
 #include <Catalog.h>
 
 #define G_URL_EXLMOTO_BLOG_TITLE       "http://exlmoto.ru/haiku-packages"
-#define G_URL_EXLMOTO_BLOG_LINK        "http://exlmoto.ru/haiku-packages#7"
+#define G_URL_EXLMOTO_BLOG_LINK        "http://exlmoto.ru/haiku-packages#launcher"
 #define G_URL_GITHUB_TITLE_LINK        "http://github.com/EXL/BeGameLauncher"
 
 #undef  B_TRANSLATION_CONTEXT
