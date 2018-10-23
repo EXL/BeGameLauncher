@@ -129,7 +129,7 @@ protected:
 	{
 		if(!BeLauncherBase::ReadSettings())
 		{
-			BeDebug("[Info]: First run, set default values.");
+			BeDebug("[Info]: First run, set default values.\n");
 			fCheckBoxOption->SetValue(1);
 		}
 		else

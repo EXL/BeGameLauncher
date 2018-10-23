@@ -33,7 +33,6 @@ class BeLauncherBase : public BeMainWindow
 	BTextControl *fDataTextControl;
 	BBox *fAdditionalBox;
 
-	void DirectorySelected(void);
 	void SelectDirectory(void);
 
 protected:
@@ -52,6 +51,9 @@ protected:
 		B_COLOR_BLUE,
 		B_COLOR_BLACK
 	};
+
+	virtual void DirectorySelected(const BeDirectoryFilePanel *filePanel,
+	                               BTextControl *textControl);
 
 	virtual void MessageReceived(BMessage *msg);
 

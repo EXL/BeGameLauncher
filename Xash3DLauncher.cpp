@@ -2,12 +2,16 @@
 #include "BeLauncherBase.h"
 #include "BeAboutWindow.h"
 #include "BeUrlStringView.h"
+#include "BeDirectoryFilePanel.h"
+#include "BeDirectoryFilter.h"
 #include "BeUtils.h"
 
 #include <Rect.h>
 #include <String.h>
 #include <StringView.h>
 #include <CheckBox.h>
+#include <TextControl.h>
+#include <Message.h>
 #include <Font.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
@@ -29,6 +33,7 @@
 #define SETTINGS_FILE                  "Xash3DLauncher.set"
 #define EXECUTABLE_FILE                "Xash3D"
 #define DATA_PATH_OPT                  "XASH3D_BASEDIR"
+#define EXTRAS_DIR_NAME                "/extras"
 
 // Various Strings
 #define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
@@ -45,11 +50,15 @@
 #define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/")
 #define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy data files: ")
 
-// Additional option
+// Additional options
 #define S_CHECKBOX_OPTION              "GAME_OPTION"
-#define L_CHECKBOX_OPTION              B_TRANSLATE("Override path to the Xash3D required libraries")
+#define S_LIBRARIES_OPTION             "LIBRARIES_PATH"
+#define L_CHECKBOX_OPTION              B_TRANSLATE("Override path to the Xash3D required libraries:")
 #define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to override path to the Xash3D required libraries.")
-#define L_CHECKBOX_SAVED_OPTION        B_TRANSLATE("Saved option: ")
+#define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required libraries.")
+#define L_EXTRA_BUTTON_BROWSE          B_TRANSLATE("...")
+#define L_EXTRA_BUTTON_BROWSE_TOOLTIP  B_TRANSLATE("Click to open the file dialog.")
+#define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 
 #define O_ABOUT_LINK                   "aboutLink"
@@ -57,10 +66,10 @@
 #define O_DATA_LINK                    "dataLink"
 #define O_DATA_LINK_DESC               "dataLinkDesc"
 
-class GameAboutWindow : public BeAboutWindow
+class Xash3DAboutWindow : public BeAboutWindow
 {
 public:
-	explicit GameAboutWindow(const BRect &frame, const char *title, const char *version)
+	explicit Xash3DAboutWindow(const BRect &frame, const char *title, const char *version)
 	         : BeAboutWindow(frame, title, version)
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
@@ -80,14 +89,21 @@ public:
 	}
 };
 
-class BasedGameLauncher : public BeLauncherBase
+class Xash3DGameLauncher : public BeLauncherBase
 {
 	enum
 	{
-		MSG_CHECKBOX_STATE_CHANGED = 'chks'
+		MSG_CHECKBOX_STATE_CHANGED              = 'chks',
+		MSG_ADDITIONAL_BROWSE_BUTTON_CLICKED    = 'abtc',
+		MSG_ADDITIONAL_FILE_PANEL_FILE_SELECTED = 'afps'
 	};
 
 	BCheckBox *fCheckBoxOption;
+	BTextControl *fAdditionalTextControl;
+	BButton *fAdditionalBrowseButton;
+
+	BeDirectoryFilePanel *fAdditionalDirectoryFilePanel;
+	BeDirectoryFilter *fAdditionalDirectoryFilter;
 
 protected:
 	virtual void
@@ -97,11 +113,19 @@ protected:
 		{
 			case MSG_CHECKBOX_STATE_CHANGED:
 			{
-				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				if(checkBox != NULL)
-				{
-					SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_OPTION) << ": " << checkBox->Value());
-				}
+				bool value = static_cast<bool>(fCheckBoxOption->Value());
+				fAdditionalTextControl->SetEnabled(value);
+				fAdditionalBrowseButton->SetEnabled(value);
+				break;
+			}
+			case MSG_ADDITIONAL_BROWSE_BUTTON_CLICKED:
+			{
+				fAdditionalDirectoryFilePanel->Show();
+				break;
+			}
+			case MSG_ADDITIONAL_FILE_PANEL_FILE_SELECTED:
+			{
+				BeLauncherBase::DirectorySelected(fAdditionalDirectoryFilePanel, fAdditionalTextControl);
 				break;
 			}
 			default:
@@ -129,16 +153,25 @@ protected:
 	{
 		if(!BeLauncherBase::ReadSettings())
 		{
-			BeDebug("[Info]: First run, set default values.");
+			BeDebug("[Info]: First run, set default values.\n");
 			fCheckBoxOption->SetValue(0);
+			BString pathToLibs = BeUtils::GetPathToPackage(PACKAGE_DIR);
+			pathToLibs << BString(EXTRAS_DIR_NAME);
+			fAdditionalTextControl->SetText(pathToLibs);
+			fAdditionalTextControl->SetEnabled(false);
+			fAdditionalBrowseButton->SetEnabled(false);
 		}
 		else
 		{
 			const char *str = BeLauncherBase::GetSettings()->GetSettingsString(S_CHECKBOX_OPTION);
 			int ASCII_MAGIC = 48;
 			int value = static_cast<int>(str[0] - ASCII_MAGIC);
-			SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_SAVED_OPTION) << value);
 			fCheckBoxOption->SetValue(value);
+			fAdditionalTextControl->SetEnabled(static_cast<bool>(value));
+			fAdditionalBrowseButton->SetEnabled(static_cast<bool>(value));
+
+			const char *path = BeLauncherBase::GetSettings()->GetSettingsString(S_LIBRARIES_OPTION);
+			fAdditionalTextControl->SetText(path);
 		}
 		return true;
 	}
@@ -149,6 +182,7 @@ protected:
 		BString value;
 		value << fCheckBoxOption->Value();
 		BeLauncherBase::GetSettings()->SetSettingsString(S_CHECKBOX_OPTION, value);
+		BeLauncherBase::GetSettings()->SetSettingsString(S_LIBRARIES_OPTION, fAdditionalTextControl->Text());
 
 		BeLauncherBase::SaveSettings(def);
 	}
@@ -156,18 +190,28 @@ protected:
 	virtual void
 	ShowAboutDialog(void)
 	{
-		GameAboutWindow *gameAboutWindow = new GameAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
-		                                                       TITLE, VERSION);
-		gameAboutWindow->Show();
+		Xash3DAboutWindow *xash3DAboutWindow = new Xash3DAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
+		                                                             TITLE, VERSION);
+		xash3DAboutWindow->Show();
 	}
 
 public:
-	explicit BasedGameLauncher(const char *startPath)
+	explicit Xash3DGameLauncher(const char *startPath)
 	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
 	                          startPath, true, false)
 	{
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
 		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);
+
+		fAdditionalTextControl = new BTextControl(NULL, NULL, NULL);
+		fAdditionalTextControl->SetToolTip(L_EXTRA_TEXT_CONTROL_TOOLTIP);
+
+		fAdditionalBrowseButton = new BButton(L_EXTRA_BUTTON_BROWSE, NULL);
+		fAdditionalBrowseButton->SetMessage(new BMessage(MSG_ADDITIONAL_BROWSE_BUTTON_CLICKED));
+		fAdditionalBrowseButton->SetToolTip(L_EXTRA_BUTTON_BROWSE_TOOLTIP);
+		fAdditionalBrowseButton->ResizeToPreferred();
+		fAdditionalBrowseButton->SetExplicitSize(BSize(fAdditionalTextControl->Bounds().Height(),
+		                                     fAdditionalTextControl->Bounds().Height()));
 
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
 		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
@@ -177,6 +221,10 @@ public:
 		                              .Add(fCheckBoxOption)
 		                              .AddGlue()
 		                          .End()
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(fAdditionalTextControl)
+		                              .Add(fAdditionalBrowseButton)
+		                          .End()
 		                          .AddGroup(B_HORIZONTAL, 0.0f)
 		                              .Add(urlDescString)
 		                              .Add(urlString)
@@ -184,8 +232,24 @@ public:
 		                          .End();
 		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
 
+		fAdditionalDirectoryFilter = new BeDirectoryFilter();
+		fAdditionalDirectoryFilePanel = new BeDirectoryFilePanel(new BMessenger(this),
+		                                                         new BMessage(MSG_ADDITIONAL_FILE_PANEL_FILE_SELECTED),
+		                                                         fAdditionalDirectoryFilter,
+		                                                         BeLauncherBase::GetTextControl()->Text());
+		fAdditionalDirectoryFilePanel->Window()->SetTitle(L_ADDITIONAL_FILE_PANEL_TITLE);
+
 		// NOTE: Be sure to call read settings function.
 		ReadSettings();
+	}
+
+	virtual
+	~Xash3DGameLauncher()
+	{
+		delete fAdditionalDirectoryFilter;
+		fAdditionalDirectoryFilter = NULL;
+		delete fAdditionalDirectoryFilePanel;
+		fAdditionalDirectoryFilePanel = NULL;
 	}
 };
 
@@ -193,8 +257,8 @@ int
 main(void)
 {
 	BeApp *beApp = new BeApp(SIGNATURE);
-	BasedGameLauncher *basedGameLauncher = new BasedGameLauncher(BeUtils::GetPathToHomeDir());
-	beApp->SetMainWindow(basedGameLauncher);
+	Xash3DGameLauncher *xash3DGameLauncher = new Xash3DGameLauncher(BeUtils::GetPathToHomeDir());
+	beApp->SetMainWindow(xash3DGameLauncher );
 	beApp->Run();
 	delete beApp;
 	beApp = NULL;

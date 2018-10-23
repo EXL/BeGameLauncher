@@ -143,7 +143,7 @@ BeLauncherBase::MessageReceived(BMessage *msg)
 		}
 		case MSG_FILE_PANEL_FILE_SELECTED:
 		{
-			DirectorySelected();
+			DirectorySelected(fDirectoryFilePanel, fDataTextControl);
 			break;
 		}
 		default:
@@ -374,15 +374,16 @@ BeLauncherBase::SelectDirectory(void)
 }
 
 void
-BeLauncherBase::DirectorySelected(void)
+BeLauncherBase::DirectorySelected(const BeDirectoryFilePanel *filePanel,
+                                  BTextControl *textControl)
 {
 	entry_ref dirRef;
-	fDirectoryFilePanel->GetPanelDirectory(&dirRef);
+	filePanel->GetPanelDirectory(&dirRef);
 	BEntry entry(&dirRef);
 	BPath path;
 	entry.GetPath(&path);
 
-	fDataTextControl->SetText(path.Path());
+	textControl->SetText(path.Path());
 }
 
 bool
