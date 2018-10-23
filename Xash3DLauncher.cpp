@@ -48,13 +48,11 @@
 #define ENGINE_LIBRARY                 "libxash.so"
 
 // Various Strings
-#define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
-                                       "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim" \
-                                       "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea" \
-                                       "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit" \
-                                       "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat " \
-                                       "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
-                                       "id est laborum.\n\n")
+#define L_ABOUT_STRING                 B_TRANSLATE("Xash3D Engine is a custom Gold Source engine rewritten from " \
+                                       "scratch. Xash3D is compatible with many of the Gold Source games and mods " \
+                                       "and should be able to run almost any existing singleplayer Half-Life mod " \
+                                       "without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on " \
+                                       "crossplatform and compability with original Xash3D and Gold Source.\n\n")
 #define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required files.\n" \
                                        "Structure, arch_postfix = 64 on the x86_64 and empty on x86:\n    " \
                                        "libmenu.so\n    libengine.so\n    extras.pak\n    " \
@@ -65,9 +63,15 @@
                                        "valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
                                        "dlls/\n          libserver-haiku[arch_postfix].so\n    ...")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
-#define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
-#define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("Uncle Mike, a1batross, mittorn, 3dEyes\n\n")
+#define L_ABOUT_PORT_STR_H             B_TRANSLATE("Port to Haiku OS:\n\t")
+#define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
+#define L_ABOUT_LINK                   B_TRANSLATE("http://xash.su")
+#define L_ABOUT_LINK_DESC              B_TRANSLATE("Official Site:")
+#define L_ABOUT_LINK_SRC               B_TRANSLATE("http://github.com/FWGS/xash3d")
+#define L_ABOUT_LINK_SRC_DESC          B_TRANSLATE("Source Code:")
+#define L_ABOUT_LINK_MOD               B_TRANSLATE("http://moddb.com/engines/xash3d-engine")
+#define L_ABOUT_LINK_MOD_DESC          B_TRANSLATE("ModDB Page:")
 #define L_DATA_TEXT_HALF_LIFE          B_TRANSLATE("Half-Life")
 #define L_DATA_LINK_HALF_LIFE          B_TRANSLATE("https://store.steampowered.com/app/70")
 #define L_DATA_TEXT_BLUE_SHIFT         B_TRANSLATE("Blue Shift")
@@ -112,17 +116,37 @@ public:
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
+		BStringView *urlDescSrcString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_SRC_DESC);
+		BeUrlStringView *urlSrcString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK_SRC);
+		BStringView *urlDescModString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_MOD_DESC);
+		BeUrlStringView *urlModString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK_MOD);
 
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_STRING);
 		BeAboutWindow::GetInformationView()->SetFontAndColor(be_bold_font);
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_THANKS_STR_H);
 		BeAboutWindow::GetInformationView()->SetFontAndColor(be_plain_font);
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_THANKS_STR);
+		BeAboutWindow::GetInformationView()->SetFontAndColor(be_bold_font);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR_H);
+		BeAboutWindow::GetInformationView()->SetFontAndColor(be_plain_font);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR);
 
-		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_HORIZONTAL)
-		                          .Add(urlDescString)
-		                          .Add(urlString)
-		                          .AddGlue();
+		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, 0.0f)
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(urlDescString)
+		                              .Add(urlString)
+		                              .AddGlue()
+		                          .End()
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(urlDescSrcString)
+		                              .Add(urlSrcString)
+		                              .AddGlue()
+		                          .End()
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(urlDescModString)
+		                              .Add(urlModString)
+		                              .AddGlue()
+		                          .End();
 		BeAboutWindow::GetAdditionalBox()->AddChild(boxLayout->View());
 	}
 };
