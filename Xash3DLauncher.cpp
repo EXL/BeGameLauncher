@@ -47,6 +47,10 @@
 #define VALVE_DIR_NAME                 "valve"
 #define ENGINE_LIBRARY                 "libxash.so"
 
+// Globals
+#define G_GAMES_LIST_HEIGHT            80.0f
+#define G_MAX_GAME_NAME_LENGTH         50
+
 // Various Strings
 #define L_ABOUT_STRING                 B_TRANSLATE("Xash3D Engine is a custom Gold Source engine rewritten from " \
                                        "scratch. Xash3D is compatible with many of the Gold Source games and mods " \
@@ -101,12 +105,8 @@
 #define O_DATA_LINKS_DESC              "dataLinkDesc"
 #define O_VIEW_SCROLL                  "viewScroll"
 #define O_GAME_LIST_LABEL              "gameListLabel"
-#define O_SEPARATOR                    "separator"
-#define O_DOT                          "separator"
-
-// Globals
-#define G_GAMES_LIST_HEIGHT            80.0f
-#define G_MAX_GAME_NAME_LENGTH         50
+#define O_SEPARATOR                    "separatorView"
+#define O_DOT                          "dotView"
 
 class Xash3DAboutWindow : public BeAboutWindow
 {
@@ -132,7 +132,7 @@ public:
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, 0.0f)
-		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                          .AddGroup(B_HORIZONTAL)
 		                              .Add(urlDescString)
 		                              .Add(urlString)
 		                              .AddGlue()
