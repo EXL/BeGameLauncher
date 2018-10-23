@@ -221,7 +221,7 @@ protected:
 				fAdditionalBrowseButton->SetEnabled(value);
 				if(!value)
 				{
-					fAdditionalTextControl->SetText(BeLauncherBase::GetSettings()->GetSettingsString(MIRROR_PATH_OPT));
+					fAdditionalTextControl->SetText(GetPathToPackageExtras());
 				}
 				break;
 			}
@@ -495,7 +495,7 @@ main(void)
 {
 	BeApp *beApp = new BeApp(SIGNATURE);
 	Xash3DGameLauncher *xash3DGameLauncher = new Xash3DGameLauncher(BeUtils::GetPathToHomeDir());
-	beApp->SetMainWindow(xash3DGameLauncher );
+	beApp->SetMainWindow(xash3DGameLauncher);
 	beApp->Run();
 	delete beApp;
 	beApp = NULL;
