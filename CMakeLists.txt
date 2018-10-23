@@ -2,11 +2,23 @@ cmake_minimum_required(VERSION 3.1)
 
 project(BeGameLauncher CXX)
 
+set(CMAKE_CXX_STANDARD 98)
+
+############################## LAUNCHERS SECTION ##############################
+if(NOT LAUNCHER OR LAUNCHER STREQUAL "based")
+	set(BASED_LAUNCHER_NAME "BasedGameLauncher")
+	set(RES_DIR "based")
+	set(SIGNATURE "application/x-vnd.exl-BasedGameLauncher")
+elseif(LAUNCHER STREQUAL "xash3d")
+	set(BASED_LAUNCHER_NAME "Xash3DLauncher")
+	set(RES_DIR "xash3d")
+	set(SIGNATURE "application/x-vnd.exl-Xash3DLauncher")
+endif()
+###############################################################################
+
 if(NOT HAIKU)
 	message(FATAL_ERROR "This application only supports the Haiku OS!")
 endif()
-
-set(CMAKE_CXX_STANDARD 98)
 
 include_directories(headers)
 
@@ -38,12 +50,6 @@ set(LIBRARIES
 set(LOCALES
 	en
 	ru)
-
-if(NOT LAUNCHER OR LAUNCHER STREQUAL "based")
-	set(BASED_LAUNCHER_NAME "BasedGameLauncher")
-	set(RES_DIR "based")
-	set(SIGNATURE "application/x-vnd.exl-BasedGameLauncher")
-endif()
 
 add_definitions(-DSIGNATURE="${SIGNATURE}")
 add_executable(${BASED_LAUNCHER_NAME} ${BASED_LAUNCHER_NAME}.cpp)
