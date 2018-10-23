@@ -57,8 +57,15 @@
 #define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
-#define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/")
-#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy data files: ")
+#define L_DATA_TEXT_HALF_LIFE          B_TRANSLATE("Half-Life")
+#define L_DATA_LINK_HALF_LIFE          B_TRANSLATE("https://store.steampowered.com/app/70")
+#define L_DATA_TEXT_BLUE_SHIFT         B_TRANSLATE("Blue Shift")
+#define L_DATA_LINK_BLUE_SHIFT         B_TRANSLATE("https://store.steampowered.com/app/130")
+#define L_DATA_TEXT_OP_FORCE           B_TRANSLATE("Opposing Force")
+#define L_DATA_LINK_OP_FORCE           B_TRANSLATE("https://store.steampowered.com/app/50")
+#define L_DATA_FILES_LINKS_D           B_TRANSLATE("Buy game files on Steam: ")
+#define L_SEPARATOR                    B_TRANSLATE(" | ")
+#define L_DOT                          B_TRANSLATE(".")
 
 // Additional options
 #define S_CHECKBOX_OPTION              "GAME_OPTION"
@@ -73,10 +80,14 @@
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
-#define O_DATA_LINK                    "dataLink"
-#define O_DATA_LINK_DESC               "dataLinkDesc"
+#define O_DATA_LINK_HALF_LIFE          "dataLinkHL"
+#define O_DATA_LINK_BLUE_SHIFT         "dataLinkBS"
+#define O_DATA_LINK_OP_FORCE           "dataLinkOP"
+#define O_DATA_LINKS_DESC              "dataLinkDesc"
 #define O_VIEW_SCROLL                  "viewScroll"
 #define O_GAME_LIST_LABEL              "gameListLabel"
+#define O_SEPARATOR                    "separator"
+#define O_DOT                          "separator"
 #define G_GAMES_LIST_HEIGHT            80.0f
 #define G_MAX_GAME_NAME_LENGTH         50
 
@@ -356,11 +367,18 @@ public:
 		fAdditionalBrowseButton->SetExplicitSize(BSize(fAdditionalTextControl->Bounds().Height(),
 		                                     fAdditionalTextControl->Bounds().Height()));
 
-		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
-		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
+		BStringView *urlDescString = new BStringView(O_DATA_LINKS_DESC, L_DATA_FILES_LINKS_D);
+		BStringView *separatorOne = new BStringView(O_SEPARATOR, L_SEPARATOR);
+		BStringView *separatorTwo = new BStringView(O_SEPARATOR, L_SEPARATOR);
+		BeUrlStringView *urlStringHL = new BeUrlStringView(O_DATA_LINK_HALF_LIFE,
+		                                                   L_DATA_TEXT_HALF_LIFE, L_DATA_LINK_HALF_LIFE);
+		BeUrlStringView *urlStringBS = new BeUrlStringView(O_DATA_LINK_BLUE_SHIFT,
+		                                                   L_DATA_TEXT_BLUE_SHIFT, L_DATA_LINK_BLUE_SHIFT);
+		BeUrlStringView *urlStringOF = new BeUrlStringView(O_DATA_LINK_OP_FORCE,
+		                                                   L_DATA_TEXT_OP_FORCE, L_DATA_LINK_OP_FORCE);
+		BStringView *dot = new BStringView(O_DOT, L_DOT);
 
 		BStringView *gameListLabel = new BStringView(O_GAME_LIST_LABEL, L_GAME_LIST_LABEL);
-
 		fGamesList = new BListView();
 		fGamesList->SetExplicitMinSize(BSize(B_SIZE_UNSET, G_GAMES_LIST_HEIGHT));
 		fGamesList->SetSelectionMessage(new BMessage(MSG_SELECTED_SOME_GAME));
@@ -383,7 +401,12 @@ public:
 		                          .Add(fScrollView)
 		                          .AddGroup(B_HORIZONTAL, 0.0f)
 		                              .Add(urlDescString)
-		                              .Add(urlString)
+		                              .Add(urlStringHL)
+		                              .Add(separatorOne)
+		                              .Add(urlStringBS)
+		                              .Add(separatorTwo)
+		                              .Add(urlStringOF)
+		                              .Add(dot)
 		                              .AddGlue()
 		                          .End();
 		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
