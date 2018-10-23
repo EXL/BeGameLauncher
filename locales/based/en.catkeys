@@ -1,38 +1,43 @@
-1	en	application/x-vnd.exl-BasedGameLauncher	2015380030
+1	en	application/x-vnd.exl-BasedGameLauncher	3817023706
 Cannot run executable: 	BeGameLauncher		Cannot run executable: 
 http://exlmoto.ru	BasedGameLauncher		http://exlmoto.ru
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
 Thanks to:\n\t	BasedGameLauncher		Thanks to:\n\t
 Select	BeGameLauncher		Select
 Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
 ...	BeGameLauncher		...
+Click to view about information.	BeGameLauncher		Click to view about information.
 Exit	BeGameLauncher		Exit
-Please choose a Game Folder	BasedGameLauncher		Please choose a Game Folder
 - my gf	BasedGameLauncher		- my gf
 Run!	BeGameLauncher		Run!
-Click to open the file dialog.	BasedGameLauncher		Click to open the file dialog.
+Saved option: 	BasedGameLauncher		Saved option: 
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
+Click to exit the application.	BeGameLauncher		Click to exit the application.
 Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
 Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
 Buy data files: 	BasedGameLauncher		Buy data files: 
-BeGameLauncer (c) EXL, 2018	BeGameLauncher		BeGameLauncer © EXL, 2018
 Settings Error	BeGameLauncher		Settings Error
 Ready.	BeGameLauncher		Ready.
-Running game via BRoster...	BeGameLauncher		Running game via BRoster...
+Check to activate game option.	BasedGameLauncher		Check to activate game option.
+Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
 Executable Error	BeGameLauncher		Executable Error
-Please select a directory with game files: 	BasedGameLauncher		Please select a directory with game files: 
 Version: 	BeGameLauncher		Version: 
 Cache Error	BeGameLauncher		Cache Error
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	BasedGameLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
+Click to run a game.	BeGameLauncher		Click to run a game.
 Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
-Error: Cannot get entry %exe% permissons.	BeGameLauncher		Error: Cannot get entry %exe% permissons.
 About...	BeGameLauncher		About...
+Game option	BasedGameLauncher		Game option
 Game data check failed.	BeGameLauncher		Game data check failed.
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
 Cannot open link: 	BeGameLauncher		Cannot open link: 
-Game Option	BasedGameLauncher		Game Option
 OK	BeGameLauncher		OK
 Some useful link: 	BasedGameLauncher		Some useful link: 
 Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
-Path to a directory with game files.	BasedGameLauncher		Path to a directory with game files.
+Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
+Please choose a game folder	BeGameLauncher		Please choose a game folder
+Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
 https://store.steampowered.com/	BasedGameLauncher		https://store.steampowered.com/
-Running game via execve...	BeGameLauncher		Running game via execve...
 Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
 Open Link Error	BeGameLauncher		Open Link Error
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 

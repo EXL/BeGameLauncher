@@ -1,38 +1,43 @@
-1	ru	application/x-vnd.exl-BasedGameLauncher	2015380030
+1	ru	application/x-vnd.exl-BasedGameLauncher	3817023706
 Cannot run executable: 	BeGameLauncher		Не могу запустить исполнительный файл: 
 http://exlmoto.ru	BasedGameLauncher		http://exlmoto.ru
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
 Thanks to:\n\t	BasedGameLauncher		Спасибо:\n\t
-Select	BeGameLauncher		Select
-Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Ошибка: Сущность %exe% не существует или не является файлом.
+Select	BeGameLauncher		Выбор
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Ошибка: Точка входа %exe% не существует или не является файлом.
 ...	BeGameLauncher		...
+Click to view about information.	BeGameLauncher		Кликните для просмотра информации о программе.
 Exit	BeGameLauncher		Выход
-Please choose a Game Folder	BasedGameLauncher		Пожалуйста выберите директорию с игровыми файлами
 - my gf	BasedGameLauncher		- моей подружке
 Run!	BeGameLauncher		Запустить!
-Click to open the file dialog.	BasedGameLauncher		Нажмите для открытия файлового диалога.
-Error: File %exe% does not have permission to execute.	BeGameLauncher		Ошибка: Файл %exe% не имеет прав на выполнение.
+Saved option: 	BasedGameLauncher		Сохранённый параметр: 
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Запуск игры через BRoster. Переменные среды: %env%...
+Click to exit the application.	BeGameLauncher		Кликните для выхода из приложения.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Ошибка: Файл %exe% не имеет прав на исполнение.
 Saving settings to the %file% file...	BeGameLauncher		Сохранение настроек в файл %file%...
-Buy data files: 	BasedGameLauncher		Купить игровые файлы: 
-BeGameLauncer (c) EXL, 2018	BeGameLauncher		BeGameLauncer © EXL, 2018
-Settings Error	BeGameLauncher		Ошибка настроек
+Buy data files: 	BasedGameLauncher		Купить файлы данных игры: 
+Settings Error	BeGameLauncher		Ошибка параметров
 Ready.	BeGameLauncher		Готово.
-Running game via BRoster...	BeGameLauncher		Запуск игры через BRoster...
+Check to activate game option.	BasedGameLauncher		Поставьте галку для включения специального параметра игры.
+Click to open the file dialog.	BeGameLauncher		Кликните для открытия файлового диалога.
 Executable Error	BeGameLauncher		Ошибка исполнительного файла
-Please select a directory with game files: 	BasedGameLauncher		Пожалуйста выберите директорию с игровыми файлами: 
 Version: 	BeGameLauncher		Версия: 
-Cache Error	BeGameLauncher		Ошибка данных
+Cache Error	BeGameLauncher		Ошибка файлов данных
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	BasedGameLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
-Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка:	Неуспешное выполнение функции get_ref_for_path() для файла %exe%.
-Error: Cannot get entry %exe% permissons.	BeGameLauncher		Ошибка: Невозможно получить права файла %exe%.
+Click to run a game.	BeGameLauncher		Кликните для запуска игры.
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка: Функция get_ref_for_path() для %exe% завершилась неуспешно.
 About...	BeGameLauncher		О программе...
-Game data check failed.	BeGameLauncher		Не удалось проверить данные игры.
-Cannot open link: 	BeGameLauncher		Не могу открыть ссылку: 
-Game Option	BasedGameLauncher		Дополнительная опция
+Game option	BasedGameLauncher		Параметр игры
+Game data check failed.	BeGameLauncher		Файлы данных игры не прошли проверку.
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Ошибка: Невозможно проверить права доступа для файла %exe%.
+Cannot open link: 	BeGameLauncher		Невозможно открыть ссылку: 
 OK	BeGameLauncher		OK
 Some useful link: 	BasedGameLauncher		Полезная ссылка: 
-Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Ошибка: Не могу запустить исполнительны файл %exe%. См. %func%.
-Path to a directory with game files.	BasedGameLauncher		Путь до директории с игровыми файлами.
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Ошибка: Невозможно запустить исполнительный файл %exe%. См. функцию %func%.
+Path to a directory with game files.	BeGameLauncher		Путь до директории с файлами данных игры.
+Please choose a game folder	BeGameLauncher		Пожалуйста выберите директорию с файлами данных игры
+Running game via execve. Environ: %env%...	BeGameLauncher		Запуск игры через execve. Переменные среды: %env%...
 https://store.steampowered.com/	BasedGameLauncher		https://store.steampowered.com/
-Running game via execve...	BeGameLauncher		Запуск игры через execve...
-Cannot write settings file: 	BeGameLauncher		Не могу записать файл настроек: 
+Cannot write settings file: 	BeGameLauncher		Невозможно запистать файл параметров: 
 Open Link Error	BeGameLauncher		Ошибка открытия ссылки
+Please select a directory with game files: 	BeGameLauncher		Пожалуйста выберите каталог с файлами данных игры: 
