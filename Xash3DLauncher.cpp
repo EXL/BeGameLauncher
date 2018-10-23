@@ -19,6 +19,8 @@
 
 #include <Catalog.h>
 
+#include <posix/stdlib.h>
+
 #ifndef SIGNATURE
 #error "Application SIGNATURE is not defined. Check your build system."
 #endif // !SIGNATURE
@@ -33,6 +35,8 @@
 #define SETTINGS_FILE                  "Xash3DLauncher.set"
 #define EXECUTABLE_FILE                "Xash3D"
 #define DATA_PATH_OPT                  "XASH3D_BASEDIR"
+#define MIRROR_PATH_OPT                "XASH3D_MIRRORDIR"
+#define GAME_OPT                       "XASH3D_GAME"
 #define EXTRAS_DIR_NAME                "/extras"
 
 // Various Strings
@@ -52,7 +56,6 @@
 
 // Additional options
 #define S_CHECKBOX_OPTION              "GAME_OPTION"
-#define S_LIBRARIES_OPTION             "LIBRARIES_PATH"
 #define L_CHECKBOX_OPTION              B_TRANSLATE("Override path to the Xash3D required libraries:")
 #define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to override path to the Xash3D required libraries.")
 #define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required libraries.")
@@ -105,6 +108,12 @@ class Xash3DGameLauncher : public BeLauncherBase
 	BeDirectoryFilePanel *fAdditionalDirectoryFilePanel;
 	BeDirectoryFilter *fAdditionalDirectoryFilter;
 
+	static const BString GetPathToPackageExtras(void)
+	{
+		BString packagePath = BeUtils::GetPathToPackage(PACKAGE_DIR);
+		return packagePath << BString(EXTRAS_DIR_NAME);
+	}
+
 protected:
 	virtual void
 	MessageReceived(BMessage *msg)
@@ -145,6 +154,18 @@ protected:
 	virtual bool
 	RunGame(void)
 	{
+		BString mirrorPath;
+		if(fCheckBoxOption->Value() == B_CONTROL_ON)
+		{
+			mirrorPath = fAdditionalTextControl->Text();
+		}
+		else
+		{
+			mirrorPath = GetPathToPackageExtras();
+		}
+		setenv(MIRROR_PATH_OPT, mirrorPath.String(), 1);
+		setenv(GAME_OPT, "bshift", 1);
+
 		return BeLauncherBase::RunGameViaRoster(true);
 	}
 
@@ -154,12 +175,11 @@ protected:
 		if(!BeLauncherBase::ReadSettings())
 		{
 			BeDebug("[Info]: First run, set default values.\n");
-			fCheckBoxOption->SetValue(0);
-			BString pathToLibs = BeUtils::GetPathToPackage(PACKAGE_DIR);
-			pathToLibs << BString(EXTRAS_DIR_NAME);
-			fAdditionalTextControl->SetText(pathToLibs);
+			fCheckBoxOption->SetValue(B_CONTROL_OFF);
 			fAdditionalTextControl->SetEnabled(false);
 			fAdditionalBrowseButton->SetEnabled(false);
+
+			fAdditionalTextControl->SetText(GetPathToPackageExtras());
 		}
 		else
 		{
@@ -170,7 +190,7 @@ protected:
 			fAdditionalTextControl->SetEnabled(static_cast<bool>(value));
 			fAdditionalBrowseButton->SetEnabled(static_cast<bool>(value));
 
-			const char *path = BeLauncherBase::GetSettings()->GetSettingsString(S_LIBRARIES_OPTION);
+			const char *path = BeLauncherBase::GetSettings()->GetSettingsString(MIRROR_PATH_OPT);
 			fAdditionalTextControl->SetText(path);
 		}
 		return true;
@@ -182,7 +202,7 @@ protected:
 		BString value;
 		value << fCheckBoxOption->Value();
 		BeLauncherBase::GetSettings()->SetSettingsString(S_CHECKBOX_OPTION, value);
-		BeLauncherBase::GetSettings()->SetSettingsString(S_LIBRARIES_OPTION, fAdditionalTextControl->Text());
+		BeLauncherBase::GetSettings()->SetSettingsString(MIRROR_PATH_OPT, fAdditionalTextControl->Text());
 
 		BeLauncherBase::SaveSettings(def);
 	}
@@ -236,7 +256,7 @@ public:
 		fAdditionalDirectoryFilePanel = new BeDirectoryFilePanel(new BMessenger(this),
 		                                                         new BMessage(MSG_ADDITIONAL_FILE_PANEL_FILE_SELECTED),
 		                                                         fAdditionalDirectoryFilter,
-		                                                         BeLauncherBase::GetTextControl()->Text());
+		                                                         BeUtils::GetPathToHomeDir());
 		fAdditionalDirectoryFilePanel->Window()->SetTitle(L_ADDITIONAL_FILE_PANEL_TITLE);
 
 		// NOTE: Be sure to call read settings function.
