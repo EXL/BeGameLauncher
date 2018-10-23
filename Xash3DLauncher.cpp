@@ -69,13 +69,15 @@
 #define L_EXTRA_BUTTON_BROWSE_TOOLTIP  B_TRANSLATE("Click to open the file dialog.")
 #define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
 #define L_ERROR_NO_VALVE_CATALOG       B_TRANSLATE("Game files directory does not contain the \"valve\" catalog.")
+#define L_GAME_LIST_LABEL              B_TRANSLATE("Please select a Game/Mod:")
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
 #define O_DATA_LINK                    "dataLink"
 #define O_DATA_LINK_DESC               "dataLinkDesc"
 #define O_VIEW_SCROLL                  "viewScroll"
-#define G_GAMES_LIST_HEIGHT            100.0f
+#define O_GAME_LIST_LABEL              "gameListLabel"
+#define G_GAMES_LIST_HEIGHT            80.0f
 #define G_MAX_GAME_NAME_LENGTH         50
 
 class Xash3DAboutWindow : public BeAboutWindow
@@ -117,6 +119,7 @@ class Xash3DGameLauncher : public BeLauncherBase
 	BTextControl *fAdditionalTextControl;
 	BButton *fAdditionalBrowseButton;
 	BListView *fGamesList;
+	BScrollView *fScrollView;
 
 	BeDirectoryFilePanel *fAdditionalDirectoryFilePanel;
 	BeDirectoryFilter *fAdditionalDirectoryFilter;
@@ -325,6 +328,16 @@ protected:
 		xash3DAboutWindow->Show();
 	}
 
+	virtual void
+	FrameResized(float newWidth, float newHeight)
+	{
+		// NOTE: Fix some drawing glitches when resizing a window.
+		fGamesList->Invalidate();
+		fScrollView->Invalidate();
+
+		BeLauncherBase::FrameResized(newWidth, newHeight);
+	}
+
 public:
 	explicit Xash3DGameLauncher(const char *startPath)
 	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
@@ -346,10 +359,12 @@ public:
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
 		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
 
+		BStringView *gameListLabel = new BStringView(O_GAME_LIST_LABEL, L_GAME_LIST_LABEL);
+
 		fGamesList = new BListView();
-		fGamesList->SetExplicitSize(BSize(B_SIZE_UNSET, G_GAMES_LIST_HEIGHT));
+		fGamesList->SetExplicitMinSize(BSize(B_SIZE_UNSET, G_GAMES_LIST_HEIGHT));
 		fGamesList->SetSelectionMessage(new BMessage(MSG_SELECTED_SOME_GAME));
-		BScrollView *scrollView = new BScrollView(O_VIEW_SCROLL, fGamesList, B_WILL_DRAW | B_FRAME_EVENTS,
+		fScrollView = new BScrollView(O_VIEW_SCROLL, fGamesList, B_WILL_DRAW | B_FRAME_EVENTS,
 		                                          false, true, B_PLAIN_BORDER);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, B_USE_HALF_ITEM_SPACING)
@@ -361,7 +376,11 @@ public:
 		                              .Add(fAdditionalTextControl)
 		                              .Add(fAdditionalBrowseButton)
 		                          .End()
-		                          .Add(scrollView)
+		                          .AddGroup(B_HORIZONTAL, 0.0f)
+		                              .Add(gameListLabel)
+		                              .AddGlue()
+		                          .End()
+		                          .Add(fScrollView)
 		                          .AddGroup(B_HORIZONTAL, 0.0f)
 		                              .Add(urlDescString)
 		                              .Add(urlString)

@@ -68,7 +68,7 @@ BeAboutWindow::GetAdditionalBox(void) const
 void
 BeAboutWindow::FrameResized(float newWidth, float newHeight)
 {
-	// Fix some draw glitches via resizing about window.
+	// Fix some draw glitches when resizing about window.
 	if(fAboutView != NULL)
 	{
 		fAboutView->GetAboutStripeView()->Invalidate();
