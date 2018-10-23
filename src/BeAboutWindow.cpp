@@ -40,10 +40,9 @@ BeAboutWindow::CreateForm(void)
 	AddChild(fAboutView);
 
 	const float gap = BeAboutStripeView::GetIconX();
-
-	SetSizeLimits(Frame().InsetBySelf(gap, 0.0f).Width(),
+	SetSizeLimits(Bounds().Width(),
 	              Frame().InsetBySelf(-gap * 4.0f, 0.0f).Width(),
-	              Frame().InsetBySelf(0.0f, gap).Height(),
+	              Bounds().Height(),
 	              Frame().InsetBySelf(0.0f, -gap * 3.0f).Height());
 }
 

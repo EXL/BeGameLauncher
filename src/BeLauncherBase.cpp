@@ -112,10 +112,9 @@ BeLauncherBase::CreateForm(void)
 	                                               fDirectoryFilter, sStartPath);
 	fDirectoryFilePanel->Window()->SetTitle(L_FILE_PANEL_TITLE);
 
-	BSize laySize = GetLayout()->MinSize();
-	SetSizeLimits(laySize.Width()   + G_OFFSET_FOR_SIZE,
-	              Bounds().Width()  + G_OFFSET_FOR_SIZE,
-	              laySize.Height()  + G_OFFSET_FOR_SIZE,
+	SetSizeLimits(Bounds().Width(),
+	              Bounds().Width() + G_OFFSET_FOR_SIZE,
+	              Bounds().Height(),
 	              Bounds().Height() + G_OFFSET_FOR_SIZE);
 }
 
