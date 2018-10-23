@@ -42,8 +42,10 @@
 #define DATA_PATH_OPT                  "XASH3D_BASEDIR"
 #define MIRROR_PATH_OPT                "XASH3D_MIRRORDIR"
 #define GAME_OPT                       "XASH3D_GAME"
+#define CHECKBOX_OPT                   "GAME_OPTION"
 #define EXTRAS_DIR_NAME                "/extras"
 #define VALVE_DIR_NAME                 "valve"
+#define ENGINE_LIBRARY                 "libxash.so"
 
 // Various Strings
 #define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
@@ -66,17 +68,18 @@
 #define L_DATA_FILES_LINKS_D           B_TRANSLATE("Buy game files on Steam: ")
 #define L_SEPARATOR                    B_TRANSLATE(" | ")
 #define L_DOT                          B_TRANSLATE(".")
-
-// Additional options
-#define S_CHECKBOX_OPTION              "GAME_OPTION"
+#define L_ERROR_NO_VALVE_CATALOG       B_TRANSLATE("Game files directory does not contain the \"valve\" catalog.")
+#define L_ERROR_NO_GAMEINFO_FILE       B_TRANSLATE("Required data file %file% not found.")
+#define L_ERROR_NO_ENG_LIBRARY         B_TRANSLATE("Required engine library %library% not found.")
 #define L_CHECKBOX_OPTION              B_TRANSLATE("Override path to the Xash3D required libraries:")
 #define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to override path to the Xash3D required libraries.")
 #define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required libraries.")
 #define L_EXTRA_BUTTON_BROWSE          B_TRANSLATE("...")
 #define L_EXTRA_BUTTON_BROWSE_TOOLTIP  B_TRANSLATE("Click to open the file dialog.")
 #define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
-#define L_ERROR_NO_VALVE_CATALOG       B_TRANSLATE("Game files directory does not contain the \"valve\" catalog.")
 #define L_GAME_LIST_LABEL              B_TRANSLATE("Please select a Game/Mod:")
+
+// Objects
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
@@ -88,6 +91,8 @@
 #define O_GAME_LIST_LABEL              "gameListLabel"
 #define O_SEPARATOR                    "separator"
 #define O_DOT                          "separator"
+
+// Globals
 #define G_GAMES_LIST_HEIGHT            80.0f
 #define G_MAX_GAME_NAME_LENGTH         50
 
@@ -264,6 +269,55 @@ protected:
 	virtual bool
 	CheckCache(void)
 	{
+		BString path = BeLauncherBase::GetTextControl()->Text();
+		if(!path.EndsWith("/"))
+		{
+			path << "/";
+		}
+
+		// NOTE: 1. Check that the "valve" directory exist.
+		// This also checks symlinks to a directories.
+		BString valveDirPath = path;
+		valveDirPath << VALVE_DIR_NAME;
+		BEntry valveDir(valveDirPath);
+		entry_ref ref;
+		valveDir.GetRef(&ref);
+		BDirectory directory;
+		if(directory.SetTo(&ref) != B_OK)
+		{
+			SetStatusString(B_COLOR_RED, L_ERROR_NO_VALVE_CATALOG);
+			return false;
+		}
+
+		// NOTE: 2. Check some file in the game cache.
+		BString fileToCheckPath = path;
+		fileToCheckPath << fSelectedGame;
+		fileToCheckPath << "/gameinfo.txt";
+		BEntry fileToCheck(fileToCheckPath);
+		if(!fileToCheck.Exists())
+		{
+			BString errorMessage(L_ERROR_NO_GAMEINFO_FILE);
+			errorMessage.ReplaceAll("%file%", fileToCheckPath);
+			SetStatusString(B_COLOR_RED, errorMessage);
+			return false;
+		}
+
+		// NOTE: 3. Check engine library in the mirrored path.
+		path = fAdditionalTextControl->Text();
+		if(!path.EndsWith("/"))
+		{
+			path << "/";
+		}
+		path << ENGINE_LIBRARY;
+		BEntry libraryToCheck(path);
+		if(!libraryToCheck.Exists())
+		{
+			BString errorMessage(L_ERROR_NO_ENG_LIBRARY);
+			errorMessage.ReplaceAll("%library%", path);
+			SetStatusString(B_COLOR_RED, errorMessage);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -307,7 +361,7 @@ protected:
 		}
 		else
 		{
-			const char *str = BeLauncherBase::GetSettings()->GetSettingsString(S_CHECKBOX_OPTION);
+			const char *str = BeLauncherBase::GetSettings()->GetSettingsString(CHECKBOX_OPT);
 			int ASCII_MAGIC = 48;
 			int value = static_cast<int>(str[0] - ASCII_MAGIC);
 			fCheckBoxOption->SetValue(value);
@@ -324,7 +378,7 @@ protected:
 	{
 		BString value;
 		value << fCheckBoxOption->Value();
-		BeLauncherBase::GetSettings()->SetSettingsString(S_CHECKBOX_OPTION, value);
+		BeLauncherBase::GetSettings()->SetSettingsString(CHECKBOX_OPT, value);
 		BeLauncherBase::GetSettings()->SetSettingsString(MIRROR_PATH_OPT, fAdditionalTextControl->Text());
 		BeLauncherBase::GetSettings()->SetSettingsString(GAME_OPT, fSelectedGame);
 
