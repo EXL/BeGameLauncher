@@ -1,43 +1,63 @@
-1	ru	application/x-vnd.exl-Xash3DLauncher	3817023706
-Cannot run executable: 	BeGameLauncher		Cannot run executable: 
-http://exlmoto.ru	BasedGameLauncher		http://exlmoto.ru
-BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
-Thanks to:\n\t	BasedGameLauncher		Thanks to:\n\t
-Select	BeGameLauncher		Select
-Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+1	ru	application/x-vnd.exl-Xash3DLauncher	3646819240
+Cannot run executable: 	BeGameLauncher		Невозможно запустить исполнительный файл: 
+Half-Life	Xash3DGameLauncher		Half-Life
+Game files directory does not contain the \"valve\" catalog.	Xash3DGameLauncher		Выбранная директория не содержит каталог \"valve\".
+Thanks to:\n\t	Xash3DGameLauncher		Спасибо:\n\t
+Uncle Mike, a1batross, mittorn, 3dEyes**\n\n	Xash3DGameLauncher		Дядя Миша, a1batross, mittorn, 3dEyes**\n\n
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
+Please choose a libraries folder	Xash3DGameLauncher		Пожалуйста, выберите директорию с библиотеками
+Select	BeGameLauncher		Выбор
+Required data file %file% not found.	Xash3DGameLauncher		Требуемый файл данных %file% не найден.
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Ошибка: Сущность %exe% не существует или не является файлом.
 ...	BeGameLauncher		...
-Click to view about information.	BeGameLauncher		Click to view about information.
-Exit	BeGameLauncher		Exit
-- my gf	BasedGameLauncher		- my gf
-Run!	BeGameLauncher		Run!
-Saved option: 	BasedGameLauncher		Saved option: 
-Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
-Click to exit the application.	BeGameLauncher		Click to exit the application.
-Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
-Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
-Buy data files: 	BasedGameLauncher		Buy data files: 
-Settings Error	BeGameLauncher		Settings Error
-Ready.	BeGameLauncher		Ready.
-Check to activate game option.	BasedGameLauncher		Check to activate game option.
-Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
-Executable Error	BeGameLauncher		Executable Error
-Version: 	BeGameLauncher		Version: 
-Cache Error	BeGameLauncher		Cache Error
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	BasedGameLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
-Click to run a game.	BeGameLauncher		Click to run a game.
-Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
-About...	BeGameLauncher		About...
-Game option	BasedGameLauncher		Game option
-Game data check failed.	BeGameLauncher		Game data check failed.
-Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
-Cannot open link: 	BeGameLauncher		Cannot open link: 
+Click to view about information.	BeGameLauncher		Кликните для просмотра информации о программе.
+http://github.com/FWGS/xash3d	Xash3DGameLauncher		http://github.com/FWGS/xash3d
+Override path to the Xash3D required files:	Xash3DGameLauncher		Переопределить путь до требуемых Xash3D файлов:
+https://store.steampowered.com/app/130	Xash3DGameLauncher		https://store.steampowered.com/app/130
+Port to Haiku OS:\n\t	Xash3DGameLauncher		Порт на Haiku OS:\n\t
+Exit	BeGameLauncher		Выход
+Run!	BeGameLauncher		Запустить!
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Запуск игры через BRoster. Переменные среды: %env%...
+...	Xash3DGameLauncher		...
+Click to exit the application.	BeGameLauncher		Кликните для выхода из приложения.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Ошибка: Файл %exe% не имеет разрешения на исполнение.
+Buy game files on Steam: 	Xash3DGameLauncher		Купить игру в Steam: 
+Saving settings to the %file% file...	BeGameLauncher		Сохранение параметров в файл %file%...
+Settings Error	BeGameLauncher		Ошибка параметров
+Ready.	BeGameLauncher		Готово.
+http://xash.su	Xash3DGameLauncher		http://xash.su
+Click to open the file dialog.	BeGameLauncher		Кликните для открытия файлового диалога.
+Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on crossplatform and compability with original Xash3D and Gold Source.\n\n	Xash3DGameLauncher		Движок Xash3D является переписанным с нуля движком Gold Source. Xash3D совместим со многими играми на Gold Source и позволяет запустить практически любой одиночный мод для игры Half-Life.\n\nXash3D FWGS является форком движка Xash3D и нацелен на кроссплатформенность и совместимость с оригинальным Xash3D и Gold Source.\n\n
+Please select a Game/Mod:	Xash3DGameLauncher		Пожалуйста, выберите игру или мод:
+https://store.steampowered.com/app/70	Xash3DGameLauncher		https://store.steampowered.com/app/70
+Executable Error	BeGameLauncher		Ошибка исполнительного файла
+Version: 	BeGameLauncher		Версия: 
+http://moddb.com/engines/xash3d-engine	Xash3DGameLauncher		http://moddb.com/engines/xash3d-engine
+Check to override path to the Xash3D required files.	Xash3DGameLauncher		Поставьте галочку для переопределения пути требуемых Xash3D файлов.
+Required engine library %library% not found.	Xash3DGameLauncher		Требуемая библиотека движка %library% не найдена.
+Cache Error	BeGameLauncher		Ошибка данных
+https://store.steampowered.com/app/50	Xash3DGameLauncher		https://store.steampowered.com/app/50
+Opposing Force	Xash3DGameLauncher		Opposing Force
+EXL\n	Xash3DGameLauncher		EXL\n
+Click to run a game.	BeGameLauncher		Кликните для запуска выбранной игры.
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка: Функция get_ref_for_path() для %exe% выполнена неуспешно.
+ModDB Page:	Xash3DGameLauncher		Страница на ModDB:
+Source Code:	Xash3DGameLauncher		Исходный код движка:
+ | 	Xash3DGameLauncher		 | 
+Path to a directory with Xash3D required files.\nStructure, arch_postfix = 64 on the x86_64 and empty on x86:\n    libmenu.so\n    libengine.so\n    extras.pak\n    bshift/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      dlls/\n          libserver-haiku[arch_postfix].so\n    gearbox/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      dlls/\n          libserver-haiku[arch_postfix].so\n    valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      dlls/\n          libserver-haiku[arch_postfix].so\n    ...	Xash3DGameLauncher		Путь до директории с требуемыми Xash3D файлами.\nСтруктура, arch_postfix равен 64 на x86_64 и пустой на x86:\n    libmenu.so\n    libengine.so\n    extras.pak\n    bshift/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      dlls/\n          libserver-haiku[arch_postfix].so\n    gearbox/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      dlls/\n          libserver-haiku[arch_postfix].so\n    valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      dlls/\n          libserver-haiku[arch_postfix].so\n    ...\nВы можете скопировать каталог \"extras\" в удобное вам место:\n    cp -avR /system/apps/Xash3D/extras ~/
+About...	BeGameLauncher		О программе...
+Official Site:	Xash3DGameLauncher		Официальный сайт:
+.	Xash3DGameLauncher		.
+Blue Shift	Xash3DGameLauncher		Blue Shift
+Game data check failed.	BeGameLauncher		Файлы данных игры не прошли проверку.
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Ошибка: Невозможно получить разрешения сущности %exe%.
+Cannot open link: 	BeGameLauncher		Невозможно открыть ссылку: 
 OK	BeGameLauncher		OK
-Some useful link: 	BasedGameLauncher		Some useful link: 
-Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
-Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
-Please choose a game folder	BeGameLauncher		Please choose a game folder
-Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
-https://store.steampowered.com/	BasedGameLauncher		https://store.steampowered.com/
-Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
-Open Link Error	BeGameLauncher		Open Link Error
-Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Ошибка: Невозможно запустить исполнительный файл %exe%. См. %func%.
+Click to open the file dialog.	Xash3DGameLauncher		Кликните для открытия файлового диалога.
+Path to a directory with game files.	BeGameLauncher		Путь до директории Xash3D, которая содержит каталог \"valve\".
+Please choose a game folder	BeGameLauncher		Пожалуйста, выберите директорию Xash3D
+Running game via execve. Environ: %env%...	BeGameLauncher		Запуск игры через execve. Переменные среды: %env%...
+Cannot write settings file: 	BeGameLauncher		Невозможно записать файл настроек: 
+Open Link Error	BeGameLauncher		Ошибка ссылки
+Please select a directory with game files: 	BeGameLauncher		Пожалуйста, выберите директорию Xash3D, содержащую каталог \"valve\": 

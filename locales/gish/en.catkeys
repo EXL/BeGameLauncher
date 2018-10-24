@@ -41,7 +41,7 @@ OK	BeGameLauncher		OK
 Information:	GishLauncher		Information:
 Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
 Path to a directory with game files.	BeGameLauncher		Path to a directory with Gish game files.
-Please choose a game folder	BeGameLauncher		Please choose a Gish game folder
+Please choose a game folder	BeGameLauncher		Please choose the Gish game folder
 Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
 Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
 http://chroniclogic.com/gish.htm	GishLauncher		http://chroniclogic.com/gish.htm

@@ -34,7 +34,7 @@ About...	BeGameLauncher		О программе...
 EXL\n	GishLauncher		EXL\n
 Gish game	GishLauncher		игра Gish
 .	GishLauncher		.
-Game data check failed.	BeGameLauncher		Игровые файлы данных не прошли проверку.
+Game data check failed.	BeGameLauncher		Файлы данных игры не прошли проверку.
 Error: Cannot get entry %exe% permissions.	BeGameLauncher		Ошибка: Невозможно получить разрешения сущности %exe%.
 Cannot open link: 	BeGameLauncher		Невозможно открыть ссылку: 
 OK	BeGameLauncher		OK

@@ -133,19 +133,19 @@ public:
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, 0.0f)
-		                          .AddGroup(B_HORIZONTAL)
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
 		                              .Add(urlDescString)
 		                              .Add(urlString)
 		                              .AddGlue()
 		                          .End()
 		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
-		                              .Add(urlDescSrcString)
-		                              .Add(urlSrcString)
+		                              .Add(urlDescModString)
+		                              .Add(urlModString)
 		                              .AddGlue()
 		                          .End()
 		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
-		                              .Add(urlDescModString)
-		                              .Add(urlModString)
+		                              .Add(urlDescSrcString)
+		                              .Add(urlSrcString)
 		                              .AddGlue()
 		                          .End();
 		BeAboutWindow::GetAdditionalBox()->AddChild(boxLayout->View());
