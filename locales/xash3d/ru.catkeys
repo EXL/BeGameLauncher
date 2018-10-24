@@ -58,6 +58,6 @@ Click to open the file dialog.	Xash3DGameLauncher		Кликните для от�
 Path to a directory with game files.	BeGameLauncher		Путь до директории Xash3D, которая содержит каталог \"valve\".
 Please choose a game folder	BeGameLauncher		Пожалуйста, выберите директорию Xash3D
 Running game via execve. Environ: %env%...	BeGameLauncher		Запуск игры через execve. Переменные среды: %env%...
-Cannot write settings file: 	BeGameLauncher		Невозможно записать файл настроек: 
+Cannot write settings file: 	BeGameLauncher		Невозможно записать файл параметров: 
 Open Link Error	BeGameLauncher		Ошибка ссылки
 Please select a directory with game files: 	BeGameLauncher		Пожалуйста, выберите директорию Xash3D, содержащую каталог \"valve\": 
