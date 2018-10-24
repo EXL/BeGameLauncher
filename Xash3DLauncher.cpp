@@ -57,7 +57,7 @@
                                        "scratch. Xash3D is compatible with many of the Gold Source games and mods " \
                                        "and should be able to run almost any existing singleplayer Half-Life mod " \
                                        "without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on " \
-                                       "crossplatform and compability with original Xash3D and Gold Source.\n\n")
+                                       "crossplatform and compatibility with original Xash3D and Gold Source.\n\n")
 #define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required files.\n" \
                                        "Structure, arch_postfix = 64 on the x86_64 and empty on x86:\n    " \
                                        "libmenu.so\n    libengine.so\n    extras.pak\n    " \
@@ -66,7 +66,9 @@
                                        "gearbox/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
                                        "dlls/\n          libserver-haiku[arch_postfix].so\n    " \
                                        "valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
-                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    ...")
+                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    ...\nYou can copy the " \
+                                       "\"extras\" catalog to any convenient place for you:\n    " \
+                                       "cp -avR /system/apps/Xash3D/extras ~/")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
 #define L_ABOUT_THANKS_STR             B_TRANSLATE("Uncle Mike, a1batross, mittorn, 3dEyes**\n\n")
 #define L_ABOUT_PORT_STR_H             B_TRANSLATE("Port to Haiku OS:\n\t")
