@@ -8,6 +8,7 @@
 
 #include <Rect.h>
 #include <String.h>
+#include <View.h>
 #include <StringList.h>
 #include <StringView.h>
 #include <CheckBox.h>
@@ -67,7 +68,7 @@
                                        "valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
                                        "dlls/\n          libserver-haiku[arch_postfix].so\n    ...")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("Uncle Mike, a1batross, mittorn, 3dEyes\n\n")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("Uncle Mike, a1batross, mittorn, 3dEyes**\n\n")
 #define L_ABOUT_PORT_STR_H             B_TRANSLATE("Port to Haiku OS:\n\t")
 #define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://xash.su")
@@ -95,7 +96,7 @@
 #define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
 #define L_GAME_LIST_LABEL              B_TRANSLATE("Please select a Game/Mod:")
 
-// Objects
+// Object Names
 #define O_CHECKBOX_OPTION              "checkBoxOption"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
