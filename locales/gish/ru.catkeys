@@ -1,43 +1,49 @@
-1	ru	application/x-vnd.exl-GishLauncher	3817023706
-Cannot run executable: 	BeGameLauncher		Cannot run executable: 
-http://exlmoto.ru	BasedGameLauncher		http://exlmoto.ru
-BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
-Thanks to:\n\t	BasedGameLauncher		Thanks to:\n\t
-Select	BeGameLauncher		Select
-Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+1	ru	application/x-vnd.exl-GishLauncher	2897186051
+Cannot run executable: 	BeGameLauncher		Невозможно запустить исполнительный файл: 
+Port to Haiku OS:\n\t	GishLauncher		Порт на Haiku OS:\n\t
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
+Buy game files on Steam: 	GishLauncher		Купить игру в Steam: 
+Select	BeGameLauncher		Выбор
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Ошибка: Сущность %exe% не существует или не является файлом.
 ...	BeGameLauncher		...
-Click to view about information.	BeGameLauncher		Click to view about information.
-Exit	BeGameLauncher		Exit
-- my gf	BasedGameLauncher		- my gf
-Run!	BeGameLauncher		Run!
-Saved option: 	BasedGameLauncher		Saved option: 
-Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
-Click to exit the application.	BeGameLauncher		Click to exit the application.
-Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
-Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
-Buy data files: 	BasedGameLauncher		Buy data files: 
-Settings Error	BeGameLauncher		Settings Error
-Ready.	BeGameLauncher		Ready.
-Check to activate game option.	BasedGameLauncher		Check to activate game option.
-Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
-Executable Error	BeGameLauncher		Executable Error
-Version: 	BeGameLauncher		Version: 
-Cache Error	BeGameLauncher		Cache Error
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	BasedGameLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
-Click to run a game.	BeGameLauncher		Click to run a game.
-Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
-About...	BeGameLauncher		About...
-Game option	BasedGameLauncher		Game option
-Game data check failed.	BeGameLauncher		Game data check failed.
-Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
-Cannot open link: 	BeGameLauncher		Cannot open link: 
+Click to view about information.	BeGameLauncher		Кликните для просмотра информации о программе.
+Source code:	GishLauncher		Исходный код:
+Exit	BeGameLauncher		Выход
+Required data file %file% not found.	GishLauncher		Требуемый файл данных %file% не найден.
+Run!	BeGameLauncher		Запустить!
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Запуск игры через BRoster. Переменные среды: %env%...
+Click to exit the application.	BeGameLauncher		Кликните для выхода из приложения.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Ошибка: Файл %exe% не имеет разрешения на исполнение.
+http://exlmoto.ru/gish-droid	GishLauncher		http://exlmoto.ru/gish-droid
+Saving settings to the %file% file...	BeGameLauncher		Сохранение параметров в файл %file%...
+Settings Error	BeGameLauncher		Ошибка параметров
+Ready.	BeGameLauncher		Готово.
+http://github.com/EXL/Gish	GishLauncher		http://github.com/EXL/Gish
+Click to open the file dialog.	BeGameLauncher		Кликните для открытия файлового диалога.
+3dEyes**\n\n	GishLauncher		3dEyes**\n\n
+Executable Error	BeGameLauncher		Ошибка исполнительного файла
+Official site:	GishLauncher		Сайт игры:
+Version: 	BeGameLauncher		Версия: 
+Thanks to:\n\t	GishLauncher		Спасибо:\n\t
+Cache Error	BeGameLauncher		Ошибка данных
+Click to run a game.	BeGameLauncher		Кликните для запуска игры Gish.
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка: Функция get_ref_for_path() для %exe% выполнена неуспешно.
+Gish is a side-scrolling platformer video game with some physicspuzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	GishLauncher		Игра Gish это платформер с элементами физики игрового мира, разработанный Cryptic Sea (псевдоним Alex'а Austin'а), Edmund'ом McMillen'ом, Josiah'ом Pisciotta'ой и выпущенный компанией Chronic Logic в 2004. Cryptic Sea выложил исходный код игры Gish под лицензией GPLv2 в 2010-ом году.\n\nЭто мой порт движка игры Gish на Haiku OS, который использует библиотеки SDL2, OpenAL и Ogg Vorbis.\n\n
+https://store.steampowered.com/app/9500/	GishLauncher		https://store.steampowered.com/app/9500/
+About...	BeGameLauncher		О программе...
+EXL\n	GishLauncher		EXL\n
+Gish game	GishLauncher		игра Gish
+.	GishLauncher		.
+Game data check failed.	BeGameLauncher		Игровые файлы данных не прошли проверку.
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Ошибка: Невозможно получить разрешения сущности %exe%.
+Cannot open link: 	BeGameLauncher		Невозможно открыть ссылку: 
 OK	BeGameLauncher		OK
-Some useful link: 	BasedGameLauncher		Some useful link: 
-Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
-Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
-Please choose a game folder	BeGameLauncher		Please choose a game folder
-Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
-https://store.steampowered.com/	BasedGameLauncher		https://store.steampowered.com/
-Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
-Open Link Error	BeGameLauncher		Open Link Error
-Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Information:	GishLauncher		Информация:
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Ошибка: Невозможно запустить исполнительный файл %exe%. См. %func%.
+Path to a directory with game files.	BeGameLauncher		Путь до директории с файлами игры Gish.
+Please choose a game folder	BeGameLauncher		Пожалуйста, выберите директорию игры 
+Running game via execve. Environ: %env%...	BeGameLauncher		Запуск игры через execve. Переменные среды: %env%...
+Cannot write settings file: 	BeGameLauncher		Невозможно записать файл настроек: 
+http://chroniclogic.com/gish.htm	GishLauncher		http://chroniclogic.com/gish.htm
+Open Link Error	BeGameLauncher		Ошибка ссылки
+Please select a directory with game files: 	BeGameLauncher		Пожалуйста, выберите директорию с файлами игры Gish: 

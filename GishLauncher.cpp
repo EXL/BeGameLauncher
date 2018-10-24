@@ -85,7 +85,7 @@ public:
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, 0.0f)
-		                          .AddGroup(B_HORIZONTAL)
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
 		                              .Add(urlDescString)
 		                              .Add(urlString)
 		                              .AddGlue()

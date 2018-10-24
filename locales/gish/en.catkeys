@@ -1,43 +1,49 @@
-1	en	application/x-vnd.exl-GishLauncher	3817023706
+1	en	application/x-vnd.exl-GishLauncher	2897186051
 Cannot run executable: 	BeGameLauncher		Cannot run executable: 
-http://exlmoto.ru	BasedGameLauncher		http://exlmoto.ru
-BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
-Thanks to:\n\t	BasedGameLauncher		Thanks to:\n\t
+Port to Haiku OS:\n\t	GishLauncher		Port to Haiku OS:\n\t
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
+Buy game files on Steam: 	GishLauncher		Buy game files on Steam: 
 Select	BeGameLauncher		Select
 Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
 ...	BeGameLauncher		...
 Click to view about information.	BeGameLauncher		Click to view about information.
+Source code:	GishLauncher		Source code:
 Exit	BeGameLauncher		Exit
-- my gf	BasedGameLauncher		- my gf
+Required data file %file% not found.	GishLauncher		Required data file %file% not found.
 Run!	BeGameLauncher		Run!
-Saved option: 	BasedGameLauncher		Saved option: 
 Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
 Click to exit the application.	BeGameLauncher		Click to exit the application.
 Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
+http://exlmoto.ru/gish-droid	GishLauncher		http://exlmoto.ru/gish-droid
 Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
-Buy data files: 	BasedGameLauncher		Buy data files: 
 Settings Error	BeGameLauncher		Settings Error
 Ready.	BeGameLauncher		Ready.
-Check to activate game option.	BasedGameLauncher		Check to activate game option.
+http://github.com/EXL/Gish	GishLauncher		http://github.com/EXL/Gish
 Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
+3dEyes**\n\n	GishLauncher		3dEyes**\n\n
 Executable Error	BeGameLauncher		Executable Error
+Official site:	GishLauncher		Official site:
 Version: 	BeGameLauncher		Version: 
+Thanks to:\n\t	GishLauncher		Thanks to:\n\t
 Cache Error	BeGameLauncher		Cache Error
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	BasedGameLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velitesse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
-Click to run a game.	BeGameLauncher		Click to run a game.
+Click to run a game.	BeGameLauncher		Click to run the Gish game.
 Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
+Gish is a side-scrolling platformer video game with some physicspuzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	GishLauncher		Gish is a side-scrolling platformer video game with some physicspuzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n
+https://store.steampowered.com/app/9500/	GishLauncher		https://store.steampowered.com/app/9500/
 About...	BeGameLauncher		About...
-Game option	BasedGameLauncher		Game option
+EXL\n	GishLauncher		EXL\n
+Gish game	GishLauncher		Gish game
+.	GishLauncher		.
 Game data check failed.	BeGameLauncher		Game data check failed.
 Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
 Cannot open link: 	BeGameLauncher		Cannot open link: 
 OK	BeGameLauncher		OK
-Some useful link: 	BasedGameLauncher		Some useful link: 
+Information:	GishLauncher		Information:
 Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
-Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
-Please choose a game folder	BeGameLauncher		Please choose a game folder
+Path to a directory with game files.	BeGameLauncher		Path to a directory with Gish game files.
+Please choose a game folder	BeGameLauncher		Please choose a Gish game folder
 Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
-https://store.steampowered.com/	BasedGameLauncher		https://store.steampowered.com/
 Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
+http://chroniclogic.com/gish.htm	GishLauncher		http://chroniclogic.com/gish.htm
 Open Link Error	BeGameLauncher		Open Link Error
-Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with Gish game files: 
