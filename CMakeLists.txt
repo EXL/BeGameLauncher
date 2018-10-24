@@ -13,12 +13,17 @@ elseif(LAUNCHER STREQUAL "xash3d")
 	set(BASED_LAUNCHER_NAME "Xash3DLauncher")
 	set(RES_DIR "xash3d")
 	set(SIGNATURE "application/x-vnd.exl-Xash3DLauncher")
+elseif(LAUNCHER STREQUAL "gish")
+	set(BASED_LAUNCHER_NAME "GishLauncher")
+	set(RES_DIR "gish")
+	set(SIGNATURE "application/x-vnd.exl-GishLauncher")
 endif()
 ###############################################################################
 
 if(NOT HAIKU)
 	message(FATAL_ERROR "This application only supports the Haiku OS!")
 endif()
+message("Will be building " ${BASED_LAUNCHER_NAME})
 
 include_directories(headers)
 
