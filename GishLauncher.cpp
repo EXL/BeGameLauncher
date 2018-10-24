@@ -4,11 +4,11 @@
 #include "BeUrlStringView.h"
 #include "BeUtils.h"
 
+#include <Font.h>
 #include <Rect.h>
 #include <String.h>
 #include <StringView.h>
-#include <CheckBox.h>
-#include <Font.h>
+#include <Entry.h>
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <InterfaceDefs.h>
@@ -20,47 +20,46 @@
 #endif // !SIGNATURE
 
 #undef  B_TRANSLATION_CONTEXT
-#define B_TRANSLATION_CONTEXT          "BasedGameLauncher"
+#define B_TRANSLATION_CONTEXT          "GishLauncher"
 
 // Launcher Settings
-#define TITLE                          "Game Launcher"
-#define VERSION                        "1.0.0"
-#define PACKAGE_DIR                    "Game"
-#define SETTINGS_FILE                  "GameLauncher.set"
-#define EXECUTABLE_FILE                "Game"
-#define DATA_PATH_OPT                  "DATA_DIR"
+#define TITLE                          "Gish Launcher"
+#define VERSION                        "1.2"
+#define PACKAGE_DIR                    "Gish"
+#define SETTINGS_FILE                  "GishLauncher.set"
+#define EXECUTABLE_FILE                "Gish"
+#define DATA_PATH_OPT                  "GISH_DATA_DIR"
 
 // Various Strings
-#define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
-                                       "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim" \
-                                       "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea" \
-                                       "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit" \
-                                       "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat " \
-                                       "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
-                                       "id est laborum.\n\n")
+#define L_ABOUT_STRING                 B_TRANSLATE("Gish is a side-scrolling platformer video game with some physics" \
+                                                   "puzzle elements developed by Cryptic Sea (pseudonym of Alex " \
+                                                   "Austin), Edmund McMillen, Josiah Pisciotta and published by " \
+                                                   "Chronic Logic in 2004. The game was featured in the first Humble " \
+                                                   "Indie Bundle in May 2010. Following the success of the Humble " \
+                                                   "Bundle promotion, Cryptic Sea pledged to go open source with the " \
+                                                   "game which eventually happened under the GPLv2 on May 29, 2010." \
+                                                   "\n\nThis is my port of the Gish game to Android OS which uses " \
+                                                   "SDL2, OpenAL and Ogg Vorbis libraries.\n\n")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
 #define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
-#define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/")
-#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy data files: ")
+#define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/app/9500/")
+#define L_DATA_TEXT                    B_TRANSLATE("Gish game")
+#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy game files on Steam: ")
+#define L_DOT                          B_TRANSLATE(".")
+#define L_ERROR_NO_GAMEINFO_FILE       B_TRANSLATE("Required data file %file% not found.")
 
-// Additional option
-#define S_CHECKBOX_OPTION              "GAME_OPTION"
-#define L_CHECKBOX_OPTION              B_TRANSLATE("Game option")
-#define L_CHECKBOX_OPTION_TOOLTIP      B_TRANSLATE("Check to activate game option.")
-#define L_CHECKBOX_SAVED_OPTION        B_TRANSLATE("Saved option: ")
-#define O_CHECKBOX_OPTION              "checkBoxOption"
-
+#define O_DOT                          "dotView"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
 #define O_DATA_LINK                    "dataLink"
 #define O_DATA_LINK_DESC               "dataLinkDesc"
 
-class GameAboutWindow : public BeAboutWindow
+class GishAboutWindow : public BeAboutWindow
 {
 public:
-	explicit GameAboutWindow(const BRect &frame, const char *title, const char *version)
+	explicit GishAboutWindow(const BRect &frame, const char *title, const char *version)
 	         : BeAboutWindow(frame, title, version)
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
@@ -80,41 +79,28 @@ public:
 	}
 };
 
-class BasedGameLauncher : public BeLauncherBase
+class GishLauncher : public BeLauncherBase
 {
-	enum
-	{
-		MSG_CHECKBOX_STATE_CHANGED = 'chks'
-	};
-
-	BCheckBox *fCheckBoxOption;
-
-protected:
-	virtual void
-	MessageReceived(BMessage *msg)
-	{
-		switch (msg->what)
-		{
-			case MSG_CHECKBOX_STATE_CHANGED:
-			{
-				BCheckBox *checkBox = dynamic_cast<BCheckBox *>(FindView(O_CHECKBOX_OPTION));
-				if(checkBox != NULL)
-				{
-					SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_OPTION) << ": " << checkBox->Value());
-				}
-				break;
-			}
-			default:
-			{
-				BeLauncherBase::MessageReceived(msg);
-				break;
-			}
-		}
-	}
-
 	virtual bool
 	CheckCache(void)
 	{
+		BString path = BeLauncherBase::GetTextControl()->Text();
+		if(!path.EndsWith("/"))
+		{
+			path << "/";
+		}
+
+		// NOTE: Check some file in the game cache.
+		path << "texture/face.tga";
+		BEntry fileToCheck(path);
+		if(!fileToCheck.Exists())
+		{
+			BString errorMessage(L_ERROR_NO_GAMEINFO_FILE);
+			errorMessage.ReplaceAll("%file%", path);
+			SetStatusString(B_COLOR_RED, errorMessage);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -124,68 +110,31 @@ protected:
 		return BeLauncherBase::RunGameViaRoster(true);
 	}
 
-	virtual bool
-	ReadSettings(void)
-	{
-		if(!BeLauncherBase::ReadSettings())
-		{
-			BeDebug("[Info]: First run, set default values.\n");
-			fCheckBoxOption->SetValue(B_CONTROL_ON);
-		}
-		else
-		{
-			const char *str = BeLauncherBase::GetSettings()->GetSettingsString(S_CHECKBOX_OPTION);
-			int ASCII_MAGIC = 48;
-			int value = static_cast<int>(str[0] - ASCII_MAGIC);
-			SetStatusString(B_COLOR_BLACK, BString(L_CHECKBOX_SAVED_OPTION) << value);
-			fCheckBoxOption->SetValue(value);
-		}
-		return true;
-	}
-
-	virtual void
-	SaveSettings(bool def)
-	{
-		BString value;
-		value << fCheckBoxOption->Value();
-		BeLauncherBase::GetSettings()->SetSettingsString(S_CHECKBOX_OPTION, value);
-
-		BeLauncherBase::SaveSettings(def);
-	}
-
 	virtual void
 	ShowAboutDialog(void)
 	{
-		GameAboutWindow *gameAboutWindow = new GameAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
+		GishAboutWindow *gameAboutWindow = new GishAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
 		                                                       TITLE, VERSION);
 		gameAboutWindow->Show();
 	}
 
 public:
-	explicit BasedGameLauncher(const char *startPath)
+	explicit GishLauncher(const char *startPath)
 	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
-	                          startPath, true, false)
+	                          startPath, true, true)
 	{
-		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
-		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);
-
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
-		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
+		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_TEXT, L_DATA_LINK);
+		BStringView *dot = new BStringView(O_DOT, L_DOT);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, B_USE_HALF_ITEM_SPACING)
 		                          .AddGroup(B_HORIZONTAL, 0.0f)
-		                              .Add(fCheckBoxOption)
-		                              .AddGlue()
-		                          .End()
-		                          .AddGroup(B_HORIZONTAL, 0.0f)
 		                              .Add(urlDescString)
 		                              .Add(urlString)
+		                              .Add(dot)
 		                              .AddGlue()
 		                          .End();
 		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
-
-		// NOTE: Be sure to call read settings function.
-		ReadSettings();
 	}
 };
 
@@ -193,8 +142,8 @@ int
 main(void)
 {
 	BeApp *beApp = new BeApp(SIGNATURE);
-	BasedGameLauncher *basedGameLauncher = new BasedGameLauncher(BeUtils::GetPathToHomeDir());
-	beApp->SetMainWindow(basedGameLauncher);
+	GishLauncher *gishLauncher = new GishLauncher(BeUtils::GetPathToHomeDir());
+	beApp->SetMainWindow(gishLauncher);
 	beApp->Run();
 	delete beApp;
 	beApp = NULL;

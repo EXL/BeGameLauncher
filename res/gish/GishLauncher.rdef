@@ -1,17 +1,17 @@
-resource app_signature "application/x-vnd.exl-BasedGameLauncher";
+resource app_signature "application/x-vnd.exl-GishLauncher";
 
 resource app_flags B_SINGLE_LAUNCH;
 
 resource app_version {
 	major = 1,
-	middle = 0,
+	middle = 2,
 	minor = 0,
 
 	variety = B_APPV_FINAL,
 	internal = 1,
 
-	short_info = "Game Launcher",
-	long_info = "Based Example launcher for BeGameLauncher project."
+	short_info = "Gish Launcher",
+	long_info = "Launcher application for Gish game."
 };
 
 resource(0, "Banner.png") #'PNG ' import "Banner.png";
