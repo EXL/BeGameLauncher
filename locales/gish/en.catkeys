@@ -1,4 +1,4 @@
-1	en	application/x-vnd.exl-GishLauncher	2897186051
+1	en	application/x-vnd.exl-GishLauncher	1659156815
 Cannot run executable: 	BeGameLauncher		Cannot run executable: 
 Port to Haiku OS:\n\t	GishLauncher		Port to Haiku OS:\n\t
 BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
@@ -28,7 +28,7 @@ Thanks to:\n\t	GishLauncher		Thanks to:\n\t
 Cache Error	BeGameLauncher		Cache Error
 Click to run a game.	BeGameLauncher		Click to run the Gish game.
 Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
-Gish is a side-scrolling platformer video game with some physicspuzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	GishLauncher		Gish is a side-scrolling platformer video game with some physicspuzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n
+Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	GishLauncher		Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n
 https://store.steampowered.com/app/9500/	GishLauncher		https://store.steampowered.com/app/9500/
 About...	BeGameLauncher		About...
 EXL\n	GishLauncher		EXL\n

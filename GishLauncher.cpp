@@ -31,7 +31,7 @@
 #define DATA_PATH_OPT                  "GISH_DATA_DIR"
 
 // Various Strings
-#define L_ABOUT_STRING                 B_TRANSLATE("Gish is a side-scrolling platformer video game with some physics" \
+#define L_ABOUT_STRING                 B_TRANSLATE("Gish is a side-scrolling platformer video game with some physics " \
                                                    "puzzle elements developed by Cryptic Sea (pseudonym of Alex " \
                                                    "Austin), Edmund McMillen, Josiah Pisciotta and published by " \
                                                    "Chronic Logic in 2004. Cryptic Sea pledged Gish to go open " \

@@ -1,4 +1,4 @@
-1	ru	application/x-vnd.exl-GishLauncher	2897186051
+1	ru	application/x-vnd.exl-GishLauncher	1659156815
 Cannot run executable: 	BeGameLauncher		Невозможно запустить исполнительный файл: 
 Port to Haiku OS:\n\t	GishLauncher		Порт на Haiku OS:\n\t
 BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
@@ -28,7 +28,7 @@ Thanks to:\n\t	GishLauncher		Спасибо:\n\t
 Cache Error	BeGameLauncher		Ошибка данных
 Click to run a game.	BeGameLauncher		Кликните для запуска игры Gish.
 Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка: Функция get_ref_for_path() для %exe% выполнена неуспешно.
-Gish is a side-scrolling platformer video game with some physicspuzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	GishLauncher		Игра Gish это платформер с элементами физики игрового мира, разработанный Cryptic Sea (псевдоним Alex'а Austin'а), Edmund'ом McMillen'ом, Josiah'ом Pisciotta'ой и выпущенный компанией Chronic Logic в 2004. Cryptic Sea выложил исходный код игры Gish под лицензией GPLv2 в 2010-ом году.\n\nЭто мой порт движка игры Gish на Haiku OS, который использует библиотеки SDL2, OpenAL и Ogg Vorbis.\n\n
+Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	GishLauncher		Игра Gish это платформер с элементами физики игрового мира, разработанный Cryptic Sea (псевдоним Alex'а Austin'а), Edmund'ом McMillen'ом, Josiah'ом Pisciotta'ой и выпущенный компанией Chronic Logic в 2004. Cryptic Sea выложил исходный код игры Gish под лицензией GPLv2 в 2010-ом году.\n\nЭто мой порт движка игры Gish на Haiku OS, который использует библиотеки SDL2, OpenAL и Ogg Vorbis.\n\n
 https://store.steampowered.com/app/9500/	GishLauncher		https://store.steampowered.com/app/9500/
 About...	BeGameLauncher		О программе...
 EXL\n	GishLauncher		EXL\n
