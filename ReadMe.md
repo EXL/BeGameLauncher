@@ -19,7 +19,7 @@ This is my first Haiku OS project and my first work experience with the Haiku AP
 
 * Banner.png (64x400 px) artwork.
 * Icon.png (64x64 px) icon.
-* RDef-file with vector icon and executable parameters. See this [RDef file](res/based/BasedGameLauncher.rdef) from based launcher as an example to follow.
+* RDef-file with vector icon and executable parameters. See [this RDef file](res/based/BasedGameLauncher.rdef) from based launcher as an example to follow.
 
 2. When the necessary files are ready, prepare directories for resources. The `%name%` is the simplified name of your target application:
 
@@ -45,7 +45,7 @@ cmake --build .
 
 ## Tips and tricks
 
-* You can open **CMakeLists.txt** file in the Qt Creator or KDevelop IDEs also and build your launcher by using this programs.
+* You can open **CMakeLists.txt** file in the Qt Creator or KDevelop IDEs also and build your launcher by using this programs. In addition you can use the Paladin IDE to editing the source code. This program is recommended IDE for Haiku OS.
 
 * You can create a vector icon for the executable file with using standard Icon-O-Matic program which is available in any distribution of Haiku OS. Use export to "HVIF RDef" feature to create a file with specially prepared string of HEX-bytes.
 
