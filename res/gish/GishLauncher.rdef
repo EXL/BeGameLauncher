@@ -8,7 +8,7 @@ resource app_version {
 	minor = 0,
 
 	variety = B_APPV_FINAL,
-	internal = 1,
+	internal = 0,
 
 	short_info = "Gish Launcher",
 	long_info = "Launcher application for Gish game."

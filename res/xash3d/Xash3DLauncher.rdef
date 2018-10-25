@@ -8,7 +8,7 @@ resource app_version {
 	minor = 2,
 
 	variety = B_APPV_FINAL,
-	internal = 1,
+	internal = 0,
 
 	short_info = "Xash3D Launcher",
 	long_info = "Launcher application for Xash3D engine."
