@@ -50,18 +50,18 @@ BeImageView::Draw(BRect rect)
 {
 	BeUnused(rect);
 
-	const BRect bitmapRect = fBitmap->Bounds();
-	BRect drawRect = Bounds();
-	drawRect = BRect(drawRect.left,
-	                 drawRect.top,
-	                 drawRect.right,
-	                 drawRect.bottom - G_IMAGE_ONE_PIXEL_SIZE);
-
-	SetDrawingMode(B_OP_ALPHA);
-	SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);
-
 	if(fSuccessful)
 	{
+		const BRect bitmapRect = fBitmap->Bounds();
+		BRect drawRect = Bounds();
+		drawRect = BRect(drawRect.left,
+		                 drawRect.top,
+		                 drawRect.right,
+		                 drawRect.bottom - G_IMAGE_ONE_PIXEL_SIZE);
+
+		SetDrawingMode(B_OP_ALPHA);
+		SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);
+
 		if(fIndex != K_ICON)
 		{
 			DrawBitmapAsync(fBitmap, bitmapRect, drawRect);
