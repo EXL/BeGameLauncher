@@ -27,7 +27,7 @@
 #define VERSION                        "1.2"
 #define PACKAGE_DIR                    "Gish"
 #define SETTINGS_FILE                  "GishLauncher.set"
-#define EXECUTABLE_FILE                "Gish"
+#define EXECUTABLE_FILE                "engine/Gish"
 #define DATA_PATH_OPT                  "GISH_DATA_DIR"
 
 // Various Strings

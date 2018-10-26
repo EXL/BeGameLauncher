@@ -27,7 +27,7 @@
 #define VERSION                        "1.0.0"
 #define PACKAGE_DIR                    "Game"
 #define SETTINGS_FILE                  "GameLauncher.set"
-#define EXECUTABLE_FILE                "Game"
+#define EXECUTABLE_FILE                "engine/Game"
 #define DATA_PATH_OPT                  "DATA_DIR"
 
 // Various Strings

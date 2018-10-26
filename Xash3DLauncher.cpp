@@ -39,7 +39,7 @@
 #define VERSION                        "0.19.3"
 #define PACKAGE_DIR                    "Xash3D"
 #define SETTINGS_FILE                  "Xash3DLauncher.set"
-#define EXECUTABLE_FILE                "Xash3D"
+#define EXECUTABLE_FILE                "engine/Xash3D"
 #define DATA_PATH_OPT                  "XASH3D_BASEDIR"
 #define MIRROR_PATH_OPT                "XASH3D_MIRRORDIR"
 #define GAME_OPT                       "XASH3D_GAME"
