@@ -36,7 +36,7 @@
 
 // Launcher Settings
 #define TITLE                          "Xash3D Launcher"
-#define VERSION                        "0.19.2"
+#define VERSION                        "0.19.3"
 #define PACKAGE_DIR                    "Xash3D"
 #define SETTINGS_FILE                  "Xash3DLauncher.set"
 #define EXECUTABLE_FILE                "Xash3D"
