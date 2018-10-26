@@ -116,6 +116,8 @@ BeLauncherBase::CreateForm(void)
 	              Bounds().Width() + G_OFFSET_FOR_SIZE,
 	              Bounds().Height(),
 	              Bounds().Height() + G_OFFSET_FOR_SIZE);
+
+	CenterOnScreen();
 }
 
 void

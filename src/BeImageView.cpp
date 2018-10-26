@@ -57,7 +57,7 @@ BeImageView::Draw(BRect rect)
 		drawRect = BRect(drawRect.left,
 		                 drawRect.top,
 		                 drawRect.right,
-		                 drawRect.bottom - G_IMAGE_ONE_PIXEL_SIZE);
+		                 drawRect.bottom);
 
 		SetDrawingMode(B_OP_ALPHA);
 		SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);
