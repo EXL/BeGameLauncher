@@ -1,9 +1,9 @@
-1	ru	application/x-vnd.exl-Xash3DLauncher	2127395118
+1	ru	application/x-vnd.exl-Xash3DLauncher	2229437977
 Cannot run executable: 	BeGameLauncher		Невозможно запустить исполнительный файл: 
+Arguments:	Xash3DGameLauncher		Аргументы:
 Half-Life	Xash3DGameLauncher		Half-Life
 Game files directory does not contain the \"valve\" catalog.	Xash3DGameLauncher		Выбранная директория не содержит каталог \"valve\".
 Thanks to:\n\t	Xash3DGameLauncher		Спасибо:\n\t
-Uncle Mike, a1batross, mittorn, 3dEyes**\n\n	Xash3DGameLauncher		Дядя Миша, a1batross, mittorn, 3dEyes**\n\n
 BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
 Please choose a libraries folder	Xash3DGameLauncher		Пожалуйста, выберите директорию с библиотеками
 Select	BeGameLauncher		Выбор
@@ -16,6 +16,8 @@ Override path to the Xash3D required files:	Xash3DGameLauncher		Переопре
 https://store.steampowered.com/app/130	Xash3DGameLauncher		https://store.steampowered.com/app/130
 Port to Haiku OS:\n\t	Xash3DGameLauncher		Порт на Haiku OS:\n\t
 Exit	BeGameLauncher		Выход
+Uncle Mike, a1batross, mittorn,\n\tnekonomicon, LostGamerHL, 3dEyes**\n\n	Xash3DGameLauncher		Дядя Миша, a1batross, mittorn,\n\tnekonomicon, LostGamerHL, 3dEyes**\n\n
+Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on crossplatform and compatibility with original Xash3D and Gold Source.\n\n	Xash3DGameLauncher		Движок Xash3D является переписанным с нуля движком Gold Source. Xash3D совместим со многими играми на Gold Source и позволяет запустить практически любой одиночный мод для игры Half-Life.\n\nXash3D FWGS является форком движка Xash3D и нацелен на кроссплатформенность и совместимость с оригинальным Xash3D и Gold Source.\n\n
 Run!	BeGameLauncher		Запустить!
 Running game via BRoster. Environ: %env%...	BeGameLauncher		Запуск игры через BRoster. Переменные среды: %env%...
 ...	Xash3DGameLauncher		...
@@ -27,7 +29,6 @@ Settings Error	BeGameLauncher		Ошибка параметров
 Ready.	BeGameLauncher		Готово.
 http://xash.su	Xash3DGameLauncher		http://xash.su
 Click to open the file dialog.	BeGameLauncher		Кликните для открытия файлового диалога.
-Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on crossplatform and compatibility with original Xash3D and Gold Source.\n\n	Xash3DGameLauncher		Движок Xash3D является переписанным с нуля движком Gold Source. Xash3D совместим со многими играми на Gold Source и позволяет запустить практически любой одиночный мод для игры Half-Life.\n\nXash3D FWGS является форком движка Xash3D и нацелен на кроссплатформенность и совместимость с оригинальным Xash3D и Gold Source.\n\n
 Please select a Game/Mod:	Xash3DGameLauncher		Пожалуйста, выберите игру или мод:
 https://store.steampowered.com/app/70	Xash3DGameLauncher		https://store.steampowered.com/app/70
 Executable Error	BeGameLauncher		Ошибка исполнительного файла

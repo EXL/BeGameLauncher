@@ -50,7 +50,7 @@
 #define ENGINE_LIBRARY                 "libxash.so"
 
 // Globals
-#define G_GAMES_LIST_HEIGHT            65.0f
+#define G_GAMES_LIST_HEIGHT            60.0f
 #define G_MAX_GAME_NAME_LENGTH         50
 
 // Various Strings
@@ -71,7 +71,8 @@
                                        "\"extras\" catalog to any convenient place for you:\n    " \
                                        "cp -avR /system/apps/Xash3D/extras ~/")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("Uncle Mike, a1batross, mittorn, 3dEyes**\n\n")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("Uncle Mike, a1batross, mittorn,\n\t" \
+                                       "nekonomicon, LostGamerHL, 3dEyes**\n\n")
 #define L_ABOUT_PORT_STR_H             B_TRANSLATE("Port to Haiku OS:\n\t")
 #define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://xash.su")
@@ -399,7 +400,7 @@ protected:
 			fAdditionalBrowseButton->SetEnabled(false);
 
 			fAdditionalTextControl->SetText(GetPathToPackageExtras());
-			fCmdArgsTextControl->SetText("-dev");
+			fCmdArgsTextControl->SetText("-dev 1");
 		}
 		else
 		{
@@ -432,7 +433,7 @@ protected:
 	virtual void
 	ShowAboutDialog(void)
 	{
-		Xash3DAboutWindow *xash3DAboutWindow = new Xash3DAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 3)),
+		Xash3DAboutWindow *xash3DAboutWindow = new Xash3DAboutWindow(Frame().InsetBySelf(BannerWidth(), -(Gap() * 4)),
 		                                                             TITLE, VERSION);
 		xash3DAboutWindow->Show();
 	}
