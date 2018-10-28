@@ -121,7 +121,7 @@ protected:
 	virtual bool
 	RunGame(void)
 	{
-		return BeLauncherBase::RunGameViaRoster(true);
+		return BeLauncherBase::RunGameViaRoster(true, false);
 	}
 
 	virtual bool

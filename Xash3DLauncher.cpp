@@ -44,12 +44,13 @@
 #define MIRROR_PATH_OPT                "XASH3D_MIRRORDIR"
 #define GAME_OPT                       "XASH3D_GAME"
 #define CHECKBOX_OPT                   "GAME_OPTION"
+#define CMD_ARGS_OPT                   "ARGS_OPTION"
 #define EXTRAS_DIR_NAME                "/extras"
 #define VALVE_DIR_NAME                 "valve"
 #define ENGINE_LIBRARY                 "libxash.so"
 
 // Globals
-#define G_GAMES_LIST_HEIGHT            80.0f
+#define G_GAMES_LIST_HEIGHT            65.0f
 #define G_MAX_GAME_NAME_LENGTH         50
 
 // Various Strings
@@ -97,6 +98,7 @@
 #define L_EXTRA_BUTTON_BROWSE_TOOLTIP  B_TRANSLATE("Click to open the file dialog.")
 #define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
 #define L_GAME_LIST_LABEL              B_TRANSLATE("Please select a Game/Mod:")
+#define L_CMD_LIST_ARGS                B_TRANSLATE("Arguments:")
 
 // Object Names
 #define O_CHECKBOX_OPTION              "checkBoxOption"
@@ -108,6 +110,7 @@
 #define O_DATA_LINKS_DESC              "dataLinkDesc"
 #define O_VIEW_SCROLL                  "viewScroll"
 #define O_GAME_LIST_LABEL              "gameListLabel"
+#define O_CMD_LIST_ARGS                "cmdListArgsLabel"
 #define O_SEPARATOR                    "separatorView"
 #define O_DOT                          "dotView"
 
@@ -168,6 +171,7 @@ class Xash3DGameLauncher : public BeLauncherBase
 
 	BCheckBox *fCheckBoxOption;
 	BTextControl *fAdditionalTextControl;
+	BTextControl *fCmdArgsTextControl;
 	BButton *fAdditionalBrowseButton;
 	BListView *fGamesList;
 	BScrollView *fScrollView;
@@ -379,7 +383,9 @@ protected:
 		}
 		setenv(GAME_OPT, fSelectedGame.String(), 1);
 
-		return BeLauncherBase::RunGameViaRoster(true);
+		SetCustomArgs(fCmdArgsTextControl->Text());
+
+		return BeLauncherBase::RunGameViaRoster(true, true);
 	}
 
 	virtual bool
@@ -393,6 +399,7 @@ protected:
 			fAdditionalBrowseButton->SetEnabled(false);
 
 			fAdditionalTextControl->SetText(GetPathToPackageExtras());
+			fCmdArgsTextControl->SetText("-dev");
 		}
 		else
 		{
@@ -404,6 +411,7 @@ protected:
 			fAdditionalBrowseButton->SetEnabled(static_cast<bool>(value));
 
 			fAdditionalTextControl->SetText(BeLauncherBase::GetSettings()->GetSettingsString(MIRROR_PATH_OPT));
+			fCmdArgsTextControl->SetText(BeLauncherBase::GetSettings()->GetSettingsString(CMD_ARGS_OPT));
 		}
 		return true;
 	}
@@ -415,6 +423,7 @@ protected:
 		value << fCheckBoxOption->Value();
 		BeLauncherBase::GetSettings()->SetSettingsString(CHECKBOX_OPT, value);
 		BeLauncherBase::GetSettings()->SetSettingsString(MIRROR_PATH_OPT, fAdditionalTextControl->Text());
+		BeLauncherBase::GetSettings()->SetSettingsString(CMD_ARGS_OPT, fCmdArgsTextControl->Text());
 		BeLauncherBase::GetSettings()->SetSettingsString(GAME_OPT, fSelectedGame);
 
 		BeLauncherBase::SaveSettings(def);
@@ -443,6 +452,9 @@ public:
 	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
 	                          startPath, true, false)
 	{
+		BStringView *cmdArgsLabel = new BStringView(O_CMD_LIST_ARGS, L_CMD_LIST_ARGS);
+		fCmdArgsTextControl = new BTextControl(NULL, NULL, NULL);
+
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
 		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);
 
@@ -475,6 +487,10 @@ public:
 		                                          false, true, B_PLAIN_BORDER);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, B_USE_HALF_ITEM_SPACING)
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(cmdArgsLabel)
+		                              .Add(fCmdArgsTextControl)
+		                          .End()
 		                          .AddGroup(B_HORIZONTAL, 0.0f)
 		                              .Add(fCheckBoxOption)
 		                              .AddGlue()

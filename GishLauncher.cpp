@@ -132,7 +132,7 @@ class GishLauncher : public BeLauncherBase
 	virtual bool
 	RunGame(void)
 	{
-		return BeLauncherBase::RunGameViaRoster(true);
+		return BeLauncherBase::RunGameViaRoster(true, false);
 	}
 
 	virtual void
