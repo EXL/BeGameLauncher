@@ -16,10 +16,9 @@
 #include <Roster.h>
 #include <Window.h>
 #include <Errors.h>
+#include <StringList.h>
 
 #include <Catalog.h>
-
-#include <vector>
 
 #include <unistd.h>
 
@@ -78,6 +77,9 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
 	fStatusString = NULL;
 	fDataTextControl = NULL;
 	fAdditionalBox = NULL;
+
+	fCustomArgs.push_back(fExecutableFilePath);
+	fCustomArgs.push_back(NULL);
 
 	CreateForm();
 
@@ -257,7 +259,7 @@ BeLauncherBase::CheckAll()
 bool
 BeLauncherBase::RunGame(void)
 {
-	return RunGameViaRoster(false);
+	return RunGameViaRoster(false, false);
 }
 
 BeDirectoryFilePanel *
@@ -429,8 +431,24 @@ BeLauncherBase::ShowAboutDialog(void)
 	aboutWindow->Show();
 }
 
+void
+BeLauncherBase::SetCustomArgs(const BString &str)
+{
+	fCustomArgs.clear();
+	fCustomArgs.push_back(fExecutableFilePath);
+
+	BStringList listArgs;
+	str.Split(" ", true, listArgs);
+	for (int i = 0; i < listArgs.CountStrings(); ++i)
+	{
+		fCustomArgs.push_back(listArgs.StringAt(i));
+	}
+
+	fCustomArgs.push_back(NULL);
+}
+
 bool
-BeLauncherBase::RunGameViaRoster(bool useEnviron)
+BeLauncherBase::RunGameViaRoster(bool useEnviron, bool customArgs)
 {
 	BString message(L_RUNNING_VIA_ROSTER);
 	message.ReplaceAll("%env%", BString() << useEnviron);
@@ -459,13 +477,20 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron)
 	}
 
 	std::vector<const char *> argv;
-	argv.push_back(executable);
-	if (!useEnviron)
+	if(!customArgs)
 	{
-		argv.push_back(sDataPathArg);
-		argv.push_back(fDataTextControl->Text());
+		argv.push_back(executable);
+		if(!useEnviron)
+		{
+			argv.push_back(sDataPathArg);
+			argv.push_back(fDataTextControl->Text());
+		}
+		argv.push_back(NULL);
 	}
-	argv.push_back(NULL);
+	else
+	{
+		argv = fCustomArgs;
+	}
 	be_roster->Launch(&ref, static_cast<int>(argv.size() - 1),
 	                  const_cast<const char * const *>(argv.data()));
 
@@ -473,7 +498,7 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron)
 }
 
 bool
-BeLauncherBase::RunGameViaExecVe(bool useEnviron)
+BeLauncherBase::RunGameViaExecVe(bool useEnviron, bool customArgs)
 {
 	BString message(L_RUNNING_VIA_EXECVE);
 	message.ReplaceAll("%env%", BString() << useEnviron);
@@ -494,13 +519,20 @@ BeLauncherBase::RunGameViaExecVe(bool useEnviron)
 		const char *executable = fExecutableFilePath.String();
 
 		std::vector<const char *> argv;
-		argv.push_back(executable);
-		if(!useEnviron)
+		if(!customArgs)
 		{
-			argv.push_back(sDataPathArg);
-			argv.push_back(fDataTextControl->Text());
+			argv.push_back(executable);
+			if(!useEnviron)
+			{
+				argv.push_back(sDataPathArg);
+				argv.push_back(fDataTextControl->Text());
+			}
+			argv.push_back(NULL);
 		}
-		argv.push_back(NULL);
+		else
+		{
+			argv = fCustomArgs;
+		}
 		execve(executable, const_cast<char * const *>(argv.data()), environ);
 
 		BString error(L_ERROR_RUN_EXE);

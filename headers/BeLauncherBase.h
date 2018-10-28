@@ -13,6 +13,8 @@
 #include <Message.h>
 #include <Box.h>
 
+#include <vector>
+
 class BeLauncherBase : public BeMainWindow
 {
 	const char *sWindowTitle;
@@ -21,6 +23,8 @@ class BeLauncherBase : public BeMainWindow
 	const char *sStartPath;
 
 	const bool sShowIcon;
+
+	std::vector<const char*> fCustomArgs;
 
 	BString fExecutableFilePath;
 
@@ -68,8 +72,8 @@ protected:
 	virtual bool CheckAll(void);
 
 	virtual bool RunGame(void);
-	virtual bool RunGameViaRoster(bool useEnviron);
-	virtual bool RunGameViaExecVe(bool useEnviron);
+	virtual bool RunGameViaRoster(bool useEnviron, bool customArgs);
+	virtual bool RunGameViaExecVe(bool useEnviron, bool customArgs);
 
 	virtual void ShowErrorCacheAlert(void);
 	virtual void ShowExecutableCacheAlert(void);
@@ -78,6 +82,8 @@ protected:
 	virtual bool QuitRequested(void);
 
 	virtual void ShowAboutDialog(void);
+
+	virtual void SetCustomArgs(const BString &str);
 
 public:
 	explicit BeLauncherBase(const char *windowTitle,
