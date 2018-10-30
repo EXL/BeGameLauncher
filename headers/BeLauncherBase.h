@@ -102,6 +102,8 @@ public:
 	BTextControl *GetTextControl(void) const;
 	BBox *GetAdditionalBox(void) const;
 
+	void SetExecutablePath(const BString &path);
+
 	static float Gap(void);
 	static float BannerWidth(void);
 	static float GetStartPointX(void);

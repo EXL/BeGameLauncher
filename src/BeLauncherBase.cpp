@@ -286,6 +286,15 @@ BeLauncherBase::GetAdditionalBox(void) const
 	return fAdditionalBox;
 }
 
+void
+BeLauncherBase::SetExecutablePath(const BString &path)
+{
+	fExecutableFilePath = path;
+
+	fCustomArgs.push_back(fExecutableFilePath);
+	fCustomArgs.push_back(NULL);
+}
+
 float
 BeLauncherBase::Gap(void)
 {
