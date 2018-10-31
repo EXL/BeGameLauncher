@@ -41,7 +41,7 @@ OK	BeGameLauncher		OK
 Information:	GishLauncher		Информация:
 Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Ошибка: Невозможно запустить исполнительный файл %exe%. См. %func%.
 Path to a directory with game files.	BeGameLauncher		Путь до директории с файлами игры Gish.
-Please choose a game folder	BeGameLauncher		Пожалуйста, выберите директорию игры 
+Please choose a game folder	BeGameLauncher		Пожалуйста, выберите директорию игры
 Running game via execve. Environ: %env%...	BeGameLauncher		Запуск игры через execve. Переменные среды: %env%...
 Cannot write settings file: 	BeGameLauncher		Невозможно записать файл параметров: 
 http://chroniclogic.com/gish.htm	GishLauncher		http://chroniclogic.com/gish.htm
