@@ -18,5 +18,5 @@ res/serious/Banner.png based on:
 res/serious/Icon.png based on:
 * [Serious Sam Logo SVG by CB260](https://www.deviantart.com/cb260/art/Serious-Sam-Logo-SVG-212403670)
 
-Some of icons in this repository based on Haiku by many authors:
+Some of icons in this repository based on Haiku vector icons by many authors:
 * [Haiku Icons Repository by darealshinji](https://github.com/darealshinji/haiku-icons)
