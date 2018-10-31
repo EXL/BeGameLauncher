@@ -40,7 +40,7 @@
 
 // Various Strings
 #define L_ABOUT_STRING                 B_TRANSLATE("The Serious Engine lets you run the \"Serious Sam Classic: " \
-                                                   "The First Encounter\" and \"Serious Sam Classic: The Second " \
+                                                   "The First Encounter\" and the \"Serious Sam Classic: The Second " \
                                                    "Encounter\" games. In addition, custom game mods are supported " \
                                                    "also. Croteam pledged Serious Engine to go open " \
                                                    "source under the GPLv2 on March 11, 2016.\n\n" \
@@ -190,7 +190,7 @@ class SeriousLauncher : public BeLauncherBase
 		}
 		if(!libraryPath.EndsWith("/"))
 		{
-			path << "/";
+			libraryPath << "/";
 		}
 
 		setenv(LIBS_PATH_OPT, libraryPath.String(), 1);

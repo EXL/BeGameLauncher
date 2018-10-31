@@ -470,9 +470,15 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron, bool customArgs)
 
 	entry_ref ref;
 
+	BString dataPath = fDataTextControl->Text();
+	if(!dataPath.EndsWith("/"))
+	{
+		dataPath << "/";
+	}
+
 	if(useEnviron)
 	{
-		setenv(sDataPathArg, fDataTextControl->Text(), 1);
+		setenv(sDataPathArg, dataPath, 1);
 	}
 
 	const char *executable = fExecutableFilePath.String();
@@ -492,7 +498,7 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron, bool customArgs)
 		if(!useEnviron)
 		{
 			argv.push_back(sDataPathArg);
-			argv.push_back(fDataTextControl->Text());
+			argv.push_back(dataPath);
 		}
 		argv.push_back(NULL);
 	}
@@ -518,9 +524,15 @@ BeLauncherBase::RunGameViaExecVe(bool useEnviron, bool customArgs)
 		return false;
 	}
 
+	BString dataPath = fDataTextControl->Text();
+	if(!dataPath.EndsWith("/"))
+	{
+		dataPath << "/";
+	}
+
 	if(useEnviron)
 	{
-		setenv(sDataPathArg, fDataTextControl->Text(), 1);
+		setenv(sDataPathArg, dataPath, 1);
 	}
 
 	if (fork() == 0)
@@ -534,7 +546,7 @@ BeLauncherBase::RunGameViaExecVe(bool useEnviron, bool customArgs)
 			if(!useEnviron)
 			{
 				argv.push_back(sDataPathArg);
-				argv.push_back(fDataTextControl->Text());
+				argv.push_back(dataPath);
 			}
 			argv.push_back(NULL);
 		}
