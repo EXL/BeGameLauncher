@@ -17,6 +17,10 @@ elseif(LAUNCHER STREQUAL "gish")
 	set(BASED_LAUNCHER_NAME "GishLauncher")
 	set(RES_DIR "gish")
 	set(SIGNATURE "application/x-vnd.exl-GishLauncher")
+elseif(LAUNCHER STREQUAL "serious")
+	set(BASED_LAUNCHER_NAME "SeriousLauncher")
+	set(RES_DIR "serious")
+	set(SIGNATURE "application/x-vnd.exl-SeriousLauncher")
 endif()
 ###############################################################################
 

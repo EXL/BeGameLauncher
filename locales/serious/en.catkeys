@@ -1,0 +1,49 @@
+1	en	application/x-vnd.exl-SeriousLauncher	2767357743
+Cannot run executable: 	BeGameLauncher		Cannot run executable: 
+Information:	SeriousLauncher		Information:
+http://exlmoto.ru/gish-droid	SeriousLauncher		http://exlmoto.ru/gish-droid
+.	SeriousLauncher		.
+Source code:	SeriousLauncher		Source code:
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
+Gish game	SeriousLauncher		Gish game
+Select	BeGameLauncher		Select
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+http://github.com/EXL/Gish	SeriousLauncher		http://github.com/EXL/Gish
+...	BeGameLauncher		...
+Click to view about information.	BeGameLauncher		Click to view about information.
+http://chroniclogic.com/gish.htm	SeriousLauncher		http://chroniclogic.com/gish.htm
+3dEyes**\n\n	SeriousLauncher		3dEyes**\n\n
+EXL\n	SeriousLauncher		EXL\n
+Exit	BeGameLauncher		Exit
+Run!	BeGameLauncher		Run!
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
+Click to exit the application.	BeGameLauncher		Click to exit the application.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
+Thanks to:\n\t	SeriousLauncher		Thanks to:\n\t
+Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
+Settings Error	BeGameLauncher		Settings Error
+Ready.	BeGameLauncher		Ready.
+Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
+Buy game files on Steam: 	SeriousLauncher		Buy game files on Steam: 
+Executable Error	BeGameLauncher		Executable Error
+Version: 	BeGameLauncher		Version: 
+Cache Error	BeGameLauncher		Cache Error
+Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	SeriousLauncher		Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n
+Port to Haiku OS:\n\t	SeriousLauncher		Port to Haiku OS:\n\t
+Official site:	SeriousLauncher		Official site:
+Click to run a game.	BeGameLauncher		Click to run a game.
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
+About...	BeGameLauncher		About...
+https://store.steampowered.com/app/9500/	SeriousLauncher		https://store.steampowered.com/app/9500/
+Game data check failed.	BeGameLauncher		Game data check failed.
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
+Cannot open link: 	BeGameLauncher		Cannot open link: 
+OK	BeGameLauncher		OK
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
+Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
+Please choose a game folder	BeGameLauncher		Please choose a game folder
+Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
+Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
+Open Link Error	BeGameLauncher		Open Link Error
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Required data file %file% not found.	SeriousLauncher		Required data file %file% not found.
