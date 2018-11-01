@@ -333,7 +333,7 @@ protected:
 		// NOTE: 2. Check some file in the game cache.
 		BString fileToCheckPath = path;
 		fileToCheckPath << fSelectedGame;
-		fileToCheckPath << "/gameinfo.txt";
+		fileToCheckPath << "/config.cfg";
 		BEntry fileToCheck(fileToCheckPath);
 		if(!fileToCheck.Exists())
 		{
