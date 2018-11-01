@@ -81,6 +81,8 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
 	fCustomArgs.push_back(fExecutableFilePath);
 	fCustomArgs.push_back(NULL);
 
+	SetAdditionalEndingSlash(false);
+
 	CreateForm();
 
 	if(readSettings)
@@ -295,6 +297,12 @@ BeLauncherBase::SetExecutablePath(const BString &path)
 	fCustomArgs.push_back(NULL);
 }
 
+void
+BeLauncherBase::SetAdditionalEndingSlash(bool state)
+{
+	fAdditionalEndingSlash = state;
+}
+
 float
 BeLauncherBase::Gap(void)
 {
@@ -471,7 +479,7 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron, bool customArgs)
 	entry_ref ref;
 
 	BString dataPath = fDataTextControl->Text();
-	if(!dataPath.EndsWith("/"))
+	if(!dataPath.EndsWith("/") && fAdditionalEndingSlash)
 	{
 		dataPath << "/";
 	}
@@ -525,7 +533,7 @@ BeLauncherBase::RunGameViaExecVe(bool useEnviron, bool customArgs)
 	}
 
 	BString dataPath = fDataTextControl->Text();
-	if(!dataPath.EndsWith("/"))
+	if(!dataPath.EndsWith("/") && fAdditionalEndingSlash)
 	{
 		dataPath << "/";
 	}
