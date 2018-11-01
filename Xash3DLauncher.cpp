@@ -100,6 +100,7 @@
 #define L_ADDITIONAL_FILE_PANEL_TITLE  B_TRANSLATE("Please choose a libraries folder")
 #define L_GAME_LIST_LABEL              B_TRANSLATE("Please select a Game/Mod:")
 #define L_CMD_LIST_ARGS                B_TRANSLATE("Arguments:")
+#define L_CMD_LIST_ARGS_TOOLTIP        B_TRANSLATE("Command-line arguments for executable file.")
 
 // Object Names
 #define O_CHECKBOX_OPTION              "checkBoxOption"
@@ -455,6 +456,7 @@ public:
 	{
 		BStringView *cmdArgsLabel = new BStringView(O_CMD_LIST_ARGS, L_CMD_LIST_ARGS);
 		fCmdArgsTextControl = new BTextControl(NULL, NULL, NULL);
+		fCmdArgsTextControl->SetToolTip(L_CMD_LIST_ARGS_TOOLTIP);
 
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
 		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);

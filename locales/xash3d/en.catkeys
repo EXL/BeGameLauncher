@@ -1,4 +1,4 @@
-1	en	application/x-vnd.exl-Xash3DLauncher	2229437977
+1	en	application/x-vnd.exl-Xash3DLauncher	280794236
 Cannot run executable: 	BeGameLauncher		Cannot run executable: 
 Arguments:	Xash3DGameLauncher		Arguments:
 Half-Life	Xash3DGameLauncher		Half-Life
@@ -16,6 +16,7 @@ Override path to the Xash3D required files:	Xash3DGameLauncher		Override path to
 https://store.steampowered.com/app/130	Xash3DGameLauncher		https://store.steampowered.com/app/130
 Port to Haiku OS:\n\t	Xash3DGameLauncher		Port to Haiku OS:\n\t
 Exit	BeGameLauncher		Exit
+Command-line arguments for executable file.	Xash3DGameLauncher		Command-line arguments for executable file.
 Uncle Mike, a1batross, mittorn,\n\tnekonomicon, LostGamerHL, 3dEyes**\n\n	Xash3DGameLauncher		Uncle Mike, a1batross, mittorn,\n\tnekonomicon, LostGamerHL, 3dEyes**\n\n
 Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on crossplatform and compatibility with original Xash3D and Gold Source.\n\n	Xash3DGameLauncher		Xash3D Engine is a custom Gold Source engine rewritten from scratch. Xash3D is compatible with many of the Gold Source games and mods and should be able to run almost any existing singleplayer Half-Life mod without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on crossplatform and compatibility with original Xash3D and Gold Source.\n\n
 Run!	BeGameLauncher		Run!
