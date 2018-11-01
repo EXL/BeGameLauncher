@@ -254,6 +254,8 @@ public:
 		                              .AddGlue()
 		                          .End();
 		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
+
+		BeLauncherBase::SetAdditionalEndingSlash(true);
 	}
 };
 
