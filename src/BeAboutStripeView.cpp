@@ -1,4 +1,6 @@
 #include "BeAboutStripeView.h"
+#include "BeImageView.h"
+#include "BeUtils.h"
 
 #include <Size.h>
 #include <Point.h>
@@ -22,6 +24,10 @@ BeAboutStripeView::BeAboutStripeView(const BBitmap *icon)
 	{
 		width += fIcon->Bounds().Width() + G_ICON_OFFSET;
 	}
+	else
+	{
+		width += BeImageView::GetGeneralWidth() + G_ICON_OFFSET;
+	}
 
 	SetExplicitSize(BSize(width, B_SIZE_UNSET));
 	SetExplicitPreferredSize(BSize(width, B_SIZE_UNLIMITED));
@@ -30,11 +36,6 @@ BeAboutStripeView::BeAboutStripeView(const BBitmap *icon)
 void
 BeAboutStripeView::Draw(BRect rect)
 {
-	if(fIcon == NULL)
-	{
-		return;
-	}
-
 	SetHighColor(ViewColor());
 	FillRect(rect);
 
@@ -45,7 +46,17 @@ BeAboutStripeView::Draw(BRect rect)
 
 	SetDrawingMode(B_OP_ALPHA);
 	SetBlendingMode(B_PIXEL_ALPHA, B_ALPHA_OVERLAY);
-	DrawBitmapAsync(fIcon, BPoint(G_ICON_X, G_ICON_Y));
+	if(fIcon != NULL)
+	{
+		DrawBitmapAsync(fIcon, BPoint(G_ICON_X, G_ICON_Y));
+	}
+	else
+	{
+		BRect iconRect(G_ICON_X, G_ICON_Y,
+		               G_ICON_X + BeImageView::GetGeneralWidth(), G_ICON_Y + BeImageView::GetGeneralWidth());
+		SetHighColor(K_RED);
+		FillRect(iconRect);
+	}
 }
 
 float
@@ -74,6 +85,9 @@ BeAboutStripeView::GetStripeWidth(void)
 
 BeAboutStripeView::~BeAboutStripeView(void)
 {
-	delete fIcon;
-	fIcon = NULL;
+	if(fIcon != NULL)
+	{
+		delete fIcon;
+		fIcon = NULL;
+	}
 }
