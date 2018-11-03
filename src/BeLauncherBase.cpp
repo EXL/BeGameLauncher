@@ -82,6 +82,7 @@ BeLauncherBase::BeLauncherBase(const char *windowTitle,
 	fCustomArgs.push_back(NULL);
 
 	SetAdditionalEndingSlash(false);
+	SetUseArgvZeroForRoster(false);
 
 	CreateForm();
 
@@ -185,7 +186,6 @@ BeLauncherBase::SetStatusString(color_msg_t type, const BString &str)
 			fStatusString->SetHighColor(K_BLACK);
 			break;
 		}
-
 	}
 
 	fStatusString->SetText(str.String());
@@ -301,6 +301,12 @@ void
 BeLauncherBase::SetAdditionalEndingSlash(bool state)
 {
 	fAdditionalEndingSlash = state;
+}
+
+void
+BeLauncherBase::SetUseArgvZeroForRoster(bool state)
+{
+	fUseArgvZeroForRoster = state;
 }
 
 float
@@ -502,7 +508,10 @@ BeLauncherBase::RunGameViaRoster(bool useEnviron, bool customArgs)
 	std::vector<const char *> argv;
 	if(!customArgs)
 	{
-		argv.push_back(executable);
+		if(fUseArgvZeroForRoster)
+		{
+			argv.push_back(executable);
+		}
 		if(!useEnviron)
 		{
 			argv.push_back(sDataPathArg);

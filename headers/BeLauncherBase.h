@@ -25,6 +25,7 @@ class BeLauncherBase : public BeMainWindow
 	const bool sShowIcon;
 
 	bool fAdditionalEndingSlash;
+	bool fUseArgvZeroForRoster;
 
 	std::vector<const char*> fCustomArgs;
 
@@ -105,7 +106,9 @@ public:
 	BBox *GetAdditionalBox(void) const;
 
 	void SetExecutablePath(const BString &path);
+
 	void SetAdditionalEndingSlash(bool state);
+	void SetUseArgvZeroForRoster(bool state);
 
 	static float Gap(void);
 	static float BannerWidth(void);
