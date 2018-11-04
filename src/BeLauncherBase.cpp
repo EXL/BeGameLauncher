@@ -458,7 +458,10 @@ void
 BeLauncherBase::SetCustomArgs(const BString &str)
 {
 	fCustomArgs.clear();
-	fCustomArgs.push_back(fExecutableFilePath);
+	if(fUseArgvZeroForRoster)
+	{
+		fCustomArgs.push_back(fExecutableFilePath);
+	}
 
 	BStringList listArgs;
 	str.Split(" ", true, listArgs);
