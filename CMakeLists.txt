@@ -21,6 +21,10 @@ elseif(LAUNCHER STREQUAL "serious")
 	set(BASED_LAUNCHER_NAME "SeriousLauncher")
 	set(RES_DIR "serious")
 	set(SIGNATURE "application/x-vnd.exl-SeriousLauncher")
+elseif(LAUNCHER STREQUAL "vangers")
+	set(BASED_LAUNCHER_NAME "VangersLauncher")
+	set(RES_DIR "vangers")
+	set(SIGNATURE "application/x-vnd.exl-VangersLauncher")
 endif()
 ###############################################################################
 
