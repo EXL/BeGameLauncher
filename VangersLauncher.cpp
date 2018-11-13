@@ -13,6 +13,7 @@
 #include <LayoutBuilder.h>
 #include <InterfaceDefs.h>
 #include <Directory.h>
+#include <Font.h>
 
 #include <Catalog.h>
 
@@ -46,7 +47,12 @@
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
 #define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/app/264080/")
-#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy data files on Steam: ")
+#define L_DATA_TEXT                    B_TRANSLATE("The Vangers Game, Steam")
+#define L_DATA_LINK_G                  B_TRANSLATE("https://gog.com/game/vangers")
+#define L_DATA_TEXT_G                  B_TRANSLATE("The Vangers Game, GOG.com")
+#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy Vangers game files on: ")
+#define L_TESTED                       B_TRANSLATE("(tested)")
+
 #define L_RADIO_OPTION_ENG             B_TRANSLATE("English")
 #define L_RADIO_OPTION_RUS             B_TRANSLATE("Russian")
 #define L_RADIO_OPTION_ENG_TOOLTIP     B_TRANSLATE("Check to activate English version of Vangers.")
@@ -57,10 +63,13 @@
 #define L_COPYING_MESSAGE              B_TRANSLATE("Copying %dir1% to %dir2%...")
 
 // Object names
+#define O_TESTED                       "testedString"
 #define O_ABOUT_LINK                   "aboutLink"
 #define O_ABOUT_LINK_DESC              "aboutLinkDesc"
 #define O_DATA_LINK                    "dataLink"
 #define O_DATA_LINK_DESC               "dataLinkDesc"
+#define O_DATA_LINK_G                  "dataLinkG"
+#define O_DATA_LINK_DESC_G             "dataLinkDescG"
 #define O_RADIO_OPTION_ENG             "radioOptionEng"
 #define O_RADIO_OPTION_RUS             "radioOptionRus"
 #define O_RADIO_GROUP_LABEL            "radioGroupLabel"
@@ -187,10 +196,11 @@ protected:
 			SetStatusString(B_COLOR_GREEN, copyingMessage);
 
 			// NOTE: This is ugly. UGLY! Need to rewrite to Haiku API.
-			BString copyCommand = "cp -aR ";
+			BString copyCommand = "cp -aR \"";
 			copyCommand << iscreenDirSys;
-			copyCommand	<< " ";
+			copyCommand	<< "\" \"";
 			copyCommand << iscreenDir;
+			copyCommand << "\"";
 			system(copyCommand);
 		}
 		if(!actintExist)
@@ -203,10 +213,11 @@ protected:
 			SetStatusString(B_COLOR_GREEN, copyingMessage);
 
 			// NOTE: This is ugly. UGLY! Need to rewrite to Haiku API.
-			BString copyCommand = "cp -aR ";
+			BString copyCommand = "cp -aR \"";
 			copyCommand << actintDirSys;
-			copyCommand	<< " ";
+			copyCommand	<< "\" \"";
 			copyCommand << actintDir;
+			copyCommand << "\"";
 			system(copyCommand);
 		}
 
@@ -310,7 +321,14 @@ public:
 		BStringView *radioLabel = new BStringView(O_RADIO_GROUP_LABEL, L_RADIO_GROUP_LABEL);
 
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
-		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_LINK);
+		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_TEXT, L_DATA_LINK);
+		BeUrlStringView *urlStringGOG = new BeUrlStringView(O_DATA_LINK_G, L_DATA_TEXT_G, L_DATA_LINK_G);
+
+		BStringView *testedString = new BStringView(O_TESTED, L_TESTED);
+		BFont font;
+		BeLauncherBase::GetAdditionalBox()->GetFont(&font);
+		font.SetFace(B_ITALIC_FACE);
+		testedString->SetFont(&font, B_FONT_FAMILY_AND_STYLE | B_FONT_FLAGS);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, B_USE_HALF_ITEM_SPACING)
 		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
@@ -319,10 +337,20 @@ public:
 		                              .Add(fChooseRusVersion)
 		                              .AddGlue()
 		                          .End()
-		                          .AddGroup(B_HORIZONTAL, 0.0f)
-		                              .Add(urlDescString)
-		                              .Add(urlString)
-		                              .AddGlue()
+		                          .AddGroup(B_VERTICAL, 0.0f)
+		                              .AddGroup(B_HORIZONTAL, 0.0f)
+		                                  .Add(urlDescString)
+		                                  .AddGlue()
+		                              .End()
+		                              .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                                  .Add(urlStringGOG)
+		                                  .Add(testedString)
+		                                  .AddGlue()
+		                              .End()
+		                              .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                                  .Add(urlString)
+		                                  .AddGlue()
+		                              .End()
 		                          .End();
 		BeLauncherBase::GetAdditionalBox()->AddChild(boxLayout->View());
 
