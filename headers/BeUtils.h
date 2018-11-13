@@ -11,6 +11,8 @@
 #define G_DEFAULT_VERSION              "1.0.0"
 
 #include <cstdio>
+#include <cmath>
+#include <limits>
 
 #define BeUnused(x)                    (void)(x)
 #if __cplusplus >= 201103L
@@ -34,6 +36,12 @@ public:
 	static const BString GetPathToSettingsFile(const char* settingsFileName);
 	static const BString GetPathToPackage(const char *packageName);
 	static const BString GetPathToExecutable(const char *packageName, const char *executableName);
+
+	template<typename T>
+	static bool AlmostEqual(T first, T second)
+	{
+		return std::fabs(first - second) < std::numeric_limits<T>::epsilon();
+	}
 
 	static bool OpenLinkViaWebBrowser(const BString &url);
 };

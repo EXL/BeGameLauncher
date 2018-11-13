@@ -14,8 +14,8 @@
 #define L_URL_ALERT_BUTTON_OK          B_TRANSLATE("OK")
 
 BeUrlStringView::BeUrlStringView(const char* name, const char* text, const char *url,
-                                 float fontSize, uint32 resizingFlags)
-                 : BeUnderlineStringView(name, text, fontSize), fText(text)
+                                 bool smallFontSize, uint32 resizingFlags)
+                 : BeUnderlineStringView(name, text, smallFontSize), fText(text)
 {
 	if(url != NULL)
 	{

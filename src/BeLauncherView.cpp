@@ -1,12 +1,14 @@
 #include "BeLauncherView.h"
 #include "BeImageView.h"
 #include "BeUtils.h"
+#include "BeUnderlineStringView.h"
 
 #include <View.h>
 #include <Size.h>
 #include <StringView.h>
 #include <InterfaceDefs.h>
 #include <LayoutBuilder.h>
+#include <Font.h>
 
 #include <Catalog.h>
 
@@ -62,7 +64,12 @@ BeLauncherView::BeLauncherView(bool showIcon)
 	fAdditionalBox->SetBorder(B_NO_BORDER);
 
 	fStatusStringView = new BStringView(O_STATUS_STRING_VIEW, L_STATUS_READY);
-	fStatusStringView->SetFontSize(G_SMALL_FONT_SIZE);
+
+	BFont font;
+	GetFont(&font);
+	const float smallFontSize = font.Size() + BeUnderlineStringView::GetOffsetStripeGapSmall(); // -2.0f
+
+	fStatusStringView->SetFontSize(smallFontSize);
 
 	fAboutButton = new BButton(L_BUTTON_ABOUT, NULL);
 	fAboutButton->SetToolTip(L_BUTTON_ABOUT_TOOLTIP);

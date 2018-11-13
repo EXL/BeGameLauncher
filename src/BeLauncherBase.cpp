@@ -17,6 +17,7 @@
 #include <Window.h>
 #include <Errors.h>
 #include <StringList.h>
+#include <Font.h>
 
 #include <Catalog.h>
 
@@ -117,10 +118,30 @@ BeLauncherBase::CreateForm(void)
 	                                               fDirectoryFilter, sStartPath);
 	fDirectoryFilePanel->Window()->SetTitle(L_FILE_PANEL_TITLE);
 
-	SetSizeLimits(Bounds().Width(),
-	              Bounds().Width() + G_OFFSET_FOR_SIZE,
-	              Bounds().Height(),
-	              Bounds().Height() + G_OFFSET_FOR_SIZE);
+	float minW, maxW, minH, maxH, fontSize;
+	BFont font;
+	fLauncherView->GetFont(&font);
+	fontSize = font.Size();
+	if(BeUtils::AlmostEqual(fontSize, G_DEFAULT_FONT_SIZE))
+	{
+		minW = Bounds().Width();
+		maxW = Bounds().Width() + G_OFFSET_FOR_SIZE;
+		minH = Bounds().Height();
+		maxH = Bounds().Height() + G_OFFSET_FOR_SIZE;
+	}
+	else
+	{
+		minW = G_WINDOW_WIDTH * (fontSize / G_DEFAULT_FONT_SIZE);
+		maxW = G_WINDOW_WIDTH * (fontSize / G_DEFAULT_FONT_SIZE) +
+		       G_OFFSET_FOR_SIZE * (fontSize / G_DEFAULT_FONT_SIZE);
+		minH = G_WINDOW_HEIGHT * (fontSize / G_DEFAULT_FONT_SIZE);
+		maxH = G_WINDOW_HEIGHT * (fontSize / G_DEFAULT_FONT_SIZE) +
+		       G_OFFSET_FOR_SIZE * (fontSize / G_DEFAULT_FONT_SIZE);
+
+		ResizeTo(minW, minH);
+	}
+
+	SetSizeLimits(minW, maxW, minH, maxH);
 
 	CenterOnScreen();
 }

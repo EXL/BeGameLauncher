@@ -65,10 +65,10 @@ BeAboutView::BeAboutView(const char *name, const char *version)
 	                                                                       L_ABOUT_LAUNCHER_STRING);
 	BeUrlStringView *beUrlEmStringView = new BeUrlStringView(O_ABOUT_URL_STRING_VIEW_EM,
 	                                                         G_URL_EXLMOTO_BLOG_TITLE, G_URL_EXLMOTO_BLOG_LINK,
-	                                                         G_SMALL_FONT_SIZE);
+	                                                         true);
 	BeUrlStringView *beUrlGhStringView = new BeUrlStringView(O_ABOUT_URL_STRING_VIEW_GH,
 	                                                         G_URL_GITHUB_TITLE_LINK, G_URL_GITHUB_TITLE_LINK,
-	                                                         G_SMALL_FONT_SIZE);
+	                                                         true);
 
 	fAboutButton = new BButton(O_ABOUT_BUTTON, L_ABOUT_BUTTON, new BMessage(B_QUIT_REQUESTED));
 

@@ -8,14 +8,15 @@
 
 class BeUnderlineStringView : public BStringView
 {
-	const float fFontSize;
+	const bool fSmallFontSize;
+	float fFontSize;
 
 protected:
 	bool drawUnderline;
 
 	virtual void Draw(BRect rect);
 public:
-	explicit BeUnderlineStringView(const char* name, const char* text, float fontSize = G_DEFAULT_FONT_SIZE);
+	explicit BeUnderlineStringView(const char* name, const char* text, bool smallFontSize = false);
 	virtual ~BeUnderlineStringView(void);
 
 	static float GetOffsetStripeGapBig(void);

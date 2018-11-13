@@ -1,12 +1,23 @@
 #include "BeUnderlineStringView.h"
 
+#include <Font.h>
+
 #define G_OFFSET_STRIPE_GAP_SMALL      (-2.0f)
 #define G_OFFSET_STRIPE_GAP_BIG        (-3.0f)
 
-BeUnderlineStringView::BeUnderlineStringView(const char* name, const char* text, float fontSize)
-                       : BStringView(BRect(), name, text), fFontSize(fontSize)
+BeUnderlineStringView::BeUnderlineStringView(const char* name, const char* text, bool smallFontSize)
+                       : BStringView(BRect(), name, text), fSmallFontSize(smallFontSize)
 {
 	drawUnderline = true;
+
+	BFont font;
+	GetFont(&font);
+	fFontSize = font.Size();
+
+	if(fSmallFontSize)
+	{
+		fFontSize += G_OFFSET_STRIPE_GAP_SMALL; // -2.0f
+	}
 
 	SetFontSize(fFontSize);
 }
