@@ -17,16 +17,16 @@ This is my first Haiku project and my first work experience with Haiku API. Perh
 
 1. Prepare the required files first:
 
-* Banner.png (64x400 px) artwork.
-* Icon.png (64x64 px) icon.
-* RDef-file with vector icon and executable parameters. See [this RDef file](res/based/BasedGameLauncher.rdef) from based launcher as an example to follow.
+   * Banner.png (64x400 px) artwork.
+   * Icon.png (64x64 px) icon.
+   * RDef-file with vector icon and executable parameters. See [this RDef file](res/based/BasedGameLauncher.rdef) from based launcher as an example to follow.
 
 2. When the necessary files are ready, prepare directories for resources. The `%name%` is the simplified name of your target application:
 
-```bash
-mkdir -p res/%name%/
-mkdir -p locales/%name%/pre/
-```
+   ```bash
+   mkdir -p res/%name%/
+   mkdir -p locales/%name%/pre/
+   ```
 
 3. Now you can create a launcher itself. Copy [BasedGameLauncher.cpp](BasedGameLauncher.cpp) or [BasedGameLauncher.cpp](GishLauncher.cpp) source file to YourAppLauncher.cpp and edit it with using existing code as an example.
 
@@ -34,12 +34,12 @@ mkdir -p locales/%name%/pre/
 
 5. Build a project once to generate the special translation cat-keys files. Ignore CMake error about the impossibility of adding cat-keys files to `SOURCES` section. This section is needed to add cat-keys files to the project tree in different IDEs.
 
-```bash
-mkdir build/
-cd build/
-cmake -DLAUNCHER=%name% ..
-cmake --build .
-```
+   ```bash
+   mkdir build/
+   cd build/
+   cmake -DLAUNCHER=%name% ..
+   cmake --build .
+   ```
 
 6. Optionally, you can translate the generated cat-keys files. They are located in the `locales/%name%/` directory. Do not forget to build the project again to add translations to the launcher executable file.
 
@@ -53,14 +53,14 @@ cmake --build .
 
 * In Inkscape you can use a very handy extention that allows you to add perspective to a selected object.
 
-![Inkscape perspective](images/Inkscape_Perspective.png)
+   ![Inkscape perspective](images/Inkscape_Perspective.png)
 
-1. Create a vector object or group it from several if necessary.
-2. Flip it vertically "Object => Flip Vertical", rotate 90 degrees CW "Object => Rotate 90* CW" then convert all objects to paths via "Path => Object to Path" feature.
-3. Using "Select and Transform objects (F1)" tool select your object then hold **Shift** button and using "Edit path by nodes (F2)" tool select the face of the base object which you need. It will be highlighted in red frame.
-4. It's time to act! Choose "Extentions => Modify Path => Perspective" and then click on the object to which the perspective was applied and select "Object => Transform => Scale => Width and Height = 80% => Apply", it should look like the image above.
+   1. Create a vector object or group it from several if necessary.
+   2. Flip it vertically "Object => Flip Vertical", rotate 90 degrees CW "Object => Rotate 90* CW" then convert all objects to paths via "Path => Object to Path" feature.
+   3. Using "Select and Transform objects (F1)" tool select your object then hold **Shift** button and using "Edit path by nodes (F2)" tool select the face of the base object which you need. It will be highlighted in red frame.
+   4. It's time to act! Choose "Extentions => Modify Path => Perspective" and then click on the object to which the perspective was applied and select "Object => Transform => Scale => Width and Height = 80% => Apply", it should look like the image above.
 
-*Note:* to use the perspective extention you need to install various Python libs and dependencies. Inkscape itself should prompt you how to do this.
+   *Note:* to use the perspective extention you need to install various Python libs and dependencies. Inkscape itself should prompt you how to do this.
 
 * You can use special pixel-stylized font "Visitor TT1 BRK" for creating inscriptions on the banner. This font looks pretty cute and earlier it was used to create a forum userbars. You can download this font from [www.userbars.be](https://www.userbars.be/resources) site which is dedicated to creating forum userbars.
 
