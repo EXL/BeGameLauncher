@@ -35,22 +35,29 @@
 #define LANG_OPT                       "LANG_OPT"
 
 // Various Strings
-#define L_ABOUT_STRING                 B_TRANSLATE("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " \
-                                       "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim " \
-                                       "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea " \
-                                       "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " \
-                                       "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat " \
-                                       "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim " \
-                                       "id est laborum.\n\n")
+#define L_ABOUT_STRING                 B_TRANSLATE("Mind-altering retro (1998) sandbox game that can be described as " \
+                                                   "a racing role-playing adventure game with a complicated storyline. " \
+                                                   "You’ll find a unique voxel atmosphere, complete freedom and lots " \
+                                                   "of gameplay hours. " \
+                                                   "KranX Productions pledged Vangers to go open " \
+                                                   "source under the GPLv3 on March 12, 2016.\n\n" \
+                                                   "This is my port of the Vangers to Haiku OS which uses " \
+                                                   "SDL2, SDL2_net, Clunk and Ogg Vorbis libraries.\n\n")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
-#define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
-#define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("stalkerg, K-D Lab, KranX Productions, 3dEyes**\n\n")
+#define L_ABOUT_PORT_STR_H             B_TRANSLATE("Port to Haiku OS:\n\t")
+#define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
+#define L_ABOUT_LINK                   B_TRANSLATE("http://kranx.com")
+#define L_ABOUT_LINK_DESC              B_TRANSLATE("Official site:")
+#define L_ABOUT_SRC_LINK               B_TRANSLATE("http://github.com/KranX/Vangers")
+#define L_ABOUT_SRC_LINK_DESC          B_TRANSLATE("Source code:")
+#define L_ABOUT_OTH_LINK               B_TRANSLATE("http://exlmoto.ru/haiku-packages/#vangers")
+#define L_ABOUT_OTH_LINK_DESC          B_TRANSLATE("Information:")
 #define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/app/264080/")
-#define L_DATA_TEXT                    B_TRANSLATE("The Vangers Game, Steam")
+#define L_DATA_TEXT                    B_TRANSLATE("The Vangers on Steam")
 #define L_DATA_LINK_G                  B_TRANSLATE("https://gog.com/game/vangers")
-#define L_DATA_TEXT_G                  B_TRANSLATE("The Vangers Game, GOG.com")
-#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy Vangers game files on: ")
+#define L_DATA_TEXT_G                  B_TRANSLATE("The Vangers on GOG.com")
+#define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy Vangers game files: ")
 #define L_TESTED                       B_TRANSLATE("(tested)")
 
 #define L_RADIO_OPTION_ENG             B_TRANSLATE("English")
@@ -82,17 +89,37 @@ public:
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
+		BStringView *urlDescSrcString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_SRC_LINK_DESC);
+		BeUrlStringView *urlSrcString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_SRC_LINK);
+		BStringView *urlDescOthString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_OTH_LINK_DESC);
+		BeUrlStringView *urlOthString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_OTH_LINK);
 
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_STRING);
 		BeAboutWindow::GetInformationView()->SetFontAndColor(be_bold_font);
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_THANKS_STR_H);
 		BeAboutWindow::GetInformationView()->SetFontAndColor(be_plain_font);
 		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_THANKS_STR);
+		BeAboutWindow::GetInformationView()->SetFontAndColor(be_bold_font);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR_H);
+		BeAboutWindow::GetInformationView()->SetFontAndColor(be_plain_font);
+		BeAboutWindow::GetInformationView()->Insert(L_ABOUT_PORT_STR);
 
-		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_HORIZONTAL)
-		                          .Add(urlDescString)
-		                          .Add(urlString)
-		                          .AddGlue();
+		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, 0.0f)
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(urlDescString)
+		                              .Add(urlString)
+		                              .AddGlue()
+		                          .End()
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(urlDescSrcString)
+		                              .Add(urlSrcString)
+		                              .AddGlue()
+		                          .End()
+		                          .AddGroup(B_HORIZONTAL, B_USE_HALF_ITEM_SPACING)
+		                              .Add(urlDescOthString)
+		                              .Add(urlOthString)
+		                              .AddGlue()
+		                          .End();
 		BeAboutWindow::GetAdditionalBox()->AddChild(boxLayout->View());
 	}
 };
