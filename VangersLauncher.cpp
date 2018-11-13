@@ -12,6 +12,7 @@
 #include <GroupLayout.h>
 #include <LayoutBuilder.h>
 #include <InterfaceDefs.h>
+#include <Directory.h>
 
 #include <Catalog.h>
 
@@ -44,13 +45,16 @@
 #define L_ABOUT_THANKS_STR             B_TRANSLATE("- my gf")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://exlmoto.ru")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Some useful link: ")
-#define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/app/264080/Vangers/")
+#define L_DATA_LINK                    B_TRANSLATE("https://store.steampowered.com/app/264080/")
 #define L_DATA_FILES_LINK_D            B_TRANSLATE("Buy data files on Steam: ")
 #define L_RADIO_OPTION_ENG             B_TRANSLATE("English")
 #define L_RADIO_OPTION_RUS             B_TRANSLATE("Russian")
 #define L_RADIO_OPTION_ENG_TOOLTIP     B_TRANSLATE("Check to activate English version of Vangers.")
 #define L_RADIO_OPTION_RUS_TOOLTIP     B_TRANSLATE("Check to activate Russian version of Vangers.")
 #define L_RADIO_GROUP_LABEL            B_TRANSLATE("Choose language version:")
+#define L_ERROR_NO_GAMEINFO_FILE       B_TRANSLATE("Required data file %file% not found.")
+#define L_ERROR_SCRIPT_DIR             B_TRANSLATE("Required script directory %dir% not found.")
+#define L_COPYING_MESSAGE              B_TRANSLATE("Copying %dir1% to %dir2%...")
 
 // Object names
 #define O_ABOUT_LINK                   "aboutLink"
@@ -103,6 +107,20 @@ class VangersLauncher : public BeLauncherBase
 
 	LangVersion version;
 
+	bool
+	CheckDirectory(const BString &path)
+	{
+		BEntry directoryPath(path);
+		entry_ref ref;
+		directoryPath.GetRef(&ref);
+		BDirectory directory;
+		if(directory.SetTo(&ref) != B_OK)
+		{
+			return false;
+		}
+		return true;
+	}
+
 protected:
 	virtual void
 	MessageReceived(BMessage *msg)
@@ -132,6 +150,80 @@ protected:
 	virtual bool
 	CheckCache(void)
 	{
+		BString path = BeLauncherBase::GetTextControl()->Text();
+		if(!path.EndsWith("/"))
+		{
+			path << "/";
+		}
+
+		// NOTE: 1. Check some file in the game cache.
+		BString filePath = path;
+		filePath << "resource/video/mech00.avi";
+		BEntry fileToCheck(filePath);
+		if(!fileToCheck.Exists())
+		{
+			BString errorMessage(L_ERROR_NO_GAMEINFO_FILE);
+			errorMessage.ReplaceAll("%file%", filePath);
+			SetStatusString(B_COLOR_RED, errorMessage);
+			return false;
+		}
+
+		// NOTE: 2. Check two script directories.
+		BString iscreenDir = path;
+		iscreenDir << "iscreen/";
+		BString actintDir = path;
+		actintDir << "actint/";
+		bool iscreenExist = CheckDirectory(iscreenDir);
+		bool actintExist = CheckDirectory(actintDir);
+
+		// NOTE: 3. Copy resource directories from package catalog if needed.
+		if(!iscreenExist)
+		{
+			BString copyingMessage(L_COPYING_MESSAGE);
+			BString iscreenDirSys = BeUtils::GetPathToPackage(PACKAGE_DIR);
+			iscreenDirSys << "/engine/iscreen/";
+			copyingMessage.ReplaceAll("%dir1%", iscreenDirSys);
+			copyingMessage.ReplaceAll("%dir2%", iscreenDir);
+			SetStatusString(B_COLOR_GREEN, copyingMessage);
+
+			// NOTE: This is ugly. UGLY! Need to rewrite to Haiku API.
+			BString copyCommand = "cp -aR ";
+			copyCommand << iscreenDirSys;
+			copyCommand	<< " ";
+			copyCommand << iscreenDir;
+			system(copyCommand);
+		}
+		if(!actintExist)
+		{
+			BString copyingMessage(L_COPYING_MESSAGE);
+			BString actintDirSys = BeUtils::GetPathToPackage(PACKAGE_DIR);
+			actintDirSys << "/engine/actint/";
+			copyingMessage.ReplaceAll("%dir1%", actintDirSys);
+			copyingMessage.ReplaceAll("%dir2%", actintDir);
+			SetStatusString(B_COLOR_GREEN, copyingMessage);
+
+			// NOTE: This is ugly. UGLY! Need to rewrite to Haiku API.
+			BString copyCommand = "cp -aR ";
+			copyCommand << actintDirSys;
+			copyCommand	<< " ";
+			copyCommand << actintDir;
+			system(copyCommand);
+		}
+
+		// NOTE: 4. Check script directories again.
+		if(!(iscreenExist && actintExist))
+		{
+			iscreenExist = CheckDirectory(iscreenDir);
+			actintExist = CheckDirectory(actintDir);
+			if(!(iscreenExist && actintExist))
+			{
+				BString errorMessage(L_ERROR_SCRIPT_DIR);
+				errorMessage.ReplaceAll("%dir%", (!iscreenExist) ? iscreenDir : actintDir);
+				SetStatusString(B_COLOR_RED, errorMessage);
+				return false;
+			}
+		}
+
 		return true;
 	}
 
