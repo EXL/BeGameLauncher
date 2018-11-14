@@ -328,7 +328,7 @@ protected:
 	ShowAboutDialog(void)
 	{
 		VangersAboutWindow *vangersAboutWindow = new VangersAboutWindow(Frame().InsetBySelf(BannerWidth(),
-		                                                                                    -(Gap() * 3)),
+		                                                                                    -(Gap() * 4)),
 		                                                                TITLE, VERSION);
 		vangersAboutWindow->Show();
 	}

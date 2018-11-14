@@ -1,43 +1,58 @@
-1	en	application/x-vnd.exl-VangersLauncher	539240980
-Check to activate game option.	VangersLauncher		Check to activate game option.
+1	en	application/x-vnd.exl-VangersLauncher	262031560
+Source code:	VangersLauncher		Source code:
 Cannot run executable: 	BeGameLauncher		Cannot run executable: 
-BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n	VangersLauncher		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n
+Buy Vangers game files: 	VangersLauncher		Buy Vangers game files: 
+The Vangers on Steam	VangersLauncher		The Vangers on Steam
+Copying %dir1% to %dir2%...	VangersLauncher		Copying %dir1% to %dir2%...
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher © EXL, 2018           
 Select	BeGameLauncher		Select
+Check to activate Russian version of Vangers.	VangersLauncher		Check to activate Russian version of Vangers.
 Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+http://kranx.com	VangersLauncher		http://kranx.com
 ...	BeGameLauncher		...
 Click to view about information.	BeGameLauncher		Click to view about information.
-- my gf	VangersLauncher		- my gf
+http://exlmoto.ru/haiku-packages/#vangers	VangersLauncher		http://exlmoto.ru/haiku-packages/#vangers
 Exit	BeGameLauncher		Exit
+http://github.com/KranX/Vangers	VangersLauncher		http://github.com/KranX/Vangers
+Choose language version:	VangersLauncher		Choose language version:
 Thanks to:\n\t	VangersLauncher		Thanks to:\n\t
 Run!	BeGameLauncher		Run!
 Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
 Click to exit the application.	BeGameLauncher		Click to exit the application.
 Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
-Saved option: 	VangersLauncher		Saved option: 
-https://store.steampowered.com/	VangersLauncher		https://store.steampowered.com/
-Some useful link: 	VangersLauncher		Some useful link: 
+(tested)	VangersLauncher		(tested)
 Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
 Settings Error	BeGameLauncher		Settings Error
-Game option	VangersLauncher		Game option
 Ready.	BeGameLauncher		Ready.
+Port to Haiku OS:\n\t	VangersLauncher		Port to Haiku OS:\n\t
 Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
 Executable Error	BeGameLauncher		Executable Error
+Official site:	VangersLauncher		Official site:
 Version: 	BeGameLauncher		Version: 
+Russian	VangersLauncher		Russian
 Cache Error	BeGameLauncher		Cache Error
-Click to run a game.	BeGameLauncher		Click to run a game.
+https://gog.com/game/vangers	VangersLauncher		https://gog.com/game/vangers
+Click to run a game.	BeGameLauncher		Click to run the Vangers game.
 Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
+stalkerg, K-D Lab, KranX Productions, 3dEyes**\n\n	VangersLauncher		stalkerg, K-D Lab, KranX Productions, 3dEyes**\n\n
 About...	BeGameLauncher		About...
 Game data check failed.	BeGameLauncher		Game data check failed.
 Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
 Cannot open link: 	BeGameLauncher		Cannot open link: 
-Buy data files: 	VangersLauncher		Buy data files: 
+Required script directory %dir% not found.	VangersLauncher		Required script directory %dir% not found.
 OK	BeGameLauncher		OK
+Information:	VangersLauncher		Information:
+The Vangers on GOG.com	VangersLauncher		The Vangers on GOG.com
 Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
-Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
+Required data file %file% not found.	VangersLauncher		Required data file %file% not found.
+https://store.steampowered.com/app/264080/	VangersLauncher		https://store.steampowered.com/app/264080/
+Path to a directory with game files.	BeGameLauncher		Path to a directory with Vangers game files.
 Please choose a game folder	BeGameLauncher		Please choose a game folder
 Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
-http://exlmoto.ru	VangersLauncher		http://exlmoto.ru
+Mind-altering retro (1998) sandbox game that can be described as a racing role-playing adventure game with a complicated storyline. You’ll find a unique voxel atmosphere, complete freedom and lots of gameplay hours. KranX Productions pledged Vangers to go open source under the GPLv3 on March 12, 2016.\n\nThis is my port of the Vangers to Haiku OS which uses SDL2, SDL2_net, Clunk and Ogg Vorbis libraries.\n\n	VangersLauncher		Mind-altering retro (1998) sandbox game that can be described as a racing role-playing adventure game with a complicated storyline. You’ll find a unique voxel atmosphere, complete freedom and lots of gameplay hours. KranX Productions pledged Vangers to go open source under the GPLv3 on March 12, 2016.\n\nThis is my port of the Vangers to Haiku OS which uses SDL2, SDL2_net, Clunk and Ogg Vorbis libraries.\n\n
 Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
+English	VangersLauncher		English
 Open Link Error	BeGameLauncher		Open Link Error
-Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with Vangers game files: 
+EXL\n	VangersLauncher		EXL\n
+Check to activate English version of Vangers.	VangersLauncher		Check to activate English version of Vangers.
