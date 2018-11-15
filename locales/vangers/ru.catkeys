@@ -1,4 +1,4 @@
-1	ru	application/x-vnd.exl-VangersLauncher	262031560
+1	ru	application/x-vnd.exl-VangersLauncher	180483897
 Source code:	VangersLauncher		Исходный код:
 Cannot run executable: 	BeGameLauncher		Невозможно запустить исполнительный файл: 
 Buy Vangers game files: 	VangersLauncher		Купить Вангеров: 
@@ -34,7 +34,7 @@ Cache Error	BeGameLauncher		Ошибка данных
 https://gog.com/game/vangers	VangersLauncher		https://gog.com/game/vangers
 Click to run a game.	BeGameLauncher		Кликните для запуска Вангеров.
 Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Ошибка: Функция get_ref_for_path() для %exe% выполнена неуспешно.
-stalkerg, K-D Lab, KranX Productions, 3dEyes**\n\n	VangersLauncher		stalkerg, K-D Lab, KranX Productions, 3dEyes**\n\n
+stalkerg, K-D Lab, KranX Productions, 3dEyes**,\n\tTK-313, Pavel Babayev, anttv\n\n	VangersLauncher		stalkerg, K-D Lab, KranX Productions, 3dEyes**,\n\tTK-313, Pavel Babayev, anttv\n\n
 About...	BeGameLauncher		О программе...
 Game data check failed.	BeGameLauncher		Файлы данных игры не прошли проверку.
 Error: Cannot get entry %exe% permissions.	BeGameLauncher		Ошибка: Невозможно получить разрешения сущности %exe%.

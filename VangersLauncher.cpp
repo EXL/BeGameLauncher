@@ -44,7 +44,8 @@
                                                    "This is my port of the Vangers to Haiku OS which uses " \
                                                    "SDL2, SDL2_net, Clunk and Ogg Vorbis libraries.\n\n")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
-#define L_ABOUT_THANKS_STR             B_TRANSLATE("stalkerg, K-D Lab, KranX Productions, 3dEyes**\n\n")
+#define L_ABOUT_THANKS_STR             B_TRANSLATE("stalkerg, K-D Lab, KranX Productions, 3dEyes**," \
+                                                   "\n\tTK-313, Pavel Babayev, anttv\n\n")
 #define L_ABOUT_PORT_STR_H             B_TRANSLATE("Port to Haiku OS:\n\t")
 #define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://kranx.com")
