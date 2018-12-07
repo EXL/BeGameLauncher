@@ -106,8 +106,9 @@
 class SeriousAboutWindow : public BeAboutWindow
 {
 public:
-	explicit SeriousAboutWindow(const BRect &frame, const char *title, const char *version)
-	         : BeAboutWindow(frame, title, version)
+	explicit
+	SeriousAboutWindow(const BRect &frame, const char *title, const char *version)
+		: BeAboutWindow(frame, title, version)
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
@@ -237,9 +238,10 @@ class SeriousLauncher : public BeLauncherBase
 	}
 
 public:
-	explicit SeriousLauncher(const char *startPath)
-	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE_TSE, SETTINGS_FILE, DATA_PATH_OPT,
-	                          startPath, true, true)
+	explicit
+	SeriousLauncher(const char *startPath)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE_TSE, SETTINGS_FILE, DATA_PATH_OPT,
+		                 startPath, true, true)
 	{
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
 		BeUrlStringView *urlStringS = new BeUrlStringView(O_DATA_TSE_LINK, L_DATA_TSE_TEXT, L_DATA_TSE_LINK);

@@ -143,8 +143,9 @@
 class Xash3DAboutWindow : public BeAboutWindow
 {
 public:
-	explicit Xash3DAboutWindow(const BRect &frame, const char *title, const char *version)
-	         : BeAboutWindow(frame, title, version)
+	explicit
+	Xash3DAboutWindow(const BRect &frame, const char *title, const char *version)
+		: BeAboutWindow(frame, title, version)
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
@@ -205,7 +206,8 @@ class Xash3DGameLauncher : public BeLauncherBase
 	BeDirectoryFilePanel *fAdditionalDirectoryFilePanel;
 	BeDirectoryFilter *fAdditionalDirectoryFilter;
 
-	void SelectSomeGame(void)
+	void
+	SelectSomeGame(void)
 	{
 		bool found = false;
 		for(int i = 0; i < fGamesList->CountItems(); ++i)
@@ -224,7 +226,8 @@ class Xash3DGameLauncher : public BeLauncherBase
 		}
 	}
 
-	void FillGamesList(void)
+	void
+	FillGamesList(void)
 	{
 		fGamesList->MakeEmpty();
 
@@ -267,7 +270,8 @@ class Xash3DGameLauncher : public BeLauncherBase
 		}
 	}
 
-	static const BString GetPathToPackageExtras(void)
+	static const BString
+	GetPathToPackageExtras(void)
 	{
 		BString packagePath = BeUtils::GetPathToPackage(PACKAGE_DIR);
 		return packagePath << BString(EXTRAS_DIR_NAME);
@@ -474,9 +478,10 @@ protected:
 	}
 
 public:
-	explicit Xash3DGameLauncher(const char *startPath)
-	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
-	                          startPath, true, false)
+	explicit
+	Xash3DGameLauncher(const char *startPath)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
+		                 startPath, true, false)
 	{
 		BStringView *cmdArgsLabel = new BStringView(O_CMD_LIST_ARGS, L_CMD_LIST_ARGS);
 		fCmdArgsTextControl = new BTextControl(NULL, NULL, NULL);

@@ -88,8 +88,9 @@
 class GishAboutWindow : public BeAboutWindow
 {
 public:
-	explicit GishAboutWindow(const BRect &frame, const char *title, const char *version)
-	         : BeAboutWindow(frame, title, version)
+	explicit
+	GishAboutWindow(const BRect &frame, const char *title, const char *version)
+		: BeAboutWindow(frame, title, version)
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
@@ -168,9 +169,10 @@ class GishLauncher : public BeLauncherBase
 	}
 
 public:
-	explicit GishLauncher(const char *startPath)
-	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
-	                          startPath, true, true)
+	explicit
+	GishLauncher(const char *startPath)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
+		                 startPath, true, true)
 	{
 		BStringView *urlDescString = new BStringView(O_DATA_LINK_DESC, L_DATA_FILES_LINK_D);
 		BeUrlStringView *urlString = new BeUrlStringView(O_DATA_LINK, L_DATA_TEXT, L_DATA_LINK);
