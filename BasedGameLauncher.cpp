@@ -84,8 +84,9 @@
 class GameAboutWindow : public BeAboutWindow
 {
 public:
-	explicit GameAboutWindow(const BRect &frame, const char *title, const char *version)
-	         : BeAboutWindow(frame, title, version)
+	explicit
+	GameAboutWindow(const BRect &frame, const char *title, const char *version)
+		: BeAboutWindow(frame, title, version)
 	{
 		BStringView *urlDescString = new BStringView(O_ABOUT_LINK_DESC, L_ABOUT_LINK_DESC);
 		BeUrlStringView *urlString = new BeUrlStringView(O_ABOUT_LINK, L_ABOUT_LINK);
@@ -186,9 +187,10 @@ protected:
 	}
 
 public:
-	explicit BasedGameLauncher(const char *startPath)
-	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
-	                          startPath, true, false)
+	explicit
+	BasedGameLauncher(const char *startPath)
+		: BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
+		                 startPath, true, false)
 	{
 		fCheckBoxOption = new BCheckBox(O_CHECKBOX_OPTION, L_CHECKBOX_OPTION, new BMessage(MSG_CHECKBOX_STATE_CHANGED));
 		fCheckBoxOption->SetToolTip(L_CHECKBOX_OPTION_TOOLTIP);
