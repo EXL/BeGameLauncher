@@ -28,7 +28,7 @@ This is my first Haiku project and my first work experience with Haiku API. Perh
    mkdir -p locales/%name%/pre/
    ```
 
-3. Now you can create a launcher itself. Copy [BasedGameLauncher.cpp](BasedGameLauncher.cpp) or [BasedGameLauncher.cpp](GishLauncher.cpp) source file to YourAppLauncher.cpp and edit it with using existing code as an example.
+3. Now you can create a launcher itself. Copy [BasedGameLauncher.cpp](BasedGameLauncher.cpp) or [GishLauncher.cpp](GishLauncher.cpp) source file to YourAppLauncher.cpp and edit it with using existing code as an example.
 
 4. After your source file is ready, add your launcher and its parameters to the `LAUNCHERS SECTIONS` in the [CMakeLists.txt](CMakeLists.txt) file. This will allow you to start building a project.
 
