@@ -39,7 +39,7 @@ BeImageView::BeImageView(const char *name, BitmapIndex index)
              : BView(name, B_WILL_DRAW), fIndex(index)
 {
 	SetFlags(Flags() | B_FULL_UPDATE_ON_RESIZE);
-	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 
 	float width;
 	float height;
