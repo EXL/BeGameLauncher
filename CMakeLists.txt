@@ -49,6 +49,10 @@ elseif(LAUNCHER STREQUAL "vangers")
 	set(BASED_LAUNCHER_NAME "VangersLauncher")
 	set(RES_DIR "vangers")
 	set(SIGNATURE "application/x-vnd.exl-VangersLauncher")
+elseif(LAUNCHER STREQUAL "arx_libertatis")
+	set(BASED_LAUNCHER_NAME "ArxLibertatisLauncher")
+	set(RES_DIR "arx_libertatis")
+	set(SIGNATURE "application/x-vnd.Arx-LibertatisLauncher")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 

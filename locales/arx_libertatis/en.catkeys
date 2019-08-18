@@ -1,0 +1,49 @@
+1	en	application/x-vnd.Arx-LibertatisLauncher	543778639
+Official site:	ArxLibertatisLauncher		Official site:
+3dEyes**\n\n	ArxLibertatisLauncher		3dEyes**\n\n
+Cannot run executable: 	BeGameLauncher		Cannot run executable: 
+Required data file %file% not found.	ArxLibertatisLauncher		Required data file %file% not found.
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
+Gish game	ArxLibertatisLauncher		Gish game
+Select	BeGameLauncher		Select
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+...	BeGameLauncher		...
+Information:	ArxLibertatisLauncher		Information:
+Click to view about information.	BeGameLauncher		Click to view about information.
+Exit	BeGameLauncher		Exit
+Run!	BeGameLauncher		Run!
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
+Click to exit the application.	BeGameLauncher		Click to exit the application.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
+Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
+Settings Error	BeGameLauncher		Settings Error
+Ready.	BeGameLauncher		Ready.
+Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n	ArxLibertatisLauncher		Gish is a side-scrolling platformer video game with some physics puzzle elements developed by Cryptic Sea (pseudonym of Alex Austin), Edmund McMillen, Josiah Pisciotta and published by Chronic Logic in 2004. Cryptic Sea pledged Gish to go open source under the GPLv2 on May 29, 2010.\n\nThis is my port of the Gish game to Haiku OS which uses SDL2, OpenAL and Ogg Vorbis libraries.\n\n
+EXL\n	ArxLibertatisLauncher		EXL\n
+http://chroniclogic.com/gish.htm	ArxLibertatisLauncher		http://chroniclogic.com/gish.htm
+Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
+Thanks to:\n\t	ArxLibertatisLauncher		Thanks to:\n\t
+Executable Error	BeGameLauncher		Executable Error
+Source code:	ArxLibertatisLauncher		Source code:
+Buy game files on Steam: 	ArxLibertatisLauncher		Buy game files on Steam: 
+Version: 	BeGameLauncher		Version: 
+Cache Error	BeGameLauncher		Cache Error
+.	ArxLibertatisLauncher		.
+Click to run a game.	BeGameLauncher		Click to run a game.
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
+About...	BeGameLauncher		About...
+Game data check failed.	BeGameLauncher		Game data check failed.
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
+Cannot open link: 	BeGameLauncher		Cannot open link: 
+http://exlmoto.ru/gish-droid	ArxLibertatisLauncher		http://exlmoto.ru/gish-droid
+OK	BeGameLauncher		OK
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
+Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
+Please choose a game folder	BeGameLauncher		Please choose a game folder
+Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
+https://store.steampowered.com/app/9500/	ArxLibertatisLauncher		https://store.steampowered.com/app/9500/
+Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
+Open Link Error	BeGameLauncher		Open Link Error
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+http://github.com/EXL/Gish	ArxLibertatisLauncher		http://github.com/EXL/Gish
+Port to Haiku OS:\n\t	ArxLibertatisLauncher		Port to Haiku OS:\n\t
