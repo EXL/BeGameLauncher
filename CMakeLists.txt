@@ -57,6 +57,10 @@ elseif(LAUNCHER STREQUAL "julius")
 	set(BASED_LAUNCHER_NAME "JuliusLauncher")
 	set(RES_DIR "julius")
 	set(SIGNATURE "application/x-vnd.JuliusLauncher")
+elseif(LAUNCHER STREQUAL "openjk_outcast")
+	set(BASED_LAUNCHER_NAME "JediOutcastLauncher")
+	set(RES_DIR "openjk_outcast")
+	set(SIGNATURE "application/x-vnd.JediOutcastLauncher")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 
