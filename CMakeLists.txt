@@ -61,6 +61,10 @@ elseif(LAUNCHER STREQUAL "openjk_outcast")
 	set(BASED_LAUNCHER_NAME "JediOutcastLauncher")
 	set(RES_DIR "openjk_outcast")
 	set(SIGNATURE "application/x-vnd.JediOutcastLauncher")
+elseif(LAUNCHER STREQUAL "gzdoom")
+	set(BASED_LAUNCHER_NAME "GZDoomLauncher")
+	set(RES_DIR "gzdoom")
+	set(SIGNATURE "application/x-vnd.GZDoomLauncher")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 

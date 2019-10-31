@@ -1,0 +1,50 @@
+1	ru	application/x-vnd.GZDoomLauncher	2808798007
+Exit	BeGameLauncher		Exit
+Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
+Buy game files on 	GZDoomLauncher		Buy game files on 
+.	GZDoomLauncher		.
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+Cannot run executable: 	BeGameLauncher		Cannot run executable: 
+EXL\n\n	GZDoomLauncher		EXL\n\n
+Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
+...	BeGameLauncher		...
+https://store.steampowered.com/app/6030	GZDoomLauncher		https://store.steampowered.com/app/6030
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
+Cache Error	BeGameLauncher		Cache Error
+Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
+Click to run a game.	BeGameLauncher		Click to run a game.
+Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
+Ready.	BeGameLauncher		Ready.
+Settings Error	BeGameLauncher		Settings Error
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
+Thanks to:\n\t	GZDoomLauncher		Thanks to:\n\t
+Cannot open link: 	BeGameLauncher		Cannot open link: 
+Game data check failed.	BeGameLauncher		Game data check failed.
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
+Click to exit the application.	BeGameLauncher		Click to exit the application.
+OK	BeGameLauncher		OK
+http://jkhub.org/forum/51-discussion/	GZDoomLauncher		http://jkhub.org/forum/51-discussion/
+Please choose a game folder	BeGameLauncher		Please choose a game folder
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
+GOG	GZDoomLauncher		GOG
+Open Link Error	BeGameLauncher		Open Link Error
+Run!	BeGameLauncher		Run!
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
+Executable Error	BeGameLauncher		Executable Error
+https://www.gog.com/game/star_wars_jedi_knight_ii_jedi_outcast	GZDoomLauncher		https://www.gog.com/game/star_wars_jedi_knight_ii_jedi_outcast
+Steam	GZDoomLauncher		Steam
+Official site:	GZDoomLauncher		Official site:
+OpenJK Discussion:	GZDoomLauncher		OpenJK Discussion:
+Select	BeGameLauncher		Select
+ or 	GZDoomLauncher		 or 
+Version: 	BeGameLauncher		Version: 
+https://github.com/JACoders/OpenJK	GZDoomLauncher		https://github.com/JACoders/OpenJK
+Click to view about information.	BeGameLauncher		Click to view about information.
+About...	BeGameLauncher		About...
+Required data file %file% not found.	GZDoomLauncher		Required data file %file% not found.
+Community-maintained Star Wars Jedi Knight II: Jedi Outcast, story version\n\n	GZDoomLauncher		Community-maintained Star Wars Jedi Knight II: Jedi Outcast, story version\n\n
+3dEyes**\n	GZDoomLauncher		3dEyes**\n
+Port to Haiku:\n\t	GZDoomLauncher		Port to Haiku:\n\t
