@@ -65,6 +65,10 @@ elseif(LAUNCHER STREQUAL "gzdoom")
 	set(BASED_LAUNCHER_NAME "GZDoomLauncher")
 	set(RES_DIR "gzdoom")
 	set(SIGNATURE "application/x-vnd.GZDoomLauncher")
+elseif(LAUNCHER STREQUAL "dhewm3")
+	set(BASED_LAUNCHER_NAME "Dhewm3Launcher")
+	set(RES_DIR "dhewm3")
+	set(SIGNATURE "application/x-vnd.Dhewm3Launcher")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 
