@@ -273,7 +273,7 @@ public:
 		fInformationView = new BTextView(O_SERVER_INFORMATION);
 		fInformationView->SetViewUIColor(B_PANEL_BACKGROUND_COLOR);
 		fInformationView->SetExplicitMinSize(BSize(B_SIZE_UNSET, G_SERVER_INFO_HEIGHT));
-		fInformationView->SetText(L_SERVER_INFORMATION);
+		fInformationView->SetText(L_GAMESP_INFORMATION);
 		fInformationView->MakeEditable(false);
 
 		BGroupLayout *boxLayout = BLayoutBuilder::Group<>(B_VERTICAL, B_USE_HALF_ITEM_SPACING)
