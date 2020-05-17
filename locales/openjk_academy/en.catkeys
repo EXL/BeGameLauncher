@@ -1,0 +1,50 @@
+1	en	application/x-vnd.JediAcademyLauncher	2200186165
+Exit	BeGameLauncher		Exit
+Click to open the file dialog.	BeGameLauncher		Click to open the file dialog.
+Error: Path entry %exe% is not exist nor file.	BeGameLauncher		Error: Path entry %exe% is not exist nor file.
+Cannot run executable: 	BeGameLauncher		Cannot run executable: 
+Running game via execve. Environ: %env%...	BeGameLauncher		Running game via execve. Environ: %env%...
+...	BeGameLauncher		...
+Please select a directory with game files: 	BeGameLauncher		Please select a directory with game files: 
+Cannot write settings file: 	BeGameLauncher		Cannot write settings file: 
+https://store.steampowered.com/app/6020	JediAcademyLauncher		https://store.steampowered.com/app/6020
+Cache Error	BeGameLauncher		Cache Error
+EXL\n\n	JediAcademyLauncher		EXL\n\n
+Saving settings to the %file% file...	BeGameLauncher		Saving settings to the %file% file...
+Click to run a game.	BeGameLauncher		Click to run a game.
+Community-maintained Star Wars Jedi Knight: Jedi Academy, story version\n\n	JediAcademyLauncher		Community-maintained Star Wars Jedi Knight: Jedi Academy, story version\n\n
+Path to a directory with game files.	BeGameLauncher		Path to a directory with game files.
+https://github.com/JACoders/OpenJK	JediAcademyLauncher		https://github.com/JACoders/OpenJK
+Ready.	BeGameLauncher		Ready.
+Settings Error	BeGameLauncher		Settings Error
+Error: Function get_ref_for_path() for %exe% failed.	BeGameLauncher		Error: Function get_ref_for_path() for %exe% failed.
+OpenJK Discussion:	JediAcademyLauncher		OpenJK Discussion:
+Cannot open link: 	BeGameLauncher		Cannot open link: 
+Game data check failed.	BeGameLauncher		Game data check failed.
+GOG	JediAcademyLauncher		GOG
+Error: Cannot run %exe% executable. See %func%.	BeGameLauncher		Error: Cannot run %exe% executable. See %func%.
+Error: File %exe% does not have permission to execute.	BeGameLauncher		Error: File %exe% does not have permission to execute.
+Click to exit the application.	BeGameLauncher		Click to exit the application.
+OK	BeGameLauncher		OK
+Required data file %file% not found.	JediAcademyLauncher		Required data file %file% not found.
+Thanks to:\n\t	JediAcademyLauncher		Thanks to:\n\t
+Please choose a game folder	BeGameLauncher		Please choose a game folder
+Official site:	JediAcademyLauncher		Official site:
+BeGameLauncher (c) EXL, 2018           	BeGameLauncher		BeGameLauncher (c) EXL, 2018           
+Open Link Error	BeGameLauncher		Open Link Error
+Run!	BeGameLauncher		Run!
+Running game via BRoster. Environ: %env%...	BeGameLauncher		Running game via BRoster. Environ: %env%...
+Error: Cannot get entry %exe% permissions.	BeGameLauncher		Error: Cannot get entry %exe% permissions.
+Executable Error	BeGameLauncher		Executable Error
+ or 	JediAcademyLauncher		 or 
+Select	BeGameLauncher		Select
+Buy game files on 	JediAcademyLauncher		Buy game files on 
+.	JediAcademyLauncher		.
+http://jkhub.org/forum/51-discussion/	JediAcademyLauncher		http://jkhub.org/forum/51-discussion/
+Version: 	BeGameLauncher		Version: 
+Click to view about information.	BeGameLauncher		Click to view about information.
+About...	BeGameLauncher		About...
+Steam	JediAcademyLauncher		Steam
+https://www.gog.com/game/star_wars_jedi_knight_jedi_academy	JediAcademyLauncher		https://www.gog.com/game/star_wars_jedi_knight_jedi_academy
+3dEyes**\n	JediAcademyLauncher		3dEyes**\n
+Port to Haiku:\n\t	JediAcademyLauncher		Port to Haiku:\n\t
