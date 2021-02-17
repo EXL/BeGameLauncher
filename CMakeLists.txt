@@ -73,6 +73,10 @@ elseif(LAUNCHER STREQUAL "dhewm3")
 	set(BASED_LAUNCHER_NAME "Dhewm3Launcher")
 	set(RES_DIR "dhewm3")
 	set(SIGNATURE "application/x-vnd.Dhewm3Launcher")
+elseif(LAUNCHER STREQUAL "aquaria")
+	set(BASED_LAUNCHER_NAME "AquariaLauncher")
+	set(RES_DIR "aquaria")
+	set(SIGNATURE "application/x-vnd.AquariaLauncher")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 
