@@ -77,6 +77,10 @@ elseif(LAUNCHER STREQUAL "aquaria")
 	set(BASED_LAUNCHER_NAME "AquariaLauncher")
 	set(RES_DIR "aquaria")
 	set(SIGNATURE "application/x-vnd.AquariaLauncher")
+elseif(LAUNCHER STREQUAL "rtcwsp")
+	set(BASED_LAUNCHER_NAME "RTCWSPLauncher")
+	set(RES_DIR "rtcwsp")
+	set(SIGNATURE "application/x-vnd.rtcw.sp")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 
