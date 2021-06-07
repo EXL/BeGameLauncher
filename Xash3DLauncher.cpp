@@ -71,7 +71,6 @@
 #define CMD_ARGS_OPT                   "ARGS_OPTION"
 #define EXTRAS_DIR_NAME                "/extras"
 #define VALVE_DIR_NAME                 "valve"
-#define ENGINE_LIBRARY                 "libxash.so"
 
 // Globals
 #define G_GAMES_LIST_HEIGHT            60.0f
@@ -367,22 +366,6 @@ protected:
 		{
 			BString errorMessage(L_ERROR_NO_GAMEINFO_FILE);
 			errorMessage.ReplaceAll("%file%", fileToCheckPath);
-			SetStatusString(B_COLOR_RED, errorMessage);
-			return false;
-		}
-
-		// NOTE: 3. Check engine library in the mirrored path.
-		path = fAdditionalTextControl->Text();
-		if(!path.EndsWith("/"))
-		{
-			path << "/";
-		}
-		path << ENGINE_LIBRARY;
-		BEntry libraryToCheck(path);
-		if(!libraryToCheck.Exists())
-		{
-			BString errorMessage(L_ERROR_NO_ENG_LIBRARY);
-			errorMessage.ReplaceAll("%library%", path);
 			SetStatusString(B_COLOR_RED, errorMessage);
 			return false;
 		}
