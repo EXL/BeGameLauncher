@@ -60,12 +60,12 @@
 
 // Launcher Settings
 #define TITLE                          "Xash3D Launcher"
-#define VERSION                        "0.19.3"
+#define VERSION                        "0.20"
 #define PACKAGE_DIR                    "Xash3D"
 #define SETTINGS_FILE                  "Xash3DLauncher.set"
 #define EXECUTABLE_FILE                "engine/Xash3D"
 #define DATA_PATH_OPT                  "XASH3D_BASEDIR"
-#define MIRROR_PATH_OPT                "XASH3D_MIRRORDIR"
+#define MIRROR_PATH_OPT                "XASH3D_RODIR"
 #define GAME_OPT                       "XASH3D_GAME"
 #define CHECKBOX_OPT                   "GAME_OPTION"
 #define CMD_ARGS_OPT                   "ARGS_OPTION"
@@ -84,14 +84,14 @@
                                        "without a hitch.\n\nXash3D FWGS is a fork of Xash3D Engine, which aims on " \
                                        "crossplatform and compatibility with original Xash3D and Gold Source.\n\n")
 #define L_EXTRA_TEXT_CONTROL_TOOLTIP   B_TRANSLATE("Path to a directory with Xash3D required files.\n" \
-                                       "Structure, arch_postfix = 64 on the x86_64 and empty on x86:\n    " \
-                                       "libmenu.so\n    libengine.so\n    extras.pak\n    " \
-                                       "bshift/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
-                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    " \
-                                       "gearbox/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
-                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    " \
-                                       "valve/\n      cl_dlls/\n          libclient-haiku[arch_postfix].so\n      " \
-                                       "dlls/\n          libserver-haiku[arch_postfix].so\n    ...\nYou can copy the " \
+                                       "Structure, arch_postfix = amd64 on the x86_64 and i386 on x86:\n    " \
+                                       "libmenu.so\n    libxash.so\n    extras.pak\n    " \
+                                       "bshift/\n      cl_dlls/\n          libclient_haiku_[arch_postfix].so\n      " \
+                                       "dlls/\n          libhl_haiku_[arch_postfix].so\n    " \
+                                       "gearbox/\n      cl_dlls/\n          libclient_haiku_[arch_postfix].so\n      " \
+                                       "dlls/\n          libhl_haiku_[arch_postfix].so\n    " \
+                                       "valve/\n      cl_dlls/\n          libclient_haiku_[arch_postfix].so\n      " \
+                                       "dlls/\n          libhl_haiku_[arch_postfix].so\n    ...\nYou can copy the " \
                                        "\"extras\" catalog to any convenient place for you:\n    " \
                                        "cp -avR /system/apps/Xash3D/extras ~/")
 #define L_ABOUT_THANKS_STR_H           B_TRANSLATE("Thanks to:\n\t")
@@ -101,7 +101,7 @@
 #define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://xash.su")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Official Site:")
-#define L_ABOUT_LINK_SRC               B_TRANSLATE("http://github.com/FWGS/xash3d")
+#define L_ABOUT_LINK_SRC               B_TRANSLATE("http://github.com/FWGS/xash3d-fwgs")
 #define L_ABOUT_LINK_SRC_DESC          B_TRANSLATE("Source Code:")
 #define L_ABOUT_LINK_MOD               B_TRANSLATE("http://moddb.com/engines/xash3d-engine")
 #define L_ABOUT_LINK_MOD_DESC          B_TRANSLATE("ModDB Page:")
