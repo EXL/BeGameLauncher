@@ -217,7 +217,7 @@ protected:
 			path << "/";
 		}
 
-		// NOTE: 1. Check some file in the game cache.
+		// NOTE: Check some file in the game cache.
 		BString filePath = path;
 		filePath << "resource/video/mech00.avi";
 		BEntry fileToCheck(filePath);
@@ -228,65 +228,6 @@ protected:
 			SetStatusString(B_COLOR_RED, errorMessage);
 			return false;
 		}
-
-		// NOTE: 2. Check two script directories.
-		BString iscreenDir = path;
-		iscreenDir << "iscreen/";
-		BString actintDir = path;
-		actintDir << "actint/";
-		bool iscreenExist = CheckDirectory(iscreenDir);
-		bool actintExist = CheckDirectory(actintDir);
-
-		// NOTE: 3. Copy resource directories from package catalog if needed.
-		if(!iscreenExist)
-		{
-			BString copyingMessage(L_COPYING_MESSAGE);
-			BString iscreenDirSys = BeUtils::GetPathToPackage(PACKAGE_DIR);
-			iscreenDirSys << "/engine/iscreen/";
-			copyingMessage.ReplaceAll("%dir1%", iscreenDirSys);
-			copyingMessage.ReplaceAll("%dir2%", iscreenDir);
-			SetStatusString(B_COLOR_GREEN, copyingMessage);
-
-			// NOTE: This is ugly. UGLY! Need to rewrite to Haiku API.
-			BString copyCommand = "cp -aR \"";
-			copyCommand << iscreenDirSys;
-			copyCommand	<< "\" \"";
-			copyCommand << iscreenDir;
-			copyCommand << "\"";
-			system(copyCommand);
-		}
-		if(!actintExist)
-		{
-			BString copyingMessage(L_COPYING_MESSAGE);
-			BString actintDirSys = BeUtils::GetPathToPackage(PACKAGE_DIR);
-			actintDirSys << "/engine/actint/";
-			copyingMessage.ReplaceAll("%dir1%", actintDirSys);
-			copyingMessage.ReplaceAll("%dir2%", actintDir);
-			SetStatusString(B_COLOR_GREEN, copyingMessage);
-
-			// NOTE: This is ugly. UGLY! Need to rewrite to Haiku API.
-			BString copyCommand = "cp -aR \"";
-			copyCommand << actintDirSys;
-			copyCommand	<< "\" \"";
-			copyCommand << actintDir;
-			copyCommand << "\"";
-			system(copyCommand);
-		}
-
-		// NOTE: 4. Check script directories again.
-		if(!(iscreenExist && actintExist))
-		{
-			iscreenExist = CheckDirectory(iscreenDir);
-			actintExist = CheckDirectory(actintDir);
-			if(!(iscreenExist && actintExist))
-			{
-				BString errorMessage(L_ERROR_SCRIPT_DIR);
-				errorMessage.ReplaceAll("%dir%", (!iscreenExist) ? iscreenDir : actintDir);
-				SetStatusString(B_COLOR_RED, errorMessage);
-				return false;
-			}
-		}
-
 		return true;
 	}
 
