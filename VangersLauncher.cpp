@@ -40,6 +40,7 @@
 #include <Font.h>
 
 #include <Catalog.h>
+#include <unistd.h>
 
 #ifndef SIGNATURE
 #error "Application SIGNATURE is not defined. Check your build system."
@@ -50,11 +51,10 @@
 
 // Launcher Settings
 #define TITLE                          "Vangers Launcher"
-#define VERSION                        "1.0.0"
+#define VERSION                        "1.46.0"
 #define PACKAGE_DIR                    "Vangers"
 #define SETTINGS_FILE                  "VangersLauncher.set"
-#define EXECUTABLE_FILE_ENG            "engine/Vangers-ENG"
-#define EXECUTABLE_FILE_RUS            "engine/Vangers-RUS"
+#define EXECUTABLE_FILE                "engine/Vangers"
 #define DATA_PATH_OPT                  "VANGERS_DATA"
 #define LANG_OPT                       "LANG_OPT"
 
@@ -295,11 +295,10 @@ protected:
 	{
 		if(version == RUSSIAN)
 		{
-			BeLauncherBase::SetExecutablePath(BeUtils::GetPathToExecutable(PACKAGE_DIR,
-			                                                               EXECUTABLE_FILE_RUS));
+			BeLauncherBase::SetCustomArgs("-russian");
 		}
-
-		return BeLauncherBase::RunGameViaRoster(true, false);
+		chdir(GetTextControl()->Text());
+		return BeLauncherBase::RunGameViaRoster(false, true);
 	}
 
 	virtual bool
@@ -360,7 +359,7 @@ protected:
 
 public:
 	explicit VangersLauncher(const char *startPath)
-	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE_ENG, SETTINGS_FILE, DATA_PATH_OPT,
+	         : BeLauncherBase(TITLE, PACKAGE_DIR, EXECUTABLE_FILE, SETTINGS_FILE, DATA_PATH_OPT,
 	                          startPath, true, false)
 	{
 		fChooseEngVersion = new BRadioButton(O_RADIO_OPTION_ENG, L_RADIO_OPTION_ENG,
