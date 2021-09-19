@@ -81,6 +81,10 @@ elseif(LAUNCHER STREQUAL "rtcwsp")
 	set(BASED_LAUNCHER_NAME "RTCWSPLauncher")
 	set(RES_DIR "rtcwsp")
 	set(SIGNATURE "application/x-vnd.rtcw.sp")
+elseif(LAUNCHER STREQUAL "fheroes2")
+	set(BASED_LAUNCHER_NAME "fHeroes2Launcher")
+	set(RES_DIR "fheroes2")
+	set(SIGNATURE "application/x-vnd.fHeroes2Launcher")
 endif()
 ################################### LAUNCHERS SECTION ####################################
 
