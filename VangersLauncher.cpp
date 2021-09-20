@@ -40,7 +40,6 @@
 #include <Font.h>
 
 #include <Catalog.h>
-#include <unistd.h>
 
 #ifndef SIGNATURE
 #error "Application SIGNATURE is not defined. Check your build system."
@@ -238,7 +237,7 @@ protected:
 		{
 			BeLauncherBase::SetCustomArgs("-russian");
 		}
-		chdir(GetTextControl()->Text());
+		BeLauncherBase::ChangeBaseDirectory(GetTextControl()->Text());
 		return BeLauncherBase::RunGameViaRoster(false, true);
 	}
 
