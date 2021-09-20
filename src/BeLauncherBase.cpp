@@ -631,6 +631,12 @@ BeLauncherBase::RunGameViaExecVe(bool useEnviron, bool customArgs)
 }
 
 bool
+BeLauncherBase::ChangeBaseDirectory(const BString &directory)
+{
+	return (chdir(directory) == 0);
+}
+
+bool
 BeLauncherBase::QuitRequested(void)
 {
 	SaveSettings(false);

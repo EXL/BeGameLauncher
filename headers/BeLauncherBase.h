@@ -102,6 +102,8 @@ protected:
 	virtual bool RunGameViaRoster(bool useEnviron, bool customArgs);
 	virtual bool RunGameViaExecVe(bool useEnviron, bool customArgs);
 
+	virtual bool ChangeBaseDirectory(const BString &directory);
+
 	virtual void ShowErrorCacheAlert(void);
 	virtual void ShowExecutableCacheAlert(void);
 	virtual void ShowWarnWriteSettingsAlert(void);
