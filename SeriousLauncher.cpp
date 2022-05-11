@@ -76,7 +76,7 @@
 #define L_ABOUT_PORT_STR               B_TRANSLATE("EXL\n")
 #define L_ABOUT_LINK                   B_TRANSLATE("http://www.croteam.com")
 #define L_ABOUT_LINK_DESC              B_TRANSLATE("Official site:")
-#define L_ABOUT_SRC_LINK               B_TRANSLATE("http://github.com/EXLMOTODEV/Serious-Engine")
+#define L_ABOUT_SRC_LINK               B_TRANSLATE("http://github.com/EXL/Serious-Engine")
 #define L_ABOUT_SRC_LINK_DESC          B_TRANSLATE("Source code:")
 #define L_ABOUT_OTH_LINK               B_TRANSLATE("http://exlmoto.ru/haiku-packages/#serious")
 #define L_ABOUT_OTH_LINK_DESC          B_TRANSLATE("Information:")
